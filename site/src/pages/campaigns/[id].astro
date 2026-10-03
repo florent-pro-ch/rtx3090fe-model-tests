@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Banner from '../../components/Banner.astro';
 import Frame from '../../components/Frame.astro';
 import RunsTable from '../../components/RunsTable.astro';
 import StatusBadge from '../../components/StatusBadge.astro';
 import Value from '../../components/Value.astro';
-import { rankingTitle, campaigns, runs, benchById, rankings, readRepoText, judgeAudit, LOT_B_ANCHOR } from '../../lib/data';
+import { rankingTitle, campaigns, runs, benchById, rankings, readRepoText, judgeAudit, LOT_B_ANCHOR, scoresWithheld } from '../../lib/data';
 import { benchHref, href, rankingHref } from '../../lib/site';
 
 export function getStaticPaths() {
@@ -17,7 +18,8 @@ const c = campaigns().find((x) => x.campaign_id === id);
 const list = runs().filter((r) => r.campaign === id);
 const rks = rankings().filter((r) => r.campaign === id);
 const title = c?.title ?? id;
-const shown = new Set(['campaign_id', 'date', 'title', 'summary', 'status', 'benches', 'n_runs']);
+const shown = new Set(['campaign_id', 'date', 'title', 'summary', 'status', 'benches', 'n_runs', 'scores_withheld']);
+const withheld = scoresWithheld(c);
 const rest = c ? Object.fromEntries(Object.entries(c).filter(([k]) => !shown.has(k))) : {};
 // Judge cross-checks keep their numbers in the judge audit (data/judge-audit.json), shown on the judge page.
 const judgeCheck = list.length === 0 && (readRepoText('data/judge-audit.json') ?? '').includes(`"${id}"`);
@@ -28,6 +30,7 @@ const lotB = judgeAudit()?.lotB ?? null;
   <p class="mono muted break">{id}</p>
   {c && <p class="badges"><StatusBadge status={c.status} /></p>}
   {c?.summary && <p class="lead">{c.summary}</p>}
+  {withheld && <Banner kind="info"><p><strong>Scores withheld.</strong> {withheld}</p></Banner>}
   {!c && <p class="empty">No campaign record is published for this folder; its runs are listed below.</p>}
   {c && (c.benches ?? []).length > 0 && (
     <p>Benches: {(c.benches ?? []).map((b, i) => <>{i > 0 && ', '}{benchById().has(b) ? <a class="mono" href={benchHref(b)}>{b}</a> : <span class="mono">{b}</span>}</>)}</p>

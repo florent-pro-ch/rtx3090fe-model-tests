@@ -447,8 +447,10 @@ main {
 }
 .frame-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
+  row-gap: 4px;
   padding: 8px 12px;
   border-bottom: 1px solid var(--border);
   min-width: 0;
@@ -460,16 +462,19 @@ main {
   background: var(--panel2);
   flex: none;
 }
+/* Title and date chip never lose words to an ellipsis (a phone, or the hero
+   card at tablet widths): the bar wraps, the chip going under the title when
+   both do not fit on one line, and a chip longer than the line wraps between
+   its words only (Frame.astro keeps each word, a date included, whole). */
 .frame-title {
   font-family: var(--mono);
   font-size: 0.82rem;
+  line-height: 1.35;
   color: var(--muted);
   margin-left: 6px;
   min-width: 0;
   flex: 0 4 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 .frame-title-short {
   display: none;
@@ -498,11 +503,11 @@ main {
   border-radius: 999px;
   padding: 1px 9px;
   flex: 0 0 auto;
-  max-width: 75%;
+  max-width: 100%;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 .frame-body {
   padding: 14px 16px;
@@ -612,6 +617,20 @@ td {
 }
 tr:last-child td {
   border-bottom: 0;
+}
+/* Inline code in a table cell keeps its words whole: `anywhere` (the default for
+   code) lets the table shrink a column below a word and cut it mid-word
+   (« mixe|d », « code/v|1 »); `break-word` breaks only a word longer than the
+   cell, and the table scrolls inside its wrapper instead. */
+th code,
+td code {
+  overflow-wrap: break-word;
+}
+@media (max-width: 520px) {
+  th,
+  td {
+    padding: 6px 7px;
+  }
 }
 thead th {
   background: var(--panel);
@@ -1029,6 +1048,10 @@ a.config-tag:hover {
 .config-head .kv {
   margin: 0;
 }
+/* Beside a drawing the list may get a narrow column: its values keep at least 7rem and never collapse to 0 px. */
+.config-head dl.kv {
+  grid-template-columns: minmax(0, max-content) minmax(7rem, 1fr);
+}
 .config-schematic {
   margin: 0;
   padding: var(--space-md) var(--space-lg);
@@ -1036,6 +1059,17 @@ a.config-tag:hover {
 @media (max-width: 760px) {
   .config-head {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* The two-pairs page keeps its 520 px drawing up to here: below 1040 px the list goes under it, not beside it. */
+@media (max-width: 1040px) {
+  .config-head.pairs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .config-head dl.kv {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1103,6 +1137,20 @@ a.config-tag:hover {
 }
 .schematic.compact .sch-fan.thin {
   stroke-width: 1.2;
+}
+/* The 2×2 configuration page: the detailed drawing (620 units, 12-unit text)
+   needs about 470 px to keep its words at 9 px or more; narrower, the compact
+   variant stands in for it. */
+.schematic.sch-narrow {
+  display: none;
+}
+@media (max-width: 600px) {
+  .schematic.sch-wide {
+    display: none;
+  }
+  .schematic.sch-narrow {
+    display: block;
+  }
 }
 
 /* Home hero (Figma hero A, 12:45) ----------------------------------------- */

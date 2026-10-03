@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 95 models, 221 runs (+40 copies), 14 benches, data as of 2026-10-02. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 82 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 122 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 95 models, 221 runs (+40 copies), 14 benches, data as of 2026-10-03. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 82 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 122 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -49,7 +49,7 @@ an identical copy of an earlier run's record and evidence, carried into a later
 campaign; its `duplicate_of` names the original. Copies are shown apart, as
 "+N copies", and never counted as runs.
 
-Data as of **2026-10-02**, the latest date found in [data/](data/).
+Data as of **2026-10-03**, the latest date found in [data/](data/).
 <!-- /gen:counts -->
 
 ## What is inside

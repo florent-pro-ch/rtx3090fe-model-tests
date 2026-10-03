@@ -14,18 +14,20 @@ const current = all.filter(isCurrentRanking);
 const superseded = all.filter((r) => !isCurrentRanking(r));
 const checked = current.filter((r) => !isJudged(r.grader));
 const judged = current.filter((r) => isJudged(r.grader));
+// AUC is named only while an AUC ranking is published (the medical-imaging scores are withheld at present).
+const anyAuc = checked.some((r) => r.grader.kind === 'auc');
 // Judged rankings are grouped by their judge: one judge per table, never two.
 const byTable = judged.filter((r) => judgeKeyOf(r.grader) === 'table');
 const byLocal = judged.filter((r) => judgeKeyOf(r.grader) === 'local');
 const byOther = judged.filter((r) => judgeKeyOf(r.grader) === null);
 const groups: { id: string; title: string; intro: string; list: Ranking[] }[] = [
-  { id: 'checked', title: 'Checked by code', intro: 'Oracles, metrics and AUC: the answer is verified by a program, not by a model.', list: checked },
+  { id: 'checked', title: 'Checked by code', intro: `${anyAuc ? 'Oracles, metrics and AUC' : 'Oracles and metrics'}: the answer is verified by a program, not by a model.`, list: checked },
   { id: 'judged', title: `Judged by ${JUDGES.table.name}`, intro: `${JUDGES.table.scope[0].toUpperCase() + JUDGES.table.scope.slice(1)}: scored by ${JUDGES.table.name} (Anthropic, cloud), alone or together with code checks ("mixed"). Read them as a ranking between candidates, not as an absolute grade.`, list: byTable },
   { id: 'judged-local', title: 'Judged by the local judge', intro: `${JUDGES.local.scope[0].toUpperCase() + JUDGES.local.scope.slice(1)}: scored by the lab's local judge, ${JUDGES.local.label}, alone or together with mechanical checks. Never compare them with the tables above: a table holds one judge's scores.`, list: byLocal },
   { id: 'judged-other', title: 'Judged by a model', intro: 'Scored by a model judge named in each ranking.', list: byOther },
 ];
 ---
-<Layout title="Rankings" description={`${current.length} current rankings generated from the runs: ${checked.length} checked by code (oracle, metric, AUC), ${byTable.length} judged by ${JUDGES.table.name} and ${byLocal.length} by the local judge, kept apart.`} nav="rankings" crumbs={[{ label: 'rankings' }]}>
+<Layout title="Rankings" description={`${current.length} current rankings generated from the runs: ${checked.length} checked by code (${anyAuc ? 'oracle, metric, AUC' : 'oracle, metric'}), ${byTable.length} judged by ${JUDGES.table.name} and ${byLocal.length} by the local judge, kept apart.`} nav="rankings" crumbs={[{ label: 'rankings' }]}>
   <h1>Rankings</h1>
   <p class="lead">
     Every ranking is generated from the runs, never edited by hand. Rankings checked by code and rankings judged by a

@@ -42,6 +42,8 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           persist-credentials: false
+          # the whole history: G9 (gitleaks) scans every commit, not only the last one
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6, resolved 2026-10-02
@@ -57,6 +59,23 @@ jobs:
           node-version: "24"
           cache: npm
           cache-dependency-path: site/package-lock.json
+
+      # G9: the same pinned, SHA-256-verified gitleaks as critical (check_all.sh fails
+      # when G9 is skipped under CI=true).
+      - name: Install gitleaks 8.30.1 (pinned, SHA-256 verified)
+        env:
+          GITLEAKS_VERSION: "8.30.1"
+          GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+        run: |
+          set -euo pipefail
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSL --max-time 120 -o "$RUNNER_TEMP/$tarball" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$tarball" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/gitleaks"
+          tar -xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP/gitleaks" gitleaks
+          echo "$RUNNER_TEMP/gitleaks" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/gitleaks/gitleaks" version
 
       # The same gates as critical, also on a deployment started by hand: npm ci, the
       # site build, then every gate (G5 and the site's link and contrast checks included).

@@ -425,6 +425,14 @@ export function modelSlug(modelId: string): string {
   return `${slugify(vendor)}__${slugify(name)}`;
 }
 
+/**
+ * The public note a record carries where its scores were withheld by the exporter's publication policy
+ * (medical imaging: until the data-use agreement's publication clause is reviewed); null otherwise.
+ */
+export function scoresWithheld(rec: unknown): string | null {
+  return isObj(rec) && typeof rec.scores_withheld === 'string' && rec.scores_withheld ? rec.scores_withheld : null;
+}
+
 // ---------------------------------------------------------------------------
 // Normalisers
 

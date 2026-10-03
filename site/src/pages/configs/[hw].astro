@@ -25,6 +25,7 @@ import { configHref, compareHref, evidenceLink, glossaryHref, href, modelHref, r
 import GraderBadge from '../../components/GraderBadge.astro';
 import PrePinBadge from '../../components/PrePinBadge.astro';
 import Schematic from '../../components/schematic/Schematic.astro';
+import Schematic2x2Compact from '../../components/schematic/Schematic2x2Compact.astro';
 
 export function getStaticPaths() {
   return HARDWARE_IDS.map((hw) => ({ params: { hw } }));
@@ -65,9 +66,15 @@ const topJudged = top.some(({ ranking }) => isJudged(ranking.grader));
   {h.description && !pairsPage && <p class="lead">{h.description}</p>}
   {h.placeholder && <p class="empty">No hardware record for this configuration is published yet.</p>}
 
-  <div class="config-head">
+  <div class:list={['config-head', { pairs: pairsPage }]}>
   <figure class="schematic-well config-schematic">
-    <Schematic hw={hw} width={pairsPage ? 520 : 300} />
+    {pairsPage ? (
+      <>
+        {/* phones: the detailed drawing would shrink its labels below 7 px, so the compact one stands in */}
+        <Schematic hw={hw} width={520} class="sch-wide" />
+        <Schematic2x2Compact class="sch-narrow" />
+      </>
+    ) : <Schematic hw={hw} width={300} />}
   </figure>
   {(h.gpus !== null || h.vram_gb_total !== null || h.nvlink !== null) && (
     <dl class="kv">

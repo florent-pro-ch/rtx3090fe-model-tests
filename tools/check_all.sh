@@ -22,7 +22,9 @@
 #      harness tests      python3 -m pytest harness/tests (the vendored bench harness; needs
 #                         pytest, skipped and said so when it is not installed)
 #   G9 gitleaks           the git history (only when gitleaks is installed; required
-#                         before any publication, see tools/README.md)
+#                         before any publication, see tools/README.md). Under CI=true
+#                         (GitHub Actions) a skipped G9 is a failure: CI installs a
+#                         pinned gitleaks and checks out the whole history.
 #
 # G5 and the site link check need the built site: --build runs `npm ci` in site/ when
 # site/node_modules is missing, then `npm run build`; without --build, a missing
@@ -129,8 +131,17 @@ else
 fi
 
 # G9 — secrets and leak shapes in every commit (gitleaks is not a Python gate)
-if command -v gitleaks >/dev/null 2>&1 && [ -d .git ]; then
+if [ "${CI:-}" = "true" ] && [ -d .git ] && [ "$(git rev-parse --is-shallow-repository 2>/dev/null)" = "true" ]; then
+  # a shallow clone would let gitleaks scan only the tip and pass quietly
+  echo "== gitleaks history (G9)"
+  echo "-- gitleaks history (G9): FAILED — shallow clone under CI=true: the whole history must be scanned (checkout with fetch-depth: 0)"
+  failed+=("gitleaks history (G9)")
+elif command -v gitleaks >/dev/null 2>&1 && [ -d .git ]; then
   run "gitleaks history (G9)" gitleaks git . --config .gitleaks.toml --redact --no-banner --log-level warn
+elif [ "${CI:-}" = "true" ]; then
+  echo "== gitleaks history (G9)"
+  echo "-- gitleaks history (G9): FAILED — skipped under CI=true (gitleaks not installed or no .git); CI must run it"
+  failed+=("gitleaks history (G9)")
 else
   echo "== gitleaks history (G9)"
   echo "-- gitleaks history (G9): SKIPPED — gitleaks not installed or no .git; it must pass before any publication"

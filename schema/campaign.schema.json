@@ -47,6 +47,11 @@
     },
     "n_copies": {
       "type": "integer"
+    },
+    "scores_withheld": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Present when this campaign's scores and rankings are withheld by the publication policy (the medical-imaging bench, until the review of its data-use agreement's publication clause): the public note that stands where the scores were."
     }
   }
 }

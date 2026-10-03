@@ -6,7 +6,7 @@ import Frame from '../../components/Frame.astro';
 import GraderBadge from '../../components/GraderBadge.astro';
 import StatusBadge from '../../components/StatusBadge.astro';
 import type { Bench } from '../../lib/data';
-import { rankingTitle, benches, benchCard, rankings, runs, canary, isJudged, rankingRegradedAt } from '../../lib/data';
+import { rankingTitle, benches, benchCard, rankings, runs, canary, isJudged, rankingRegradedAt, scoresWithheld } from '../../lib/data';
 import { renderMarkdown } from '../../lib/markdown';
 import { evidenceHref, href, rankingHref, runHref } from '../../lib/site';
 
@@ -17,12 +17,18 @@ export function getStaticPaths() {
 const { b } = Astro.props as { b: Bench };
 const card = benchCard(b);
 const cardPath = card.path ?? `benches/${b.bench_id}/CARD.md`;
-const cardHtml = card.markdown ? renderMarkdown(card.markdown, cardPath) : null;
+// Scores withheld by the publication policy: the page shows the note once, in the banner under the title, so the
+// card's own copy of it (a quoted line, kept for readers of the file on GitHub) is left out here.
+const withheld = scoresWithheld(b);
+const cardMd = card.markdown && withheld
+  ? card.markdown.split('\n').filter((l) => l.replace(/^>\s*/, '').trim() !== withheld.trim()).join('\n')
+  : card.markdown;
+const cardHtml = cardMd ? renderMarkdown(cardMd, cardPath) : null;
 const rks = rankings().filter((r) => r.bench_id === b.bench_id);
 const usedBy = runs().filter((r) => r.quality.some((q) => q.bench_id === b.bench_id));
 const description = `Bench ${b.bench_id} (${b.name}): ${b.modality}, ${b.language}, graded by ${b.grader.kind}; items frozen and published byte for byte, answer keys as SHA-256 only.`;
 const benchDir = `benches/${b.bench_id}/`;
-// A bench withheld entirely (a dataset under a data use agreement): no file, no item count of its own, aggregates only.
+// A bench withheld entirely (a dataset under a data use agreement): no file; its exam count is the bench record's own n_items.
 const withheldEntirely = b.withheld_entirely === true;
 const examRow = withheldEntirely
   ? rks.flatMap((r) => r.rows.map((row) => ({ r, n: row.extra?.exams }))).find((x) => typeof x.n === 'number')
@@ -38,12 +44,14 @@ const examRow = withheldEntirely
     <span class="badge plain tone-muted" title="language of the items">items: {b.language}</span>
   </p>
   {isJudged(b.grader) && <Banner kind="judge" graders={[b.grader]} />}
+  {withheld && <Banner kind="info"><p><strong>Scores withheld.</strong> {withheld}</p></Banner>}
 
   <Frame title="record" chip={b.frozen_at ? `frozen ${b.frozen_at.slice(0, 10)}` : null}>
     <dl class="kv">
       <dt>Mode</dt><dd class="mono">{String(b.mode)}</dd>
       <dt>Items</dt><dd>{withheldEntirely
-        ? (examRow ? <><Num value={examRow.n} href={rankingHref(examRow.r.ranking_id)} /> exams, not published</> : <>not published</>)
+        ? (examRow ? <><Num value={examRow.n} href={rankingHref(examRow.r.ranking_id)} /> exams, not published</>
+          : typeof b.n_items === 'number' ? <><Num value={b.n_items} evidence={`${benchDir}CARD.md`} /> exams, not published</> : <>not published</>)
         : <Num value={b.n_items} evidence={benchDir} nullText="unknown" />}</dd>
       <dt>Grader</dt><dd>{b.grader.kind}{b.grader.judge && <> · judge <span class="mono">{b.grader.judge}</span></>}{b.grader.same_lineage === true && <> · <span class="tone-amber">same lineage as some candidates</span></>}{b.grader.human_calibrated === false && <> · no human calibration</>}</dd>
       {b.item_source && <><dt>Item source</dt><dd>{b.item_source}</dd></>}
@@ -69,7 +77,7 @@ const examRow = withheldEntirely
   {withheldEntirely ? (
     <>
       <h2 id="withheld">Items</h2>
-      <p>No item, answer key or per-item score of this bench is published: the dataset is withheld entirely under its data use agreement, and only aggregate results appear in its rankings.</p>
+      <p>No item, answer key or per-item score of this bench is published: the dataset is withheld entirely under its data use agreement{withheld ? ', and no score of it is published at present.' : ', and only aggregate results appear in its rankings.'}</p>
     </>
   ) : <>
   <h2 id="withheld">Withheld files</h2>

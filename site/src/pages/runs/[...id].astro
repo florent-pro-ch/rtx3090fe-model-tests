@@ -11,7 +11,7 @@ import type { Run } from '../../lib/data';
 import {
   runs, modelById, buildById, campaignById, benchById, headlineRun, runDate, vramPerGpu, vramKind, isNum,
   listRepoFiles, repoPathExists, launchFor, launchLine, isJudged, topologyKnown, hardwareById, itemScoresOf,
-  VERSION_LABEL, isRefusalOnly, visibleQuality, REFUSAL_BENCH, isABTreatment, aggSlots, readyWithDebug, usesSpeculation, notGradedReasonText, notYetText, judgeKeyOf, JUDGES,
+  VERSION_LABEL, isRefusalOnly, visibleQuality, REFUSAL_BENCH, isABTreatment, aggSlots, readyWithDebug, usesSpeculation, notGradedReasonText, notYetText, judgeKeyOf, JUDGES, scoresWithheld,
 } from '../../lib/data';
 import { benchHref, campaignHref, configHref, engineLabel, evidenceHref, href, hwShort, modelHref, runHref, topoLabel } from '../../lib/site';
 
@@ -31,6 +31,7 @@ const vr = lab ? [] : vramPerGpu(r);
 const metricKeys = lab ? [] : Object.keys(r.metrics).filter((k) => !['vram_mib', 'vram_kind'].includes(k)).sort();
 const launch = lab ? null : launchFor(r);
 const quality = visibleQuality(r);
+const withheld = scoresWithheld(r);
 const itemFiles = itemScoresOf(r.run_id).filter((f) => !lab || REFUSAL_BENCH.test(f.bench_id));
 const anyJudged = quality.some((q) => isJudged(q.grader)) || itemFiles.some((f) => isJudged(f.grader));
 // An item file with no judge named whose judged items wait for the table's judge (not_graded no-table-judge-verdict).
@@ -176,6 +177,13 @@ const slots = aggSlots(r);
           </tbody>
         </table>
       </div>
+    </>
+  )}
+
+  {quality.length === 0 && withheld && (
+    <>
+      <h2 id="quality">Quality</h2>
+      <Banner kind="info"><p><strong>Scores withheld.</strong> {withheld}</p></Banner>
     </>
   )}
 

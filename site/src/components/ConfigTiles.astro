@@ -8,6 +8,7 @@
  */
 import Num from './Num.astro';
 import Schematic from './schematic/Schematic.astro';
+import Schematic2x2Compact from './schematic/Schematic2x2Compact.astro';
 import { comparisonById, comparisonRow, isHouseProtocol, runById, runDate } from '../lib/data';
 import { compareHref, configHref, engineLabel, glossaryHref } from '../lib/site';
 import { CONFIG_SHORT, configSub, configSummaries, oneCardHeadline, rowSrc, rowSrcIn, twoPairs } from '../lib/configs';
@@ -34,7 +35,8 @@ const tiles = configSummaries();
         <p class="tag-row"><a class="config-tag" href={page} aria-hidden="true" tabindex="-1">{CONFIG_SHORT[id]?.tag ?? id}</a> <span class="caption">{configSub(h)}</span></p>
         <h3 class="config-title"><a href={page}>{h.label}</a></h3>
         <div class="schematic-well">
-          <Schematic hw={id} width={id === '2x2x3090fe-nvlink' ? 330 : 240} />
+          {/* the detailed 2x2 drawing shrinks its labels to 5–7 px in a tile: the compact variant keeps them at 11–12 px */}
+          {id === '2x2x3090fe-nvlink' ? <Schematic2x2Compact /> : <Schematic hw={id} width={240} />}
         </div>
         <div class="stats">
           {id === '2x2x3090fe-nvlink' ? (

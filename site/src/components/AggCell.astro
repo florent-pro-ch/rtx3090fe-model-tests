@@ -4,7 +4,8 @@
  * requests the server could decode at once (llama.cpp slots, vLLM
  * max_num_seqs). A llama.cpp run with one slot serves the requests one after
  * another: its aggregate is labelled "1 slot (serialised)", it is not
- * batching.
+ * batching. In the long form (the « fits on » tile) the line may wrap between
+ * its parts, never inside one, so it stays inside a narrow tile.
  */
 import Num from './Num.astro';
 import type { Run } from '../lib/data';
@@ -19,11 +20,11 @@ const word = s.engine === 'vllm' ? (s.slots === 1 ? 'sequence at once' : 'sequen
 {isNum(v) ? (
   <>
     <Num value={v} unit="tok/s" run={run.run_id} />{long && <span class="muted small"> aggregate</span>}
-    {!long && <br />}<span class="muted small nowrap">{long ? ' at ' : ''}{isNum(c) && <>c=<Num value={c} run={run.run_id} /></>}
+    {!long && <br />}<span class={long ? 'muted small' : 'muted small nowrap'}>{long ? ' at ' : ''}{isNum(c) && <span class="nowrap">c=<Num value={c} run={run.run_id} /></span>}
       {s.slots !== null ? (
-        <>{isNum(c) && ' · '}{s.engine === 'vllm' && 'up to '}<Num value={s.slots} run={run.run_id} /> {word}{s.serialised && s.engine !== 'vllm' && <> (<abbr title="one llama.cpp slot (-np 1): the requests were served one after another, so this is serialised single-stream speed, not batching">serialised</abbr>)</>}</>
+        <>{isNum(c) && ' · '}<span class="nowrap">{s.engine === 'vllm' && 'up to '}<Num value={s.slots} run={run.run_id} /> {word}</span>{s.serialised && s.engine !== 'vllm' && <> (<abbr title="one llama.cpp slot (-np 1): the requests were served one after another, so this is serialised single-stream speed, not batching">serialised</abbr>)</>}</>
       ) : s.engine === 'llamacpp' ? (
-        <>{isNum(c) && ' · '}slots not recorded</>
+        <>{isNum(c) && ' · '}<span class="nowrap">slots not recorded</span></>
       ) : null}
     </span>
   </>

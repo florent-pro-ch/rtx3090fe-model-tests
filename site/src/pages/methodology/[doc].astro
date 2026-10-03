@@ -20,6 +20,16 @@ export function getStaticPaths() {
 const { d } = Astro.props as { d: MarkdownDoc | null };
 const { doc } = Astro.params as { doc: string };
 const html = d ? renderMarkdown(d.markdown, d.file) : null;
+// The judge page: its H1 and first intro paragraph come before the judge banner, as on every other page (the
+// banner under the title, never above it); the rest of the note follows the banner.
+const cut = (() => {
+  if (doc !== 'judge' || !html) return 0;
+  const h1 = html.indexOf('</h1>');
+  const p = h1 >= 0 ? html.indexOf('</p>', h1) : -1;
+  return p >= 0 ? p + '</p>'.length : 0;
+})();
+const head = html ? html.slice(0, cut) : '';
+const body = html ? html.slice(cut) : null;
 const title = d?.title ?? 'The judge';
 const judgedRankings = rankings().filter((r) => isJudged(r.grader));
 const judgedBenches = benches().filter((b) => isJudged(b.grader));
@@ -31,14 +41,13 @@ const judges = [...new Set([...judgedRankings, ...judgedBenches].map((x) => x.gr
   nav="methodology"
   crumbs={[{ label: 'methodology', href: href('methodology/') }, { label: doc }]}
 >
-  {doc === 'judge' && <Banner kind="judge" />}
-  {html ? (
-    <article class="prose" set:html={html} />
+  {head && <div class="prose" set:html={head} />}
+  {!html && <h1>{title}</h1>}
+  {doc === 'judge' && <Banner kind="judge" selfPage />}
+  {body ? (
+    <article class="prose" set:html={body} />
   ) : (
-    <>
-      <h1>{title}</h1>
-      <p class="empty">The full note on the judge is not published yet.</p>
-    </>
+    <p class="empty">The full note on the judge is not published yet.</p>
   )}
   {doc === 'judge' && (judges.length > 0 || judgedRankings.length > 0) && (
     <>

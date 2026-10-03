@@ -33,8 +33,10 @@ interface Props {
   robustness?: boolean;
   /** graders of the judged scores on the page; omitted on a page not about one table */
   graders?: (Grader | null | undefined)[];
+  /** on the judge page itself: no link to it */
+  selfPage?: boolean;
 }
-const { kind = 'warn', judgeModel = false, robustness = false, graders } = Astro.props;
+const { kind = 'warn', judgeModel = false, robustness = false, graders, selfPage = false } = Astro.props;
 const keys: JudgeKey[] = graders ? judgeKeysOf(graders) : [];
 const one: JudgeKey | null = keys.length === 1 ? keys[0] : null;
 const robust = robustness && kind === 'judge'
@@ -81,7 +83,7 @@ const L = JUDGES.local;
         as a tie.
       </p>
     )}
-    {!html && <p class="small"><a href={href('methodology/judge/')}>How the judges work and what they get wrong</a>.</p>}
+    {!html && !selfPage && <p class="small"><a href={href('methodology/judge/')}>How the judges work and what they get wrong</a>.</p>}
     {robustness ? (
       <p class="banner-row small">
         {robust.length > 0 && (
@@ -112,7 +114,7 @@ const L = JUDGES.local;
       <p class="small">
         <strong>Judge-robustness badges.</strong> No other judge ranked the rows of the local judge's tables:{' '}
         <span class={`badge plain tone-${ROBUSTNESS_INFO.untested.tone}`}>{ROBUSTNESS_INFO.untested.label}</span>.{' '}
-        <a href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>How the badges are computed</a>.
+        <a href={selfPage ? `#${ROBUSTNESS_ANCHOR}` : href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>How the badges are computed</a>.
       </p>
     ) : (
     <p class="small">
@@ -126,7 +128,7 @@ const L = JUDGES.local;
       ))}
       A range next to a rank, such as (3–4), is on the table's own numbering: the rank shown, and that rank moved by
       the row's shift between the two judges among the rows both ranked; its tooltip gives the two ranks behind it.{' '}
-      <a href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>How the badges are computed</a>.
+      <a href={selfPage ? `#${ROBUSTNESS_ANCHOR}` : href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>How the badges are computed</a>.
     </p>
     )}
   </aside>

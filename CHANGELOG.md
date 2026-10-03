@@ -4,6 +4,36 @@ Every release says what changed in the published data, never only in the
 prose. A figure removed or corrected after publication is also logged in
 [data/errata.json](data/errata.json).
 
+## 2026-10-03, after v0: the medical-imaging scores withdrawn
+
+A correction, not a new release: these changes follow v0 and are logged here
+as such ([data/errata.json](data/errata.json) records the withdrawal).
+
+- **Medical-imaging scores withdrawn.** The aggregate scores of the
+  medical-imaging measurements that v0 published (two per model, each with its
+  interval, in the imaging ranking) are withdrawn until the data-use
+  agreement's publication clause has been reviewed. The ranking
+  `imagerie-med-v1--2026-09-25-imagerie-med-v1` is removed; the MedGemma run
+  keeps its timing and hardware figures but no quality entry; the campaign,
+  the bench, that run and the two model records (MedGemma 1.5 4B, RADAR)
+  carry the note that stands where the scores were (`scores_withheld`, typed in
+  the four schemas concerned), and the campaign's framing is `scores-withheld`.
+  ATTRIBUTION, METHODOLOGY, TOPOLOGY, GLOSSARY and the bench card say so.
+  Nothing per exam was ever published, and still is not.
+- **Site fixes.** The "fits on" line wraps between its parts; the two-pairs
+  tiles use the compact drawing, and the two-pairs page swaps to it on phones
+  and puts its key figures under the drawing below 1,040 px, where they were
+  squeezed to nothing; console-card bars wrap, the date pill keeping each
+  word whole; the judge page puts its heading and introduction before the
+  banner, whose links stay on the page; inline code in table cells breaks only
+  a word longer than the cell; the 404 page's canonical and `og:url` name the
+  home page; the medical-imaging pages show the note once, and RADAR's page
+  says it was run on this rig, its record and scores withheld at present.
+- **gitleaks in CI.** Both workflows check out the whole history and install a
+  pinned gitleaks release by direct download, its SHA-256 checked against the
+  release's checksums file; under `CI=true`, `check_all.sh` fails G9 when it
+  is skipped or when the clone is shallow.
+
 ## v0 (2026-10-02)
 
 First public version: the first export of the lab's model tests into this

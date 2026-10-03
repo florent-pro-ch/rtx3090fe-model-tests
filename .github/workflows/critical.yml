@@ -24,6 +24,8 @@ jobs:
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5, resolved 2026-10-02
         with:
           persist-credentials: false
+          # the whole history: G9 (gitleaks) scans every commit, not only the last one
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6, resolved 2026-10-02
@@ -33,9 +35,27 @@ jobs:
       - name: Install jsonschema and pytest
         run: python -m pip install --disable-pip-version-check "jsonschema>=4.23,<5" "pytest>=8,<9"
 
+      # G9: a pinned gitleaks release, downloaded directly and checked against the
+      # SHA-256 of that release's official checksums file
+      # (https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_checksums.txt,
+      # fetched 2026-10-03). check_all.sh fails when G9 is skipped under CI=true.
+      - name: Install gitleaks 8.30.1 (pinned, SHA-256 verified)
+        env:
+          GITLEAKS_VERSION: "8.30.1"
+          GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+        run: |
+          set -euo pipefail
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSL --max-time 120 -o "$RUNNER_TEMP/$tarball" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$tarball" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/gitleaks"
+          tar -xzf "$RUNNER_TEMP/$tarball" -C "$RUNNER_TEMP/gitleaks" gitleaks
+          echo "$RUNNER_TEMP/gitleaks" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/gitleaks/gitleaks" version
+
       # G5 and the site link check need the built site: they run after the build below.
-      # G9 (gitleaks over the whole history) is not run here, since the checkout is
-      # shallow: it is a manual gate before any publication (tools/README.md).
+      # G9 (gitleaks over the whole history) runs inside check_all.sh.
       - name: Run every repository gate (tools/check_all.sh; site gates after the build)
         run: bash tools/check_all.sh
 

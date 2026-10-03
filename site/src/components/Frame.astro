@@ -18,7 +18,7 @@ const full = bare ? title : `3090fe · ${title}`;
     {short
       ? <span class="frame-title has-short"><span class="frame-title-full">{full}</span><span class="frame-title-short">{short}</span></span>
       : <span class="frame-title">{full}</span>}
-    {chip && <span class="frame-chip">{chip}</span>}
+    {chip && <span class="frame-chip">{chip.split(' ').map((w, i) => <>{i > 0 && ' '}<span class="nowrap">{w}</span></>)}</span>}
   </div>
   <div class={`frame-body${flush ? ' flush' : ''}`}>
     {heading && <h2 class="sr-only">{title}</h2>}

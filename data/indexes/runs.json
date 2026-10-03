@@ -4036,7 +4036,7 @@
       "kind": "quality",
       "model_id": "google/medgemma-1.5-4b-it",
       "pre_pin": false,
-      "protocol": "imagerie-med/v1 (aggregate only)",
+      "protocol": "imagerie-med/v1 (scores withheld)",
       "run_id": "2026-09-25-imagerie-med-v1/vlm-medgemma-15-4b",
       "solo_tok_s": null,
       "split": "none",

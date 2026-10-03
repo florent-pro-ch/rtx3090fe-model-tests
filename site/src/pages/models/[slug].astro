@@ -17,7 +17,7 @@ import type { Model } from '../../lib/data';
 import { rankingTitle, judgeRobustness, rowRankInterval, rankRangeTitle, judgeKeyOf, ROBUSTNESS_ANCHOR,
   HARDWARE_IDS, models, runsOfModel, headlineRun, soloTokS, runDate, rankingRowsOfModel, buildsOfModel,
   launchFor, launchLine, benchById, modelHasNumbers, isJudged, isNum, hardwareById, isForge, isCurrentRanking,
-  runCount, visibleQuality, rowNotRated, rowOtherJudge, JUDGES, notRatedText, rowItemsNotGraded, isTwoOrders, otherJudgeText, judgedByText, drafterRunsOf, drafterRankingRows, buildLabel, isHouseProtocol, distinctRuns, comparisons,
+  runCount, visibleQuality, rowNotRated, rowOtherJudge, JUDGES, notRatedText, rowItemsNotGraded, isTwoOrders, otherJudgeText, judgedByText, drafterRunsOf, drafterRankingRows, buildLabel, isHouseProtocol, distinctRuns, comparisons, scoresWithheld,
 } from '../../lib/data';
 import { benchHref, compareHref, evidenceHref, href, hwShort, rankingHref, runHref, STATUS_LABEL } from '../../lib/site';
 import RunsTableDrafter from '../../components/RunsTable.astro';
@@ -66,8 +66,14 @@ const prePinRuns = runs.filter((r) => r.engine.pre_pin);
 const indexable = modelHasNumbers(m.model_id);
 const measuredOn = heads.filter((x) => x.run).map((x) => `${soloTokS(x.run!)} tok/s on ${hwShort(x.hw)}`);
 // Listed in the lab's records with no run, no drafter run and no score: nothing was measured here.
+const withheld = scoresWithheld(m);
 const noRecord = runs.length === 0 && drafterRuns.length === 0 && allRankRows.length === 0 && runQuality.length === 0;
-const description = noRecord
+// Tested here (it has a test date) but its record and scores are withheld by the publication policy: it was run on
+// this rig, nothing of it is published at present. Never "never run here".
+const withheldRecord = noRecord && !!withheld && !!m.last_tested;
+const description = withheldRecord
+  ? `${m.name} (${m.model_id}): run on this rig; its record and scores are withheld at present.`
+  : noRecord
   ? `${m.name} (${m.model_id}): listed in the lab's records; no run record published for RTX 3090 FE cards.`
   : `${m.name} (${m.model_id}) on RTX 3090 FE: ${measuredOn.length ? `single stream ${measuredOn.join(', ')}` : 'no single-stream speed figure'}; verdict: ${STATUS_LABEL[m.verdict.status] ?? m.verdict.status}; ${rc.distinct} distinct run${rc.distinct === 1 ? '' : 's'}${rc.copies ? ` (+${rc.copies} copies)` : ''}, ${rankRows.length} entr${rankRows.length === 1 ? 'y' : 'ies'} in the latest rankings.`;
 // One table per judge, never two judges' scores in one table: the tables' judge, the local judge, any other
@@ -118,11 +124,13 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
     <p class="lead">{m.verdict.summary}{m.verdict.as_of && <span class="muted small"> (as of <time class="mono">{m.verdict.as_of}</time>)</span>}</p>
   )}
   {!indexable && !noRecord && <p class="small muted">This model has no measured number yet; the page is kept for the record and is not indexed.</p>}
-  {noRecord && <p class="small muted">Nothing on this page is a measurement made here; the page is kept for the record and is not indexed.</p>}
+  {noRecord && !withheldRecord && <p class="small muted">Nothing on this page is a measurement made here; the page is kept for the record and is not indexed.</p>}
+  {withheldRecord && <p class="small muted">The page is kept for the record and is not indexed.</p>}
+  {withheld && <Banner kind="info"><p><strong>Scores withheld.</strong> {withheld}</p></Banner>}
 
   {noRecord ? (
     <Frame title="fits on">
-      <p class="muted" id="runs">Listed; no run record published.</p>
+      <p class="muted" id="runs">{withheldRecord ? <>Run on this rig (last tested <time class="mono">{m.last_tested}</time>); its record and scores are withheld at present.</> : <>Listed; no run record published.</>}</p>
     </Frame>
   ) : runs.length === 0 && drafterRuns.length > 0 ? (
     <Banner kind="info"><p id="runs"><strong>Measured only as a speculative-decoding drafter.</strong> This model has no run of its own: its <Num value={drafterRuns.length} href="#as-drafter" /> run{drafterRuns.length === 1 ? '' : 's'} decoded another model with it as the drafter, and are read against that model without a drafter (<a href="#as-drafter">below</a>).</p></Banner>
@@ -202,7 +210,7 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
   {!noRecord && <h2 id="quality">Quality per bench</h2>}
   {(anyJudged || isJudgeModel) && <Banner kind="judge" judgeModel={isJudgeModel} graders={[...rankRows.map((x) => x.ranking.grader), ...runQuality.map((x) => x.q.grader)]} />}
   {noRecord ? null : rankRows.length === 0 && runQuality.length === 0 && olderRows.length === 0 ? (
-    <p class="empty">No quality score in the data for this model.</p>
+    <p class="empty">{withheld ? 'No quality score is published for this model: its scores are withheld (see the note above).' : 'No quality score in the data for this model.'}</p>
   ) : (
     <>
     {qualityGroups.map((g) => (
@@ -340,7 +348,7 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
                 <td class="small mono">{b.engine_family}</td>
                 <td class="num"><Num value={b.size_gb} unit="GB" nullText="—" /></td>
                 <td class="small mono break">{b.source_repo ?? '—'}</td>
-                <td class="num">{(() => { const n = distinctRuns(runsOfModel(m.model_id)).filter((r) => r.build_id === b.build_id).length; return n > 0 ? <Num value={n} href="#runs" /> : <span class="badge plain tone-muted" title="the build is listed in the lab's inventory; no run record uses it">listed, never run here</span>; })()}</td>
+                <td class="num">{(() => { const n = distinctRuns(runsOfModel(m.model_id)).filter((r) => r.build_id === b.build_id).length; return n > 0 ? <Num value={n} href="#runs" /> : withheldRecord ? <span class="badge plain tone-muted" title="run on this rig; its record and scores are withheld at present">run here, record withheld</span> : <span class="badge plain tone-muted" title="the build is listed in the lab's inventory; no run record uses it">listed, never run here</span>; })()}</td>
               </tr>
             ))}
           </tbody>

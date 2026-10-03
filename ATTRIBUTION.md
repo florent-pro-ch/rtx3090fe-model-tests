@@ -15,7 +15,7 @@ describes v0 (2026-10-02).
 | SIX example QR-IBAN | `document/v1`, two QR-bill pages | documented example value | yes, inside the bench pages |
 | YuE2 example by M-A-P | `audio/v1`, one item | upstream terms | no: a pointer only |
 | RADAR | medical-imaging reference model | upstream terms | no |
-| Merlin (Stanford AIMI) | medical-imaging measurements | data use agreement | no: two aggregate scores per model, with intervals, and counts |
+| Merlin (Stanford AIMI) | medical-imaging measurements | data use agreement | no: no score at present; the aggregates published in v0 were withdrawn on 2026-10-03 (see below) |
 | Claude Fable 5.1's verdicts (Anthropic) | every tutoring, vision and judged-code score | Anthropic's terms for its outputs | no: only the scores and duel outcomes derived from them |
 | GPT-6 Astra's verdicts (OpenAI) | the second-opinion agreement figures of the judge audit | OpenAI's terms for its outputs | no: aggregates computed from them only |
 | The local judge's weights | the refusal-probe and forge scores | Qwen licence | no |
@@ -123,7 +123,7 @@ to an official example file of the YuE2 release by M-A-P
 prompt and lyrics are read from the upstream file at generation time and are
 not reproduced in this repository; they remain under their publisher's terms.
 
-## Medical imaging: aggregate scores only
+## Medical imaging: scores withheld at present
 
 ### RADAR
 
@@ -136,9 +136,16 @@ Its weights and outputs are not redistributed here.
 
 The medical-imaging measurements use CT exams from the **Merlin** dataset of
 the Stanford Center for Artificial Intelligence in Medicine and Imaging
-(AIMI), accessed under a data use agreement. Accordingly, exactly this is
-published, in one ranking file
-([data/rankings/imagerie-med-v1--2026-09-25-imagerie-med-v1.json](data/rankings/imagerie-med-v1--2026-09-25-imagerie-med-v1.json)):
+(AIMI), accessed under a data use agreement.
+
+> Since 2026-10-03, medical-imaging scores are withheld until the data-use agreement's publication clause has been reviewed.
+
+Version v0 published two aggregate scores per model for these measurements;
+they were withdrawn on 2026-10-03, pending that review, and the withdrawal is
+logged in [data/errata.json](data/errata.json). Since then no score of these
+measurements is published: only the timing of the run and the hardware it
+used. Once the review allows it, at most this is to be published again, in one
+ranking file:
 
 - for each model, **two aggregate scores, each with its 95 % confidence
   interval**: the overall Q (100 × the mean area under the ROC curve over the

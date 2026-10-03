@@ -171,7 +171,7 @@ model ([data/comparisons/two-pairs-parallel.json](../data/comparisons/two-pairs-
   on the other;
 - two candidates benchmarked at the same time, one per pair;
 - one 3D-generation engine per card, on both pairs at once;
-- one medical-imaging engine per card (published as aggregate scores only).
+- one medical-imaging engine per card (its timing only; its scores are withheld at present).
 
 Never measured here, and not planned: tensor parallel 4; tensor parallel 2
 combined with pipeline parallel 2; llama.cpp RPC across the two machines; two

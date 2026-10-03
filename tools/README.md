@@ -45,8 +45,11 @@ gitleaks dir . --config .gitleaks.toml --redact     # the working tree, untracke
 ```
 
 `check_all.sh` runs the history scan when `gitleaks` is installed and reports it as
-skipped otherwise; a skipped G9 is not a pass. CI does not run it: its checkout is
-shallow, so a history scan there would see one commit. A finding in history is
+skipped otherwise; a skipped G9 is not a pass. CI runs it too: both workflows check
+out the whole history (`fetch-depth: 0`) and install a pinned gitleaks release by
+direct download, its SHA-256 checked against that release's official checksums
+file, and under `CI=true` a skipped G9 fails `check_all.sh`, as does a shallow clone
+(`git rev-parse --is-shallow-repository`), which would scan only the tip. A finding in history is
 fixed by rewriting the history before publication, never by an allowlist entry.
 
 The leak gates hold **generic shapes only**. The lab's own names, addresses and paths
