@@ -286,6 +286,9 @@
           },
           {
             "$ref": "#/$defs/cloud_lot_b"
+          },
+          {
+            "$ref": "#/$defs/cloud_lot_b_supplement"
           }
         ]
       }
@@ -2704,6 +2707,97 @@
         },
         "n_graded_by_channel_note": {
           "type": "string"
+        }
+      }
+    },
+    "cloud_lot_b_supplement": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A run tested after lot B was drawn, graded by the tables' judge the same way later: a short entry beside cloud-lot-b, whose census it does not change.",
+      "required": [
+        "id",
+        "supplement_to",
+        "campaign",
+        "date",
+        "what",
+        "run_ids",
+        "rankings",
+        "tested_on",
+        "cloud_judge",
+        "n_calls",
+        "n_calls_by_bench",
+        "n_graded",
+        "n_refused_by_provider_safety_filter",
+        "source_id"
+      ],
+      "properties": {
+        "id": {
+          "const": "cloud-lot-b-supplement"
+        },
+        "supplement_to": {
+          "const": "cloud-lot-b"
+        },
+        "campaign": {
+          "type": "string"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "what": {
+          "type": "string"
+        },
+        "run_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "rankings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tested_on": {
+          "$ref": "#/$defs/date"
+        },
+        "cloud_judge": {
+          "type": "string"
+        },
+        "n_calls": {
+          "$ref": "#/$defs/count"
+        },
+        "n_calls_by_bench": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/count"
+          }
+        },
+        "n_graded": {
+          "$ref": "#/$defs/count"
+        },
+        "n_refused_by_provider_safety_filter": {
+          "$ref": "#/$defs/count"
+        },
+        "source_id": {
+          "$ref": "#/$defs/source_id"
+        },
+        "other_sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_id"
+            ],
+            "properties": {
+              "source_id": {
+                "$ref": "#/$defs/source_id"
+              }
+            }
+          }
         }
       }
     }

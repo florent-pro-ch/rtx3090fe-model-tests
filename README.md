@@ -155,8 +155,10 @@ forge bench) are graded by a model judge, **one judge per table, never two**:
   2026-10-02). Outside the uncensored lab, which is published as refusal rates
   only, that is 5,112 of 5,115 calls graded (124 of them had been graded
   locally by the backup judge, not the local judge; 3 were refused by the
-  provider's safety filter); a
-  candidate tested after lot B was drawn is shown as not graded yet. No candidate belongs to
+  provider's safety filter); the one
+  candidate tested after lot B was drawn (2026-09-25), on 2026-10-01, was
+  graded the same way on 2026-10-03 and is ranked in its tutoring and
+  agentic-code tables. No candidate belongs to
   its family, and it never saw candidate names.
 - **The refusal probe and the forge bench: the local judge,
   Qwen3.8-Flash-Next** (local, GGUF UD-Q3_K_XL), with reasoning off, of the

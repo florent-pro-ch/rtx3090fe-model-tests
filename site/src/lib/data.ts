@@ -1537,7 +1537,7 @@ function cloudGateOf(lot: Dict | undefined, lotB: LotB | null): CloudGate | null
   return { status, label, title, date: strOrNull(inter.date) };
 }
 /** The lot-B badge, read from cross_checks[id=cloud-lot-b]; null when the block is absent or incomplete. */
-function lotBOf(b: Dict | undefined): LotB | null {
+function lotBOf(b: Dict | undefined, sup?: Dict): LotB | null {
   if (!b) return null;
   const judgeObj = isObj(b.judge) ? b.judge : {};
   const judge = strOrNull(b.cloud_judge) ?? strOrNull(judgeObj.name);
@@ -1562,7 +1562,9 @@ function lotBOf(b: Dict | undefined): LotB | null {
     (byBench.length ? ` (${byBench.join(', ')})` : '') +
     `; ${fmtCount(nGraded)} graded, ${fmtCount(nRefused)} refused by the provider's safety filter and left ungraded` +
     (nBackup !== null ? `; ${fmtCount(nBackup)} of the calls had been graded locally by the backup judge, not the local judge` : '') +
-    `. Every published tutoring, vision and judged-code score comes from these verdicts; a candidate tested after lot B was drawn${drawn ? ` (${drawn})` : ''} is not graded yet` +
+    (sup && strOrNull(sup.date)
+      ? `. Every published tutoring, vision and judged-code score comes from these verdicts and, for a run tested after lot B was drawn, from a supplement graded the same way on ${strOrNull(sup.date)} (cloud-lot-b-supplement)`
+      : `. Every published tutoring, vision and judged-code score comes from these verdicts; a candidate tested after lot B was drawn${drawn ? ` (${drawn})` : ''} is not graded yet`) +
     (lotsNotSent.length ? `; ${lotsText(lotsNotSent)} (the refusal probe and the forge bench) not sent` : '');
   return { judge, label, title, date: strOrNull(b.date), campaign: strOrNull(b.campaign), nCalls, nGraded, nRefused, nBackup, upTo, lotsNotSent };
 }
@@ -1590,7 +1592,7 @@ export const judgeAudit = memo((): JudgeAuditSummary | null => {
     .filter((x): x is string => !!x)
     .sort();
   const human = isObj(d.human_calibration) ? d.human_calibration : {};
-  const lotB = lotBOf(checks.find((c) => c.id === 'cloud-lot-b'));
+  const lotB = lotBOf(checks.find((c) => c.id === 'cloud-lot-b'), checks.find((c) => c.id === 'cloud-lot-b-supplement'));
   return {
     secondJudgeDate: dates.at(-1) ?? strOrNull(d.as_of),
     humanItems: isNum(human.items_graded) ? human.items_graded : 0,
