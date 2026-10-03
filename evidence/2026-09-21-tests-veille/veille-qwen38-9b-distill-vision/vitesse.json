@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen38-9b-distill-vision",
+ "debut": "2026-09-22T10:48:20Z",
+ "solo": {
+  "ttft_ms": 115,
+  "tok_s": 47.6,
+  "completion_tokens": 512,
+  "wall_s": 10.751
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 183.8,
+  "p50_latency_s": 16.72,
+  "wall_s": 22.28
+ },
+ "fin": "2026-09-22T10:49:04Z"
+}

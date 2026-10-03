@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-unlimited-ocr"
+    ],
+    "inventory_ids": [
+      "unlimited-ocr-3b-bf16"
+    ]
+  },
+  "arch": "moe",
+  "builds": [
+    "baidu/unlimited-ocr@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-25",
+  "licence": {
+    "flags": [],
+    "name": "MIT",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "baidu/unlimited-ocr",
+  "name": "Unlimited-OCR",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 3.34,
+  "parse_notes": [],
+  "slug": "baidu__unlimited-ocr",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/baidu/Unlimited-OCR",
+  "vendor": "Baidu",
+  "verdict": {
+    "as_of": "2026-09-30",
+    "status": "rated-no-role",
+    "summary": "OCR in the DeepSeek-OCR lineage: many empty answers, probably because its card prompt carries a literal image token the chat route does not place as expected. Rated, no role assigned."
+  }
+}

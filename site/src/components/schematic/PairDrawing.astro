@@ -1,0 +1,21 @@
+---
+/**
+ * One NVLink pair (Figma Schematic/2x, 8:15): two GPU chips joined by the
+ * 4-slot bridge, in 240 x 150 units. bridge="closed" draws the bridge dashed:
+ * still in place, peer-to-peer closed in software (the A/B proxy). No drawing
+ * shows a removed bridge: none was measured.
+ */
+import GpuChip from './GpuChip.astro';
+interface Props { x?: number; y?: number; bridge?: 'on' | 'closed'; caption?: string | null }
+const { x = 0, y = 0, bridge = 'on', caption = null } = Astro.props;
+---
+<g transform={`translate(${x} ${y})`}>
+  <GpuChip x={20} y={14} />
+  <GpuChip x={20} y={78} />
+  {bridge === 'on'
+    ? <rect class="sch-bridge" x="170" y="22" width="12" height="84" rx="4"></rect>
+    : <rect class="sch-bridge closed" x="171" y="23" width="10" height="82" rx="3.5"></rect>}
+  <text class="sch-link" x="188" y="60">NVLink</text>
+  <text class="sch-link" x="188" y="76">4-slot</text>
+  {caption && <text class="sch-caption" x="20" y="142">{caption}</text>}
+</g>

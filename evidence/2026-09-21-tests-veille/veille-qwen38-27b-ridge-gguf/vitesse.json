@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen38-27b-ridge-gguf",
+ "debut": "2026-09-22T09:42:33Z",
+ "solo": {
+  "ttft_ms": 425,
+  "tok_s": 45.3,
+  "completion_tokens": 512,
+  "wall_s": 11.307
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 45.7,
+  "p50_latency_s": 50.37,
+  "wall_s": 89.54
+ },
+ "fin": "2026-09-22T09:44:25Z"
+}

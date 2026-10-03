@@ -1,0 +1,651 @@
+{
+  "agrege": {
+    "c4-en": {
+      "agg_tok_s": 204.2,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 7.5,
+      "tokens": 8192,
+      "wall_s": 40.11
+    },
+    "c4-fr": {
+      "agg_tok_s": 128.8,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 15.12,
+      "tokens": 4096,
+      "wall_s": 31.8
+    },
+    "c8-en": {
+      "agg_tok_s": 241.6,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 12.34,
+      "tokens": 8192,
+      "wall_s": 33.91
+    },
+    "c8-fr": {
+      "agg_tok_s": 165.2,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 23.12,
+      "tokens": 4096,
+      "wall_s": 24.79
+    }
+  },
+  "block_size": 16,
+  "bras": "g31-dflash-8k",
+  "cible": "gemma-4-31b-qat",
+  "debut": "2026-09-25T19:39:46Z",
+  "erreurs": 0,
+  "fin": "2026-09-25T19:51:23Z",
+  "identite": {
+    "erreurs": 0,
+    "finish": {
+      "length": 24
+    },
+    "n": 24,
+    "tokens_max": 512,
+    "tokens_min": 512
+  },
+  "kv": {
+    "kv_cache_memoire_gib": 6.3,
+    "kv_cache_tokens": 14649.0,
+    "poids_gib": 12.46
+  },
+  "moteur": "vllm",
+  "nvidia_smi_apres": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 74
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 65
+    }
+  ],
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 73
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 65
+    }
+  ],
+  "nvidia_smi_charge": [
+    {
+      "index": 0,
+      "memoire_mib": 22177,
+      "temperature_c": 79
+    },
+    {
+      "index": 1,
+      "memoire_mib": 22177,
+      "temperature_c": 70
+    }
+  ],
+  "nvidia_smi_pret": [
+    {
+      "index": 0,
+      "memoire_mib": 22177,
+      "temperature_c": 53
+    },
+    {
+      "index": 1,
+      "memoire_mib": 22177,
+      "temperature_c": 44
+    }
+  ],
+  "passes": {
+    "c4-en": {
+      "acceptation": {
+        "accepted_tokens": 5742.0,
+        "draft_tokens": 39712.0,
+        "drafts": 2482.0,
+        "longueur_acceptee_moyenne": 3.313,
+        "par_position": {
+          "0": 0.6604,
+          "1": 0.4279,
+          "10": 0.0367,
+          "11": 0.029,
+          "12": 0.0222,
+          "13": 0.0129,
+          "14": 0.0093,
+          "15": 0.0052,
+          "2": 0.2994,
+          "3": 0.2192,
+          "4": 0.166,
+          "5": 0.135,
+          "6": 0.1023,
+          "7": 0.0782,
+          "8": 0.062,
+          "9": 0.0479
+        },
+        "taux_acceptation": 0.1446
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1639.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[10]": 91.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[11]": 72.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[12]": 55.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[13]": 32.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[14]": 23.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[15]": 13.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1062.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 743.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 544.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 412.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 335.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 254.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 194.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[8]": 154.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[9]": 119.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5742.0,
+        "vllm:spec_decode_num_draft_tokens_total": 39712.0,
+        "vllm:spec_decode_num_drafts_total": 2482.0
+      },
+      "secondes": 40.1
+    },
+    "c4-fr": {
+      "acceptation": {
+        "accepted_tokens": 2124.0,
+        "draft_tokens": 31712.0,
+        "drafts": 1982.0,
+        "longueur_acceptee_moyenne": 2.072,
+        "par_position": {
+          "0": 0.5505,
+          "1": 0.2341,
+          "10": 0.002,
+          "11": 0.001,
+          "12": 0.0005,
+          "13": 0.0005,
+          "14": 0.0,
+          "15": 0.0,
+          "2": 0.109,
+          "3": 0.0651,
+          "4": 0.0424,
+          "5": 0.0272,
+          "6": 0.0207,
+          "7": 0.0101,
+          "8": 0.0055,
+          "9": 0.003
+        },
+        "taux_acceptation": 0.067
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1091.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[10]": 4.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[11]": 2.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[12]": 1.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[13]": 1.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[14]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[15]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 464.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 216.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 129.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 84.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 54.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 41.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 20.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[8]": 11.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[9]": 6.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2124.0,
+        "vllm:spec_decode_num_draft_tokens_total": 31712.0,
+        "vllm:spec_decode_num_drafts_total": 1982.0
+      },
+      "secondes": 31.8
+    },
+    "c8-en": {
+      "acceptation": {
+        "accepted_tokens": 5752.0,
+        "draft_tokens": 39664.0,
+        "drafts": 2479.0,
+        "longueur_acceptee_moyenne": 3.32,
+        "par_position": {
+          "0": 0.672,
+          "1": 0.4385,
+          "10": 0.0387,
+          "11": 0.0303,
+          "12": 0.0234,
+          "13": 0.0145,
+          "14": 0.0109,
+          "15": 0.0065,
+          "2": 0.2945,
+          "3": 0.2142,
+          "4": 0.161,
+          "5": 0.1271,
+          "6": 0.0988,
+          "7": 0.0783,
+          "8": 0.0617,
+          "9": 0.05
+        },
+        "taux_acceptation": 0.145
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1666.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[10]": 96.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[11]": 75.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[12]": 58.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[13]": 36.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[14]": 27.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[15]": 16.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1087.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 730.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 531.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 399.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 315.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 245.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 194.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[8]": 153.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[9]": 124.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5752.0,
+        "vllm:spec_decode_num_draft_tokens_total": 39664.0,
+        "vllm:spec_decode_num_drafts_total": 2479.0
+      },
+      "secondes": 33.9
+    },
+    "c8-fr": {
+      "acceptation": {
+        "accepted_tokens": 2207.0,
+        "draft_tokens": 30608.0,
+        "drafts": 1913.0,
+        "longueur_acceptee_moyenne": 2.154,
+        "par_position": {
+          "0": 0.5593,
+          "1": 0.2525,
+          "10": 0.0016,
+          "11": 0.0016,
+          "12": 0.0005,
+          "13": 0.0005,
+          "14": 0.0,
+          "15": 0.0,
+          "2": 0.1307,
+          "3": 0.0748,
+          "4": 0.0502,
+          "5": 0.0324,
+          "6": 0.0204,
+          "7": 0.0146,
+          "8": 0.011,
+          "9": 0.0037
+        },
+        "taux_acceptation": 0.0721
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1070.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[10]": 3.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[11]": 3.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[12]": 1.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[13]": 1.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[14]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[15]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 483.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 250.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 143.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 96.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 62.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 39.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 28.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[8]": 21.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[9]": 7.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2207.0,
+        "vllm:spec_decode_num_draft_tokens_total": 30608.0,
+        "vllm:spec_decode_num_drafts_total": 1913.0
+      },
+      "secondes": 24.8
+    },
+    "identite": {
+      "acceptation": {
+        "accepted_tokens": 7867.0,
+        "draft_tokens": 71296.0,
+        "drafts": 4456.0,
+        "longueur_acceptee_moyenne": 2.765,
+        "par_position": {
+          "0": 0.6239,
+          "1": 0.3476,
+          "10": 0.0213,
+          "11": 0.0168,
+          "12": 0.0135,
+          "13": 0.0081,
+          "14": 0.0063,
+          "15": 0.0031,
+          "2": 0.2159,
+          "3": 0.1468,
+          "4": 0.1084,
+          "5": 0.0824,
+          "6": 0.0615,
+          "7": 0.0458,
+          "8": 0.0355,
+          "9": 0.0287
+        },
+        "taux_acceptation": 0.1103
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2780.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[10]": 95.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[11]": 75.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[12]": 60.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[13]": 36.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[14]": 28.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[15]": 14.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1549.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 962.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 654.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 483.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 367.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 274.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 204.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[8]": 158.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[9]": 128.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7867.0,
+        "vllm:spec_decode_num_draft_tokens_total": 71296.0,
+        "vllm:spec_decode_num_drafts_total": 4456.0
+      },
+      "secondes": 129.9
+    },
+    "solo": {
+      "acceptation": {
+        "accepted_tokens": 7867.0,
+        "draft_tokens": 71296.0,
+        "drafts": 4456.0,
+        "longueur_acceptee_moyenne": 2.765,
+        "par_position": {
+          "0": 0.6239,
+          "1": 0.3476,
+          "10": 0.0213,
+          "11": 0.0168,
+          "12": 0.0135,
+          "13": 0.0081,
+          "14": 0.0063,
+          "15": 0.0031,
+          "2": 0.2159,
+          "3": 0.1468,
+          "4": 0.1084,
+          "5": 0.0824,
+          "6": 0.0615,
+          "7": 0.0458,
+          "8": 0.0355,
+          "9": 0.0287
+        },
+        "taux_acceptation": 0.1103
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2780.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[10]": 95.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[11]": 75.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[12]": 60.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[13]": 36.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[14]": 28.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[15]": 14.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1549.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 962.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 654.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 483.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 367.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 274.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 204.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[8]": 158.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[9]": 128.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7867.0,
+        "vllm:spec_decode_num_draft_tokens_total": 71296.0,
+        "vllm:spec_decode_num_drafts_total": 4456.0
+      },
+      "secondes": 130.1
+    }
+  },
+  "pret_en_secondes": 302.3,
+  "requetes": 96,
+  "role": "spec",
+  "solo": {
+    "en": {
+      "decode_tok_s_mediane": 147.3,
+      "decode_tok_s_moyenne": 139.0,
+      "n": 16,
+      "ttft_ms_mediane": 94
+    },
+    "fr": {
+      "decode_tok_s_mediane": 74.0,
+      "decode_tok_s_moyenne": 73.1,
+      "n": 8,
+      "ttft_ms_mediane": 80
+    },
+    "items": [
+      {
+        "decode_tok_s": 83.0,
+        "deltas": 211,
+        "id": "spe-fr-tut-01",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 72,
+        "wall_s": 6.23
+      },
+      {
+        "decode_tok_s": 79.9,
+        "deltas": 221,
+        "id": "spe-fr-tut-02",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 67,
+        "wall_s": 6.46
+      },
+      {
+        "decode_tok_s": 76.2,
+        "deltas": 230,
+        "id": "spe-fr-tut-03",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 100,
+        "wall_s": 6.81
+      },
+      {
+        "decode_tok_s": 65.1,
+        "deltas": 262,
+        "id": "spe-fr-tut-04",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 69,
+        "wall_s": 7.92
+      },
+      {
+        "decode_tok_s": 71.7,
+        "deltas": 245,
+        "id": "spe-fr-tut-05",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 96,
+        "wall_s": 7.22
+      },
+      {
+        "decode_tok_s": 77.1,
+        "deltas": 231,
+        "id": "spe-fr-tut-06",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 89,
+        "wall_s": 6.72
+      },
+      {
+        "decode_tok_s": 60.6,
+        "deltas": 291,
+        "id": "spe-fr-tut-07",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 92,
+        "wall_s": 8.53
+      },
+      {
+        "decode_tok_s": 71.0,
+        "deltas": 247,
+        "id": "spe-fr-tut-08",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 68,
+        "wall_s": 7.27
+      },
+      {
+        "decode_tok_s": 119.1,
+        "deltas": 149,
+        "id": "spe-code-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 78,
+        "wall_s": 4.37
+      },
+      {
+        "decode_tok_s": 114.3,
+        "deltas": 156,
+        "id": "spe-code-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 99,
+        "wall_s": 4.57
+      },
+      {
+        "decode_tok_s": 248.7,
+        "deltas": 72,
+        "id": "spe-code-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 105,
+        "wall_s": 2.16
+      },
+      {
+        "decode_tok_s": 168.6,
+        "deltas": 106,
+        "id": "spe-code-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 99,
+        "wall_s": 3.13
+      },
+      {
+        "decode_tok_s": 145.9,
+        "deltas": 123,
+        "id": "spe-code-05",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 97,
+        "wall_s": 3.6
+      },
+      {
+        "decode_tok_s": 155.7,
+        "deltas": 115,
+        "id": "spe-code-06",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 99,
+        "wall_s": 3.38
+      },
+      {
+        "decode_tok_s": 146.3,
+        "deltas": 122,
+        "id": "spe-code-07",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 106,
+        "wall_s": 3.6
+      },
+      {
+        "decode_tok_s": 148.3,
+        "deltas": 120,
+        "id": "spe-code-08",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 114,
+        "wall_s": 3.56
+      },
+      {
+        "decode_tok_s": 59.4,
+        "deltas": 298,
+        "id": "spe-en-prose-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 72,
+        "wall_s": 8.68
+      },
+      {
+        "decode_tok_s": 63.7,
+        "deltas": 276,
+        "id": "spe-en-prose-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 48,
+        "wall_s": 8.07
+      },
+      {
+        "decode_tok_s": 59.2,
+        "deltas": 300,
+        "id": "spe-en-prose-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 62,
+        "wall_s": 8.69
+      },
+      {
+        "decode_tok_s": 69.4,
+        "deltas": 256,
+        "id": "spe-en-prose-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 83,
+        "wall_s": 7.45
+      },
+      {
+        "decode_tok_s": 170.9,
+        "deltas": 105,
+        "id": "spe-en-math-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 90,
+        "wall_s": 3.08
+      },
+      {
+        "decode_tok_s": 176.7,
+        "deltas": 98,
+        "id": "spe-en-math-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 98,
+        "wall_s": 2.99
+      },
+      {
+        "decode_tok_s": 186.6,
+        "deltas": 96,
+        "id": "spe-en-math-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 91,
+        "wall_s": 2.83
+      },
+      {
+        "decode_tok_s": 190.7,
+        "deltas": 94,
+        "id": "spe-en-math-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 80,
+        "wall_s": 2.76
+      }
+    ]
+  },
+  "spec": {
+    "draft_tensor_parallel_size": 1,
+    "method": "dflash",
+    "model": "$MODELS/gemma-4-31b-it-dflash",
+    "num_speculative_tokens": null
+  },
+  "statut": "TERMINE"
+}

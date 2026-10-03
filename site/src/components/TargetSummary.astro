@@ -1,0 +1,80 @@
+---
+/**
+ * Per-target summary rows of a comparison (data/comparisons/*.json
+ * summary_rows): for each target model, its base run (A) and its fastest
+ * arm, French and English apart, at one request and at eight, the share of
+ * outputs identical to the base, and whether an arm was kept. Base figures
+ * link to the base run, best-arm figures to the arm's run, deltas and
+ * shares to the comparison record. Stacks into one card per target on a
+ * phone (table.stack).
+ */
+import Num from './Num.astro';
+import { hardwareById, isNum, modelById, runById } from '../lib/data';
+import { compareHref, configHref, hwShort, modelHref, runHref } from '../lib/site';
+
+type Row = Record<string, unknown>;
+interface Props { rows: Row[]; compId: string; showTarget?: boolean }
+const { rows, compId, showTarget = true } = Astro.props;
+const strs = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
+const rec = `${compareHref(compId)}#summary`;
+const runLink = (id: string | undefined) => (id && runById().has(id) ? id : null);
+---
+<div class="table-wrap">
+  <table class="stack">
+    <thead>
+      <tr>
+        {showTarget && <th scope="col">Target</th>}
+        <th scope="col">Best arm</th>
+        <th scope="col" class="num">Single stream FR</th>
+        <th scope="col" class="num">Single stream EN</th>
+        <th scope="col" class="num">8 requests FR</th>
+        <th scope="col" class="num">8 requests EN</th>
+        <th scope="col" class="num" title="share of the 24 outputs byte-identical to the base, against the base's own repeat">Identical outputs</th>
+        <th scope="col">Kept</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => {
+        const ids = strs(r.run_ids);
+        const base = runLink(ids[0]);
+        const best = runLink(ids[1]);
+        const target = typeof r.target === 'string' ? r.target : typeof r.model_id === 'string' ? r.model_id : '';
+        const m = modelById().get(target);
+        const hw = typeof r.hardware === 'string' ? r.hardware : null;
+        const leg = (b: string, x: string, d: string, unit: string) => (
+          <span>
+            {isNum(r[b]) ? <Num value={r[b]} unit={unit} run={base} href={base ? null : rec} /> : <span class="num-null">—</span>}
+            {' → '}
+            {isNum(r[x]) ? <Num value={r[x]} unit={unit} run={best} href={best ? null : rec} /> : <span class="num-null">—</span>}
+            {isNum(r[d]) && <><br /><strong class={(r[d] as number) >= 0 ? 'tone-green' : 'tone-red'}>{(r[d] as number) >= 0 ? '+' : ''}<Num value={r[d]} unit="%" href={rec} /></strong></>}
+          </span>
+        );
+        const kept = r.kept;
+        return (
+          <tr>
+            {showTarget && (
+              <td data-label="Target"><div class="cell-min">
+                {m ? <a href={modelHref(m.slug)}>{m.name}</a> : <span class="mono small">{target || '—'}</span>}
+                {typeof r.build === 'string' && <span class="muted small"> ({r.build})</span>}
+                {hw && <><br /><a class="small" href={configHref(hw)}>{hardwareById(hw) ? hwShort(hw) : hw}</a></>}
+              </div></td>
+            )}
+            <td data-label="Best arm" class="small"><span>
+              {typeof r.best_arm === 'string' ? (best ? <a class="mono" href={runHref(best)}>{r.best_arm}</a> : <span class="mono">{r.best_arm}</span>) : '—'}
+              {isNum(r.arms) && <><br /><span class="muted"><Num value={r.arms_rated ?? null} href={rec} nullText="?" /> of <Num value={r.arms} href={rec} /> arms rated</span></>}
+            </span></td>
+            <td class="num" data-label="Single stream FR (base → best)">{leg('base_solo_fr', 'best_solo_fr', 'delta_solo_fr_pct', 'tok/s')}</td>
+            <td class="num" data-label="Single stream EN (base → best)">{leg('base_solo_en', 'best_solo_en', 'delta_solo_en_pct', 'tok/s')}</td>
+            <td class="num" data-label="8 requests FR (base → best)">{leg('base_c8_fr_tok_s', 'best_c8_fr_tok_s', 'delta_c8_fr_pct', 'tok/s')}</td>
+            <td class="num" data-label="8 requests EN (base → best)">{leg('base_c8_en_tok_s', 'best_c8_en_tok_s', 'delta_c8_en_pct', 'tok/s')}</td>
+            <td class="num" data-label="Identical outputs (best, base repeat)"><span>
+              {isNum(r.identical_share) ? <Num value={r.identical_share} href={rec} /> : <span class="num-null">—</span>}
+              {isNum(r.base_identical_share) && <span class="muted small"> vs <Num value={r.base_identical_share} href={rec} /></span>}
+            </span></td>
+            <td data-label="Kept">{kept === true || (isNum(kept) && kept > 0) ? <span class="badge plain tone-green">kept{isNum(kept) && <> (<Num value={kept} href={rec} />)</>}</span> : kept === false || kept === 0 ? <span class="badge plain tone-muted">none kept</span> : <span class="num-null">—</span>}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>

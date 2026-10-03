@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hardware.schema.json",
+  "title": "A hardware configuration of the RTX 3090 FE",
+  "type": "object",
+  "required": [
+    "hardware_id",
+    "label",
+    "gpus",
+    "vram_gb_total",
+    "nvlink",
+    "mode",
+    "never_measured"
+  ],
+  "properties": {
+    "hardware_id": {
+      "enum": [
+        "1x3090fe",
+        "2x3090fe-nvlink",
+        "2x2x3090fe-nvlink"
+      ]
+    },
+    "label": {
+      "type": "string"
+    },
+    "gpus": {
+      "type": "integer"
+    },
+    "vram_gb_total": {
+      "type": "number"
+    },
+    "nvlink": {
+      "type": "boolean"
+    },
+    "mode": {
+      "enum": [
+        "single",
+        "tensor-parallel-pair",
+        "independent-pairs"
+      ]
+    },
+    "single_model_runs": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fact": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "never_measured": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "single_model_run_copies": {
+      "type": "integer"
+    },
+    "runs_counting_rule": {
+      "type": "string"
+    }
+  }
+}

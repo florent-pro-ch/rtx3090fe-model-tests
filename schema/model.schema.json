@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model.schema.json",
+  "title": "Upstream model identity",
+  "type": "object",
+  "required": [
+    "model_id",
+    "slug",
+    "name",
+    "vendor",
+    "category",
+    "lineage",
+    "licence",
+    "access",
+    "verdict",
+    "aliases",
+    "builds"
+  ],
+  "properties": {
+    "model_id": {
+      "type": "string",
+      "description": "Upstream id, usually the Hugging Face repo id of the base artefact (lowercase), e.g. google/gemma-4-26b-a4b-it"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*__[a-z0-9][a-z0-9._-]*$",
+      "description": "vendor__name, used in URLs and file names"
+    },
+    "name": {
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "llm",
+        "moe-llm",
+        "vlm",
+        "coder",
+        "ocr",
+        "asr",
+        "tts",
+        "music",
+        "image-gen",
+        "3d-gen",
+        "medical-imaging",
+        "embedding",
+        "reranker",
+        "visual-retriever",
+        "text-normalizer",
+        "draft-head",
+        "interface",
+        "private-forge",
+        "other"
+      ]
+    },
+    "arch": {
+      "enum": [
+        "dense",
+        "moe",
+        "other",
+        "unknown"
+      ]
+    },
+    "params_b_total": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "params_b_active": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "modalities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "base",
+            "finetune",
+            "merge",
+            "distill",
+            "abliteration",
+            "requant",
+            "draft-head",
+            "private-forge",
+            "unknown"
+          ]
+        },
+        "base_model_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "licence": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "flags"
+      ]
+    },
+    "access": {
+      "enum": [
+        "open",
+        "gated",
+        "unknown"
+      ]
+    },
+    "upstream_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "aliases": {
+      "type": "object",
+      "properties": {
+        "inventory_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "harness_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "builds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "build_id list"
+    },
+    "verdict": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "serves-lane",
+            "kept",
+            "parked",
+            "reservations",
+            "rated-no-role",
+            "rejected",
+            "not-rated"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "as_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "summary"
+      ]
+    },
+    "first_tested": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_tested": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parse_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "drafter_runs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "run_ids where this model served as the speculative-decoding drafter"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "block_size": 8,
+  "bras": "g31-rh-dflash",
+  "cible": "gemma-4-31b-qat",
+  "debut": "2026-09-25T17:47:36Z",
+  "fin": "2026-09-25T17:51:13Z",
+  "kv": {},
+  "moteur": "vllm",
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 52
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 42
+    }
+  ],
+  "passes": {},
+  "role": "spec",
+  "spec": {
+    "draft_tensor_parallel_size": 1,
+    "method": "dflash",
+    "model": "$MODELS/gemma-4-31b-it-rh-dflash",
+    "num_speculative_tokens": null
+  },
+  "statut": "ECHEC-DEMARRAGE"
+}

@@ -1,0 +1,26 @@
+{
+  "docker_options": [
+    "-d",
+    "--restart=no",
+    "--memory=56g",
+    "--shm-size=8g"
+  ],
+  "engine_args": [],
+  "env": {
+    "CUDA_VISIBLE_DEVICES": "0"
+  },
+  "gpus_device_list": [
+    0
+  ],
+  "image": "house/comfyui:0.37.0-cu130-sm86",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "harness_urls",
+    "image",
+    "labels",
+    "ports",
+    "volumes"
+  ]
+}

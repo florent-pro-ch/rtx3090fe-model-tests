@@ -1,0 +1,28 @@
+{
+  "bras": "g26-assistant",
+  "cible": "veille-gemma4-26b-a4b",
+  "debut": "2026-09-25T18:08:23Z",
+  "fin": "2026-09-25T18:11:35Z",
+  "kv": {},
+  "moteur": "vllm",
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 63
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 30
+    }
+  ],
+  "passes": {},
+  "role": "spec",
+  "spec": {
+    "method": "draft_model",
+    "model": "$MODELS/gemma-4-26b-a4b-it-assistant",
+    "num_speculative_tokens": 3
+  },
+  "statut": "ECHEC-DEMARRAGE"
+}

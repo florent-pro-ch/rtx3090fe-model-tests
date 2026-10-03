@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Table from '../../components/Table.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { campaigns, runs } from '../../lib/data';
+import { campaignHref } from '../../lib/site';
+
+const list = campaigns();
+// Campaign folders seen in runs but without a campaign record still get a row.
+const known = new Set(list.map((c) => c.campaign_id));
+const orphans = [...new Set(runs().map((r) => r.campaign))].filter((id) => !known.has(id)).sort().reverse();
+const nRuns = (id: string) => runs().filter((r) => r.campaign === id).length;
+const uniq = (xs: string[]) => [...new Set(xs)].sort();
+---
+<Layout title="Campaigns" description={`${list.length} dated test campaigns on the RTX 3090 FE rig, each with its runs, benches and status.`} crumbs={[{ label: 'campaigns' }]}>
+  <h1>Campaigns</h1>
+  <p class="lead">Each test was part of a dated campaign. Exploratory campaigns without a frozen bench are listed for the record.</p>
+  {list.length === 0 && orphans.length === 0 ? (
+    <p class="empty">No campaign is published yet.</p>
+  ) : (
+    <Table label="campaigns" filters={[{ col: 2, label: 'status', values: uniq([...list.map((c) => c.status), ...(orphans.length ? ['no record'] : [])]) }]}>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" data-sort>Date</th>
+            <th scope="col" data-sort>Campaign</th>
+            <th scope="col" data-sort>Status</th>
+            <th scope="col" class="num" data-sort="num">Runs</th>
+            <th scope="col">Benches</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map((c) => (
+            <tr>
+              <td class="mono small nowrap">{c.date}</td>
+              <td><a href={campaignHref(c.campaign_id)}>{c.title}</a><br /><span class="mono small muted break">{c.campaign_id}</span></td>
+              <td data-f={c.status}><StatusBadge status={c.status} /></td>
+              <td class="num" data-v={String(nRuns(c.campaign_id))}><Num value={nRuns(c.campaign_id)} href={campaignHref(c.campaign_id)} /></td>
+              <td class="mono small">{(c.benches ?? []).join(', ') || '—'}</td>
+            </tr>
+          ))}
+          {orphans.map((id) => (
+            <tr>
+              <td class="mono small nowrap">{id.slice(0, 10)}</td>
+              <td><a class="mono" href={campaignHref(id)}>{id}</a></td>
+              <td data-f="no record"><span class="badge plain tone-muted">no record</span></td>
+              <td class="num" data-v={String(nRuns(id))}><Num value={nRuns(id)} href={campaignHref(id)} /></td>
+              <td>—</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Table>
+  )}
+</Layout>

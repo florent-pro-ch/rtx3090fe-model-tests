@@ -1,0 +1,18 @@
+---
+/**
+ * The headline-run rule, from its single text source
+ * methodology/headline-rule.md (a short built-in text when absent). Shown on
+ * /methodology/ and as the note under every headline table.
+ */
+import { headlineRuleMarkdown } from '../lib/data';
+import { renderMarkdown } from '../lib/markdown';
+import { href } from '../lib/site';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const rule = headlineRuleMarkdown();
+const html = renderMarkdown(rule.markdown, rule.file ?? 'methodology/headline-rule.md');
+---
+<div class={`headline-rule ${compact ? 'small muted' : ''}`}>
+  {compact && <p class="rule-k"><a href={href('methodology/#headline-run-rule')}>Headline-run rule</a>:</p>}
+  <div set:html={html} />
+</div>

@@ -1,0 +1,102 @@
+---
+/**
+ * Horizontal bars in inline SVG, from data only. Honest axis: it starts at 0
+ * (or spans the negative side when a value is negative) and ends at a round
+ * number at or above the largest value; no bar is ever rescaled or clipped.
+ * Every value label and tick goes through <Num>. The caption carries the date
+ * and the evidence link.
+ */
+import Num from './Num.astro';
+import { isNum } from '../lib/data';
+
+export interface BarItem {
+  label: string;
+  value: number | null;
+  href?: string | null;
+  run?: string | null;
+  evidence?: string | null;
+  tone?: 'blue' | 'green' | 'amber' | 'red' | 'muted';
+  note?: string;
+  /** Tie group of the row (rankings): contiguous rows of one group are bracketed together. */
+  group?: string | number | null;
+}
+interface Props {
+  items: BarItem[];
+  unit?: string;
+  digits?: number;
+  title: string;
+  caption?: string;
+  date?: string | null;
+  evidenceHref?: string | null;
+  evidenceLabel?: string;
+  dateLabel?: string;
+  /** Upper end of the axis, to share one scale between several charts (still rounded up, never below the data). */
+  max?: number;
+}
+const { items, unit = '', digits, title, caption, date, evidenceHref, evidenceLabel = 'evidence', dateLabel = 'measured', max } = Astro.props;
+const valid = items.filter((i) => isNum(i.value));
+const missing = items.filter((i) => !isNum(i.value));
+
+function nice(x: number): number {
+  if (x <= 0) return 0;
+  const p = Math.pow(10, Math.floor(Math.log10(x)));
+  for (const m of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (m * p >= x) return m * p;
+  return 10 * p;
+}
+const maxV = Math.max(0, isNum(max) ? max : 0, ...valid.map((i) => i.value as number));
+const minV = Math.min(0, ...valid.map((i) => i.value as number));
+const hi = nice(maxV);
+const lo = minV < 0 ? -nice(-minV) : 0;
+const span = hi - lo || 1;
+const W = 1000;
+const x = (v: number) => ((v - lo) / span) * W;
+const zero = x(0);
+const ticks = lo < 0 ? [lo, 0, hi] : [0, hi / 2, hi];
+// Tie groups: a group of two rows or more gets a bracket on the left; neighbouring groups alternate colours.
+const groupSize = new Map<string, number>();
+for (const i of valid) if (i.group !== null && i.group !== undefined) groupSize.set(String(i.group), (groupSize.get(String(i.group)) ?? 0) + 1);
+const bracketOf = new Map<BarItem, string>();
+let parity = 0;
+let prev: string | null = null;
+for (const i of valid) {
+  const g = i.group !== null && i.group !== undefined && (groupSize.get(String(i.group)) ?? 0) > 1 ? String(i.group) : null;
+  if (g !== null && g !== prev) parity = 1 - parity;
+  if (g !== null) bracketOf.set(i, `tie-bracket tie-${parity ? 'a' : 'b'}`);
+  prev = g;
+}
+const anyTie = bracketOf.size > 0;
+---
+{valid.length > 0 && (
+  <figure class="chart" aria-label={title}>
+    <div class="bars" role="list">
+      {valid.map((i) => {
+        const v = i.value as number;
+        const x0 = Math.min(zero, x(v));
+        const w = Math.max(Math.abs(x(v) - zero), 2);
+        return (
+          <div class="bar-row" role="listitem">
+            <span class={`bar-label ${bracketOf.get(i) ?? ''}`} title={bracketOf.has(i) ? `${i.label} (tie group ${i.group})` : i.label}>{i.href ? <a href={i.href}>{i.label}</a> : i.label}</span>
+            <svg class={`bar-svg tone-${i.tone ?? 'blue'}`} viewBox={`0 0 ${W} 16`} preserveAspectRatio="none" aria-hidden="true">
+              <rect x="0" y="0" width={W} height="16" fill="var(--grid)"></rect>
+              <rect x={x0} y="2" width={w} height="12" rx="3" fill="currentColor"></rect>
+              {lo < 0 && <line x1={zero} x2={zero} y1="0" y2="16" stroke="var(--muted)" stroke-width="3"></line>}
+            </svg>
+            <span class="bar-value"><Num value={v} unit={unit} digits={digits} run={i.run} evidence={i.evidence} />{i.note && <span class="muted small"> {i.note}</span>}</span>
+          </div>
+        );
+      })}
+      <div class="bar-axis" aria-hidden="true">
+        <span></span>
+        <span class="ticks">{ticks.map((t) => <span><Num value={t} digits={t % 1 === 0 ? 0 : undefined} /></span>)}</span>
+        <span>{unit}</span>
+      </div>
+    </div>
+    <figcaption>
+      {title}{caption ? ` — ${caption}` : ''}
+      {anyTie && <> · rows bracketed together on the left form one tie group (a statistical tie); inside a group the order is the ranking's tie-break, given in its notes</>}
+      {date && <> · {dateLabel} <time class="mono">{date}</time></>}
+      {evidenceHref && <> · <a href={evidenceHref}>{evidenceLabel}</a></>}
+      {missing.length > 0 && <> · {missing.map((m) => m.label).join(', ')}: no number in the data</>}
+    </figcaption>
+  </figure>
+)}

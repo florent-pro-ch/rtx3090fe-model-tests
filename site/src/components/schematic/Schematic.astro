@@ -1,0 +1,12 @@
+---
+/** The schematic of a configuration by its hardware id: 1x, 2x (one pair) or 2x2 (two pairs, never one machine). */
+import Schematic1x from './Schematic1x.astro';
+import Schematic2x from './Schematic2x.astro';
+import Schematic2x2 from './Schematic2x2.astro';
+interface Props { hw: string; caption?: boolean; width?: number | string; class?: string }
+const { hw, caption = true, width, class: cls } = Astro.props;
+---
+{hw === '1x3090fe' ? <Schematic1x caption={caption} width={width} class={cls} />
+  : hw === '2x3090fe-nvlink' ? <Schematic2x caption={caption} width={width} class={cls} />
+  : hw === '2x2x3090fe-nvlink' ? <Schematic2x2 caption={caption} width={width} class={cls} />
+  : null}

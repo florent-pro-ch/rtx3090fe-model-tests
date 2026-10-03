@@ -1,0 +1,23 @@
+# pulsegate configuration.
+# Values here are the defaults; see pulsegate/settings.py for the environment
+# variables that override them at runtime.
+
+service:
+  name: pulsegate
+  version: 0.3.1
+
+server:
+  host: 127.0.0.1
+  # port: 8080          # pre-0.3 default, kept for reference only; not read
+  port: 9130
+
+upstream:
+  url: http://127.0.0.1:9000/ingest
+  timeout_seconds: 4
+
+queue:
+  dir: var/queue
+  # retries: 8          # removed in 0.3 -- the retry policy now lives in code
+
+logging:
+  level: info

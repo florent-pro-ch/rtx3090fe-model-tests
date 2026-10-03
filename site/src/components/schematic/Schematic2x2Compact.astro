@@ -1,0 +1,37 @@
+---
+/**
+ * Two NVLink pairs, small-scale variant (the geometry of COMPACT22 in
+ * src/lib/og/draw.ts, which draws the same figure in the README banner and the
+ * social cards): two dashed pair boxes with a wide gap and "no link" in it, each
+ * pair two plain cards and its bridge, no per-card text. Shown at its own size
+ * (204 px wide), so the pair labels and "no link" stay at 11 px and the caption
+ * "2 independent machines" at 12 px: at a glance it reads as two machines, never
+ * as four cards in one box. The detailed drawing (Schematic2x2) stays on the
+ * configuration pages.
+ */
+import { COMPACT22 as G } from '../../lib/og/draw';
+interface Props { caption?: boolean; class?: string }
+const { caption = true, class: cls = '' } = Astro.props;
+const h = caption ? G.hCaption : G.boxH;
+const card = (y: number) => ({ y, slot: `M10.5 ${y}H11V${y + 13}H10.5A2.5 2.5 0 0 1 8 ${y + 10.5}V${y + 2.5}A2.5 2.5 0 0 1 10.5 ${y}Z` });
+const cards = [card(22), card(40)];
+---
+<svg class={`schematic compact ${cls}`} viewBox={`0 0 ${G.w} ${h}`} width={G.w} height={h} role="img" aria-label="Schematic: two separate NVLink pairs, pair A and pair B, each two RTX 3090 Founders Edition cards joined by a bridge, with no link between them: two independent machines, never one model on four cards.">
+  {['A', 'B'].map((p, i) => (
+    <g transform={`translate(${i * (G.box + G.gap)} 0)`}>
+      <rect class="sch-pairbox" x="0.5" y="0.5" width={G.box - 1} height={G.boxH - 1} rx="8"></rect>
+      <text class="sch-pairlabel" x="8" y="15">pair {p}</text>
+      {cards.map((c) => (
+        <>
+          <rect class="sch-card" x="8.5" y={c.y + 0.5} width="43" height="12" rx="2.5"></rect>
+          <path class="sch-slot" d={c.slot}></path>
+          <circle class="sch-fan thin" cx="20" cy={c.y + 6.5} r="4"></circle>
+          <circle class="sch-hub" cx="20" cy={c.y + 6.5} r="1.2"></circle>
+        </>
+      ))}
+      <rect class="sch-bridge" x="56" y="24" width="5" height="27" rx="2.5"></rect>
+    </g>
+  ))}
+  <text class="sch-caption sch-nolink" x={G.box + G.gap / 2} y="34" text-anchor="middle">no link</text>
+  {caption && <text class="sch-caption" x={G.w / 2} y={G.captionBase} text-anchor="middle">{G.caption}</text>}
+</svg>

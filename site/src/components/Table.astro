@@ -1,0 +1,35 @@
+---
+/**
+ * A sortable, filterable table. Put a full <table> in the slot; mark sortable
+ * headers with data-sort ("num" for numbers, anything else for text) and give
+ * cells a data-v sort value when their text is not the value (e.g. a <Num>).
+ * `filters` adds one <select> per column (cells may carry data-f); an option
+ * may carry a label distinct from the value it matches.
+ * The behaviour lives in the layout's inline script; without JS the table
+ * is simply static.
+ */
+interface Filter { col: number; label: string; values: (string | { value: string; label: string })[] }
+interface Props { label?: string; search?: boolean; filters?: Filter[] }
+const { label = 'table', search = true, filters = [] } = Astro.props;
+const showTools = search || filters.length > 0;
+---
+<div data-table>
+  {showTools && (
+    <div class="table-tools">
+      {search && <input type="search" data-filter placeholder="Filter rows…" aria-label={`Filter ${label}`} />}
+      {filters.map((f) => (
+        <label class="small muted">
+          {f.label}{' '}
+          <select data-filter-col={String(f.col)} aria-label={`${f.label} filter`}>
+            <option value="">all</option>
+            {f.values.map((v) => (typeof v === 'string' ? <option value={v}>{v}</option> : <option value={v.value}>{v.label}</option>))}
+          </select>
+        </label>
+      ))}
+      <span class="table-count" data-count aria-live="polite"></span>
+    </div>
+  )}
+  <div class="table-wrap">
+    <slot />
+  </div>
+</div>

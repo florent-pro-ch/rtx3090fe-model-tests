@@ -1,0 +1,555 @@
+{
+  "agrege": {
+    "c4-en": {
+      "agg_tok_s": 340.2,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 5.04,
+      "tokens": 8192,
+      "wall_s": 24.08
+    },
+    "c4-fr": {
+      "agg_tok_s": 154.3,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 12.9,
+      "tokens": 4096,
+      "wall_s": 26.55
+    },
+    "c8-en": {
+      "agg_tok_s": 395.5,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 8.78,
+      "tokens": 8192,
+      "wall_s": 20.71
+    },
+    "c8-fr": {
+      "agg_tok_s": 181.2,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 22.06,
+      "tokens": 4096,
+      "wall_s": 22.61
+    }
+  },
+  "block_size": 8,
+  "bras": "g31-rh-dflash-8k",
+  "cible": "gemma-4-31b-qat",
+  "debut": "2026-09-25T19:18:38Z",
+  "erreurs": 0,
+  "fin": "2026-09-25T19:29:13Z",
+  "identite": {
+    "erreurs": 0,
+    "finish": {
+      "length": 24
+    },
+    "n": 24,
+    "tokens_max": 512,
+    "tokens_min": 512
+  },
+  "kv": {
+    "kv_cache_memoire_gib": 4.19,
+    "kv_cache_tokens": 9138.0,
+    "poids_gib": 14.92
+  },
+  "moteur": "vllm",
+  "nvidia_smi_apres": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 73
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 65
+    }
+  ],
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 72
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 65
+    }
+  ],
+  "nvidia_smi_charge": [
+    {
+      "index": 0,
+      "memoire_mib": 21357,
+      "temperature_c": 79
+    },
+    {
+      "index": 1,
+      "memoire_mib": 21357,
+      "temperature_c": 70
+    }
+  ],
+  "nvidia_smi_pret": [
+    {
+      "index": 0,
+      "memoire_mib": 21357,
+      "temperature_c": 52
+    },
+    {
+      "index": 1,
+      "memoire_mib": 21357,
+      "temperature_c": 42
+    }
+  ],
+  "passes": {
+    "c4-en": {
+      "acceptation": {
+        "accepted_tokens": 5808.0,
+        "draft_tokens": 19192.0,
+        "drafts": 2399.0,
+        "longueur_acceptee_moyenne": 3.421,
+        "par_position": {
+          "0": 0.7424,
+          "1": 0.5073,
+          "2": 0.3656,
+          "3": 0.2676,
+          "4": 0.2043,
+          "5": 0.1471,
+          "6": 0.1109,
+          "7": 0.0759
+        },
+        "taux_acceptation": 0.3026
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1781.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1217.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 877.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 642.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 490.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 353.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 266.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 182.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5808.0,
+        "vllm:spec_decode_num_draft_tokens_total": 19192.0,
+        "vllm:spec_decode_num_drafts_total": 2399.0
+      },
+      "secondes": 24.1
+    },
+    "c4-fr": {
+      "acceptation": {
+        "accepted_tokens": 1322.0,
+        "draft_tokens": 22192.0,
+        "drafts": 2774.0,
+        "longueur_acceptee_moyenne": 1.477,
+        "par_position": {
+          "0": 0.3129,
+          "1": 0.106,
+          "2": 0.0332,
+          "3": 0.018,
+          "4": 0.0047,
+          "5": 0.0018,
+          "6": 0.0,
+          "7": 0.0
+        },
+        "taux_acceptation": 0.0596
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 868.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 294.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 92.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 50.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 13.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 5.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 1322.0,
+        "vllm:spec_decode_num_draft_tokens_total": 22192.0,
+        "vllm:spec_decode_num_drafts_total": 2774.0
+      },
+      "secondes": 26.6
+    },
+    "c8-en": {
+      "acceptation": {
+        "accepted_tokens": 5799.0,
+        "draft_tokens": 19208.0,
+        "drafts": 2401.0,
+        "longueur_acceptee_moyenne": 3.415,
+        "par_position": {
+          "0": 0.7397,
+          "1": 0.5115,
+          "2": 0.3619,
+          "3": 0.2682,
+          "4": 0.202,
+          "5": 0.1454,
+          "6": 0.1095,
+          "7": 0.0771
+        },
+        "taux_acceptation": 0.3019
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1776.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1228.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 869.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 644.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 485.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 349.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 263.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 185.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5799.0,
+        "vllm:spec_decode_num_draft_tokens_total": 19208.0,
+        "vllm:spec_decode_num_drafts_total": 2401.0
+      },
+      "secondes": 20.7
+    },
+    "c8-fr": {
+      "acceptation": {
+        "accepted_tokens": 1319.0,
+        "draft_tokens": 22208.0,
+        "drafts": 2776.0,
+        "longueur_acceptee_moyenne": 1.475,
+        "par_position": {
+          "0": 0.2983,
+          "1": 0.1052,
+          "2": 0.0396,
+          "3": 0.0245,
+          "4": 0.0047,
+          "5": 0.0025,
+          "6": 0.0004,
+          "7": 0.0
+        },
+        "taux_acceptation": 0.0594
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 828.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 292.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 110.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 68.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 13.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 7.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 1.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 0.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 1319.0,
+        "vllm:spec_decode_num_draft_tokens_total": 22208.0,
+        "vllm:spec_decode_num_drafts_total": 2776.0
+      },
+      "secondes": 22.6
+    },
+    "identite": {
+      "acceptation": {
+        "accepted_tokens": 7081.0,
+        "draft_tokens": 41696.0,
+        "drafts": 5212.0,
+        "longueur_acceptee_moyenne": 2.359,
+        "par_position": {
+          "0": 0.5017,
+          "1": 0.2905,
+          "2": 0.1855,
+          "3": 0.1299,
+          "4": 0.0979,
+          "5": 0.0691,
+          "6": 0.0507,
+          "7": 0.0334
+        },
+        "taux_acceptation": 0.1698
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2615.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1514.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 967.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 677.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 510.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 360.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 264.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 174.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7081.0,
+        "vllm:spec_decode_num_draft_tokens_total": 41696.0,
+        "vllm:spec_decode_num_drafts_total": 5212.0
+      },
+      "secondes": 119.3
+    },
+    "solo": {
+      "acceptation": {
+        "accepted_tokens": 7081.0,
+        "draft_tokens": 41696.0,
+        "drafts": 5212.0,
+        "longueur_acceptee_moyenne": 2.359,
+        "par_position": {
+          "0": 0.5017,
+          "1": 0.2905,
+          "2": 0.1855,
+          "3": 0.1299,
+          "4": 0.0979,
+          "5": 0.0691,
+          "6": 0.0507,
+          "7": 0.0334
+        },
+        "taux_acceptation": 0.1698
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2615.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1514.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 967.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[3]": 677.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[4]": 510.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[5]": 360.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[6]": 264.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[7]": 174.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7081.0,
+        "vllm:spec_decode_num_draft_tokens_total": 41696.0,
+        "vllm:spec_decode_num_drafts_total": 5212.0
+      },
+      "secondes": 118.8
+    }
+  },
+  "pret_en_secondes": 297.6,
+  "requetes": 96,
+  "role": "spec",
+  "solo": {
+    "en": {
+      "decode_tok_s_mediane": 176.6,
+      "decode_tok_s_moyenne": 169.5,
+      "n": 16,
+      "ttft_ms_mediane": 87
+    },
+    "fr": {
+      "decode_tok_s_mediane": 65.8,
+      "decode_tok_s_moyenne": 65.7,
+      "n": 8,
+      "ttft_ms_mediane": 83
+    },
+    "items": [
+      {
+        "decode_tok_s": 71.6,
+        "deltas": 315,
+        "id": "spe-fr-tut-01",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 66,
+        "wall_s": 7.2
+      },
+      {
+        "decode_tok_s": 63.1,
+        "deltas": 356,
+        "id": "spe-fr-tut-02",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 68,
+        "wall_s": 8.16
+      },
+      {
+        "decode_tok_s": 62.0,
+        "deltas": 360,
+        "id": "spe-fr-tut-03",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 75,
+        "wall_s": 8.32
+      },
+      {
+        "decode_tok_s": 67.5,
+        "deltas": 331,
+        "id": "spe-fr-tut-04",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 84,
+        "wall_s": 7.65
+      },
+      {
+        "decode_tok_s": 66.6,
+        "deltas": 331,
+        "id": "spe-fr-tut-05",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 90,
+        "wall_s": 7.76
+      },
+      {
+        "decode_tok_s": 62.2,
+        "deltas": 357,
+        "id": "spe-fr-tut-06",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 85,
+        "wall_s": 8.3
+      },
+      {
+        "decode_tok_s": 67.4,
+        "deltas": 330,
+        "id": "spe-fr-tut-07",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 85,
+        "wall_s": 7.67
+      },
+      {
+        "decode_tok_s": 65.1,
+        "deltas": 342,
+        "id": "spe-fr-tut-08",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 82,
+        "wall_s": 7.93
+      },
+      {
+        "decode_tok_s": 131.6,
+        "deltas": 172,
+        "id": "spe-code-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 77,
+        "wall_s": 3.96
+      },
+      {
+        "decode_tok_s": 143.7,
+        "deltas": 159,
+        "id": "spe-code-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 74,
+        "wall_s": 3.63
+      },
+      {
+        "decode_tok_s": 241.0,
+        "deltas": 95,
+        "id": "spe-code-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 100,
+        "wall_s": 2.22
+      },
+      {
+        "decode_tok_s": 199.8,
+        "deltas": 115,
+        "id": "spe-code-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 93,
+        "wall_s": 2.65
+      },
+      {
+        "decode_tok_s": 169.3,
+        "deltas": 136,
+        "id": "spe-code-05",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 92,
+        "wall_s": 3.11
+      },
+      {
+        "decode_tok_s": 190.0,
+        "deltas": 121,
+        "id": "spe-code-06",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 90,
+        "wall_s": 2.78
+      },
+      {
+        "decode_tok_s": 171.5,
+        "deltas": 133,
+        "id": "spe-code-07",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 101,
+        "wall_s": 3.08
+      },
+      {
+        "decode_tok_s": 181.7,
+        "deltas": 126,
+        "id": "spe-code-08",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 107,
+        "wall_s": 2.92
+      },
+      {
+        "decode_tok_s": 93.9,
+        "deltas": 242,
+        "id": "spe-en-prose-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 66,
+        "wall_s": 5.51
+      },
+      {
+        "decode_tok_s": 97.3,
+        "deltas": 229,
+        "id": "spe-en-prose-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 48,
+        "wall_s": 5.3
+      },
+      {
+        "decode_tok_s": 86.2,
+        "deltas": 227,
+        "id": "spe-en-prose-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 61,
+        "wall_s": 5.99
+      },
+      {
+        "decode_tok_s": 99.8,
+        "deltas": 221,
+        "id": "spe-en-prose-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 61,
+        "wall_s": 5.18
+      },
+      {
+        "decode_tok_s": 245.0,
+        "deltas": 94,
+        "id": "spe-en-math-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 84,
+        "wall_s": 2.17
+      },
+      {
+        "decode_tok_s": 202.1,
+        "deltas": 104,
+        "id": "spe-en-math-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 92,
+        "wall_s": 2.62
+      },
+      {
+        "decode_tok_s": 199.1,
+        "deltas": 106,
+        "id": "spe-en-math-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 84,
+        "wall_s": 2.65
+      },
+      {
+        "decode_tok_s": 260.1,
+        "deltas": 88,
+        "id": "spe-en-math-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 95,
+        "wall_s": 2.06
+      }
+    ]
+  },
+  "spec": {
+    "draft_tensor_parallel_size": 1,
+    "method": "dflash",
+    "model": "$MODELS/gemma-4-31b-it-rh-dflash",
+    "num_speculative_tokens": null
+  },
+  "statut": "TERMINE"
+}

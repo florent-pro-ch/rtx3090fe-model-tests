@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen36-35b-a3b-vision",
+ "debut": "2026-09-13T12:35:11Z",
+ "solo": {
+  "ttft_ms": 177,
+  "tok_s": 172.9,
+  "completion_tokens": 512,
+  "wall_s": 2.962
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 1015.0,
+  "p50_latency_s": 4.03,
+  "wall_s": 4.04
+ },
+ "fin": "2026-09-13T12:35:21Z"
+}

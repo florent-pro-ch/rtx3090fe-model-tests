@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Banner from '../../components/Banner.astro';
+import Num from '../../components/Num.astro';
+import GraderBadge from '../../components/GraderBadge.astro';
+import type { MarkdownDoc } from '../../lib/data';
+import { rankingTitle, methodologyDocs, rankings, benches, isJudged, JUDGES } from '../../lib/data';
+import { renderMarkdown } from '../../lib/markdown';
+import { benchHref, href, rankingHref } from '../../lib/site';
+
+export function getStaticPaths() {
+  // PITFALLS.md has its own top-level page (/pitfalls/); pages/methodology/pitfalls.astro points there.
+  const docs = methodologyDocs().filter((d) => d.slug !== 'methodology' && d.slug !== 'pitfalls');
+  const paths = docs.map((d) => ({ params: { doc: d.slug }, props: { d } }));
+  // The judge banner on every judged page links here: the page exists even before JUDGE.md is published.
+  if (!docs.some((d) => d.slug === 'judge')) paths.push({ params: { doc: 'judge' }, props: { d: null as unknown as MarkdownDoc } });
+  return paths;
+}
+
+const { d } = Astro.props as { d: MarkdownDoc | null };
+const { doc } = Astro.params as { doc: string };
+const html = d ? renderMarkdown(d.markdown, d.file) : null;
+const title = d?.title ?? 'The judge';
+const judgedRankings = rankings().filter((r) => isJudged(r.grader));
+const judgedBenches = benches().filter((b) => isJudged(b.grader));
+const judges = [...new Set([...judgedRankings, ...judgedBenches].map((x) => x.grader.judge).filter((j): j is string => !!j))].sort();
+---
+<Layout
+  title={title}
+  description={doc === 'judge' ? `How the judged scores are produced: one judge per table, ${JUDGES.table.name} for ${JUDGES.table.scope}, the local judge ${JUDGES.local.name} for ${JUDGES.local.scope}; no human calibration, and what that means for reading the rankings.` : `${title}: part of the methodology of the RTX 3090 FE model tests.`}
+  nav="methodology"
+  crumbs={[{ label: 'methodology', href: href('methodology/') }, { label: doc }]}
+>
+  {doc === 'judge' && <Banner kind="judge" />}
+  {html ? (
+    <article class="prose" set:html={html} />
+  ) : (
+    <>
+      <h1>{title}</h1>
+      <p class="empty">The full note on the judge is not published yet.</p>
+    </>
+  )}
+  {doc === 'judge' && (judges.length > 0 || judgedRankings.length > 0) && (
+    <>
+      <h2 id="in-the-data">Judged scores in the data</h2>
+      {judges.length > 0 && <p>Judge{judges.length > 1 ? 's' : ''} named in the records: {judges.map((j, i) => <>{i > 0 && ', '}<code>{j}</code></>)}.</p>}
+      <ul>
+        {judgedRankings.map((r) => <li><a href={rankingHref(r.ranking_id)}>{rankingTitle(r)}</a> <GraderBadge grader={r.grader} /> <Num value={r.rows.length} href={rankingHref(r.ranking_id)} /> rows</li>)}
+        {judgedBenches.map((b) => <li>Bench <a class="mono" href={benchHref(b.bench_id)}>{b.bench_id}</a></li>)}
+      </ul>
+    </>
+  )}
+</Layout>

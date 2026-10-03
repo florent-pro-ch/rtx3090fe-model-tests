@@ -1,0 +1,23 @@
+{
+  "benches": [],
+  "campaign_id": "2026-09-13-nvlink-ab",
+  "date": "2026-09-13",
+  "has_frozen_bench": false,
+  "modes": [
+    "interconnect",
+    "speed"
+  ],
+  "n_run_records": 3,
+  "n_runs": 3,
+  "run_ids": [
+    "2026-09-13-nvlink-ab/no-p2p",
+    "2026-09-13-nvlink-ab/no-p2p-no-car",
+    "2026-09-13-nvlink-ab/with-nvlink"
+  ],
+  "source": {
+    "source_id": "src-35afb1f0fab182c3"
+  },
+  "status": "closed",
+  "summary": "A dense Qwen3.8-27B (GPTQ INT4) served by vLLM 0.29.0 in tensor parallel 2 on one pair, under three arms: as built, with NCCL peer-to-peer disabled, and with both NCCL peer-to-peer and vLLM's custom all-reduce disabled, the software proxy for a pair without a bridge. Closing both paths cost about a tenth of single-stream speed and about a fifth of eight-request throughput; disabling NCCL peer-to-peer alone measured nothing, a false negative. The bridge was never physically removed, and each arm ran once.",
+  "title": "Does the NVLink bridge matter? A dense 27B in tensor parallel 2"
+}

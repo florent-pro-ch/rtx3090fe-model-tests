@@ -1,0 +1,13 @@
+---
+/** One RTX 3090 FE card (Figma Schematic/1x, 8:7), 240 x 120 units. */
+import GpuChip from './GpuChip.astro';
+import { hardwareById, isNum } from '../../lib/data';
+interface Props { caption?: boolean; width?: number | string; class?: string }
+const { caption = true, width = 240, class: cls = '' } = Astro.props;
+const h = hardwareById('1x3090fe');
+const text = h && isNum(h.vram_gb_total) ? `1 card · ${h.vram_gb_total} GB` : '1 card';
+---
+<svg class={`schematic ${cls}`} viewBox="0 0 240 120" width={width} role="img" aria-label={`Schematic: one RTX 3090 Founders Edition card${h && isNum(h.vram_gb_total) ? `, ${h.vram_gb_total} GB` : ''}.`}>
+  <GpuChip x={32} y={38} />
+  {caption && <text class="sch-caption" x="32" y="104">{text}</text>}
+</svg>

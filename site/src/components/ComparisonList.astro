@@ -1,0 +1,20 @@
+---
+/** Comparisons that involve a hardware configuration. */
+import type { Comparison } from '../lib/data';
+import { compareHref } from '../lib/site';
+interface Props { comps: Comparison[] }
+const { comps } = Astro.props;
+---
+{comps.length > 0 && (
+  <>
+    <h2 id="comparisons">Comparisons on this configuration</h2>
+    <ul>
+      {comps.map((c) => (
+        <li>
+          <a href={compareHref(c.comparison_id)}>{c.title}</a>
+          {typeof c.question === 'string' && <><br /><span class="small muted">{c.question}</span></>}
+        </li>
+      ))}
+    </ul>
+  </>
+)}

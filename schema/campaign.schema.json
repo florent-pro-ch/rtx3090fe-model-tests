@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "campaign.schema.json",
+  "title": "A dated campaign",
+  "type": "object",
+  "required": [
+    "campaign_id",
+    "date",
+    "title",
+    "status"
+  ],
+  "properties": {
+    "campaign_id": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "modes": {
+      "type": "array"
+    },
+    "benches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "closed",
+        "partial",
+        "exploratory",
+        "not-run"
+      ]
+    },
+    "n_runs": {
+      "type": "integer"
+    },
+    "has_frozen_bench": {
+      "type": "boolean"
+    },
+    "n_copies": {
+      "type": "integer"
+    }
+  }
+}

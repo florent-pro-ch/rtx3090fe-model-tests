@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-oxcoder-9b-gguf",
+ "debut": "2026-09-13T07:40:08Z",
+ "solo": {
+  "ttft_ms": 156,
+  "tok_s": 116.2,
+  "completion_tokens": 512,
+  "wall_s": 4.407
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 117.2,
+  "p50_latency_s": 19.65,
+  "wall_s": 34.93
+ },
+ "fin": "2026-09-13T07:40:52Z"
+}

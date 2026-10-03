@@ -1,0 +1,18 @@
+{
+ "candidat": "qwen38-flash-next-gguf",
+ "debut": "2026-09-05T08:42:53Z",
+ "solo": {
+  "ttft_ms": 754,
+  "tok_s": 36.2,
+  "completion_tokens": 512,
+  "wall_s": 14.144
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 35.8,
+  "p50_latency_s": 64.75,
+  "wall_s": 114.34
+ },
+ "fin": "2026-09-05T08:45:18Z"
+}

@@ -1,0 +1,17 @@
+---
+/** Status colours of DESIGN.md: serves-lane/kept green, parked/reservations amber,
+ * rated-no-role muted, rejected red. Also used for run and campaign statuses.
+ * A verdict status links to its definition in the glossary. */
+import { STATUS_LABEL, STATUS_TONE, glossaryHref } from '../lib/site';
+interface Props { status: string | null | undefined; label?: string; title?: string; link?: boolean }
+const { status, label, title, link = true } = Astro.props;
+const s = status || 'unknown';
+const tone = STATUS_TONE[s] ?? 'muted';
+const target = link && (s in STATUS_LABEL || ["ok", "failed", "failed-start", "partial", "interrupted"].includes(s)) ? glossaryHref(s) : null;
+const defined = !!target && !target.endsWith('/glossary/');
+---
+{defined ? (
+  <a class={`badge tone-${tone} badge-link`} href={target} title={title ?? `status: ${s} (see the glossary)`}>{label ?? STATUS_LABEL[s] ?? s}</a>
+) : (
+  <span class={`badge tone-${tone}`} title={title ?? `status: ${s}`}>{label ?? STATUS_LABEL[s] ?? s}</span>
+)}

@@ -1,0 +1,25 @@
+---
+/**
+ * Two NVLink pairs side by side (Figma Schematic/2x2, 8:33), 620 x 214 units:
+ * two separate dashed boxes, pair A and pair B, each its own 48 GB machine,
+ * with "no link" between them. Never drawn as one machine: no model has run
+ * on four cards here.
+ */
+import PairDrawing from './PairDrawing.astro';
+import { hardwareById, isNum } from '../../lib/data';
+interface Props { caption?: boolean; width?: number | string; class?: string }
+const { caption = true, width = 620, class: cls = '' } = Astro.props;
+const pair = hardwareById('2x3090fe-nvlink');
+const gb = pair && isNum(pair.vram_gb_total) ? ` · ${pair.vram_gb_total} GB` : '';
+---
+<svg class={`schematic ${cls}`} viewBox={`0 0 620 ${caption ? 214 : 178}`} width={width} role="img" aria-label={`Schematic: two separate NVLink pairs, pair A and pair B, each two RTX 3090 Founders Edition cards${gb ? ` and${gb.replace(' ·', '')}` : ''}, with no link between them: two independent machines, never one model on four cards.`}>
+  {['A', 'B'].map((p, i) => (
+    <g transform={`translate(${i * 338} 0)`}>
+      <rect class="sch-pairbox" x="0.5" y="0.5" width="281" height="175" rx="12"></rect>
+      <text class="sch-pairlabel" x="12" y="22">pair {p}{gb}</text>
+      <PairDrawing x={10} y={26} />
+    </g>
+  ))}
+  <text class="sch-caption" x="286" y="94">no link</text>
+  {caption && <text class="sch-caption" x="0" y="204">two independent machines · never one model on four cards</text>}
+</svg>

@@ -1,0 +1,20 @@
+{
+  "about": "Written by tools/build_figures.mjs. source_sha256: the SVG drawn from data/ before rendering; sha256: the file written. Checked by node tools/build_figures.mjs --check.",
+  "figures": {
+    "banner-dark.svg": {
+      "source_sha256": "4a442e383492ae0953c9354a13a6156988f889ebfeeeb572e8e06e1fe6cf25cc",
+      "sha256": "1a672af005d091bcefddd59e57acf007d61257eb94e20b0a9167a039eb31f333",
+      "bytes": 163339
+    },
+    "banner-light.svg": {
+      "source_sha256": "4a442e383492ae0953c9354a13a6156988f889ebfeeeb572e8e06e1fe6cf25cc",
+      "sha256": "fd20e17df97cd91f81b738c250152d9aeb232bdfa1437027d63289c3c0e438b6",
+      "bytes": 163339
+    },
+    "social-preview.png": {
+      "source_sha256": "ca168fbba53958a7aed4e6203c8797d5fd983f8ce77c301ba8098eab60131156",
+      "sha256": "2cd10f55c499558b3a13a4a3d7af7d23fa81ead873cc46f0819c71004d8f89ef",
+      "bytes": 97805
+    }
+  }
+}

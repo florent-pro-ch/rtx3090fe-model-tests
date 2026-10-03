@@ -1,0 +1,49 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/gemma-4-31B-it-qat-w4a16-ct",
+    "--tensor-parallel-size",
+    "2",
+    "--max-model-len",
+    "16384",
+    "--max-num-seqs",
+    "8",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.90",
+    "--kv-cache-dtype",
+    "bfloat16",
+    "--no-enable-prefix-caching",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "gemma4",
+    "--reasoning-parser",
+    "gemma4",
+    "--speculative-config",
+    "{\"method\":\"dflash\",\"model\":\"$MODELS/gemma-4-31b-it-rh-dflash\",\"num_speculative_tokens\":8,\"draft_tensor_parallel_size\":1}",
+    "--served-model-name",
+    "gemma-4-31b-it"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "labels",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

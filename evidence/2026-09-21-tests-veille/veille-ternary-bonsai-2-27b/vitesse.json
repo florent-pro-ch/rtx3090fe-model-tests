@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-ternary-bonsai-2-27b",
+ "debut": "2026-09-21T13:24:52Z",
+ "solo": {
+  "ttft_ms": 409,
+  "tok_s": 70.5,
+  "completion_tokens": 512,
+  "wall_s": 7.26
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 72.0,
+  "p50_latency_s": 31.99,
+  "wall_s": 56.89
+ },
+ "fin": "2026-09-21T13:26:03Z"
+}

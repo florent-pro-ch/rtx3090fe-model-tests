@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { comparisons } from '../../lib/data';
+import { compareHref, hwShort } from '../../lib/site';
+
+const list = comparisons();
+const text = (v: unknown) => (typeof v === 'string' ? v : '');
+---
+<Layout title="Compare" description={`${list.length} measured comparisons on RTX 3090 FE: one card against an NVLink pair, NVLink on and off, engines, speculative decoding.`} nav="compare" crumbs={[{ label: 'compare' }]}>
+  <h1>Compare</h1>
+  <p class="lead">
+    Side-by-side measurements where only one thing changes: one card against a pair, NVLink against its software proxy,
+    one engine against another, speculative decoding on and off. Each comparison carries its own caveat.
+  </p>
+  {list.length === 0 ? (
+    <p class="empty">No comparison is published yet.</p>
+  ) : (
+    <div class="grid">
+      {list.map((c) => (
+        <article class="tile">
+          <h3><a href={compareHref(c.comparison_id)}>{c.title}</a></h3>
+          <p class="mono small muted break">{c.comparison_id}</p>
+          {text(c.summary || c.description || c.question) && <p class="small">{text(c.summary || c.description || c.question)}</p>}
+          {Array.isArray(c.hardware) && <p class="small muted">{(c.hardware as unknown[]).map((h) => hwShort(String(h))).join(' · ')}</p>}
+          {typeof c.caveat === 'string' && <p class="small tone-amber">{c.caveat}</p>}
+        </article>
+      ))}
+    </div>
+  )}
+</Layout>

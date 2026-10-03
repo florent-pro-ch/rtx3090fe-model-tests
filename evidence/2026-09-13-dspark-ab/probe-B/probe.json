@@ -1,0 +1,106 @@
+{
+  "note": "answer excerpts removed",
+  "rows": [
+    {
+      "acceptance_length": 1.408,
+      "accepted_tokens": 148.0,
+      "completion_tokens": 512,
+      "draft_tokens": 2541.0,
+      "drafts": 363.0,
+      "finish": "stop",
+      "per_position_rate": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0
+      },
+      "prompt": "fr-bench",
+      "tok_s": 134.2,
+      "wall_s": 3.815
+    },
+    {
+      "acceptance_length": 2.697,
+      "accepted_tokens": 314.0,
+      "completion_tokens": 500,
+      "draft_tokens": 1295.0,
+      "drafts": 185.0,
+      "finish": "stop",
+      "per_position_rate": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0
+      },
+      "prompt": "en-twin",
+      "tok_s": 268.4,
+      "wall_s": 1.863
+    },
+    {
+      "acceptance_length": 4.376,
+      "accepted_tokens": 395.0,
+      "completion_tokens": 512,
+      "draft_tokens": 819.0,
+      "drafts": 117.0,
+      "finish": "length",
+      "per_position_rate": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0
+      },
+      "prompt": "en-code",
+      "tok_s": 428.8,
+      "wall_s": 1.194
+    },
+    {
+      "acceptance_length": 5.232,
+      "accepted_tokens": 419.0,
+      "completion_tokens": 512,
+      "draft_tokens": 693.0,
+      "drafts": 99.0,
+      "finish": "length",
+      "per_position_rate": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0
+      },
+      "prompt": "en-math",
+      "tok_s": 506.4,
+      "wall_s": 1.011
+    },
+    {
+      "acceptance_length": 1.408,
+      "accepted_tokens": 148.0,
+      "completion_tokens": 512,
+      "draft_tokens": 2541.0,
+      "drafts": 363.0,
+      "finish": "stop",
+      "per_position_rate": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0
+      },
+      "prompt": "fr-bench-again",
+      "tok_s": 139.8,
+      "wall_s": 3.661
+    }
+  ],
+  "started_at": "2026-09-13T08:01:38Z"
+}

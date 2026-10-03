@@ -1,0 +1,61 @@
+{
+  "build_id": "xhtoken/spark-x2.5-4b@gguf-q8_0",
+  "campaign": "2026-09-12-tests-veille",
+  "duplicate_of": "2026-09-09-tests-veille/veille-spark-x25-4b-gguf",
+  "ended_at": null,
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda",
+    "name": "llamacpp",
+    "pre_pin": true,
+    "version": null
+  },
+  "engine_args": {
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_gpu_layers": 999,
+    "parallel_slots": 1
+  },
+  "evidence": [
+    "evidence/2026-09-12-tests-veille/veille-spark-x25-4b-gguf.echec-b10795-20260910/gpu-snapshots.json",
+    "evidence/2026-09-12-tests-veille/veille-spark-x25-4b-gguf.echec-b10795-20260910/launch.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "failed",
+  "metrics": {},
+  "model_id": "xhtoken/spark-x2.5-4b",
+  "parse_notes": [
+    "byte copy of an earlier run folder (sync copy)"
+  ],
+  "prompt_lang": "n/a",
+  "protocol": null,
+  "quality": [],
+  "run_id": "2026-09-12-tests-veille/veille-spark-x25-4b-gguf.echec-b10795-20260910",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-09a8f93e6a0d2aed"
+  },
+  "started_at": null,
+  "status": "failed-start",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": null
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

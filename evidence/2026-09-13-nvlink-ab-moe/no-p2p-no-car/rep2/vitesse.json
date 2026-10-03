@@ -1,0 +1,18 @@
+{
+ "candidat": "nvlink-moe-no-p2p-no-car-rep2",
+ "debut": "2026-09-13T07:34:19Z",
+ "solo": {
+  "ttft_ms": 68,
+  "tok_s": 157.6,
+  "completion_tokens": 512,
+  "wall_s": 3.249
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 793.7,
+  "p50_latency_s": 5.16,
+  "wall_s": 5.16
+ },
+ "fin": "2026-09-13T07:34:31Z"
+}

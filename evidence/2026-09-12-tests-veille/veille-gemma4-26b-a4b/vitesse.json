@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-gemma4-26b-a4b",
+ "debut": "2026-09-12T20:55:15Z",
+ "solo": {
+  "ttft_ms": 115,
+  "tok_s": 138.9,
+  "completion_tokens": 512,
+  "wall_s": 3.685
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 764.1,
+  "p50_latency_s": 5.36,
+  "wall_s": 5.36
+ },
+ "fin": "2026-09-12T20:55:27Z"
+}

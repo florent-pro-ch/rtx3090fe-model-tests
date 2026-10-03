@@ -1,0 +1,8 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { href } from '../lib/site';
+---
+<Layout title="Not found" description="This page does not exist." noindex>
+  <h1>Not found</h1>
+  <p>This page does not exist (or no longer does). Try the <a href={href('models/')}>models</a> or the <a href={href('/')}>home page</a>.</p>
+</Layout>

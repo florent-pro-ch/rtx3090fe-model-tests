@@ -1,0 +1,53 @@
+---
+/**
+ * A training-loss curve in inline SVG, from data only: x = step, y = loss.
+ * Honest axes: both start at zero and end at a round number at or above the
+ * largest value; every point is drawn, none is smoothed. Tick labels carry
+ * data-num (rounding check of tools/verify_numbers.py). The caption carries
+ * the date and the record it comes from.
+ */
+import { fmtNum } from '../lib/site';
+import { evidenceHref } from '../lib/site';
+interface Series { name: string; points: [number, number][] }
+interface Props { series: Series[]; title: string; date?: string | null; evidence?: string | null; xLabel?: string; yLabel?: string }
+const { series, title, date, evidence, xLabel = 'step', yLabel = 'loss' } = Astro.props;
+const all = series.flatMap((s) => s.points);
+function nice(x: number): number {
+  if (x <= 0) return 1;
+  const p = Math.pow(10, Math.floor(Math.log10(x)));
+  for (const m of [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) if (m * p >= x) return m * p;
+  return 10 * p;
+}
+const xMax = nice(Math.max(...all.map((p) => p[0]), 0));
+const yMax = nice(Math.max(...all.map((p) => p[1]), 0));
+const W = 600, H = 240, L = 52, R = 12, T = 12, B = 34;
+const sx = (v: number) => L + (v / xMax) * (W - L - R);
+const sy = (v: number) => H - B - (v / yMax) * (H - T - B);
+const xt = [0, xMax / 2, xMax];
+const yt = [0, yMax / 2, yMax];
+const tones = ['var(--blue)', 'var(--amber)', 'var(--green)', 'var(--red)'];
+const sparse = series.some((s) => s.points.length < 10);
+const path = (pts: [number, number][]) => pts.map((p, i) => `${i ? 'L' : 'M'}${sx(p[0]).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(' ');
+---
+{all.length > 1 && (
+  <figure class="chart">
+    <svg class="forge-curve" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${title}: ${series.map((s) => `${s.name}, ${s.points.length} points`).join('; ')}`}>
+      <g aria-hidden="true">
+        {yt.map((v) => <line class="gridline" x1={L} x2={W - R} y1={sy(v)} y2={sy(v)}></line>)}
+        <line class="axis" x1={L} x2={L} y1={T} y2={H - B}></line>
+        <line class="axis" x1={L} x2={W - R} y1={H - B} y2={H - B}></line>
+        {yt.map((v) => <text x={L - 6} y={sy(v) + 4} text-anchor="end" data-num={String(v)}>{fmtNum(v)}</text>)}
+        {xt.map((v) => <text x={sx(v)} y={H - B + 16} text-anchor="middle" data-num={String(v)}>{fmtNum(v)}</text>)}
+        <text x={(L + W - R) / 2} y={H - 4} text-anchor="middle">{xLabel}</text>
+        <text x={L + 6} y={T + 10}>{yLabel}</text>
+        {series.map((s, i) => <path class="line" d={path(s.points)} style={`color:${tones[i % tones.length]}`} stroke-dasharray={s.points.length < 10 ? '4 4' : undefined}></path>)}
+        {series.map((s, i) => s.points.map((p) => <circle cx={sx(p[0])} cy={sy(p[1])} r="3.5" fill="currentColor" style={`color:${tones[i % tones.length]}`}></circle>))}
+      </g>
+    </svg>
+    <figcaption>
+      {title} — {series.map((s) => `${s.name}, ${s.points.length} logged points`).join('; ')}; both axes start at zero; dots are the logged points{sparse && ', the dashed line only joins them (nothing was logged in between)'}
+      {date && <> · trained <time class="mono">{date}</time></>}
+      {evidence && <> · <a href={evidenceHref(evidence)}>record</a></>}
+    </figcaption>
+  </figure>
+)}

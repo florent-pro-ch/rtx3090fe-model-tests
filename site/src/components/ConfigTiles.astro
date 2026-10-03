@@ -1,0 +1,91 @@
+---
+/**
+ * The three configuration tiles (Figma Config tile 8:77 / 8:105 / 8:143): tag,
+ * title, the drawn schematic, distinct-run counts (copies apart), and one
+ * dated finding per configuration read from the runs and data/comparisons
+ * (never computed beyond what the records hold). A finding whose records are
+ * missing from the data is simply not shown.
+ */
+import Num from './Num.astro';
+import Schematic from './schematic/Schematic.astro';
+import { comparisonById, comparisonRow, isHouseProtocol, runById, runDate } from '../lib/data';
+import { compareHref, configHref, engineLabel, glossaryHref } from '../lib/site';
+import { CONFIG_SHORT, configSub, configSummaries, oneCardHeadline, rowSrc, rowSrcIn, twoPairs } from '../lib/configs';
+
+const nv = {
+  dSolo: comparisonRow('nvlink-ab-dense', 'no-p2p-no-car against', 'delta_solo_tok_s_pct'),
+  dAgg: comparisonRow('nvlink-ab-dense', 'no-p2p-no-car against', 'delta_agg_tok_s_pct'),
+};
+const nvRun = nv.dSolo ? nv.dSolo.run_ids.map((id) => runById().get(id)).find((r) => !!r) : undefined;
+const nvDate = nvRun ? runDate(nvRun) : null;
+const pairs = twoPairs();
+const one = oneCardHeadline();
+const oneAgg = one && typeof one.run.metrics.agg_tok_s === 'number' ? (one.run.metrics.agg_tok_s as number) : null;
+const oneC = one && typeof one.run.metrics.agg_concurrency === 'number' ? (one.run.metrics.agg_concurrency as number) : null;
+const WORD: Record<number, string> = { 2: 'two', 4: 'four', 8: 'eight' };
+const tiles = configSummaries();
+---
+<div class="config-tiles">
+  {tiles.map(({ h, runs, copies, models, headlines, singleModelRuns, singleModelRow }) => {
+    const id = h.hardware_id;
+    const page = configHref(id);
+    return (
+      <article class="config-tile">
+        <p class="tag-row"><a class="config-tag" href={page} aria-hidden="true" tabindex="-1">{CONFIG_SHORT[id]?.tag ?? id}</a> <span class="caption">{configSub(h)}</span></p>
+        <h3 class="config-title"><a href={page}>{h.label}</a></h3>
+        <div class="schematic-well">
+          <Schematic hw={id} width={id === '2x2x3090fe-nvlink' ? 330 : 240} />
+        </div>
+        <div class="stats">
+          {id === '2x2x3090fe-nvlink' ? (
+            <>
+              <span class="stat"><span class="label">runs of one model on 4 cards</span><span class="value"><Num value={singleModelRuns} href={compareHref('two-pairs-parallel')} /></span></span>
+              {pairs.busy && <span class="stat"><span class="label">cards busy at once (max)</span><span class="value"><Num value={pairs.busy.value} {...rowSrcIn(pairs.busy, 'two-pairs-parallel')} /></span></span>}
+            </>
+          ) : (
+            <>
+              <span class="stat"><span class="label">runs{copies > 0 && <> (+<Num value={copies} href={`${page}#all-runs`} /> copies)</>}</span><span class="value"><Num value={runs} href={`${page}#all-runs`} /></span></span>
+              <span class="stat"><span class="label">models</span><span class="value"><Num value={models} href={`${page}#all-runs`} /></span></span>
+              <span class="stat"><span class="label">with a speed figure</span><span class="value"><Num value={headlines} href={`${page}#headline`} /></span></span>
+            </>
+          )}
+        </div>
+
+        {id === '1x3090fe' && one && (
+          <div class="finding">
+            <p class="finding-k">Finding</p>
+            <p>
+              {one.name} fits one card: <Num value={one.run.metrics.solo_tok_s} unit="tok/s" run={one.run.run_id} /> single stream
+              {oneAgg !== null && <>, <Num value={oneAgg} unit="tok/s" run={one.run.run_id} /> at {oneC !== null ? (WORD[oneC] ?? String(oneC)) : 'several'} requests</>}
+              {one.vram !== null && <>, <Num value={one.vram} unit="MiB" run={one.run.run_id} /> {one.vramKind === 'reserved' ? 'reserved' : 'of VRAM'}</>}
+              {' '}(<a class="mono" href={glossaryHref(one.run.protocol ?? 'speed-house/v1')}>{one.run.protocol ?? 'no protocol'}</a>, {engineLabel(one.run.engine)}, <time class="mono">{runDate(one.run) ?? 'undated'}</time>{!isHouseProtocol(one.run.protocol) && ', not the house protocol'}).
+              {' '}<a href={compareHref('gemma4-26b-1-vs-2-cards')}>What a second card adds</a>
+            </p>
+          </div>
+        )}
+        {id === '2x3090fe-nvlink' && nv.dSolo && (
+          <div class="finding">
+            <p class="finding-k">Finding</p>
+            <p>
+              Closing the bridge's peer-to-peer paths cost a dense 27B <Num value={nv.dSolo.value} unit="%" {...rowSrc(nv.dSolo)} /> single stream
+              {nv.dAgg && <> and <Num value={nv.dAgg.value} unit="%" {...rowSrc(nv.dAgg)} /> at eight requests</>}.
+              {' '}<strong class="tone-amber">Software proxy, the bridge never removed</strong>{nvDate && <>, <time class="mono">{nvDate}</time></>}.
+              {' '}<a href={compareHref('nvlink-ab-dense')}>dense A/B</a> · <a href={compareHref('nvlink-ab-moe')}>MoE A/B</a>
+            </p>
+          </div>
+        )}
+        {id === '2x2x3090fe-nvlink' && (
+          <div class="finding">
+            <p class="finding-k">Finding</p>
+            <p>
+              <strong>Two independent 48 GB machines.</strong>
+              {pairs.busy && <> Up to <Num value={pairs.busy.value} unit="cards" {...rowSrcIn(pairs.busy, 'two-pairs-parallel')} /> busy at once{typeof pairs.busy.at === 'string' && <> (<time class="mono">{(pairs.busy.at as string).slice(0, 10)}</time>)</>}, each pair on its own job</>}
+              {pairs.maxGpus && <>; no recorded launch asks for more than <Num value={pairs.maxGpus.value} unit="GPUs" href={compareHref('two-pairs-parallel')} /></>}.
+              {' '}<a href={compareHref('two-pairs-parallel')}>{comparisonById('two-pairs-parallel')?.title ?? 'What both pairs did at once'}</a>
+            </p>
+          </div>
+        )}
+      </article>
+    );
+  })}
+</div>

@@ -1,0 +1,88 @@
+{
+  "budget_gpu_h": 2,
+  "candidat": "pixal3d-comfy",
+  "carte": "une",
+  "ecrit": "2026-09-30T12:00:59Z",
+  "etapes": [
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 40084,
+      "succes": true,
+      "vram_pic_mo": {
+        "1": 7870
+      },
+      "wall_s": 144.7
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 41818,
+      "succes": true,
+      "vram_pic_mo": {
+        "1": 9781
+      },
+      "wall_s": 111.3
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 44166,
+      "succes": true,
+      "vram_pic_mo": {
+        "1": 10459
+      },
+      "wall_s": 156.8
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 43947,
+      "succes": true,
+      "vram_pic_mo": {
+        "1": 11478
+      },
+      "wall_s": 177.7
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 43830,
+      "succes": true,
+      "vram_pic_mo": {
+        "1": 10266
+      },
+      "wall_s": 138.4
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 42840,
+      "succes": true,
+      "vram_pic_mo": {
+        "1": 11825
+      },
+      "wall_s": 272.5
+    },
+    {
+      "axe": "texture",
+      "erreur": "node 196 (UnwrapMesh) has no input texture_size in the template (inputs: ['mesh', 'padding', 'resolution', 'segmenter', 'weld_distance'])",
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": null,
+      "succes": false,
+      "vram_pic_mo": {},
+      "wall_s": 0.0
+    }
+  ],
+  "gpu_h_utilise": 0.278,
+  "plafond": {
+    "resolution": "1536",
+    "texture": null
+  }
+}

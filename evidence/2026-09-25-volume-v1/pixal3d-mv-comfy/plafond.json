@@ -1,0 +1,78 @@
+{
+  "budget_gpu_h": 2,
+  "candidat": "pixal3d-mv-comfy",
+  "carte": "une",
+  "ecrit": "2026-09-30T15:06:05Z",
+  "etapes": [
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-1",
+      "ram_pic_mo": 17620,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 9292
+      },
+      "wall_s": 141.6
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-2",
+      "ram_pic_mo": 27932,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 8190
+      },
+      "wall_s": 161.8
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 30450,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 10123
+      },
+      "wall_s": 232.9
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-1",
+      "ram_pic_mo": 29197,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 11653
+      },
+      "wall_s": 191.8
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-2",
+      "ram_pic_mo": 31086,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 9642
+      },
+      "wall_s": 222.1
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 30895,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 14960
+      },
+      "wall_s": 388.2
+    }
+  ],
+  "gpu_h_utilise": 0.372,
+  "plafond": {
+    "resolution": "1536"
+  }
+}

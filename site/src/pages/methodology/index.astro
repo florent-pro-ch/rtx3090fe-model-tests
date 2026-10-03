@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Banner from '../../components/Banner.astro';
+import Frame from '../../components/Frame.astro';
+import HeadlineRule from '../../components/HeadlineRule.astro';
+import { methodologyDocs } from '../../lib/data';
+import { renderMarkdown } from '../../lib/markdown';
+import { href } from '../../lib/site';
+
+const docs = methodologyDocs();
+const main = docs.find((d) => d.slug === 'methodology');
+const others = docs.filter((d) => d.slug !== 'methodology');
+const hasJudge = others.some((d) => d.slug === 'judge');
+const html = main ? renderMarkdown(main.markdown, main.file) : null;
+---
+<Layout title="Methodology" description="How speed and quality are measured on the RTX 3090 FE rig, how a run's topology is read, and the rule that picks the one headline figure per model and configuration." nav="methodology" crumbs={[{ label: 'methodology' }]}>
+  <h1>Methodology</h1>
+  <Banner kind="judge" />
+
+  <Frame title="rules this site applies">
+    <h3 id="headline-run-rule">Headline-run rule</h3>
+    <HeadlineRule />
+    <p class="small muted">On an NVLink pair the rule is applied within each split mode (tensor parallel, llama.cpp layer split,
+      part of the model in system RAM), which are different ways of running the same model. Speculative-decoding arms are read
+      against their base in the <a href={href('compare/spec-decoding-3090/')}>speculative-decoding comparison</a>; A/B treatment
+      arms against their reference on the comparison pages.</p>
+    <h3 id="topology">Topology</h3>
+    <p>
+      A run's topology (GPU count, tensor or layer split, NVLink use, CPU offload) is read from its launch record. A
+      llama.cpp layer split is never labelled tensor parallel. A run whose topology is unknown is left out of the
+      configuration pages and still has its own run page.
+    </p>
+    <h3 id="numbers">Numbers</h3>
+    <p>
+      Every number links to the run or the evidence it comes from. A value the export could not parse is shown as{' '}
+      <span class="num-null">n/a</span> with a parse note, never guessed. Units sit in the data keys
+      (<code>_tok_s</code>, <code>_ms</code>, <code>_mib</code>).
+    </p>
+  </Frame>
+
+  {html ? <article class="prose" set:html={html} /> : <p class="empty">The full methodology note is not published yet.</p>}
+
+  <h2 id="notes">Notes</h2>
+  <ul>
+    {others.map((d) => <li><a href={href(d.slug === 'pitfalls' ? 'pitfalls/' : `methodology/${d.slug}/`)}>{d.title}</a> <span class="mono small muted">{d.file}</span></li>)}
+    {!hasJudge && <li><a href={href('methodology/judge/')}>The judge</a></li>}
+  </ul>
+</Layout>

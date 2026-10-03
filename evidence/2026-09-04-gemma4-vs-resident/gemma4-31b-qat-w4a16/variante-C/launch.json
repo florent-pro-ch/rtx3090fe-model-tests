@@ -1,0 +1,54 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/gemma-4-31B-it-qat-w4a16-ct",
+    "--served-model-name",
+    "gemma-4-31b-it",
+    "--tensor-parallel-size",
+    "2",
+    "--max-model-len",
+    "32768",
+    "--max-num-seqs",
+    "8",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.90",
+    "--kv-cache-dtype",
+    "bfloat16",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "gemma4",
+    "--reasoning-parser",
+    "gemma4"
+  ],
+  "engine_args_parsed": {
+    "gpu_memory_utilization": 0.9,
+    "kv_cache_dtype": "bfloat16",
+    "max_model_len": 32768,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 8,
+    "tensor_parallel_size": 2
+  },
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "vllm/vllm-openai:v0.26.0",
+  "kind": "docker",
+  "note": "launch of variant C (gemma4 parsers, bf16 KV cache), read from the campaign's judge driver script; it served the passes 'variante-C' and 'variante-C/thinking' of speed-passes.json",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

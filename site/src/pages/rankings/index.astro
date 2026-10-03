@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Table from '../../components/Table.astro';
+import Banner from '../../components/Banner.astro';
+import GraderBadge from '../../components/GraderBadge.astro';
+import RobustnessBadge from '../../components/RobustnessBadge.astro';
+import type { Ranking } from '../../lib/data';
+import { rankingTitle, rankings, isJudged, isCurrentRanking, benchById, judgeKeyOf, JUDGES, rankingRegradedAt } from '../../lib/data';
+import { benchHref, href, rankingHref } from '../../lib/site';
+
+const all = rankings();
+const current = all.filter(isCurrentRanking);
+const superseded = all.filter((r) => !isCurrentRanking(r));
+const checked = current.filter((r) => !isJudged(r.grader));
+const judged = current.filter((r) => isJudged(r.grader));
+// Judged rankings are grouped by their judge: one judge per table, never two.
+const byTable = judged.filter((r) => judgeKeyOf(r.grader) === 'table');
+const byLocal = judged.filter((r) => judgeKeyOf(r.grader) === 'local');
+const byOther = judged.filter((r) => judgeKeyOf(r.grader) === null);
+const groups: { id: string; title: string; intro: string; list: Ranking[] }[] = [
+  { id: 'checked', title: 'Checked by code', intro: 'Oracles, metrics and AUC: the answer is verified by a program, not by a model.', list: checked },
+  { id: 'judged', title: `Judged by ${JUDGES.table.name}`, intro: `${JUDGES.table.scope[0].toUpperCase() + JUDGES.table.scope.slice(1)}: scored by ${JUDGES.table.name} (Anthropic, cloud), alone or together with code checks ("mixed"). Read them as a ranking between candidates, not as an absolute grade.`, list: byTable },
+  { id: 'judged-local', title: 'Judged by the local judge', intro: `${JUDGES.local.scope[0].toUpperCase() + JUDGES.local.scope.slice(1)}: scored by the lab's local judge, ${JUDGES.local.label}, alone or together with mechanical checks. Never compare them with the tables above: a table holds one judge's scores.`, list: byLocal },
+  { id: 'judged-other', title: 'Judged by a model', intro: 'Scored by a model judge named in each ranking.', list: byOther },
+];
+---
+<Layout title="Rankings" description={`${current.length} current rankings generated from the runs: ${checked.length} checked by code (oracle, metric, AUC), ${byTable.length} judged by ${JUDGES.table.name} and ${byLocal.length} by the local judge, kept apart.`} nav="rankings" crumbs={[{ label: 'rankings' }]}>
+  <h1>Rankings</h1>
+  <p class="lead">
+    Every ranking is generated from the runs, never edited by hand. Rankings checked by code and rankings judged by a
+    model are kept apart, and each judged ranking has one judge: {JUDGES.table.name} for {JUDGES.table.scope}, the local
+    judge for {JUDGES.local.scope}.
+  </p>
+  {all.length === 0 && <p class="empty">No ranking is published yet.</p>}
+  {groups.map((g) => g.list.length > 0 && (
+    <section id={g.id}>
+      <h2>{g.title}</h2>
+      <p class="small muted">{g.intro}</p>
+      {g.id.startsWith('judged') && <Banner kind="judge" graders={g.list.map((r) => r.grader)} />}
+      <Table label={g.title}>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" data-sort>Ranking</th>
+              <th scope="col" data-sort>Bench</th>
+              <th scope="col" data-sort>Grader</th>
+              <th scope="col" class="num" data-sort="num">Rows</th>
+              <th scope="col" data-sort>Campaign</th>
+              <th scope="col" data-sort>Generated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {g.list.map((r) => (
+              <tr>
+                <td><a href={rankingHref(r.ranking_id)}>{rankingTitle(r)}</a><br /><span class="mono small muted break">{r.ranking_id}</span></td>
+                <td>{benchById().has(r.bench_id) ? <a class="mono small" href={benchHref(r.bench_id)}>{r.bench_id}</a> : <span class="mono small">{r.bench_id}</span>}</td>
+                <td data-v={r.grader.kind}><GraderBadge grader={r.grader} />{g.id.startsWith('judged') && <> <RobustnessBadge ranking={r} /></>}</td>
+                <td class="num" data-v={String(r.rows.length)}><Num value={r.rows.length} href={rankingHref(r.ranking_id)} /></td>
+                <td class="mono small">{r.campaign ?? '—'}</td>
+                <td class="mono small nowrap">{r.generated_at ? r.generated_at.slice(0, 10) : '—'}{rankingRegradedAt(r) && <><br /><span class="muted" title={`harness ranking of ${r.generated_at ? r.generated_at.slice(0, 10) : 'an earlier date'}, re-graded by ${judgeKeyOf(r.grader) ? JUDGES[judgeKeyOf(r.grader)!].name : 'its judge'} on ${rankingRegradedAt(r)}`}>re-graded {rankingRegradedAt(r)}</span></>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Table>
+    </section>
+  ))}
+  {superseded.length > 0 && (
+    <section id="earlier">
+      <h2>Earlier snapshots</h2>
+      <p class="small muted">
+        A candidate pool is re-ranked each time a candidate joins; each earlier snapshot stays published, marked as
+        superseded by the later one.
+      </p>
+      <details>
+        <summary><Num value={superseded.length} href="#earlier" /> superseded rankings</summary>
+        <ul>
+          {superseded.map((r) => (
+            <li><a href={rankingHref(r.ranking_id)}>{r.ranking_id}</a> <GraderBadge grader={r.grader} /> <RobustnessBadge ranking={r} /> · superseded by <a class="mono small" href={rankingHref(String(r.superseded_by))}>{r.superseded_by}</a></li>
+          ))}
+        </ul>
+      </details>
+    </section>
+  )}
+  <p class="small muted">How scores, confidence intervals and ties are computed: <a href={href('methodology/')}>methodology</a>.</p>
+</Layout>

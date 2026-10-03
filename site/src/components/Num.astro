@@ -1,0 +1,42 @@
+---
+/**
+ * Every number on the site goes through <Num>: monospace, with its unit, and
+ * linked to the run page or the evidence path it comes from. A missing value
+ * renders as a muted "n/a", never as a zero. data-num carries the raw value
+ * for the number checker (tools/verify_numbers.py).
+ */
+import { isNum, runById } from '../lib/data';
+import { evidenceHref, fmtNum, runHref } from '../lib/site';
+
+interface Props {
+  value: unknown;
+  unit?: string;
+  digits?: number;
+  run?: string | null;
+  evidence?: string | null;
+  href?: string | null;
+  approx?: boolean;
+  title?: string;
+  nullText?: string;
+  /** Link used when `run` names no published run and no evidence is given. */
+  fallback?: string | null;
+}
+const { value: raw, unit = '', digits, run, evidence, href: link, approx = false, title, nullText = 'n/a', fallback = null } = Astro.props;
+// A negative zero in the data (a rounded -0.0) is shown and checked as 0: String(-0) is "0" but Intl formats "-0".
+const value = Object.is(raw, -0) ? 0 : raw;
+const ok = isNum(value);
+// A run id links to its page only when that run is published; else evidence, else the fallback.
+const runOk = !!run && runById().has(run);
+const target = link ?? (runOk ? runHref(run!) : evidence ? evidenceHref(evidence) : fallback);
+const tip = title ?? (run ? `From run ${run}` : evidence ? `Evidence: ${evidence}` : undefined);
+const text = ok ? `${approx ? '~' : ''}${fmtNum(value as number, digits)}` : '';
+---
+{ok ? (
+  target ? (
+    <a class="num-v" href={target} title={tip} data-num={String(value)}>{text}{unit && <span class="num-unit">{unit}</span>}</a>
+  ) : (
+    <span class="num-v" title={tip} data-num={String(value)}>{text}{unit && <span class="num-unit">{unit}</span>}</span>
+  )
+) : (
+  <span class="num-null" title="No number in the data">{nullText}</span>
+)}

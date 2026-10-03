@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "run.schema.json",
+  "title": "One measured pass of one build on one hardware configuration at one time",
+  "type": "object",
+  "required": [
+    "run_id",
+    "campaign",
+    "model_id",
+    "kind",
+    "status",
+    "hardware",
+    "topology",
+    "engine",
+    "evidence",
+    "source"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "description": "<campaign>/<run-folder>"
+    },
+    "campaign": {
+      "type": "string"
+    },
+    "model_id": {
+      "type": "string"
+    },
+    "build_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "speed",
+        "quality",
+        "speed+quality",
+        "spec-decoding",
+        "ab-test",
+        "generation",
+        "failed"
+      ]
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "failed-start",
+        "failed",
+        "interrupted",
+        "partial",
+        "unknown"
+      ]
+    },
+    "hardware": {
+      "enum": [
+        "1x3090fe",
+        "2x3090fe-nvlink",
+        "2x2x3090fe-nvlink",
+        "unknown"
+      ]
+    },
+    "topology": {
+      "type": "object",
+      "required": [
+        "gpus",
+        "split"
+      ],
+      "properties": {
+        "gpus": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "tp": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "pp": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "split": {
+          "enum": [
+            "none",
+            "tensor",
+            "layer",
+            "row",
+            "unknown"
+          ]
+        },
+        "nvlink_used": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "p2p": {
+          "enum": [
+            "nvlink",
+            "off-software",
+            "n/a",
+            "unknown"
+          ]
+        },
+        "cpu_offload_gb": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "expert_parallel": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "ram_spill": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "true when part of the model sat in system RAM (llama.cpp without full -ngl, or vLLM --cpu-offload-gb); null when unknown"
+        }
+      }
+    },
+    "engine": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pre_pin": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "true: the engine is older than the pin (vLLM < 0.29.0, a floating llama.cpp tag or a build < b10830, or a run started before 2026-09-10 on an unpinned engine); false: pinned; null: engine unknown or withheld"
+        }
+      }
+    },
+    "engine_args": {
+      "type": "object",
+      "description": "max_model_len, max_num_seqs, kv_cache_dtype, gpu_memory_utilization, parallel_slots, ctx_size, n_gpu_layers... as parsed; ab_arm: 'reference' | 'treatment' for arms of an A/B experiment; speculative: the drafter configuration when speculative decoding was on ({method, num_speculative_tokens, ...} as passed to the engine)"
+    },
+    "protocol": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "prompt_lang": {
+      "enum": [
+        "fr",
+        "en",
+        "mixed",
+        "n/a",
+        "unknown"
+      ]
+    },
+    "started_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ended_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Typed numbers, unit in key: solo_tok_s, solo_ttft_ms (first, cold pass when the run has repetitions; solo_ttft_ms_mean is the mean over them), agg_tok_s, agg_concurrency, p50_latency_s, ready_s, kv_pool_tokens, acceptance_rate, seconds_per_item..."
+    },
+    "vram": {
+      "type": "object",
+      "properties": {
+        "mib_per_gpu": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "kind": {
+          "enum": [
+            "reserved",
+            "after-load",
+            "peak",
+            "needed",
+            "unknown"
+          ],
+          "description": "reserved = vLLM pre-allocation set by gpu-memory-utilization; after-load = nvidia-smi read a few seconds after the server is ready, before any request; peak = maximum observed during the run"
+        },
+        "snapshot": {
+          "type": "string"
+        }
+      }
+    },
+    "quality": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "bench_id",
+          "score"
+        ],
+        "properties": {
+          "bench_id": {
+            "type": "string"
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ci95": {
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "n_items": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "grader": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "oracle",
+                  "llm-judge",
+                  "metric",
+                  "auc",
+                  "human",
+                  "mixed",
+                  "none"
+                ]
+              },
+              "judge": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "judge_family": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "same_lineage": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "human_calibrated": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "thinking": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "repo-relative paths under evidence/ or benches/"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "source_id"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string"
+        }
+      }
+    },
+    "duplicate_of": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scrubbed_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parse_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

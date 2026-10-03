@@ -1,0 +1,79 @@
+{
+  "build_id": "empero-ai/qwen3.8-9b-distill@bf16",
+  "campaign": "2026-09-21-tests-veille",
+  "duplicate_of": null,
+  "ended_at": "2026-09-21T13:08:05Z",
+  "engine": {
+    "image": "vllm/vllm-openai:v0.29.0",
+    "name": "vllm",
+    "pre_pin": false,
+    "version": "0.29.0"
+  },
+  "engine_args": {
+    "gpu_memory_utilization": 0.95,
+    "kv_cache_dtype": "bfloat16",
+    "max_model_len": 8192,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 4
+  },
+  "evidence": [
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/gpu-snapshots.json",
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/launch.json",
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/mecanique-code.json",
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/mecanique-refus.json",
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/mecanique-tuteur.json",
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/pret-en-secondes.txt",
+    "evidence/2026-09-21-tests-veille/veille-qwen38-9b-distill/vitesse.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "speed+quality",
+  "metrics": {
+    "agg_concurrency": 8,
+    "agg_ok": 8,
+    "agg_tok_s": 183.9,
+    "agg_wall_s": 22.27,
+    "p50_latency_s": 16.71,
+    "ready_s": 197,
+    "solo_completion_tokens": 512,
+    "solo_tok_s": 47.7,
+    "solo_ttft_ms": 113,
+    "solo_wall_s": 10.742
+  },
+  "model_id": "empero-ai/qwen3.8-9b-distill",
+  "parse_notes": [],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-09-21-tests-veille/veille-qwen38-9b-distill",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-fa3077304c9c70d3"
+  },
+  "started_at": "2026-09-21T13:07:21Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "reserved",
+    "mib_per_gpu": [
+      21755
+    ],
+    "snapshot": "load"
+  }
+}

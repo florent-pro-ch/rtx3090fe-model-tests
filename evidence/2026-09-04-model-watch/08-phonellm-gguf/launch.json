@@ -1,0 +1,38 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/phonellm-alpha-1.i1-Q4_K_M.gguf",
+    "--alias",
+    "08-phonellm-gguf",
+    "-c",
+    "16384",
+    "-np",
+    "4",
+    "-ngl",
+    "999",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

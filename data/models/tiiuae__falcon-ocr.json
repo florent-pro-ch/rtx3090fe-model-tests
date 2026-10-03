@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-falcon-ocr"
+    ],
+    "inventory_ids": [
+      "falcon-ocr-1-5-270m-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "tiiuae/falcon-ocr@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-29",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "tiiuae/falcon-ocr",
+  "name": "Falcon-OCR",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 0.27,
+  "parse_notes": [],
+  "slug": "tiiuae__falcon-ocr",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/tiiuae/Falcon-OCR",
+  "vendor": "TII",
+  "verdict": {
+    "as_of": "2026-09-30",
+    "status": "rated-no-role",
+    "summary": "A 270M early-fusion OCR model served through a small Transformers server: fair transcription, near zero on the structured tasks under the fixed reader, slow per page. Rated, no role assigned."
+  }
+}

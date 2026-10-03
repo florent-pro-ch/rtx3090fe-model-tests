@@ -1,0 +1,18 @@
+---
+/**
+ * How a score was graded: oracle / metric (checked by code) vs LLM judge (amber).
+ * A judged score names its judge on the badge itself ("judged · Claude Fable 5.1",
+ * "judged · local judge"): the site has one judge per table, and two judges in all.
+ */
+import type { Grader } from '../lib/data';
+import { JUDGES, judgeKeyOf } from '../lib/data';
+interface Props { grader?: Grader | null }
+const g = Astro.props.grader;
+const kind = g?.kind ?? 'none';
+const tone = kind === 'oracle' || kind === 'human' ? 'green' : kind === 'metric' || kind === 'auc' ? 'blue' : kind === 'llm-judge' || kind === 'mixed' ? 'amber' : 'muted';
+const jk = judgeKeyOf(g);
+const who = jk ? JUDGES[jk].badge : null;
+const label = kind === 'llm-judge' ? (who ? `judged · ${who}` : 'judged') : kind === 'mixed' ? (who ? `mixed: oracle + ${who}` : 'mixed: oracle + judge') : kind === 'auc' ? 'AUC' : kind;
+const tip = g?.judge ? `judge: ${g.judge}${g.human_calibrated === false ? ' · no human calibration' : ''}` : `grader: ${kind}`;
+---
+<span class={`badge${tone === 'blue' || tone === 'muted' ? ' plain' : ''} tone-${tone}`} title={tip} data-judge={jk ?? undefined}>{label}</span>

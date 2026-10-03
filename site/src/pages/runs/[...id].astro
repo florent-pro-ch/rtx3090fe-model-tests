@@ -1,0 +1,296 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Banner from '../../components/Banner.astro';
+import Frame from '../../components/Frame.astro';
+import Value from '../../components/Value.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import PrePinBadge from '../../components/PrePinBadge.astro';
+import GraderBadge from '../../components/GraderBadge.astro';
+import type { Run } from '../../lib/data';
+import {
+  runs, modelById, buildById, campaignById, benchById, headlineRun, runDate, vramPerGpu, vramKind, isNum,
+  listRepoFiles, repoPathExists, launchFor, launchLine, isJudged, topologyKnown, hardwareById, itemScoresOf,
+  VERSION_LABEL, isRefusalOnly, visibleQuality, REFUSAL_BENCH, isABTreatment, aggSlots, readyWithDebug, usesSpeculation, notGradedReasonText, notYetText, judgeKeyOf, JUDGES,
+} from '../../lib/data';
+import { benchHref, campaignHref, configHref, engineLabel, evidenceHref, href, hwShort, modelHref, runHref, topoLabel } from '../../lib/site';
+
+export function getStaticPaths() {
+  return runs().map((r) => ({ params: { id: r.run_id }, props: { r } }));
+}
+
+const { r } = Astro.props as { r: Run };
+const m = modelById().get(r.model_id);
+const b = r.build_id ? buildById().get(r.build_id) : undefined;
+const camp = campaignById().get(r.campaign);
+const head = topologyKnown(r) ? headlineRun(r.model_id, r.hardware) : null;
+const isHead = head?.run_id === r.run_id;
+// The uncensored lab and its copies: refusal rates only (no speed, VRAM, launch line, engine arguments or other score).
+const lab = isRefusalOnly(r);
+const vr = lab ? [] : vramPerGpu(r);
+const metricKeys = lab ? [] : Object.keys(r.metrics).filter((k) => !['vram_mib', 'vram_kind'].includes(k)).sort();
+const launch = lab ? null : launchFor(r);
+const quality = visibleQuality(r);
+const itemFiles = itemScoresOf(r.run_id).filter((f) => !lab || REFUSAL_BENCH.test(f.bench_id));
+const anyJudged = quality.some((q) => isJudged(q.grader)) || itemFiles.some((f) => isJudged(f.grader));
+// An item file with no judge named whose judged items wait for the table's judge (not_graded no-table-judge-verdict).
+const notYetFile = (f: (typeof itemFiles)[number]) =>
+  !judgeKeyOf(f.grader) && f.items.some((it) => it.not_graded === 'no-table-judge-verdict');
+// The banner's graders: such a file belongs to a table of Claude Fable 5.1, so it counts as that judge's here,
+// and the page never opens on the local judge's banner alone above Fable's benches.
+const tableJudgeGrader = { kind: 'llm-judge', judge: JUDGES.table.label, judge_id: JUDGES.table.id, judge_location: JUDGES.table.location };
+const bannerGraders = itemFiles.map((f) => (notYetFile(f) ? tableJudgeGrader : f.grader));
+// Item codes shown in words (the raw code stays in the cell's tooltip and in the JSON).
+const REASON_KEYS = ['not_graded', 'mechanical_reason'];
+const REASON_HEAD: Record<string, string> = { not_graded: 'not graded, why', mechanical_reason: 'scored without a judge, why' };
+const itemExtraKeys = (f: (typeof itemFiles)[number]) =>
+  [...new Set(f.items.flatMap((it) => Object.keys(it)))].filter((k) => !['item_id', 'score', 'max'].includes(k)).sort();
+const evidence = r.evidence.map((e) => {
+  const kind = repoPathExists(e);
+  const raw = kind === 'dir' ? listRepoFiles(e, 200) : { files: [], total: 0 };
+  // Lab runs: only refusal files are listed.
+  const listing = lab ? { files: raw.files.filter((f) => /refus/i.test(f)), total: raw.files.filter((f) => /refus/i.test(f)).length } : raw;
+  return { path: e, kind, listing };
+});
+const name = m?.name ?? r.model_id;
+const date = runDate(r);
+const description = `${name} on ${hwShort(r.hardware)}${date ? `, ${date}` : ''}: ${r.kind} run, status ${r.status}, engine ${engineLabel(r.engine)}. Every metric with its evidence files.`;
+const otherKeys = lab ? [] : Object.keys(r.engine_args ?? {}).sort();
+// Readable names for metric keys (the raw key stays under each label).
+const METRIC_LABEL: Record<string, string> = {
+  solo_tok_s: 'single-stream decode speed', solo_ttft_ms: 'single-stream time to first token', ttft_ms: 'time to first token',
+  agg_tok_s: 'aggregate throughput', agg_concurrency: 'concurrent requests (aggregate pass)', agg_ok: 'aggregate requests that succeeded',
+  agg_wall_s: 'aggregate pass wall time', p50_latency_s: 'median request latency', ready_s: 'time to a ready server',
+  solo_completion_tokens: 'single-stream completion tokens', solo_wall_s: 'single-stream wall time', kv_pool_tokens: 'KV-cache pool',
+  kv_cache_gib: 'KV cache', weights_gib: 'weights in VRAM', repetitions: 'repetitions of the speed pass', bench_time_s: 'bench wall time',
+  tasks_passed: 'tasks passed', tasks_total: 'tasks', turns: 'agent turns', tool_calls: 'tool calls', tool_errors: 'tool errors',
+  tokens_in: 'tokens in', tokens_out: 'tokens out', items: 'items', items_ok: 'items that ran', solo_acceptance_rate: 'single-stream draft acceptance rate',
+  solo_mean_acceptance_length: 'single-stream mean acceptance length', agent_killed_or_timed_out: 'agent runs killed or timed out', verify_timeouts: 'verification timeouts',
+};
+const metricLabel = (k: string): string | null => {
+  if (METRIC_LABEL[k]) return METRIC_LABEL[k];
+  const m = k.match(/^(solo|c4|c8)_(fr|en)_(.+)$/);
+  if (m) {
+    const lang = m[2] === 'fr' ? 'French prompts' : 'English prompts';
+    const who = m[1] === 'solo' ? 'single stream' : `${m[1].slice(1)} requests`;
+    const what = METRIC_LABEL[m[3]] ?? (m[3] === 'decode_tok_s_median' ? 'median decode speed' : m[3] === 'decode_tok_s_mean' ? 'mean decode speed' : m[3] === 'ttft_ms_median' ? 'median time to first token' : m[3] === 'n' ? 'requests' : m[3] === 'ok' ? 'requests that succeeded' : m[3] === 'acceptance_rate' ? 'draft acceptance rate' : m[3] === 'mean_acceptance_length' ? 'mean acceptance length' : m[3].replace(/_/g, ' '));
+    return `${what}, ${who}, ${lang}`;
+  }
+  const mm = k.match(/^(.+)_(min|max|mean)$/);
+  if (mm && METRIC_LABEL[mm[1]]) return `${METRIC_LABEL[mm[1]]} (${mm[2]} over passes)`;
+  return null;
+};
+const slots = aggSlots(r);
+---
+<Layout
+  title={`Run ${r.run_id}`}
+  description={description}
+  noindex={false}
+  crumbs={[{ label: 'campaigns', href: href('campaigns/') }, { label: r.campaign, href: campaignHref(r.campaign) }, { label: r.run_id.slice(r.campaign.length + 1) || r.run_id }]}
+>
+  <h1 class="break">{name}</h1>
+  <p class="mono muted break">run {r.run_id}</p>
+  <p class="badges">
+    <StatusBadge status={r.status} />
+    <span class="badge plain tone-muted">{r.kind}</span>
+    <PrePinBadge prePin={r.engine.pre_pin} />
+    {isHead && <span class="badge plain tone-green" title="this run is the headline figure for its model and configuration">headline run</span>}
+    {r.duplicate_of && <span class="badge plain tone-amber wrap">copy of {r.duplicate_of}</span>}
+    {isABTreatment(r) && <span class="badge plain tone-amber" title="never a headline figure">A/B treatment arm</span>}
+    {!lab && usesSpeculation(r) && <span class="badge plain tone-muted" title="decoded with a speculative-decoding drafter: never a headline figure">drafter</span>}
+  </p>
+  {r.duplicate_of && (
+    <p class="small muted">This record is a byte copy of <a class="mono" href={runHref(r.duplicate_of)}>{r.duplicate_of}</a>, carried into a later campaign; it is not counted as a run of its own.</p>
+  )}
+  {lab && (
+    <Banner kind="info"><p><strong>Uncensored-model lab: only refusal rates are published.</strong> This run's speed, memory, launch line and other scores are not shown; its refusal rates are in the <a href={href('rankings/')}>refusal ranking</a>.</p></Banner>
+  )}
+  {!topologyKnown(r) && (
+    <Banner kind="warn"><p>The topology of this run is not known from its launch record: it is left out of the configuration pages.</p></Banner>
+  )}
+
+  <Frame title="run" chip={date}>
+    <dl class="kv">
+      <dt>Model</dt><dd>{m ? <a href={modelHref(m.slug)}>{m.name}</a> : <span class="mono">{r.model_id}</span>}</dd>
+      <dt>Build</dt><dd class="mono">{r.build_id ?? '—'}{b && <span class="muted"> · {b.quant.label}</span>}</dd>
+      <dt>Hardware</dt><dd>{hardwareById(r.hardware) ? <a href={configHref(r.hardware)}>{hardwareById(r.hardware)!.label}</a> : r.hardware}</dd>
+      <dt>Topology</dt><dd>{topoLabel(r.topology)}{r.topology.p2p && <span class="muted small"> · P2P {r.topology.p2p}</span>}{r.topology.nvlink_used !== undefined && r.topology.nvlink_used !== null && <span class="muted small"> · NVLink {r.topology.nvlink_used ? 'used' : 'not used'}</span>}</dd>
+      <dt>Engine</dt><dd class="mono">{engineLabel(r.engine)}{r.engine.image && <span class="muted"> · {r.engine.image}</span>}</dd>
+      <dt>Protocol</dt><dd class="mono">{r.protocol ?? '—'}</dd>
+      <dt>Prompt language</dt><dd class="mono">{r.prompt_lang ?? '—'}</dd>
+      <dt>Started</dt><dd class="mono">{r.started_at ?? '—'}</dd>
+      <dt>Ended</dt><dd class="mono">{r.ended_at ?? '—'}</dd>
+      <dt>Campaign</dt><dd><a href={campaignHref(r.campaign)}>{camp?.title ?? r.campaign}</a></dd>
+      {head && !isHead && <><dt>Headline run</dt><dd><a class="mono" href={runHref(head.run_id)}>{head.run_id}</a> <span class="muted small">is the figure shown for this model on this configuration</span></dd></>}
+    </dl>
+  </Frame>
+
+  <h2 id="metrics">Metrics</h2>
+  {lab ? (
+    <p class="empty">Not published for this study (refusal rates only).</p>
+  ) : metricKeys.length === 0 && vr.length === 0 ? (
+    <p class="empty">No metric in this run's record.</p>
+  ) : (
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Metric</th><th scope="col" class="num">Value</th></tr></thead>
+        <tbody>
+          {metricKeys.map((k) => (
+            <tr>
+              <td>{metricLabel(k) ? <>{metricLabel(k)}<br /><span class="mono small muted">{k}</span></> : <span class="mono small">{k}</span>}</td>
+              <td class="num"><Value value={r.metrics[k]} k={k} run={r.run_id} />
+                {k === 'agg_tok_s' && slots.slots !== null && <><br /><span class="muted small">{slots.engine === 'vllm' ? 'max_num_seqs' : 'llama.cpp slots'} <Num value={slots.slots} run={r.run_id} />{slots.serialised && slots.engine !== 'vllm' && ': requests served one after another (serialised), not batching'}</span></>}
+                {k === 'ready_s' && readyWithDebug(r) && <><br /><span class="muted small">measured with NCCL debug logging on: not comparable with other runs</span></>}
+              </td>
+            </tr>
+          ))}
+          {vr.length > 0 && (
+            <tr>
+              <td><span class="mono small">vram per GPU</span>{vramKind(r) && <span class="muted small"> ({vramKind(r)})</span>}</td>
+              <td class="num">{vr.map((v, i) => <>{i > 0 && ' + '}<Num value={v} unit="MiB" run={r.run_id} evidence={r.vram?.snapshot ?? null} /></>)}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  {quality.length > 0 && (
+    <>
+      <h2 id="quality">Quality</h2>
+      {anyJudged && <Banner kind="judge" graders={[...quality.map((q) => q.grader), ...bannerGraders]} />}
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Bench</th><th scope="col">Grader</th><th scope="col" class="num">Score</th><th scope="col" class="num">CI95</th><th scope="col" class="num">Items</th><th scope="col">Thinking</th></tr></thead>
+          <tbody>
+            {quality.map((q) => (
+              <tr>
+                <td>{benchById().has(q.bench_id) ? <a class="mono small" href={benchHref(q.bench_id)}>{q.bench_id}</a> : <span class="mono small">{q.bench_id}</span>}</td>
+                <td><GraderBadge grader={q.grader} /></td>
+                <td class="num"><Num value={q.score} run={r.run_id} /></td>
+                <td class="num">{Array.isArray(q.ci95) && q.ci95.length === 2 ? <><Num value={q.ci95[0]} run={r.run_id} />–<Num value={q.ci95[1]} run={r.run_id} /></> : <span class="num-null">—</span>}</td>
+                <td class="num"><Num value={q.n_items} run={r.run_id} nullText="—" /></td>
+                <td class="small mono">{q.thinking ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  {itemFiles.length > 0 && (
+    <>
+      <h2 id="items">Per-item scores</h2>
+      {anyJudged && quality.length === 0 && <Banner kind="judge" graders={bannerGraders} />}
+      <p class="small muted">Scores only: model answers and judge rationales are not published in {VERSION_LABEL}.</p>
+      {itemFiles.map((f) => {
+        const extra = itemExtraKeys(f);
+        return (
+          <details>
+            <summary>
+              {benchById().has(f.bench_id) ? <a class="mono" href={benchHref(f.bench_id)}>{f.bench_id}</a> : <span class="mono">{f.bench_id}</span>}
+              {' '}<GraderBadge grader={f.grader} /> · {(() => {
+                const ng = f.items.filter((it) => typeof it.not_graded === 'string').length;
+                // no judge named and judged items waiting for the table's judge: say so instead of naming a grader
+                const notYet = notYetFile(f);
+                if (notYet) {
+                  return <><Num value={f.items.length - ng} href="#items" /> of <Num value={f.items.length} evidence={f.path} /> items scored without a judge · <span class="flag" title={notYetText(r.run_id)}>not graded by {JUDGES.table.name} yet</span></>;
+                }
+                return ng > 0
+                  ? <><Num value={f.items.length - ng} href="#items" /> of <Num value={f.items.length} evidence={f.path} /> items graded</>
+                  : <><Num value={f.items.length} evidence={f.path} /> items</>;
+              })()}
+              {typeof f.setting === 'string' && <span class="muted small"> · {f.setting}</span>}
+            </summary>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th scope="col">Item</th><th scope="col" class="num">Score</th><th scope="col" class="num">Max</th>{extra.map((k) => <th scope="col">{REASON_HEAD[k] ?? k.replace(/_/g, ' ')}</th>)}</tr></thead>
+                <tbody>
+                  {f.items.map((it) => (
+                    <tr>
+                      <td class="mono small">{it.item_id}</td>
+                      <td class="num"><Num value={it.score} evidence={f.path} nullText="—" /></td>
+                      <td class="num"><Num value={it.max} evidence={f.path} nullText="—" /></td>
+                      {extra.map((k) => <td class="small">{REASON_KEYS.includes(k) ? (typeof it[k] === 'string' ? <span title={String(it[k])}>{notGradedReasonText(String(it[k]), r.run_id)}</span> : <span class="num-null">—</span>) : <Value value={it[k]} k={k} evidence={f.path} depth={2} />}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="small"><a class="mono" href={evidenceHref(f.path)}>{f.path}</a></p>
+          </details>
+        );
+      })}
+    </>
+  )}
+
+  {otherKeys.length > 0 && (
+    <>
+      <h2 id="engine-args">Engine arguments</h2>
+      <dl class="kv">
+        {otherKeys.map((k) => (
+          <>
+            <dt class="mono small">{k}</dt>
+            <dd><Value value={(r.engine_args as Record<string, unknown>)[k]} k={k} run={r.run_id} /></dd>
+          </>
+        ))}
+      </dl>
+    </>
+  )}
+
+  {launch && (
+    <>
+      <h2 id="launch">Launch line</h2>
+      <p class="small muted">Scrubbed launch record: <a class="mono" href={evidenceHref(launch.path)}>{launch.path}</a></p>
+      <pre class="launch"><code>{launchLine(launch.data) ?? JSON.stringify(launch.data, null, 2)}</code></pre>
+      {Array.isArray((launch.data as Record<string, unknown>)?.scrubbed) && (
+        <p class="small muted">Removed before publication: {((launch.data as Record<string, unknown>).scrubbed as string[]).join(', ')}. Mount your own model folder as <code>$MODELS</code>.</p>
+      )}
+    </>
+  )}
+
+  <h2 id="evidence">Evidence</h2>
+  {evidence.length === 0 ? (
+    <p class="empty">No evidence path in this run's record.</p>
+  ) : (
+    <ul class="plain">
+      {evidence.map((e) => (
+        <li>
+          <a class="mono small break" href={evidenceHref(e.path)}>{e.path}</a>
+          {e.kind === null && <span class="muted small"> (not in this build of the repository)</span>}
+          {e.listing.files.length > 0 && (
+            <ul>
+              {e.listing.files.map((f) => <li><a class="mono small break" href={evidenceHref(f)}>{f.slice(e.path.replace(/\/$/, '').length + 1)}</a></li>)}
+              {e.listing.total > e.listing.files.length && <li class="muted small">… <Num value={e.listing.total - e.listing.files.length} href={evidenceHref(e.path)} /> more files on GitHub</li>}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+  <p class="small muted">
+    Evidence file names stay in French where the harness wrote them (<code>vitesse.json</code> = speed,{' '}
+    <code>pret-en-secondes.txt</code> = seconds until ready, <code>mecanique-*.json</code> = mechanics,{' '}
+    <code>scores-*.json</code> = scores); see the glossary in the repository.
+  </p>
+
+  {((r.parse_notes ?? []).length > 0 || (r.scrubbed_fields ?? []).length > 0) && (
+    <>
+      <h2 id="notes">Export notes</h2>
+      {(r.parse_notes ?? []).length > 0 && (
+        <>
+          <h3>Parse notes</h3>
+          <ul>{(r.parse_notes ?? []).map((n) => <li class="small">{n}</li>)}</ul>
+        </>
+      )}
+      {(r.scrubbed_fields ?? []).length > 0 && (
+        <>
+          <h3>Scrubbed fields</h3>
+          <p class="small">Removed or generalised before publication: {(r.scrubbed_fields ?? []).map((f, i) => <>{i > 0 && ', '}<code>{f}</code></>)}.</p>
+        </>
+      )}
+    </>
+  )}
+  <p class="small muted">Source record <code>{r.source.source_id || '—'}</code> (an opaque id; the lab's private ledger maps it back to its file).</p>
+</Layout>

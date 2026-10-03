@@ -1,0 +1,18 @@
+{
+ "candidat": "fable-711-gptq",
+ "debut": "2026-09-05T08:26:24Z",
+ "solo": {
+  "ttft_ms": 120,
+  "tok_s": 65.8,
+  "completion_tokens": 512,
+  "wall_s": 7.782
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 464.4,
+  "p50_latency_s": 8.82,
+  "wall_s": 8.82
+ },
+ "fin": "2026-09-05T08:26:48Z"
+}

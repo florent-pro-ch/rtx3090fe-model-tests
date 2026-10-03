@@ -1,0 +1,217 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Banner from '../../components/Banner.astro';
+import Frame from '../../components/Frame.astro';
+import Table from '../../components/Table.astro';
+import BarChart from '../../components/BarChart.astro';
+import GraderBadge from '../../components/GraderBadge.astro';
+import RobustnessBadge from '../../components/RobustnessBadge.astro';
+import Value from '../../components/Value.astro';
+import type { Ranking } from '../../lib/data';
+import { rankingTitle, rankings, modelById, benchById, isJudged, isNum, campaignById, rowNotRated, rowOtherJudge, runById, judgeRobustness, rowRankInterval, rankRangeTitle, rowSecondJudge, ROBUSTNESS_ANCHOR, ROBUSTNESS_INFO, isTwoOrders, otherJudgeText, judgedByText, judgeKeyOf, JUDGES, notRatedText, rowItemsNotGraded, rankingDatesText, firstByDuelTieBreak, topRowsDifferFromShown } from '../../lib/data';
+import { benchHref, campaignHref, href, humanKey, modelHref, rankingHref, unitForKey } from '../../lib/site';
+
+export function getStaticPaths() {
+  return rankings().map((r) => ({ params: { id: r.ranking_id }, props: { r } }));
+}
+
+const { r } = Astro.props as { r: Ranking };
+const judged = isJudged(r.grader);
+const jr = judgeRobustness(r);
+const rows = r.rows
+  .slice()
+  .sort((a, b) => (isNum(a.rank) ? a.rank : 1e9) - (isNum(b.rank) ? b.rank : 1e9) || (b.score ?? -1e9) - (a.score ?? -1e9) || a.model_id.localeCompare(b.model_id));
+// Sub-score columns: the numeric keys shared by the rows (at most 8, the rest in the detail column).
+const subKeyCount = new Map<string, number>();
+for (const row of rows) for (const [k, v] of Object.entries(row.sub_scores ?? {})) if (isNum(v)) subKeyCount.set(k, (subKeyCount.get(k) ?? 0) + 1);
+const subKeys = [...subKeyCount.keys()].sort().slice(0, 8);
+const hasCi = rows.some((x) => Array.isArray(x.ci95) && x.ci95.length === 2);
+const hasTie = rows.some((x) => x.tie_group !== null && x.tie_group !== undefined);
+// The other judge's per-row score column belongs to the older substitution method only: a table of two full
+// orders (Claude Fable 5.1's) shows the other judge's rank as a range, never its score.
+const twoOrders = isTwoOrders(jr);
+const hasSecond = !twoOrders && rows.some((x) => rowSecondJudge(x) !== null);
+const jk = judgeKeyOf(r.grader);
+const judgeName = jk ? JUDGES[jk].name : r.grader.judge ?? null;
+const otherName = jr ? otherJudgeText(jr) : 'the second judge';
+// A rank interval is shown only where the two judges disagree on the row's rank.
+const moved = (row: (typeof rows)[number]) => { const iv = rowRankInterval(row); return iv && iv[0] !== iv[1] ? iv : null; };
+const hasExtra = rows.some((x) => x.extra && Object.keys(x.extra).length) || rows.some((x) => Object.keys(x.sub_scores ?? {}).some((k) => !subKeys.includes(k)));
+const baseLabel = (row: (typeof rows)[number]) => modelById().get(row.model_id)?.name ?? row.label ?? row.model_id;
+const nameCount = new Map<string, number>();
+for (const row of rows) nameCount.set(baseLabel(row), (nameCount.get(baseLabel(row)) ?? 0) + 1);
+// Two builds of one model in the same ranking: tell them apart by their build suffix.
+const label1 = (row: (typeof rows)[number]) => {
+  const b = baseLabel(row);
+  const suffix = row.build_id && row.build_id.includes('@') ? row.build_id.split('@').pop() : null;
+  return (nameCount.get(b) ?? 0) > 1 && suffix ? `${b} (${suffix})` : b;
+};
+// Still ambiguous (one pool holds a thinking-on and a thinking-off row): name the thinking setting.
+const label1Count = new Map<string, number>();
+for (const row of rows) label1Count.set(label1(row), (label1Count.get(label1(row)) ?? 0) + 1);
+// The thinking setting of a row: extra.thinking, else the run's engine_args.thinking, else a run id ending in "--thinking" (on).
+const thinkingOf = (row: (typeof rows)[number]): string | null => {
+  const th = row.extra?.thinking ?? (row.run_id ? runById().get(row.run_id)?.engine_args?.thinking : undefined);
+  if (typeof th === 'boolean') return th ? 'on' : 'off';
+  if (typeof th === 'string' && th) return th;
+  return row.run_id && /--thinking$/.test(row.run_id) ? 'on' : null;
+};
+const label = (row: (typeof rows)[number]) => {
+  const l = label1(row);
+  if ((label1Count.get(l) ?? 0) <= 1) return l;
+  const th = thinkingOf(row);
+  // The other pass of a pool where one pass is marked thinking on was run without it.
+  const sibOn = rows.some((o) => o !== row && label1(o) === l && thinkingOf(o) === 'on');
+  const shown = th ?? (sibOn ? 'off' : null);
+  return shown ? `${l} (thinking ${shown})` : l;
+};
+const title = rankingTitle(r);
+const genDate = r.generated_at ? r.generated_at.slice(0, 10) : null;
+const notRated = (row: (typeof rows)[number]) => rowNotRated(row);
+const other = (row: (typeof rows)[number]) => rowOtherJudge(r, row);
+const charted = rows.filter((row) => !notRated(row) && !other(row));
+const offChart = rows.filter((row) => notRated(row) || other(row));
+const labHidden = typeof r.lab_rows_hidden === 'number' ? r.lab_rows_hidden : 0;
+const camp = r.campaign ? campaignById().get(r.campaign) : undefined;
+const top = charted.find((x) => isNum(x.score));
+const dates = rankingDatesText(r);
+const firstByDuel = top ? firstByDuelTieBreak(r, top) : false;
+const description = `${title}: ${rows.length} candidates on bench ${r.bench_id}, ${judged ? judgedByText(r.grader) : `graded by ${r.grader.kind}`}${top ? `; first${firstByDuel ? ', by a duel tie-break' : ''}: ${label(top)}` : ''}.`;
+---
+<Layout title={genDate ? `${title}, ${genDate}` : title} description={description} nav="rankings" crumbs={[{ label: 'rankings', href: href('rankings/') }, { label: genDate ? `${r.bench_id}, ${genDate}` : r.bench_id }]}>
+  <h1>{title}</h1>
+  <p class="small muted">{dates.regraded ? <>Harness ranking of {genDate ? <time class="mono">{genDate}</time> : 'an earlier date'}, re-graded by {dates.judge ?? 'its judge'} on <time class="mono">{dates.regraded}</time> · </> : genDate ? <>Ranking generated <time class="mono">{genDate}</time> · </> : null}id <span class="mono break">{r.ranking_id}</span></p>
+  <p class="badges"><GraderBadge grader={r.grader} /> <RobustnessBadge ranking={r} /></p>
+  {judged && <Banner kind="judge" graders={[r.grader]} />}
+  {r.superseded_by && (
+    <Banner kind="info"><p>This is an earlier snapshot of the pool. It is superseded by <a class="mono" href={rankingHref(String(r.superseded_by))}>{r.superseded_by}</a>.</p></Banner>
+  )}
+
+  <Frame title="ranking" chip={dates.regraded ? `${genDate ? `harness ${genDate} · ` : ''}re-graded ${dates.regraded}` : genDate ? `generated ${genDate}` : null}>
+    <dl class="kv">
+      <dt>Bench</dt><dd>{benchById().has(r.bench_id) ? <a class="mono" href={benchHref(r.bench_id)}>{r.bench_id}</a> : <span class="mono">{r.bench_id}</span>}</dd>
+      {r.mode !== undefined && r.mode !== null && <><dt>Mode</dt><dd class="mono">{String(r.mode)}</dd></>}
+      <dt>Grader</dt><dd>{r.grader.kind}{r.grader.judge && <> · judge <span class="mono">{r.grader.judge}</span>{jk === 'local' && <> (the local judge)</>}{jk === 'table' && <> (the judge of every tutoring, vision and judged-code table)</>}</>}{r.grader.same_lineage === true && <> · <span class="tone-amber">judge shares a lineage with some candidates</span></>}{r.grader.human_calibrated === false && <> · no human calibration</>}</dd>
+      {jr && (
+        <>
+          <dt>Judge robustness</dt>
+          <dd>
+            <a href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>{ROBUSTNESS_INFO[jr.status].label}</a>
+            {jr.status === 'untested' ? (
+              <>: {jr.note ?? ROBUSTNESS_INFO.untested.meaning}</>
+            ) : (
+              <>
+                {twoOrders ? (
+                  <>
+                    {' '}· this table was also ranked whole by {otherName}, with its own scores and duels
+                    {jr.rows_compared !== null && <>: <Num value={jr.rows_compared} href="#table" /> row{jr.rows_compared === 1 ? '' : 's'} ranked by both</>}
+                  </>
+                ) : (
+                  <>
+                    {' '}· {jr.second_judge} re-graded <Num value={jr.rows_regraded} href="#table" /> row{jr.rows_regraded === 1 ? '' : 's'}
+                    {jr.rows_compared !== null && <> of <Num value={jr.rows_compared} href="#table" /> compared</>}
+                  </>
+                )}
+                {jr.kendall_tau !== null && <> · Kendall τ <Num value={jr.kendall_tau} href="#table" /></>}
+                {jr.ranks_changed !== null && <> · <Num value={jr.ranks_changed} href="#table" /> place{jr.ranks_changed === 1 ? '' : 's'} change</>}
+                {twoOrders && jr.top.length > 0 && (
+                  <>{jr.top.map((t) => <> · {topRowsDifferFromShown(r, t.rows) ? <>first <Num value={t.rows} href="#table" /> of the <Num value={jr.rows_compared} href="#table" /> rows both judges ranked</> : <>first <Num value={t.rows} href="#table" /> rows</>}: {t.kendall_tau === 1 && t.places_changed !== null && t.places_changed > 0
+                    ? <>τ <Num value={t.kendall_tau} href="#table" />, their relative order is unchanged; <Num value={t.places_changed} href="#table" /> of them sit{t.places_changed === 1 ? 's' : ''} at another rank number</>
+                    : <>τ <Num value={t.kendall_tau} href="#table" />{t.places_changed !== null && <>, <Num value={t.places_changed} href="#table" /> place{t.places_changed === 1 ? '' : 's'} change</>}</>}</>)}</>
+                )}
+                {jr.note && <><br /><span class="small muted">{jr.note}</span></>}
+              </>
+            )}
+          </dd>
+        </>
+      )}
+      {r.campaign && <><dt>Campaign</dt><dd>{camp ? <a href={campaignHref(camp.campaign_id)}>{camp.title}</a> : <span class="mono">{r.campaign}</span>}</dd></>}
+      <dt>Generated from</dt><dd class="mono small break">{r.generated_from || '—'}</dd>
+    </dl>
+  </Frame>
+
+  {charted.length > 0 && (
+    <BarChart
+      title={`${title}: score per candidate`}
+      caption={`${judged ? `scores ${judgedByText(r.grader)}; ` : ''}the axis starts at zero${offChart.length ? `; left out of the chart: ${offChart.map((row) => `${label(row)} (${notRated(row) ? notRatedText(row).short : `graded by ${other(row)}, not comparable`})`).join(', ')}` : ''}`}
+      date={dates.regraded ?? genDate}
+      dateLabel={dates.regraded ? 're-graded' : 'generated'}
+      evidenceHref={`#table`}
+      evidenceLabel="full table"
+      items={charted.slice(0, 40).map((row) => {
+        const m = modelById().get(row.model_id);
+        return { label: label(row), value: row.score, run: row.run_id ?? null, href: m ? modelHref(m.slug) : null, tone: judged ? 'amber' : 'blue', group: row.tie_group ?? null };
+      })}
+    />
+  )}
+
+  <h2 id="table">Table</h2>
+  {rows.length === 0 ? (
+    <p class="empty">This ranking has no row.</p>
+  ) : (
+    <Table label="ranking rows">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" class="num" data-sort="num">Rank{jr && jr.status !== 'untested' && <><br /><span class="small muted" title={twoOrders ? `on this table's numbering (every rated row): the rank shown, and that rank moved by the row's shift between ${judgeName}'s order and ${otherName}'s among the rows both judges ranked; shown where the two judges differ` : 'lowest and highest rank of the row under the two judges, shown where they differ'}>(range)</span></>}</th>
+            {hasTie && <th scope="col" data-sort>Tie group</th>}
+            <th scope="col" data-sort>Candidate</th>
+            <th scope="col" class="num" data-sort="num">Score</th>
+            {hasCi && <th scope="col" class="num">CI95</th>}
+            {hasSecond && <th scope="col" class="num" data-sort="num" title={jr?.second_judge ?? undefined}>Second judge</th>}
+            {subKeys.map((k) => <th scope="col" class="num" data-sort="num">{humanKey(k)}</th>)}
+            {hasExtra && <th scope="col">Detail</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => {
+            const m = modelById().get(row.model_id);
+            const ci = Array.isArray(row.ci95) && row.ci95.length === 2 ? row.ci95 : null;
+            const restSub = Object.fromEntries(Object.entries(row.sub_scores ?? {}).filter(([k]) => !subKeys.includes(k)));
+            const detail = { ...(Object.keys(restSub).length ? { sub_scores: restSub } : {}), ...(row.extra ?? {}) };
+            const link = { run: row.run_id ?? null, fallback: `#table` };
+            const nr = notRated(row);
+            const oj = other(row);
+            return (
+              <tr>
+                <td class="num" data-v={isNum(row.rank) ? String(row.rank) : ''}><Num value={row.rank} {...link} nullText="—" />{moved(row) && <><br /><span class="small muted nowrap" title={rankRangeTitle(r, row)}>(<Num value={moved(row)![0]} href="#table" />–<Num value={moved(row)![1]} href="#table" />)</span></>}</td>
+                {hasTie && <td class="mono small">{oj || nr ? <span title="not in a tie group: not comparable with the other rows">—</span> : (row.tie_group ?? '—')}</td>}
+                <td><div class="cell-min">
+                  {m ? <a href={modelHref(m.slug)}>{label(row)}</a> : <span>{row.label ?? row.model_id}</span>}
+                  <br /><span class="mono small muted break">{row.build_id ?? row.model_id}</span>
+                  {oj && <><br /><a class="flag" href={href('methodology/judge/')}>graded by {oj}; not comparable</a></>}
+                  {rowItemsNotGraded(row) && <><br /><span class="flag">{rowItemsNotGraded(row)!.text}</span></>}
+                </div></td>
+                <td class="num" data-v={!nr && isNum(row.score) ? String(row.score) : ''}>{nr ? <span class="num-null" title={notRatedText(row).title}>{notRatedText(row).short}</span> : <Num value={row.score} {...link} />}</td>
+                {hasCi && <td class="num">{ci && !nr ? <><Num value={ci[0]} {...link} />–<Num value={ci[1]} {...link} /></> : <span class="num-null">—</span>}</td>}
+                {hasSecond && (() => {
+                  const sj = rowSecondJudge(row);
+                  return <td class="num" data-v={sj && isNum(sj.score) ? String(sj.score) : ''}>{sj ? <><Num value={sj.score} {...link} />{isNum(sj.rank) && <><br /><span class="small muted">rank <Num value={sj.rank} href="#table" /></span></>}</> : <span class="num-null" title="not re-graded by the second judge">—</span>}</td>;
+                })()}
+                {subKeys.map((k) => {
+                  const v = (row.sub_scores ?? {})[k];
+                  return <td class="num" data-v={isNum(v) ? String(v) : ''}><Num value={v} unit={unitForKey(k)} {...link} nullText="—" /></td>;
+                })}
+                {hasExtra && <td class="small">{Object.keys(detail).length ? <details><summary>more</summary><Value value={detail} run={row.run_id ?? null} depth={1} /></details> : '—'}</td>}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </Table>
+  )}
+
+  {labHidden > 0 && (
+    <p class="small muted">
+      <Num value={labHidden} href="#table" /> row{labHidden === 1 ? '' : 's'} measured in the uncensored-model lab {labHidden === 1 ? 'is' : 'are'} not
+      shown: for that study only refusal rates are published.
+    </p>
+  )}
+  {(r.notes ?? []).length > 0 && (
+    <>
+      <h2 id="notes">Notes</h2>
+      <ul>{(r.notes ?? []).map((n) => <li>{n}</li>)}</ul>
+    </>
+  )}
+</Layout>

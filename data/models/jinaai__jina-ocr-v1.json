@@ -1,0 +1,61 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-jina-ocr-v1"
+    ],
+    "inventory_ids": [
+      "jina-ocr-v1-3b-bf16"
+    ]
+  },
+  "arch": "moe",
+  "builds": [
+    "jinaai/jina-ocr-v1@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-29",
+  "licence": {
+    "flags": [
+      "non-commercial"
+    ],
+    "name": "CC-BY-NC-4.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "jinaai/jina-ocr-v1",
+  "name": "Jina-OCR-v1",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 3.37,
+  "parse_notes": [],
+  "slug": "jinaai__jina-ocr-v1",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/jinaai/jina-ocr-v1",
+  "vendor": "Jina AI",
+  "verdict": {
+    "as_of": "2026-09-30",
+    "status": "rated-no-role",
+    "summary": "OCR on a DeepSeek-OCR backbone: fair transcription, near zero on the structured tasks under the fixed reader. Non-commercial licence; private-lab evaluation only."
+  }
+}

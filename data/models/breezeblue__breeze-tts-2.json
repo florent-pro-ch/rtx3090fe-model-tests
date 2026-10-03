@@ -1,0 +1,62 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [],
+    "inventory_ids": [
+      "breeze-tts-2"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "breezeblue/breeze-tts-2@bf16"
+  ],
+  "category": "tts",
+  "first_tested": "2026-09-04",
+  "last_tested": "2026-09-04",
+  "licence": {
+    "flags": [
+      "non-commercial"
+    ],
+    "name": "research / non-commercial licence",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "audio"
+  ],
+  "model_id": "breezeblue/breeze-tts-2",
+  "name": "Breeze TTS 2",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": null,
+  "parse_notes": [
+    "params not recorded in a parseable form",
+    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
+  ],
+  "slug": "breezeblue__breeze-tts-2",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/BreezeBlue/Breeze-TTS-2",
+  "vendor": "BreezeBlue",
+  "verdict": {
+    "as_of": "2026-09-04",
+    "status": "reservations",
+    "summary": "Listed; no run record published."
+  }
+}

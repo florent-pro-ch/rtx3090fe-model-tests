@@ -1,0 +1,133 @@
+---
+/**
+ * "Does the NVLink bridge matter?" (Figma hero B, 13:1227): aggregate
+ * throughput at eight requests, tensor parallel 2 on one pair, for the dense
+ * and the MoE A/B of data/comparisons/nvlink-ab-*.json, three arms each:
+ * bridge on; NCCL peer-to-peer off only (vLLM's custom all-reduce still on,
+ * still over the bridge through CUDA IPC); both off (the proxy for "no
+ * bridge"). Bars start at zero on one shared axis; the middle arm is hatched,
+ * the both-off arm dashed (the bridge was never removed); every value goes
+ * through <Num> and links to its run; the finding under the bars quotes the
+ * deltas from the data, and the caption gives the date, the engine, the
+ * protocol, the passes and the evidence folders.
+ */
+import Num from './Num.astro';
+import Frame from './Frame.astro';
+import { comparisonById, comparisonRows, isHouseProtocol, isNum, modelById, modelName, runById, runDate } from '../lib/data';
+import type { ComparisonRow } from '../lib/data';
+import { compareHref, engineLabel, evidenceLink } from '../lib/site';
+
+const STUDIES = [
+  { id: 'nvlink-ab-dense', short: 'Dense 27B (INT4)' },
+  { id: 'nvlink-ab-moe', short: 'MoE 35B-A3B (AWQ)' },
+];
+/** The three arms, in order; `kind` sets the bar style. */
+const ARMS = [
+  { id: 'with-nvlink', words: 'bridge on', kind: 'on' },
+  { id: 'no-p2p', words: 'NCCL P2P off only', kind: 'half' },
+  { id: 'no-p2p-no-car', words: 'both off', kind: 'closed' },
+] as const;
+type ArmKind = (typeof ARMS)[number]['kind'];
+/** The row of an arm: its label is the arm id alone or the id followed by " (" (never a longer id that shares the prefix). */
+const armRow = (compId: string, arm: string, metric: string): ComparisonRow | null =>
+  comparisonRows(comparisonById(compId)).find((r) => (r.label === arm || r.label.startsWith(`${arm} (`) || r.label.startsWith(`${arm} against`)) && r.metric === metric && r.value !== null) ?? null;
+const WORD: Record<number, string> = { 2: 'two', 3: 'three', 4: 'four', 8: 'eight' };
+const word = (n: number) => WORD[n] ?? String(n);
+
+interface Bar { label: string; title: string; row: ComparisonRow; kind: ArmKind; delta: ComparisonRow | null; first: boolean }
+const bars: Bar[] = [];
+const used: { id: string; short: string; rows: ComparisonRow[]; half: ComparisonRow | null; closed: ComparisonRow | null }[] = [];
+for (const s of STUDIES) {
+  const c = comparisonById(s.id);
+  const rows = ARMS.map((a) => armRow(s.id, a.id, 'agg_tok_s'));
+  if (!c || rows.some((r) => !r)) continue;
+  const full = typeof c.model_id === 'string' ? (modelById().get(c.model_id)?.name ?? modelName(c.model_id)) : s.short;
+  const deltas = ARMS.map((a) => (a.kind === 'on' ? null : armRow(s.id, a.id, 'delta_agg_tok_s_pct')));
+  ARMS.forEach((a, i) => bars.push({ label: `${s.short}, ${a.words}`, title: full, row: rows[i]!, kind: a.kind, delta: deltas[i], first: i === 0 }));
+  used.push({ id: s.id, short: s.short, rows: rows as ComparisonRow[], half: deltas[1], closed: deltas[2] });
+}
+
+const runsOf = (r: ComparisonRow) => r.run_ids.map((id) => runById().get(id)).filter((x) => !!x);
+const allRuns = bars.flatMap((b) => runsOf(b.row));
+const dates = [...new Set(allRuns.map((r) => runDate(r!)).filter((d): d is string => !!d))].sort();
+const dateText = dates.length === 0 ? null : dates.length === 1 ? dates[0] : `${dates[0]} to ${dates.at(-1)}`;
+const engines = [...new Set(allRuns.map((r) => engineLabel(r!.engine)))];
+const protocols = [...new Set(allRuns.map((r) => r!.protocol ?? 'no protocol'))];
+const conc = [...new Set(bars.map((b) => b.row.concurrency).filter(isNum))];
+const runLink = (r: ComparisonRow) => r.run_ids.find((id) => runById().has(id)) ?? null;
+
+// One axis from zero for every bar: a round top at or above the largest value, ticks every round step.
+const maxV = Math.max(0, ...bars.map((b) => b.row.value ?? 0));
+const mag = maxV > 0 ? Math.pow(10, Math.floor(Math.log10(maxV)) - 1) : 1;
+const top = Math.max(mag, Math.ceil(maxV / mag) * mag);
+const step = (() => {
+  const raw = top / 4;
+  const p = Math.pow(10, Math.floor(Math.log10(raw)));
+  return [5, 2.5, 2, 1].map((m) => m * p).find((v) => v <= raw) ?? p;
+})();
+const ticks: number[] = [];
+for (let t = 0; t <= top + 1e-9; t += step) ticks.push(Math.round(t * 1e6) / 1e6);
+const pct = (v: number) => `${((v / top) * 100).toFixed(3)}%`;
+const passes = (r: ComparisonRow) => (isNum(r.n_passes) ? r.n_passes : 1);
+---
+{bars.length > 0 && (
+  <Frame title="nvlink-ab · software proxy" short="nvlink-ab" bare chip={dateText} id="nvlink" heading={false}>
+    <figure class="nv-figure" aria-labelledby="nvlink-title">
+      <h2 class="nv-title" id="nvlink-title">Does the NVLink bridge matter?</h2>
+      <p class="nv-sub">
+        Aggregate throughput at {conc.length === 1 ? word(conc[0]) : 'several'} requests, tensor parallel 2 on one pair.
+        Three arms: the bridge on; NCCL peer-to-peer off only; and both off, NCCL peer-to-peer and vLLM's custom all-reduce.{' '}
+        <strong class="tone-amber">Software proxy: the bridge was never removed.</strong>
+      </p>
+      <div class="nv-bars">
+        {bars.map((b) => (
+          <div class={`nv-row${b.first ? ' nv-first' : ''}`}>
+            <span class="nv-label" title={b.title}>{b.label}</span>
+            <span class="nv-track" aria-hidden="true">
+              <span class={`nv-bar${b.kind === 'on' ? '' : ` ${b.kind}`}`} style={`width: ${pct(b.row.value ?? 0)}`}></span>
+            </span>
+            <span class="nv-value">
+              <Num value={b.row.value} unit="tok/s" run={runLink(b.row)} evidence={b.row.evidence[0] ?? null} />
+              {b.delta && <span class="nv-delta"><Num value={b.delta.value} unit="%" run={runLink(b.delta)} evidence={b.delta.evidence[0] ?? null} /></span>}
+            </span>
+          </div>
+        ))}
+        <div class="nv-row nv-axis" aria-hidden="true">
+          <span class="nv-label"></span>
+          <span class="nv-ticks">
+            {ticks.map((t) => <span class="nv-tick" style={`left: ${pct(t)}`}><Num value={t} /></span>)}
+          </span>
+          <span class="nv-value nv-axis-unit">tok/s, axis from zero</span>
+        </div>
+      </div>
+      <p class="nv-legend" aria-hidden="true">
+        <span><span class="nv-key"></span> bridge on</span>
+        <span><span class="nv-key half"></span> NCCL peer-to-peer off only</span>
+        <span><span class="nv-key closed"></span> both off (dashed: the bridge stays in place)</span>
+      </p>
+      {used.length === STUDIES.length && used.every((u) => u.half && u.closed) && (
+        <p class="nv-finding">
+          Switching off NCCL peer-to-peer alone costs little
+          ({used.map((u, i) => <>{i > 0 && ', '}<Num value={u.half!.value} unit="%" run={runLink(u.half!)} evidence={u.half!.evidence[0] ?? null} /> {u.short.split(' ')[0].toLowerCase() === 'moe' ? 'MoE' : u.short.split(' ')[0].toLowerCase()}</>)}):
+          vLLM's custom all-reduce, still on, keeps using the bridge through CUDA IPC.
+          Only with both off is the bridge out of the data path
+          ({used.map((u, i) => <>{i > 0 && ', '}<Num value={u.closed!.value} unit="%" run={runLink(u.closed!)} evidence={u.closed!.evidence[0] ?? null} /> {u.short.split(' ')[0].toLowerCase() === 'moe' ? 'MoE' : u.short.split(' ')[0].toLowerCase()}</>)}).
+        </p>
+      )}
+      <figcaption class="nv-caption">
+        Measured {dateText ? <time class="mono">{dateText}</time> : 'on an unrecorded date'} with {engines.join(', ')} and {protocols.every((p) => isHouseProtocol(p)) ? 'the house speed protocol' : <>protocol <span class="mono">{protocols.join(', ')}</span></>}.
+        {used.map((u) => {
+          const n = passes(u.rows[0]);
+          return <> {u.short.split(' ')[0]}: {n === 1 ? 'one run per arm' : `mean of ${word(n)} passes`}.</>;
+        })}
+        {' '}Evidence:{' '}
+        {used.map((u, i) => {
+          const ev = u.rows[0].evidence[0]?.replace(/[^/]+\/?$/, '') ?? null;
+          const link = ev ? evidenceLink(ev) : null;
+          return <>{i > 0 && ' and '}{link ? <a class="mono" href={link}>{ev}</a> : <span class="mono">{ev ?? 'not recorded'}</span>}</>;
+        })}
+        {' '}· <a href={compareHref('nvlink-ab-dense')}>dense A/B</a> · <a href={compareHref('nvlink-ab-moe')}>MoE A/B</a>
+      </figcaption>
+    </figure>
+  </Frame>
+)}

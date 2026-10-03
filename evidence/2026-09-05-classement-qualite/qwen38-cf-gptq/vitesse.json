@@ -1,0 +1,18 @@
+{
+ "candidat": "qwen38-cf-gptq",
+ "debut": "2026-09-05T08:14:17Z",
+ "solo": {
+  "ttft_ms": 83,
+  "tok_s": 99.4,
+  "completion_tokens": 347,
+  "wall_s": 3.491
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 420.0,
+  "p50_latency_s": 3.99,
+  "wall_s": 6.34
+ },
+ "fin": "2026-09-05T08:14:30Z"
+}

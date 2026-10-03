@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [],
+    "inventory_ids": [
+      "triposplat-comfy"
+    ]
+  },
+  "arch": "unknown",
+  "builds": [
+    "vast-ai/triposplat@bf16"
+  ],
+  "category": "3d-gen",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-30",
+  "licence": {
+    "flags": [],
+    "name": "MIT",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "image",
+    "3d"
+  ],
+  "model_id": "vast-ai/triposplat",
+  "name": "TripoSplat",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": null,
+  "parse_notes": [
+    "params not recorded in a parseable form"
+  ],
+  "slug": "vast-ai__triposplat",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/VAST-AI/TripoSplat",
+  "vendor": "VAST-AI",
+  "verdict": {
+    "as_of": "2026-10-01",
+    "status": "rated-no-role",
+    "summary": "Image to Gaussian splats, scored as a point cloud from the splat centres (no faces, so no surface metrics): second of five, in one tie group with the first. Rated, no role assigned."
+  }
+}

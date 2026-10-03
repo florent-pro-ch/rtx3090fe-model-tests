@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Table from '../../components/Table.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { HARDWARE_IDS, models, isForge, headlineRun, runsOfModel, soloTokS, counts, distinctRuns, splitGroup } from '../../lib/data';
+import { href, hwShort, modelHref, STATUS_LABEL } from '../../lib/site';
+
+const list = models().filter((m) => !isForge(m));
+const rows = list.map((m) => ({
+  m,
+  runs: distinctRuns(runsOfModel(m.model_id)).length,
+  heads: HARDWARE_IDS.map((hw) => headlineRun(m.model_id, hw)),
+  ran: HARDWARE_IDS.map((hw) => distinctRuns(runsOfModel(m.model_id)).some((r) => r.hardware === hw && r.status === 'ok')),
+}));
+const uniq = (xs: string[]) => [...new Set(xs)].sort();
+const neverRun = rows.filter((x) => x.runs === 0).length;
+const c = counts();
+---
+<Layout
+  title="Models"
+  description={`Every model tested on RTX 3090 FE cards: ${list.length} models, with verdict, licence, access and headline single-stream speed on each configuration.`}
+  nav="models"
+  crumbs={[{ label: 'models' }]}
+>
+  <h1>Models</h1>
+  <p class="lead">
+    Every upstream model in the lab's records, with its verdict, licence and access, and its headline single-stream speed on
+    each configuration. <Num value={neverRun} href={href('models/')} /> of the <Num value={list.length} href={href('models/')} /> were listed but have no
+    run record published (run count 0). Click a column to sort; filter by name, category, verdict or access.
+  </p>
+  <p class="small muted">Models spotted but never run, with the reason they wait: the <a href={href('watchlist/')}>watchlist</a>.</p>
+  {c.forge_models > 0 && (
+    <p class="small muted">Private fine-tune checkpoints are counted apart: <Num value={c.forge_models} href={href('forge/')} /> on the <a href={href('forge/')}>forge page</a>.</p>
+  )}
+  {rows.length === 0 ? (
+    <p class="empty">No model record is published yet.</p>
+  ) : (
+    <Table
+      label="models"
+      filters={[
+        { col: 2, label: 'category', values: uniq(list.map((m) => m.category)) },
+        { col: 3, label: 'verdict', values: uniq(list.map((m) => STATUS_LABEL[m.verdict.status] ?? m.verdict.status)) },
+        { col: 5, label: 'access', values: uniq(list.map((m) => m.access)) },
+      ]}
+    >
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" data-sort>Model</th>
+            <th scope="col" data-sort>Vendor</th>
+            <th scope="col" data-sort>Category</th>
+            <th scope="col" data-sort>Verdict</th>
+            <th scope="col" data-sort>Licence</th>
+            <th scope="col" data-sort>Access</th>
+            {HARDWARE_IDS.map((hw) => <th scope="col" class="num" data-sort="num">{hwShort(hw)}</th>)}
+            <th scope="col" class="num" data-sort="num" title="distinct runs (copies of earlier runs not counted)">Runs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ m, runs, heads, ran }) => (
+            <tr>
+              <td><div class="cell-min"><a href={modelHref(m.slug)}>{m.name}</a><br /><span class="mono small muted break">{m.model_id}</span></div></td>
+              <td class="small">{m.vendor}</td>
+              <td class="small" data-f={m.category}>{m.category}</td>
+              <td data-f={STATUS_LABEL[m.verdict.status] ?? m.verdict.status} data-v={m.verdict.status}><StatusBadge status={m.verdict.status} /></td>
+              <td class="small mono lic">{m.licence.name}</td>
+              <td class="small" data-f={m.access}>{m.access}</td>
+              {heads.map((r, i) => (
+                <td class="num" data-v={r ? String(soloTokS(r)) : ''}>
+                  {r ? <><Num value={soloTokS(r)} unit="tok/s" run={r.run_id} />{splitGroup(r) === 'cpu-offload' && <span class="muted small" title="part of the model was held in system RAM"><br />+ system RAM</span>}</>
+                    : ran[i] ? <a class="small muted nowrap" href={`${modelHref(m.slug)}#runs`} title="runs ended ok on this configuration, none with a headline single-stream figure">ran · no speed figure</a>
+                    : <span class="num-null" title="not run on this configuration">—</span>}
+                </td>
+              ))}
+              <td class="num" data-v={String(runs)}><Num value={runs} href={`${modelHref(m.slug)}#runs`} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Table>
+  )}
+  <p class="small muted">Speed columns show the headline single-stream run per configuration (<a href={href('methodology/#headline-run-rule')}>rule</a>); "ran · no speed figure" means runs ended ok there without a headline single-stream figure (quality, OCR or agent-loop runs, drafter or A/B arms); "—" means not run there.</p>
+</Layout>

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Value from '../components/Value.astro';
+import { watchlist } from '../lib/data';
+
+const { items, meta } = watchlist();
+const note = typeof meta.note === 'string' ? meta.note : typeof meta.description === 'string' ? meta.description : null;
+// The count is the open-weight models spotted for the rig (route local-weights); cloud or API-only models and
+// tools are listed on the same page but counted apart. Without routes in the data, every entry is counted.
+const routed = items.some((e) => typeof e.route === 'string');
+const forRig = routed ? items.filter((e) => e.route === 'local-weights').length : items.length;
+const apart = items.length - forRig;
+---
+<Layout title="Watchlist" description={`Watchlist entries spotted for the RTX 3090 FE rig, not run here when listed: ${forRig} open-weight models or builds, each with its reason${apart ? `; ${apart} cloud, API-only or tool entries listed apart` : ''}.`} crumbs={[{ label: 'watchlist' }]}>
+  <h1>Watchlist</h1>
+  <p class="lead">Models considered for the rig and not tested (yet), with the reason. Nothing on this page is a measurement.</p>
+  {note && <p>{note}</p>}
+  {items.length === 0 ? <p class="empty">No watchlist is published yet.</p> : <Value value={items} />}
+</Layout>

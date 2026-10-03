@@ -1,0 +1,492 @@
+{
+  "agrege": {
+    "c4-en": {
+      "agg_tok_s": 416.9,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 4.39,
+      "tokens": 8192,
+      "wall_s": 19.65
+    },
+    "c4-fr": {
+      "agg_tok_s": 361.9,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 5.5,
+      "tokens": 4096,
+      "wall_s": 11.32
+    },
+    "c8-en": {
+      "agg_tok_s": 599.4,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 5.65,
+      "tokens": 8192,
+      "wall_s": 13.67
+    },
+    "c8-fr": {
+      "agg_tok_s": 552.1,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 7.04,
+      "tokens": 4096,
+      "wall_s": 7.42
+    }
+  },
+  "bras": "q38b-mtp-k3",
+  "cible": "labo-qwen38-base",
+  "debut": "2026-09-25T17:24:56Z",
+  "erreurs": 0,
+  "fin": "2026-09-25T17:33:49Z",
+  "identite": {
+    "erreurs": 0,
+    "finish": {
+      "length": 24
+    },
+    "n": 24,
+    "tokens_max": 512,
+    "tokens_min": 512
+  },
+  "kv": {
+    "kv_cache_memoire_gib": 10.22,
+    "kv_cache_tokens": 391230.0,
+    "poids_gib": 9.45
+  },
+  "moteur": "vllm",
+  "nvidia_smi_apres": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 68
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 61
+    }
+  ],
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 68
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 61
+    }
+  ],
+  "nvidia_smi_charge": [
+    {
+      "index": 0,
+      "memoire_mib": 22153,
+      "temperature_c": 72
+    },
+    {
+      "index": 1,
+      "memoire_mib": 22153,
+      "temperature_c": 65
+    }
+  ],
+  "nvidia_smi_pret": [
+    {
+      "index": 0,
+      "memoire_mib": 22149,
+      "temperature_c": 50
+    },
+    {
+      "index": 1,
+      "memoire_mib": 22149,
+      "temperature_c": 39
+    }
+  ],
+  "passes": {
+    "c4-en": {
+      "acceptation": {
+        "accepted_tokens": 5537.0,
+        "draft_tokens": 7971.0,
+        "drafts": 2657.0,
+        "longueur_acceptee_moyenne": 3.084,
+        "par_position": {
+          "0": 0.8551,
+          "1": 0.6823,
+          "2": 0.5465
+        },
+        "taux_acceptation": 0.6946
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2272.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1813.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 1452.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5537.0,
+        "vllm:spec_decode_num_draft_tokens_total": 7971.0,
+        "vllm:spec_decode_num_drafts_total": 2657.0
+      },
+      "secondes": 19.7
+    },
+    "c4-fr": {
+      "acceptation": {
+        "accepted_tokens": 2567.0,
+        "draft_tokens": 4578.0,
+        "drafts": 1526.0,
+        "longueur_acceptee_moyenne": 2.682,
+        "par_position": {
+          "0": 0.808,
+          "1": 0.5623,
+          "2": 0.3119
+        },
+        "taux_acceptation": 0.5607
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1233.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 858.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 476.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2567.0,
+        "vllm:spec_decode_num_draft_tokens_total": 4578.0,
+        "vllm:spec_decode_num_drafts_total": 1526.0
+      },
+      "secondes": 11.3
+    },
+    "c8-en": {
+      "acceptation": {
+        "accepted_tokens": 5578.0,
+        "draft_tokens": 7851.0,
+        "drafts": 2617.0,
+        "longueur_acceptee_moyenne": 3.131,
+        "par_position": {
+          "0": 0.8628,
+          "1": 0.7039,
+          "2": 0.5648
+        },
+        "taux_acceptation": 0.7105
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2258.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1842.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 1478.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5578.0,
+        "vllm:spec_decode_num_draft_tokens_total": 7851.0,
+        "vllm:spec_decode_num_drafts_total": 2617.0
+      },
+      "secondes": 13.7
+    },
+    "c8-fr": {
+      "acceptation": {
+        "accepted_tokens": 2547.0,
+        "draft_tokens": 4650.0,
+        "drafts": 1550.0,
+        "longueur_acceptee_moyenne": 2.643,
+        "par_position": {
+          "0": 0.7929,
+          "1": 0.5387,
+          "2": 0.3116
+        },
+        "taux_acceptation": 0.5477
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1229.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 835.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 483.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2547.0,
+        "vllm:spec_decode_num_draft_tokens_total": 4650.0,
+        "vllm:spec_decode_num_drafts_total": 1550.0
+      },
+      "secondes": 7.4
+    },
+    "identite": {
+      "acceptation": {
+        "accepted_tokens": 8116.0,
+        "draft_tokens": 12549.0,
+        "drafts": 4183.0,
+        "longueur_acceptee_moyenne": 2.94,
+        "par_position": {
+          "0": 0.8396,
+          "1": 0.6431,
+          "2": 0.4576
+        },
+        "taux_acceptation": 0.6467
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 3512.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 2690.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 1914.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 8116.0,
+        "vllm:spec_decode_num_draft_tokens_total": 12549.0,
+        "vllm:spec_decode_num_drafts_total": 4183.0
+      },
+      "secondes": 107.9
+    },
+    "solo": {
+      "acceptation": {
+        "accepted_tokens": 8116.0,
+        "draft_tokens": 12549.0,
+        "drafts": 4183.0,
+        "longueur_acceptee_moyenne": 2.94,
+        "par_position": {
+          "0": 0.8396,
+          "1": 0.6431,
+          "2": 0.4576
+        },
+        "taux_acceptation": 0.6467
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 3512.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 2690.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 1914.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 8116.0,
+        "vllm:spec_decode_num_draft_tokens_total": 12549.0,
+        "vllm:spec_decode_num_drafts_total": 4183.0
+      },
+      "secondes": 106.7
+    }
+  },
+  "pret_en_secondes": 261.9,
+  "requetes": 96,
+  "role": "spec",
+  "solo": {
+    "en": {
+      "decode_tok_s_mediane": 138.7,
+      "decode_tok_s_moyenne": 129.4,
+      "n": 16,
+      "ttft_ms_mediane": 116
+    },
+    "fr": {
+      "decode_tok_s_mediane": 104.8,
+      "decode_tok_s_moyenne": 105.5,
+      "n": 8,
+      "ttft_ms_mediane": 122
+    },
+    "items": [
+      {
+        "decode_tok_s": 112.6,
+        "deltas": 182,
+        "id": "spe-fr-tut-01",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 111,
+        "wall_s": 4.65
+      },
+      {
+        "decode_tok_s": 102.9,
+        "deltas": 200,
+        "id": "spe-fr-tut-02",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 122,
+        "wall_s": 5.09
+      },
+      {
+        "decode_tok_s": 111.6,
+        "deltas": 183,
+        "id": "spe-fr-tut-03",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 122,
+        "wall_s": 4.7
+      },
+      {
+        "decode_tok_s": 105.4,
+        "deltas": 195,
+        "id": "spe-fr-tut-04",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 134,
+        "wall_s": 4.98
+      },
+      {
+        "decode_tok_s": 99.9,
+        "deltas": 205,
+        "id": "spe-fr-tut-05",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 5.24
+      },
+      {
+        "decode_tok_s": 101.9,
+        "deltas": 201,
+        "id": "spe-fr-tut-06",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 5.14
+      },
+      {
+        "decode_tok_s": 104.8,
+        "deltas": 196,
+        "id": "spe-fr-tut-07",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 104,
+        "wall_s": 4.98
+      },
+      {
+        "decode_tok_s": 104.8,
+        "deltas": 195,
+        "id": "spe-fr-tut-08",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 122,
+        "wall_s": 5.0
+      },
+      {
+        "decode_tok_s": 138.0,
+        "deltas": 151,
+        "id": "spe-code-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 106,
+        "wall_s": 3.81
+      },
+      {
+        "decode_tok_s": 135.7,
+        "deltas": 153,
+        "id": "spe-code-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 105,
+        "wall_s": 3.87
+      },
+      {
+        "decode_tok_s": 144.1,
+        "deltas": 144,
+        "id": "spe-code-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 3.67
+      },
+      {
+        "decode_tok_s": 142.1,
+        "deltas": 145,
+        "id": "spe-code-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 123,
+        "wall_s": 3.72
+      },
+      {
+        "decode_tok_s": 142.5,
+        "deltas": 145,
+        "id": "spe-code-05",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 3.71
+      },
+      {
+        "decode_tok_s": 136.0,
+        "deltas": 152,
+        "id": "spe-code-06",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 3.88
+      },
+      {
+        "decode_tok_s": 147.9,
+        "deltas": 141,
+        "id": "spe-code-07",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 105,
+        "wall_s": 3.56
+      },
+      {
+        "decode_tok_s": 135.1,
+        "deltas": 154,
+        "id": "spe-code-08",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 109,
+        "wall_s": 3.89
+      },
+      {
+        "decode_tok_s": 101.0,
+        "deltas": 204,
+        "id": "spe-en-prose-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 79,
+        "wall_s": 5.14
+      },
+      {
+        "decode_tok_s": 94.4,
+        "deltas": 218,
+        "id": "spe-en-prose-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 96,
+        "wall_s": 5.51
+      },
+      {
+        "decode_tok_s": 84.8,
+        "deltas": 243,
+        "id": "spe-en-prose-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 104,
+        "wall_s": 6.13
+      },
+      {
+        "decode_tok_s": 101.9,
+        "deltas": 203,
+        "id": "spe-en-prose-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 5.14
+      },
+      {
+        "decode_tok_s": 140.2,
+        "deltas": 148,
+        "id": "spe-en-math-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 105,
+        "wall_s": 3.75
+      },
+      {
+        "decode_tok_s": 142.1,
+        "deltas": 145,
+        "id": "spe-en-math-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 3.72
+      },
+      {
+        "decode_tok_s": 139.4,
+        "deltas": 148,
+        "id": "spe-en-math-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 3.79
+      },
+      {
+        "decode_tok_s": 145.3,
+        "deltas": 143,
+        "id": "spe-en-math-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 123,
+        "wall_s": 3.64
+      }
+    ]
+  },
+  "spec": {
+    "method": "mtp",
+    "num_speculative_tokens": 3
+  },
+  "statut": "TERMINE"
+}

@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-nex-n25-mini-w4a16-vision",
+ "debut": "2026-09-13T12:27:44Z",
+ "solo": {
+  "ttft_ms": 173,
+  "tok_s": 198.7,
+  "completion_tokens": 510,
+  "wall_s": 2.567
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 1126.3,
+  "p50_latency_s": 3.5,
+  "wall_s": 3.51
+ },
+ "fin": "2026-09-13T12:27:52Z"
+}

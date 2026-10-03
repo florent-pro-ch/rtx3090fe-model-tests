@@ -1,0 +1,89 @@
+---
+/**
+ * Home (Figma hero A, frames 12:3 / 12:734 / 12:441 / 12:802):
+ * the promise with the version and data date, the four counts (distinct runs,
+ * copies apart) and the rig console with the three schematics and their
+ * counts; then hero B's figure "Does the NVLink bridge matter?"; then the
+ * three configuration tiles and the judge banner with its robustness row.
+ */
+import Layout from '../layouts/Layout.astro';
+import Num from '../components/Num.astro';
+import Banner from '../components/Banner.astro';
+import Frame from '../components/Frame.astro';
+import ConfigTiles from '../components/ConfigTiles.astro';
+import NvlinkFigure from '../components/NvlinkFigure.astro';
+import Schematic from '../components/schematic/Schematic.astro';
+import Schematic2x2Compact from '../components/schematic/Schematic2x2Compact.astro';
+import { SITE_NAME, VERSION_LABEL, counts, dataAsOf, REPO_URL } from '../lib/data';
+import { compareHref, configHref, href } from '../lib/site';
+import { CONFIG_SHORT, configSummaries } from '../lib/configs';
+
+const c = counts();
+const asOf = dataAsOf();
+const rows = configSummaries();
+const description = `What runs on RTX 3090 Founders Edition cards, how fast and how well — one card, one NVLink pair, two pairs: ${c.models} models, ${c.runs} distinct runs, each number linked to its evidence.`;
+// The two pairs use the small-scale drawing at its own size (its words at 11–12 px), not the detailed one shrunk.
+const SCHEMATIC_WIDTH: Record<string, number> = { '1x3090fe': 149, '2x3090fe-nvlink': 149 };
+---
+<Layout title={SITE_NAME} description={description} nav="">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-promise">
+      <p class="version-pill">{VERSION_LABEL}<span class="pill-date"> · data as of <time datetime={asOf ?? undefined}>{asOf ?? 'no data yet'}</time></span></p>
+      <h1 id="hero-title">{SITE_NAME}</h1>
+      <p class="hero-lede">
+        What open models actually do on an RTX 3090 Founders Edition — one card, an NVLink pair, two pairs — measured on
+        the cards, every number dated and linked to its evidence.
+      </p>
+      <div class="hero-counts">
+        <span class="stat"><span class="label">models</span><span class="value"><Num value={c.models} href={href('models/')} /></span></span>
+        <span class="stat"><span class="label">runs</span><span class="value"><Num value={c.runs} href={href('campaigns/')} />{c.run_copies > 0 && <span class="copies">+<Num value={c.run_copies} href={href('campaigns/')} /> copies</span>}</span></span>
+        <span class="stat"><span class="label">benches</span><span class="value"><Num value={c.benches} href={href('benches/')} /></span></span>
+        <span class="stat"><span class="label">campaigns</span><span class="value"><Num value={c.campaigns} href={href('campaigns/')} /></span></span>
+      </div>
+      <p class="hero-note"><span class="note-date">Data as of <time datetime={asOf ?? undefined}>{asOf ?? 'no data yet'}</time>. </span>Runs are distinct run records; copies of earlier runs are counted apart. What was never measured is shown as missing, never estimated.</p>
+    </div>
+
+    <Frame title="rig · three configurations" short="rig" bare chip={asOf ? `data as of ${asOf}` : 'no data yet'} flush>
+      {rows.map(({ h, runs, copies, models, singleModelRuns }) => (
+        <div class="rig-row">
+          <span class="tag-col"><a class="config-tag" href={configHref(h.hardware_id)} title={h.label}>{CONFIG_SHORT[h.hardware_id]?.tag ?? h.hardware_id}<span class="sr-only">: {h.label}</span></a></span>
+          {h.hardware_id === '2x2x3090fe-nvlink'
+            ? <Schematic2x2Compact />
+            : <Schematic hw={h.hardware_id} caption={false} width={SCHEMATIC_WIDTH[h.hardware_id]} />}
+          <span class="count">
+            {h.hardware_id === '2x2x3090fe-nvlink' ? (
+              <>
+                <span class="big"><Num value={singleModelRuns} href={compareHref('two-pairs-parallel')} /></span>
+                <span class="caption">runs of one model on 4 cards</span>
+              </>
+            ) : (
+              <>
+                <span class="big"><Num value={runs} href={`${configHref(h.hardware_id)}#all-runs`} /></span>
+                <span class="caption">runs{copies > 0 && <> (+<Num value={copies} href={`${configHref(h.hardware_id)}#all-runs`} /> copies)</>}<br /><Num value={models} href={`${configHref(h.hardware_id)}#all-runs`} /> models</span>
+              </>
+            )}
+          </span>
+        </div>
+      ))}
+    </Frame>
+  </section>
+
+  <NvlinkFigure />
+
+  <h2 id="configurations">Three configurations</h2>
+  <ConfigTiles />
+
+  <Banner kind="judge" robustness />
+
+  <h2 id="next">Where to go next</h2>
+  <ul>
+    <li><a href={href('models/')}>Models</a> — what fits on which configuration, how fast, and how well it scored.</li>
+    <li><a href={href('pitfalls/')}>Ampere pitfalls</a> — what breaks or does not help on an sm86 card, learnt the hard way.</li>
+    <li><a href={href('rankings/')}>Rankings</a> — <Num value={c.rankings} href={href('rankings/')} /> rankings; scores checked by code and judged scores, kept apart.</li>
+    <li><a href={href('benches/')}>Benches</a> — the frozen instruments (items in French, cards in English; answer keys as hashes).</li>
+    <li><a href={href('compare/')}>Compare</a> — one card against a pair, NVLink on and off, engines, speculative decoding.</li>
+    <li><a href={href('forge/')}>Forge</a> — <Num value={c.forge_models} href={href('forge/')} /> fine-tune checkpoints, counted apart from the models.</li>
+    <li><a href={href('methodology/')}>Methodology</a> — how speed and quality are measured, and the headline-run rule.</li>
+    <li><a href={href('data/')}>Data</a> — download everything as JSON (CC BY 4.0), or browse the <a href={`${REPO_URL}/tree/main/data`}>data folder</a>.</li>
+  </ul>
+</Layout>

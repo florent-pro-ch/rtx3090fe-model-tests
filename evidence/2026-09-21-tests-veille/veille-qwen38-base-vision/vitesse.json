@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen38-base-vision",
+ "debut": "2026-09-22T14:06:20Z",
+ "solo": {
+  "ttft_ms": 167,
+  "tok_s": 75.8,
+  "completion_tokens": 512,
+  "wall_s": 6.759
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 475.4,
+  "p50_latency_s": 8.61,
+  "wall_s": 8.62
+ },
+ "fin": "2026-09-22T14:06:42Z"
+}

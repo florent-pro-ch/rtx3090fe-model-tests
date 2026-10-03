@@ -1,0 +1,79 @@
+---
+/**
+ * Renders any JSON value found in a data record: numbers through <Num> (unit
+ * from the key suffix, linked to the run when known), strings as text,
+ * arrays of objects as a table, objects as a key/value list (recursive).
+ */
+import Num from './Num.astro';
+import { benchById, githubUrl, isNum, modelById, runById } from '../lib/data';
+import { benchHref, humanKey, modelHref, runHref, unitForKey } from '../lib/site';
+
+interface Props { value: unknown; k?: string; run?: string | null; evidence?: string | null; depth?: number }
+const { value, k = '', run = null, evidence = null, depth = 0 } = Astro.props;
+const unit = unitForKey(k);
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const scalar = (v: unknown) => v === null || ['string', 'number', 'boolean'].includes(typeof v);
+const rowsOfObjects = Array.isArray(value) && value.length > 0 && value.every(isObj);
+const cols = rowsOfObjects ? [...new Set((value as Record<string, unknown>[]).flatMap((o) => Object.keys(o)))] : [];
+const looksMono = (s: string) => /^[\w./@:+-]+$/.test(s) && /[/_.@-]/.test(s) && s.length < 120;
+const Self = Astro.self;
+// Ids that resolve to a page of this site become links.
+let idLink: string | null = null;
+if (typeof value === 'string') {
+  const key = k.toLowerCase();
+  if ((key.endsWith('run_id') || key.endsWith('run_ids') || key === 'runs') && runById().has(value)) idLink = runHref(value);
+  else if ((key.endsWith('model_id') || key.endsWith('model_ids') || key === 'models') && modelById().has(value)) idLink = modelHref(modelById().get(value)!.slug);
+  else if ((key.endsWith('bench_id') || key === 'benches') && benchById().has(value)) idLink = benchHref(value);
+  else if (key === 'evidence' && /^(evidence|data|benches)\//.test(value)) idLink = githubUrl(value);
+}
+---
+{isNum(value) ? (
+  <Num value={value} unit={unit} run={run} evidence={evidence} />
+) : value === null || value === undefined ? (
+  <span class="num-null">n/a</span>
+) : typeof value === 'boolean' ? (
+  <span class="mono">{value ? 'yes' : 'no'}</span>
+) : typeof value === 'string' ? (
+  idLink ? <a href={idLink}><code>{value}</code></a> : looksMono(value) ? <code>{value}</code> : <span>{value}</span>
+) : Array.isArray(value) ? (
+  value.length === 0 ? (
+    <span class="muted">none</span>
+  ) : value.every(scalar) ? (
+    <span>{value.map((v, i) => <>{i > 0 && ', '}<Self value={v} k={k} run={run} evidence={evidence} depth={depth + 1} /></>)}</span>
+  ) : rowsOfObjects && depth < 3 ? (
+    <div class="table-wrap">
+      <table>
+        <thead><tr>{cols.map((c) => <th scope="col">{humanKey(c)}{unitForKey(c) && <span class="num-unit">{unitForKey(c)}</span>}</th>)}</tr></thead>
+        <tbody>
+          {(value as Record<string, unknown>[]).map((o) => {
+            const rowRun = typeof o.run_id === 'string' ? (o.run_id as string) : run;
+            return (
+              <tr>
+                {cols.map((c) => (
+                  <td class={isNum(o[c]) ? 'num' : ''}><Self value={o[c]} k={c} run={rowRun} evidence={evidence} depth={depth + 1} /></td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  ) : (
+    <code>{JSON.stringify(value)}</code>
+  )
+) : isObj(value) ? (
+  depth < 4 ? (
+    <dl class="kv">
+      {Object.keys(value).filter((key) => !(isObj(value[key]) && Object.keys(value[key] as object).length === 0)).sort().map((key) => (
+        <>
+          <dt>{humanKey(key)}</dt>
+          <dd><Self value={value[key]} k={key} run={typeof value.run_id === 'string' ? (value.run_id as string) : run} evidence={evidence} depth={depth + 1} /></dd>
+        </>
+      ))}
+    </dl>
+  ) : (
+    <code>{JSON.stringify(value)}</code>
+  )
+) : (
+  <span>{String(value)}</span>
+)}

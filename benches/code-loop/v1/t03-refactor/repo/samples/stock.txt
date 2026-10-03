@@ -1,0 +1,11 @@
+# Warehouse A -- stock snapshot
+sku,name,qty,price
+wid-100, Widget (small), 40, 2.5
+WID-200, Widget (large), 12, 4
+GAD-001, Gadget deluxe edition with extras, 3, 19.99
+gad-002, Gadget mini, 0, 9.9
+
+# restock received after the snapshot
+WID-100, Widget (small), 8, 2.75
+BLT-777, Bolt M8, 1200, 1.25
+CBL-050, Cable 5m, 5, 7.05

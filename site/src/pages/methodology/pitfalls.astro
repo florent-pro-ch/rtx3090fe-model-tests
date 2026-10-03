@@ -1,0 +1,11 @@
+---
+/** Former address of the pitfalls note: a small page that sends the reader to /pitfalls/. */
+import Layout from '../../layouts/Layout.astro';
+import { href } from '../../lib/site';
+const target = href('pitfalls/');
+---
+<Layout title="Ampere pitfalls" description="The Ampere pitfalls note moved to /pitfalls/." noindex canonicalPath={target} nav="pitfalls" crumbs={[{ label: 'methodology', href: href('methodology/') }, { label: 'pitfalls' }]}>
+  <meta http-equiv="refresh" content={`0; url=${target}`} slot="head" />
+  <h1>Ampere pitfalls</h1>
+  <p>This note lives at <a href={target}>{target}</a>.</p>
+</Layout>

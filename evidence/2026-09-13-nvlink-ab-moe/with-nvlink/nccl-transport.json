@@ -1,0 +1,11 @@
+{
+  "channel_counts": [
+    0,
+    4
+  ],
+  "note": "summary of NCCL_DEBUG=INFO lines; raw lines not exported",
+  "nvls_multicast_available": false,
+  "transports": [
+    "P2P/CUMEM"
+  ]
+}

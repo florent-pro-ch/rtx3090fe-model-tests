@@ -1,0 +1,49 @@
+# gitleaks configuration of rtx3090fe-model-tests.
+# The default rule set, plus the generic leak shapes of tools/scan_public.py so that a
+# scan of the git history (gitleaks git .) also catches private addresses and home
+# directories, not only tokens. No private literal belongs in this file.
+#
+#   gitleaks dir . --redact          # working tree (same as: gitleaks detect --no-git)
+#   gitleaks git . --redact          # every commit
+title = "rtx3090fe-model-tests"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "private-ipv4"
+description = "Private IPv4 address (RFC 1918, 100.64/10 shared range, 169.254/16 link-local)"
+regex = '''(?:^|[^\w.@~^])((?:10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])|192\.168|100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|169\.254)\.\d{1,3}\.\d{1,3})(?:[^\w.]|$)'''
+secretGroup = 1
+tags = ["network", "privacy"]
+
+[[rules]]
+id = "home-directory-path"
+description = "Absolute home directory of a named user"
+# the secret group leaves out the leading slash: the default global allowlist exempts
+# secrets that look like ^/(bin|etc|home|...)/ paths, which would silence this rule
+regex = '''(?:^|[^\w.~])/((?:home|Users)/[A-Za-z][A-Za-z0-9_.-]*)'''
+secretGroup = 1
+tags = ["path", "privacy"]
+[[rules.allowlists]]
+regexTarget = "secret"
+regexes = ['''^(?:home)/runner$''']  # the CI runner's home
+
+[[rules]]
+id = "mac-address"
+description = "Hardware MAC address"
+regex = '''(?i)(?:^|[^\w:-])((?:[0-9a-f]{2}:){5}[0-9a-f]{2})(?:[^\w:-]|$)'''
+secretGroup = 1
+tags = ["network", "privacy"]
+[[rules.allowlists]]
+regexTarget = "secret"
+regexes = ['''^(?:00:){5}00$''', '''(?i)^(?:ff:){5}ff$''']
+
+[[allowlists]]
+description = "SHA-256 fingerprints (bench manifests, evidence records) are not secrets"
+regexTarget = "secret"
+regexes = ['''^[0-9a-f]{64}$''']
+
+[[allowlists]]
+description = "Dependencies and local build caches (never committed)"
+paths = ['''(?:^|/)node_modules/''', '''^site/\.astro/''']

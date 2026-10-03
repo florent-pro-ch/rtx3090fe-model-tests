@@ -1,0 +1,46 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/granite-4.2-8b",
+    "--dtype",
+    "bfloat16",
+    "--max-model-len",
+    "16384",
+    "--max-num-seqs",
+    "8",
+    "--max-num-batched-tokens",
+    "4096",
+    "--gpu-memory-utilization",
+    "0.95",
+    "--kv-cache-dtype",
+    "fp8",
+    "--reasoning-parser",
+    "granite_thinking_parser",
+    "--reasoning-parser-plugin",
+    "$MODELS/granite_thinking_parser.py",
+    "--tool-call-parser",
+    "qwen3_coder",
+    "--enable-auto-tool-choice",
+    "--served-model-name",
+    "granite-4.2-8b"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "vllm/vllm-openai:v0.26.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

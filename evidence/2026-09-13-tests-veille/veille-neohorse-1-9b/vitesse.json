@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-neohorse-1-9b",
+ "debut": "2026-09-13T07:41:26Z",
+ "solo": {
+  "ttft_ms": 112,
+  "tok_s": 47.4,
+  "completion_tokens": 512,
+  "wall_s": 10.796
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 360.7,
+  "p50_latency_s": 11.35,
+  "wall_s": 11.35
+ },
+ "fin": "2026-09-13T07:41:59Z"
+}

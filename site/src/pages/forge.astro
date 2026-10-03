@@ -1,0 +1,182 @@
+---
+/**
+ * The forge: fine-tunes trained on the rig, as aggregates only. The summary
+ * (data/forge/summary.json) gives the counts and the method; per-checkpoint
+ * records (data/forge/checkpoints/*.json), when published, give the loss
+ * curve, the scores and the hyperparameters of each checkpoint. Without them
+ * the page says it shows counts only: it never claims curves it does not draw.
+ */
+import Layout from '../layouts/Layout.astro';
+import Frame from '../components/Frame.astro';
+import Value from '../components/Value.astro';
+import Num from '../components/Num.astro';
+import Banner from '../components/Banner.astro';
+import LossCurve from '../components/LossCurve.astro';
+import { rankingTitle, forge, forgeCheckpoints, models, isForge, runsOfModel, rankingRowsOfModel, isJudged, isNum, rankings, modelById, VERSION_LABEL } from '../lib/data';
+import { evidenceHref, humanKey, modelHref, rankingHref, unitForKey } from '../lib/site';
+
+type D = Record<string, unknown>;
+const isObj = (v: unknown): v is D => typeof v === 'object' && v !== null && !Array.isArray(v);
+const text = (v: unknown) => (typeof v === 'string' ? v : '');
+
+const summaries = forge();
+const checkpoints = models().filter(isForge);
+const cps = forgeCheckpoints();
+const forgeRankings = rankings().filter((r) => /^forge\//.test(r.bench_id));
+const judged = forgeRankings.some((r) => isJudged(r.grader)) || checkpoints.some((m) => rankingRowsOfModel(m.model_id).some((x) => isJudged(x.ranking.grader)));
+
+/** Points of a curve value: [{step, loss}], [[step, loss]], or {steps: [], loss: []}. */
+function points(v: unknown, yKey = 'loss'): [number, number][] {
+  if (Array.isArray(v)) {
+    return v
+      .map((p): [number, number] | null => {
+        if (Array.isArray(p) && isNum(p[0]) && isNum(p[1])) return [p[0], p[1]];
+        if (isObj(p)) {
+          const x = [p.step, p.steps, p.x, p.epoch].find(isNum);
+          const y = [p[yKey], p.loss, p.train_loss, p.value, p.y].find(isNum);
+          return isNum(x) && isNum(y) ? [x, y] : null;
+        }
+        return null;
+      })
+      .filter((p): p is [number, number] => p !== null)
+      .sort((a, b) => a[0] - b[0]);
+  }
+  if (isObj(v)) {
+    const xs = [v.steps, v.step, v.x].find(Array.isArray) as unknown[] | undefined;
+    const ys = [v[yKey], v.loss, v.values, v.y].find(Array.isArray) as unknown[] | undefined;
+    if (xs && ys) return xs.map((x, i): [number, number] | null => (isNum(x) && isNum(ys[i]) ? [x, ys[i] as number] : null)).filter((p): p is [number, number] => p !== null);
+  }
+  return [];
+}
+/** Every curve of a checkpoint record, named: parallel steps[] / loss[] arrays, or a curve value. */
+function curvesOf(d: D): { name: string; points: [number, number][] }[] {
+  const out: { name: string; points: [number, number][] }[] = [];
+  if (Array.isArray(d.steps) && Array.isArray(d.loss)) {
+    const p = points({ steps: d.steps, loss: d.loss });
+    if (p.length > 1) out.push({ name: 'training loss', points: p });
+  }
+  for (const k of ['loss_curve', 'curve', 'train_loss', 'training_loss']) {
+    const p = points(d[k]);
+    if (p.length > 1) out.push({ name: humanKey(k).toLowerCase(), points: p });
+  }
+  if (!out.length && !Array.isArray(d.steps)) {
+    const p = points(d.loss);
+    if (p.length > 1) out.push({ name: 'training loss', points: p });
+  }
+  for (const k of ['curves', 'loss_curves']) {
+    if (isObj(d[k])) for (const [name, v] of Object.entries(d[k] as D).sort()) { const p = points(v); if (p.length > 1) out.push({ name, points: p }); }
+  }
+  for (const k of ['eval_loss', 'validation_loss']) {
+    const p = points(d[k], k);
+    if (p.length > 1) out.push({ name: humanKey(k).toLowerCase(), points: p });
+  }
+  return out;
+}
+const scoresOf = (d: D): D => (isObj(d.scores) ? (d.scores as D) : isObj(d.aggregates) ? (d.aggregates as D) : {});
+const hyperOf = (d: D): D => (isObj(d.hyperparameters) ? (d.hyperparameters as D) : isObj(d.hparams) ? (d.hparams as D) : isObj(d.recipe) ? (d.recipe as D) : {});
+const trainingOf = (d: D): D => (isObj(d.training) ? (d.training as D) : {});
+const cpRows = cps.map((c) => ({ ...c, curves: curvesOf(c.data), scores: scoresOf(c.data), hyper: hyperOf(c.data), training: trainingOf(c.data) }));
+const hasScore = (v: unknown) => isNum(v) || (isObj(v) && isNum(v.value));
+const scoreKeys = [...new Set(cpRows.flatMap((c) => Object.entries(c.scores).filter(([, v]) => hasScore(v)).map(([k]) => k)))].sort();
+const withCurve = cpRows.filter((c) => c.curves.length > 0);
+const anyCurve = withCurve.length > 0;
+const anyScore = scoreKeys.length > 0;
+const dateOf = (d: D) => text(d.date) || text(d.trained_on) || text(d.trained_at) || text(d.ended_at) || null;
+const nameOf = (c: (typeof cpRows)[number]) => text(c.data.label) || text(c.data.name) || c.id;
+const lead = anyCurve || anyScore
+  ? `Fine-tunes trained on the rig, as aggregates only: for each of the ${cps.length} checkpoints its recipe, its aggregate scores${anyCurve ? `, and a loss curve where one was logged (${withCurve.length} of ${cps.length})` : ''}. The training sets, the adapters and the per-item material stay private.`
+  : `Fine-tunes trained on the rig. Counts only in this version (${VERSION_LABEL}): the number of checkpoints per base model, the method and the outcomes. No training curve and no per-checkpoint score is published yet; the training sets, the adapters and the per-item material stay private.`;
+---
+<Layout title="Fine-tune forge" description={anyCurve || anyScore ? `Private fine-tunes made on the rig, as aggregates only: recipe, training figures and aggregate scores of ${cps.length} checkpoints${anyCurve ? ' (a loss curve where one was logged)' : ''}, never their training sets, adapters or items.` : 'Private fine-tunes made on the rig, as aggregates only: counts and method in this version, never their training sets, adapters or items.'} crumbs={[{ label: 'forge' }]}>
+  <h1>Fine-tune forge</h1>
+  <p class="lead">{lead} Checkpoints are counted apart from the upstream models.</p>
+  {judged && <Banner kind="judge" graders={[...forgeRankings.map((r) => r.grader), ...checkpoints.flatMap((m) => rankingRowsOfModel(m.model_id).map((x) => x.ranking.grader))]} />}
+  {forgeRankings.length > 0 && (
+    <p>Ranking of the forge checkpoints: {forgeRankings.map((r, i) => <>{i > 0 && ', '}<a href={rankingHref(r.ranking_id)}>{rankingTitle(r)}</a> (<Num value={r.rows.length} href={rankingHref(r.ranking_id)} /> rows)</>)}.</p>
+  )}
+  {summaries.length === 0 && checkpoints.length === 0 && cps.length === 0 && <p class="empty">No forge summary is published yet.</p>}
+
+  {cpRows.length > 0 && (
+    <>
+      <h2 id="per-checkpoint">Checkpoints: recipe, training and scores</h2>
+      <p class="small muted">
+        Each score is <em>value / of</em> items (the base model's value before fine-tuning in brackets, when measured). Scores
+        are counts on the lab's own question sets, which stay private. Final loss is the loss the trainer reported at the end.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Checkpoint</th>
+              <th scope="col">Base · method</th>
+              <th scope="col">Trained</th>
+              <th scope="col" class="num">Final loss</th>
+              <th scope="col" class="num">Wall time</th>
+              {scoreKeys.map((k) => <th scope="col" class="num">{humanKey(k)}</th>)}
+              <th scope="col">Hyperparameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cpRows.map((c) => {
+              const base = text(c.data.base_model_id) || text(c.data.base);
+              const bm = base ? modelById().get(base) : undefined;
+              return (
+                <tr id={`cp-${c.id}`}>
+                  <td><div class="cell-min">{nameOf(c)}<br /><span class="mono small muted">{c.id}</span>{text(c.data.outcome) && <><br /><span class="small muted">{text(c.data.outcome)}</span></>}</div></td>
+                  <td class="small">{bm ? <a href={modelHref(bm.slug)}>{bm.name}</a> : <span class="mono">{base || '—'}</span>}{text(c.data.method) && <><br /><span class="muted">{text(c.data.method)}</span></>}</td>
+                  <td class="mono small nowrap">{dateOf(c.data) ?? '—'}</td>
+                  <td class="num"><Num value={c.training.reported_loss} evidence={c.path} nullText="—" /></td>
+                  <td class="num"><Num value={c.training.wall_s} unit="s" evidence={c.path} nullText="—" /></td>
+                  {scoreKeys.map((k) => {
+                    const v = c.scores[k];
+                    return (
+                      <td class="num">{isObj(v) && isNum(v.value)
+                        ? <><Num value={v.value} evidence={c.path} />{isNum(v.of) && <> / <Num value={v.of} evidence={c.path} /></>}{isNum(v.base) && <span class="muted small"> (<Num value={v.base} evidence={c.path} />)</span>}</>
+                        : <Num value={v} unit={unitForKey(k)} evidence={c.path} nullText="—" />}</td>
+                    );
+                  })}
+                  <td class="small">{Object.keys(c.hyper).length ? <details><summary>recipe</summary><Value value={c.hyper} evidence={c.path} /></details> : '—'}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <h2 id="curves">Loss curves</h2>
+      {anyCurve ? (
+        <>
+          <p class="small muted"><Num value={withCurve.length} href={evidenceHref("data/forge/checkpoints/")} /> of <Num value={cpRows.length} href={evidenceHref("data/forge/checkpoints/")} /> checkpoints logged a loss curve; the others record only their final loss (table above).</p>
+          {withCurve.map((c) => <LossCurve series={c.curves} title={`${nameOf(c)}: training loss per step`} date={dateOf(c.data)} evidence={c.path} />)}
+        </>
+      ) : (
+        <p class="empty">No checkpoint record holds a loss curve in this version; only the final loss is published (table above).</p>
+      )}
+    </>
+  )}
+
+  {summaries.map((s, i) => (
+    <Frame title={typeof s.title === 'string' ? s.title : `summary ${i + 1}`} chip={typeof s.date === 'string' ? s.date : null}>
+      <Value value={s} />
+    </Frame>
+  ))}
+  {checkpoints.length > 0 && (
+    <>
+      <h2 id="checkpoints">Checkpoints with a model page</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Checkpoint</th><th scope="col">Base</th><th scope="col" class="num">Runs</th><th scope="col" class="num">Ranking entries</th></tr></thead>
+          <tbody>
+            {checkpoints.map((m) => (
+              <tr>
+                <td><a href={modelHref(m.slug)}>{m.name}</a></td>
+                <td class="mono small">{m.lineage.base_model_id ?? '—'}</td>
+                <td class="num"><Num value={runsOfModel(m.model_id).length} href={modelHref(m.slug)} /></td>
+                <td class="num"><Num value={rankingRowsOfModel(m.model_id).length} href={modelHref(m.slug)} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+</Layout>

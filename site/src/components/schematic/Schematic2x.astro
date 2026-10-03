@@ -1,0 +1,17 @@
+---
+/**
+ * One NVLink pair (Figma Schematic/2x, 8:15): two FE cards and the 4-slot
+ * bridge, 240 x 150 units. bridge="closed": dashed, peer-to-peer closed in
+ * software, the bridge still in place.
+ */
+import PairDrawing from './PairDrawing.astro';
+import { hardwareById, isNum } from '../../lib/data';
+interface Props { caption?: boolean; width?: number | string; class?: string; bridge?: 'on' | 'closed' }
+const { caption = true, width = 240, class: cls = '', bridge = 'on' } = Astro.props;
+const h = hardwareById('2x3090fe-nvlink');
+const text = h && isNum(h.vram_gb_total) ? `2 cards · ${h.vram_gb_total} GB` : '2 cards';
+const label = `Schematic: two RTX 3090 Founders Edition cards joined by a 4-slot NVLink bridge${bridge === 'closed' ? ' drawn dashed: the bridge stays in place, peer-to-peer closed in software' : ''}${h && isNum(h.vram_gb_total) ? `, ${h.vram_gb_total} GB` : ''}.`;
+---
+<svg class={`schematic ${cls}`} viewBox="0 0 240 150" width={width} role="img" aria-label={label}>
+  <PairDrawing bridge={bridge} caption={caption ? text : null} />
+</svg>

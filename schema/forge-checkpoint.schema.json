@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forge-checkpoint.schema.json",
+  "title": "Forge checkpoint (one local fine-tune)",
+  "description": "One fine-tuning run of the lab, published as recipe, training figures and aggregate scores. No corpus, adapter, item or answer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["checkpoint_id", "label", "subject", "base_model_id", "method", "hyperparameters", "gpu", "training", "steps", "loss", "eval_loss", "scores", "outcome", "trained_on", "source"],
+  "properties": {
+    "checkpoint_id": {"type": "string", "pattern": "^[a-z-]+-[0-9]{2}$"},
+    "label": {"type": "string"},
+    "subject": {"enum": ["calibration", "exam-tutor", "biology", "history", "geography", "other"]},
+    "base_model_id": {"type": ["string", "null"]},
+    "method": {"type": "string"},
+    "hyperparameters": {
+      "type": "object", "additionalProperties": false,
+      "required": ["lora_rank", "lora_alpha", "learning_rate", "epochs", "max_seq_len"],
+      "properties": {
+        "lora_rank": {"type": ["integer", "null"]},
+        "lora_alpha": {"type": ["integer", "null"]},
+        "learning_rate": {"type": ["number", "null"]},
+        "epochs": {"type": ["integer", "null"]},
+        "max_seq_len": {"type": ["integer", "null"]}
+      }
+    },
+    "gpu": {"const": "1x3090fe"},
+    "training": {
+      "type": "object", "additionalProperties": false,
+      "required": ["steps_total", "wall_s", "peak_vram_mib", "peak_vram", "reported_loss"],
+      "properties": {
+        "steps_total": {"type": ["integer", "null"]},
+        "wall_s": {"type": ["number", "null"]},
+        "peak_vram_mib": {"type": ["number", "null"], "description": "only when the lab recorded it in MiB"},
+        "peak_vram": {
+          "oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false, "required": ["value", "unit", "kind"],
+            "properties": {"value": {"type": "number"}, "unit": {"enum": ["MiB", "GiB", "GB"]}, "kind": {"type": "string"}}}]
+        },
+        "reported_loss": {"type": ["number", "null"], "description": "the loss the trainer reported at the end of the run"}
+      }
+    },
+    "steps": {"type": "array", "items": {"type": "integer"}, "maxItems": 200},
+    "loss": {"type": "array", "items": {"type": "number"}, "maxItems": 200},
+    "eval_loss": {"type": ["array", "null"]},
+    "scores": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false, "required": ["value"],
+        "properties": {"value": {"type": "number"}, "of": {"type": ["integer", "null"]}, "base": {"type": ["integer", "null"]}}
+      }
+    },
+    "outcome": {"enum": ["served", "rejected", "kept-as-checkpoint"]},
+    "trained_on": {"type": ["string", "null"], "format": "date"},
+    "source": {"type": "object", "required": ["source_id"], "properties": {"source_id": {"type": "string"}}}
+  }
+}

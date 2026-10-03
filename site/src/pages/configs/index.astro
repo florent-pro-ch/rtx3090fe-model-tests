@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConfigTiles from '../../components/ConfigTiles.astro';
+import Banner from '../../components/Banner.astro';
+import { href } from '../../lib/site';
+---
+<Layout title="Configurations" description="The RTX 3090 FE in three configurations: one card, one NVLink pair, and two pairs used side by side — what ran on each, and what was never measured." nav="configs" crumbs={[{ label: 'configurations' }]}>
+  <h1>Configurations</h1>
+  <p class="lead">
+    The rig holds four RTX 3090 Founders Edition cards in two NVLink pairs, each pair passed whole to its own
+    virtual machine. A model ran on one card, or on one pair. The two pairs only ever worked side by side.
+  </p>
+  <ConfigTiles />
+  <Banner kind="info">
+    <p>A run appears on a configuration page only when its topology (GPU count and split) is known from its launch
+      record. See <a href={href('methodology/')}>methodology</a>.</p>
+  </Banner>
+</Layout>

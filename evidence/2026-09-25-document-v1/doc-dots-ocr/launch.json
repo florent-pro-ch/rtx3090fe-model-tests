@@ -1,0 +1,42 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/dots-ocr",
+    "--tensor-parallel-size",
+    "1",
+    "--max-model-len",
+    "16384",
+    "--max-num-seqs",
+    "4",
+    "--max-num-batched-tokens",
+    "8192",
+    "--limit-mm-per-prompt",
+    "{\"image\":1}",
+    "--gpu-memory-utilization",
+    "0.90",
+    "--trust-remote-code",
+    "--chat-template-content-format",
+    "string",
+    "--served-model-name",
+    "dots-ocr"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

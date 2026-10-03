@@ -1,0 +1,18 @@
+{
+ "candidat": "granite-4.2-8b",
+ "debut": "2026-09-05T09:16:02Z",
+ "solo": {
+  "ttft_ms": 79,
+  "tok_s": 45.3,
+  "completion_tokens": 512,
+  "wall_s": 11.309
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 342.3,
+  "p50_latency_s": 11.96,
+  "wall_s": 11.97
+ },
+ "fin": "2026-09-05T09:16:36Z"
+}

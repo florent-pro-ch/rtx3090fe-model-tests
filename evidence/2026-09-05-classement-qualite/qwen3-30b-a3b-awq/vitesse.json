@@ -1,0 +1,18 @@
+{
+ "candidat": "qwen3-30b-a3b-awq",
+ "debut": "2026-09-05T09:28:29Z",
+ "solo": {
+  "ttft_ms": 98,
+  "tok_s": 213.6,
+  "completion_tokens": 512,
+  "wall_s": 2.397
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 1229.0,
+  "p50_latency_s": 3.33,
+  "wall_s": 3.33
+ },
+ "fin": "2026-09-05T09:28:37Z"
+}

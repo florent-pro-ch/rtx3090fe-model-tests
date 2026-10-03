@@ -1,0 +1,441 @@
+{
+  "items": [
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:03:57Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:06:22Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-1",
+      "ram_pic_mo": 43384,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 32872320,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10626
+      },
+      "wall_s": 144.6
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:06:22Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:08:56Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 43184,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 35209024,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10523
+      },
+      "wall_s": 153.4
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:18:57Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:22:09Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-1",
+      "ram_pic_mo": 45103,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 35430096,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10711
+      },
+      "wall_s": 192.5
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:22:10Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:24:49Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 44101,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 35619808,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12092
+      },
+      "wall_s": 159.4
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:13:47Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:18:57Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 46041,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 34914388,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11896
+      },
+      "wall_s": 309.1
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:24:49Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:26:50Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-1",
+      "ram_pic_mo": 10667,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 36085372,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10079
+      },
+      "wall_s": 120.3
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:26:50Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:29:27Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 11116,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37393464,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10510
+      },
+      "wall_s": 157.2
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:08:56Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:13:47Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 44075,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37928756,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11514
+      },
+      "wall_s": 290.7
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:34:09Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:36:37Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-1",
+      "ram_pic_mo": 11137,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 38905484,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10495
+      },
+      "wall_s": 147.5
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:36:37Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:38:50Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 10696,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 36292208,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10429
+      },
+      "wall_s": 133.6
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:01:00Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:03:57Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 43767,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 35718320,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11136
+      },
+      "wall_s": 177.6
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:29:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:34:09Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 11978,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37023552,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 14247
+      },
+      "wall_s": 281.1
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:38:51Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:43:17Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 11940,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 41729348,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 14131
+      },
+      "wall_s": 266.4
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:43:17Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:47:14Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-02",
+      "ram_pic_mo": 11784,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 45006188,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12401
+      },
+      "wall_s": 236.2
+    },
+    {
+      "candidat": "pixal3d-comfy",
+      "debut": "2026-09-30T12:47:14Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T12:51:56Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-03",
+      "ram_pic_mo": 12101,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 43959284,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 13085
+      },
+      "wall_s": 281.5
+    }
+  ],
+  "n": 15,
+  "note": "per-item generation records; output files, output hashes and engine addresses removed"
+}

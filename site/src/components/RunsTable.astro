@@ -1,0 +1,89 @@
+---
+/** Every run listed side by side, never merged: engine, protocol and date on each line. */
+import Num from './Num.astro';
+import AggCell from './AggCell.astro';
+import Table from './Table.astro';
+import StatusBadge from './StatusBadge.astro';
+import PrePinBadge from './PrePinBadge.astro';
+import Vram from './Vram.astro';
+import type { Run } from '../lib/data';
+import { isNum, modelById, modelName, runDate, soloTokS, vramPerGpu, usesSpeculation, isRefusalOnly, isABTreatment, buildLabel } from '../lib/data';
+import { engineLabel, hwShort, modelHref, runHref, topoLabel } from '../lib/site';
+
+interface Props { runs: Run[]; showModel?: boolean; showHardware?: boolean; label?: string; headline?: Set<string> }
+const { runs, showModel = true, showHardware = true, label = 'runs', headline = new Set<string>() } = Astro.props;
+const statuses = [...new Set(runs.map((r) => r.status))].sort();
+const engines = [...new Set(runs.map((r) => r.engine.name))].sort();
+let col = 1;
+const modelCol = showModel ? col++ : -1;
+const hwCol = showHardware ? col++ : -1;
+col++; // build
+const statusCol = col++;
+const engineCol = col++;
+const filters = [
+  ...(statuses.length > 1 ? [{ col: statusCol, label: 'status', values: statuses }] : []),
+  ...(engines.length > 1 ? [{ col: engineCol, label: 'engine', values: engines.map((e) => ({ value: e, label: engineLabel({ name: e }) })) }] : []),
+];
+void modelCol; void hwCol;
+---
+{runs.length === 0 ? (
+  <p class="empty">No run in the data.</p>
+) : (
+  <Table label={label} filters={filters}>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col" data-sort>Run</th>
+          {showModel && <th scope="col" data-sort>Model</th>}
+          {showHardware && <th scope="col" data-sort>Hardware</th>}
+          <th scope="col" data-sort>Build</th>
+          <th scope="col" data-sort>Status</th>
+          <th scope="col" data-sort>Engine</th>
+          <th scope="col" data-sort>Topology</th>
+          <th scope="col" data-sort>Protocol</th>
+          <th scope="col" data-sort>Date</th>
+          <th scope="col" class="num" data-sort="num">Single stream</th>
+          <th scope="col" class="num" data-sort="num">Aggregate</th>
+          <th scope="col" class="num" data-sort="num">VRAM per GPU</th>
+        </tr>
+      </thead>
+      <tbody>
+        {runs.map((r) => {
+          const m = modelById().get(r.model_id);
+          const lab = isRefusalOnly(r);
+          const vr = lab ? [] : vramPerGpu(r);
+          return (
+            <tr>
+              <td class="run-cell" data-v={r.run_id}>
+                <a class="mono small" href={runHref(r.run_id)}>{r.run_id.slice(r.campaign.length + 1) || r.run_id}</a>
+                {headline.has(r.run_id) && <> <span class="badge plain tone-green" title="headline run for this model and configuration">headline</span></>}
+                {r.duplicate_of && <> <span class="badge plain tone-muted" title={`byte copy of ${r.duplicate_of}: not counted as a run`}>copy</span></>}
+                {isABTreatment(r) && <> <span class="badge plain tone-amber" title="treatment arm of an A/B test (for example NVLink switched off in software): never a headline figure">A/B treatment</span></>}
+                <br /><span class="mono small muted">{r.campaign}</span>
+              </td>
+              {showModel && <td><div class="cell-min">{m ? <a href={modelHref(m.slug)}>{m.name}</a> : <span class="mono small">{modelName(r.model_id)}</span>}</div></td>}
+              {showHardware && <td class="nowrap" data-f={r.hardware}>{hwShort(r.hardware)}</td>}
+              <td class="small"><span title={r.build_id ?? 'build not recorded'}>{buildLabel(r)}</span></td>
+              <td data-f={r.status} data-v={r.status}><StatusBadge status={r.status} /></td>
+              <td data-f={r.engine.name}><span class="mono small engine">{engineLabel(r.engine)}</span> <PrePinBadge prePin={r.engine.pre_pin} />{usesSpeculation(r) && <> <span class="badge plain tone-muted" title="decoded with a speculative-decoding drafter: never a headline figure">drafter</span></>}</td>
+              <td class="small">{topoLabel(r.topology)}</td>
+              <td class="mono small nowrap">{r.protocol ?? '—'}</td>
+              <td class="mono small nowrap">{runDate(r) ?? '—'}</td>
+              {lab ? (
+                <td class="small muted" colspan="3">refusal rates only (uncensored lab)</td>
+              ) : (
+                <>
+                  <td class="num" data-v={soloTokS(r) ?? ''}><Num value={soloTokS(r)} unit="tok/s" run={r.run_id} nullText="—" /></td>
+                  <td class="num" data-v={isNum(r.metrics.agg_tok_s) ? String(r.metrics.agg_tok_s) : ''}>
+                    <AggCell run={r} />
+                  </td>
+                  <td class="num" data-v={vr.length ? String(Math.max(...vr)) : ''}><Vram run={r} /></td>
+                </>
+              )}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </Table>
+)}

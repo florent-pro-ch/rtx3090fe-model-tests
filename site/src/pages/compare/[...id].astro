@@ -1,0 +1,297 @@
+---
+/**
+ * A comparison page (data/comparisons/<id>.json). Rows come in long format,
+ * one measured value per row: {label, metric, value, unit, run_ids[],
+ * evidence[], note?, ...}. With few arms (labels) the rows are pivoted into a
+ * metric x arm table and every tok/s metric gets a bar chart; with many arms
+ * they stay a long, filterable table. Any other row shape falls back to a
+ * generic table. Every value links to its run (or its evidence).
+ */
+import Layout from '../../layouts/Layout.astro';
+import Banner from '../../components/Banner.astro';
+import Frame from '../../components/Frame.astro';
+import Table from '../../components/Table.astro';
+import BarChart from '../../components/BarChart.astro';
+import Value from '../../components/Value.astro';
+import Num from '../../components/Num.astro';
+import TargetSummary from '../../components/TargetSummary.astro';
+import type { Comparison } from '../../lib/data';
+import { comparisons, isNum, modelById, runById, hardwareById, aggSlots } from '../../lib/data';
+import { configHref, evidenceHref, evidenceLink, href, hwShort, metricLabel, modelHref, runHref } from '../../lib/site';
+
+export function getStaticPaths() {
+  return comparisons().map((c) => ({ params: { id: c.comparison_id }, props: { c } }));
+}
+
+type Row = Record<string, unknown>;
+const { c } = Astro.props as { c: Comparison };
+const isObj = (v: unknown): v is Row => typeof v === 'object' && v !== null && !Array.isArray(v);
+const text = (v: unknown) => (typeof v === 'string' ? v : '');
+const strs = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : typeof v === 'string' ? [v] : []);
+
+const question = text(c.question) || text(c.summary) || text(c.description);
+const verdict = text(c.verdict);
+const method = text(c.method);
+const caveats = [...strs(c.caveat), ...strs(c.caveats)];
+const hw = strs(c.hardware);
+const models = [...strs(c.model_id), ...strs(c.models)];
+const rowsKey = ['rows', 'arms', 'results', 'items', 'entries'].find((k) => Array.isArray(c[k]) && (c[k] as unknown[]).every(isObj));
+const rows = rowsKey ? (c[rowsKey] as Row[]) : [];
+const long = rows.length > 0 && rows.every((r) => typeof r.metric === 'string' && 'value' in r);
+
+const labels = [...new Set(rows.map((r) => text(r.label) || '—'))];
+const metrics = [...new Set(rows.map((r) => text(r.metric)))];
+const pivot = long && labels.length <= 6;
+const cell = (label: string, metric: string) => rows.find((r) => (text(r.label) || '—') === label && r.metric === metric);
+const recordPath = `data/comparisons/${c.comparison_id}.json`;
+// A figure read from unpublished lab files (no evidence of its own) links to the comparison record that holds it, never to a run that does not contain it.
+const noEvidence = (r: Row | undefined) => !!r && strs(r.evidence).length === 0;
+const runOf = (r: Row | undefined) => (noEvidence(r) ? null : strs(r?.run_ids).find((id) => runById().has(id)) ?? null);
+const evOf = (r: Row | undefined) => (noEvidence(r) ? recordPath : strs(r?.evidence)[0] ?? null);
+// Source ids (opaque, resolvable only in the lab's private ledger) are collapsed into a count.
+const sourceKeys = ['sources', 'source_ids', 'source'];
+const sourceCount = sourceKeys.reduce((n, k) => n + (Array.isArray(c[k]) ? (c[k] as unknown[]).length : isObj(c[k]) ? 1 : 0), 0);
+const unitOf = (metric: string) => text(rows.find((r) => r.metric === metric)?.unit);
+const shownUnit = (u: string) => (u === 'fraction' || u === 'ratio' || u === 'count' ? '' : u);
+const chartMetrics = pivot
+  ? metrics.filter((m) => unitOf(m) === 'tok/s' && labels.filter((l) => isNum(cell(l, m)?.value)).length >= 2).slice(0, 6)
+  : [];
+const extraKeys = long
+  ? [...new Set(rows.flatMap((r) => Object.keys(r)))].filter((k) => !['label', 'metric', 'value', 'unit', 'run_ids', 'evidence'].includes(k)).sort()
+  : [];
+const allRuns = [...new Set(rows.flatMap((r) => strs(r.run_ids)))].sort();
+const allEvidence = [...new Set([...rows.flatMap((r) => strs(r.evidence)), ...strs(c.evidence)])].sort();
+// Per-target summary rows (written by the exporter when a comparison has several targets): shown first.
+const summaryKey = ['summary_rows', 'per_target', 'targets', 'summary'].find((k) => Array.isArray(c[k]) && (c[k] as unknown[]).length > 0 && (c[k] as unknown[]).every(isObj));
+const summary = summaryKey ? (c[summaryKey] as Row[]) : [];
+const summaryNote = text(c.summary_note);
+// Rows in the speculative-decoding shape (base and best arm per language) get the dedicated table.
+const targetShape = summary.length > 0 && summary.every((r) => 'best_arm' in r && ('base_solo_fr' in r || 'base_solo_en' in r));
+const SUMMARY_SKIP = new Set(['run_ids', 'evidence', 'model_id', 'build_id', 'note', 'notes']);
+const summaryCols = [...new Set(summary.flatMap((r) => Object.keys(r)))].filter((k) => !SUMMARY_SKIP.has(k));
+const COL_LABEL: Record<string, string> = {
+  target: 'Target', label: 'Target', model: 'Target', hardware: 'Configuration',
+  base_solo_fr: 'Base, single stream FR', base_solo_en: 'Base, single stream EN',
+  best_arm: 'Best arm', best_solo_fr: 'Best arm, single stream FR', best_solo_en: 'Best arm, single stream EN',
+  delta_solo_fr_pct: 'Single stream FR', delta_solo_en_pct: 'Single stream EN',
+  delta_c8_fr_pct: '8 requests FR', delta_c8_en_pct: '8 requests EN',
+  identical_share: 'Identical outputs', base_identical_share: 'Base repeat identical', kept: 'Kept', arms: 'Arms', arms_rated: 'Arms rated',
+};
+const colLabel = (k: string) => COL_LABEL[k] ?? k.replace(/_pct$/, ' (%)').replace(/_/g, ' ').replace(/\bfr\b/, 'FR').replace(/\ben\b/, 'EN').replace(/^./, (x) => x.toUpperCase());
+const colUnit = (k: string) => (/_pct$/.test(k) ? '%' : /tok_s|solo_(fr|en)$/.test(k) ? 'tok/s' : '');
+// The language of a measured row: from its metric (…_fr, fr_…) or its label ("French prompt").
+const langOf = (r: Row): 'fr' | 'en' | 'all' => {
+  const m = text(r.metric);
+  const l = text(r.label);
+  if (/(^|_)fr(_|$)/.test(m) || /\bFrench\b/.test(l)) return 'fr';
+  if (/(^|_)en(_|$)/.test(m) || /\bEnglish\b/.test(l)) return 'en';
+  return 'all';
+};
+const langGroups = long && !pivot && rows.some((r) => langOf(r) !== 'all')
+  ? ([['fr', 'French prompts'], ['en', 'English prompts'], ['all', 'Both languages, or language not split']] as const)
+      .map(([id, title]) => ({ id, title, rows: rows.filter((r) => langOf(r) === id) }))
+      .filter((g) => g.rows.length > 0)
+  : [{ id: 'all' as const, title: '', rows }];
+const collapse = summary.length > 0 || rows.length > 40;
+// Aggregate rows of a single run: the number of requests its server could decode at once.
+const slotNote = (r: Row | undefined): string => {
+  if (!r || !/agg/.test(text(r.metric))) return '';
+  const ids = strs(r.run_ids);
+  if (ids.length !== 1) return '';
+  const run = runById().get(ids[0]);
+  if (!run) return '';
+  const sl = aggSlots(run);
+  if (sl.slots === null) return sl.engine === 'llamacpp' ? 'slots not recorded' : '';
+  if (sl.engine === 'vllm') return `up to ${sl.slots} sequence${sl.slots === 1 ? '' : 's'} at once`;
+  return sl.serialised ? '1 slot (serialised)' : `${sl.slots} slots`;
+};
+const shown = new Set([...(summaryKey ? [summaryKey, 'summary_note'] : []), 'comparison_id', 'title', 'question', 'summary', 'description', 'verdict', 'method', 'caveat', 'caveats', 'hardware', 'model_id', 'models', 'evidence', ...sourceKeys, ...(rowsKey ? [rowsKey] : [])]);
+const rest = Object.fromEntries(Object.entries(c).filter(([k]) => !shown.has(k)));
+---
+<Layout
+  title={c.title}
+  description={question || `Comparison ${c.comparison_id} on RTX 3090 FE cards, with its caveats and evidence.`}
+  nav="compare"
+  crumbs={[{ label: 'compare', href: href('compare/') }, { label: c.comparison_id }]}
+>
+  <h1>{c.title}</h1>
+  <p class="mono muted break">{c.comparison_id}</p>
+  <p class="badges">
+    {hw.map((h) => (hardwareById(h) ? <a class="badge plain tone-blue" href={configHref(h)}>{hwShort(h)}</a> : <span class="badge plain tone-muted">{hwShort(h)}</span>))}
+    {models.map((id) => (modelById().get(id) ? <a class="badge plain tone-muted" href={modelHref(modelById().get(id)!.slug)}>{modelById().get(id)!.name}</a> : <span class="badge plain tone-muted mono">{id}</span>))}
+  </p>
+  {question && <p class="lead">{question}</p>}
+  {hw.includes('2x2x3090fe-nvlink') && <Banner kind="two-pairs" />}
+
+  {summary.length > 0 && (
+    <>
+      <h2 id="summary">Per target</h2>
+      {summaryNote && <p class="small muted">{summaryNote}</p>}
+      {targetShape ? <TargetSummary rows={summary} compId={c.comparison_id} /> : (
+      <div class="table-wrap">
+        <table class="stack">
+          <thead><tr>{summaryCols.map((k) => <th scope="col" class={summary.some((r) => isNum(r[k])) ? 'num' : ''} style="white-space: normal">{colLabel(k)}</th>)}</tr></thead>
+          <tbody>
+            {summary.map((r) => (
+              <tr>
+                {summaryCols.map((k) => {
+                  const v = r[k];
+                  if (isNum(v)) return <td class="num" data-label={colLabel(k)}><Num value={v} unit={colUnit(k)} href="#summary" /></td>;
+                  if (typeof v === 'boolean') return <td data-label={colLabel(k)}>{v ? <span class="badge plain tone-green">yes</span> : <span class="badge plain tone-muted">no</span>}</td>;
+                  if (typeof v === 'string' && k === 'hardware' && hardwareById(v)) return <td class="small nowrap" data-label={colLabel(k)}><a href={configHref(v)}>{hwShort(v)}</a></td>;
+                  if (typeof v === 'string') {
+                    const m = k === 'model_id' || k === 'target' ? modelById().get(v) : undefined;
+                    return <td class="small" data-label={colLabel(k)}><div class="cell-min">{m ? <a href={modelHref(m.slug)}>{m.name}</a> : v}</div></td>;
+                  }
+                  return <td class="small" data-label={colLabel(k)}>{v === null || v === undefined ? <span class="num-null">—</span> : <Value value={v} depth={1} />}</td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      )}
+      {summary.some((r) => typeof r.note === 'string' || typeof r.notes === 'string') && (
+        <ul class="small muted">{summary.filter((r) => typeof r.note === 'string' || typeof r.notes === 'string').map((r) => <li>{text(r.target) || text(r.label) || text(r.model_id)}: {text(r.note) || text(r.notes)}</li>)}</ul>
+      )}
+    </>
+  )}
+
+  {verdict && (
+    <Frame title="verdict">
+      <p>{verdict}</p>
+    </Frame>
+  )}
+
+  {caveats.length > 0 && (
+    <Banner kind="warn">
+      <p><strong>Read with care</strong></p>
+      <ul>{caveats.map((x) => <li>{x}</li>)}</ul>
+    </Banner>
+  )}
+
+  {method && (
+    <>
+      <h2 id="method">Method</h2>
+      <p>{method}</p>
+    </>
+  )}
+
+  {chartMetrics.length > 0 && <h2 id="charts">Speed</h2>}
+  {chartMetrics.map((m) => (
+    <BarChart
+      title={`${c.title}: ${metricLabel(m).toLowerCase()}`}
+      unit="tok/s"
+      caption="the axis starts at zero"
+      evidenceHref="#measurements"
+      evidenceLabel="all measurements"
+      items={labels
+        .map((l) => ({ l, r: cell(l, m) }))
+        .filter(({ r }) => r && isNum(r.value))
+        .map(({ l, r }) => ({ label: l, value: r!.value as number, run: runOf(r), evidence: runOf(r) ? null : evOf(r) }))}
+    />
+  ))}
+
+  {rows.length > 0 && <h2 id="measurements">Measurements</h2>}
+  {collapse && rows.length > 0 && <p class="small muted">Every measured row, one value per row{langGroups.length > 1 ? ', French and English prompts apart' : ''}. Open a group to read it.</p>}
+  {pivot ? (
+    <Table label="measurements" search={false}>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Metric</th>
+            {labels.map((l) => <th scope="col" class="num" style="white-space: normal; min-width: 8rem">{l}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {metrics.map((m) => (
+            <tr>
+              <td class="small" title={m}>{metricLabel(m)}</td>
+              {labels.map((l) => {
+                const r = cell(l, m);
+                const note = [text(r?.note), text(r?.vram_kind), isNum(r?.concurrency) ? `concurrency ${r!.concurrency}` : ''].filter(Boolean).join(' · ');
+                return (
+                  <td class="num">
+                    {r ? <><Num value={r.value} unit={shownUnit(text(r.unit))} run={runOf(r)} evidence={runOf(r) ? null : evOf(r)} title={note || undefined} nullText="n/a" />{slotNote(r) && <><br /><span class="muted small">{slotNote(r)}</span></>}</> : <span class="num-null">—</span>}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Table>
+  ) : long ? (
+    langGroups.map((g) => {
+      const gm = [...new Set(g.rows.map((r) => text(r.metric)))].sort();
+      const table = (
+        <Table label={`measurements${g.title ? `, ${g.title.toLowerCase()}` : ''}`} filters={gm.length > 1 ? [{ col: 1, label: 'metric', values: gm.map((x) => ({ value: x, label: metricLabel(x) })) }] : []}>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" data-sort>Arm</th>
+                <th scope="col" data-sort>Metric</th>
+                <th scope="col" class="num" data-sort="num">Value</th>
+                {extraKeys.length > 0 && <th scope="col">Detail</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {g.rows.map((r) => {
+                const detail = Object.fromEntries(extraKeys.filter((k) => r[k] !== undefined && k !== 'model_id').map((k) => [k, r[k]]));
+                const sn = slotNote(r);
+                return (
+                  <tr>
+                    <td class="small"><div class="cell-min">{text(r.label) || '—'}</div></td>
+                    <td class="small" data-f={text(r.metric)} title={text(r.metric)}>{metricLabel(text(r.metric))}</td>
+                    <td class="num" data-v={isNum(r.value) ? String(r.value) : ''}><Num value={r.value} unit={shownUnit(text(r.unit))} run={runOf(r)} evidence={runOf(r) ? null : evOf(r)} />{sn && <span class="muted small nowrap"> · {sn}</span>}</td>
+                    {extraKeys.length > 0 && <td class="small">{Object.keys(detail).length ? <Value value={detail} run={runOf(r)} evidence={evOf(r)} depth={2} /> : '—'}</td>}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </Table>
+      );
+      return collapse ? (
+        <details class="measure-group">
+          <summary>{g.title || 'All measured rows'}</summary>
+          {table}
+        </details>
+      ) : (
+        <>{g.title && <h3 id={`lang-${g.id}`}>{g.title}</h3>}{table}</>
+      );
+    })
+  ) : rows.length > 0 ? (
+    <Value value={rows} />
+  ) : null}
+
+  {Object.keys(rest).length > 0 && (
+    <Frame title="record">
+      <Value value={rest} />
+    </Frame>
+  )}
+
+  {sourceCount > 0 && (
+    <p class="small muted" id="sources">
+      Read from <Num value={sourceCount} href={evidenceLink(recordPath)} /> lab file{sourceCount === 1 ? '' : 's'} (ids in{' '}
+      <a class="mono" href={evidenceLink(recordPath)!}>{recordPath}</a>; the ids are opaque and resolve only in the lab's private ledger).
+    </p>
+  )}
+  {rows.some((r) => noEvidence(r)) && (
+    <p class="small muted">Figures with no evidence of their own were read from lab logs that are not published; they link to the comparison record above.</p>
+  )}
+  {(allRuns.length > 0 || allEvidence.length > 0) && (
+    <>
+      <h2 id="evidence">Runs and evidence</h2>
+      {(() => {
+        const list = (
+          <ul>
+            {allRuns.map((id) => <li>{runById().has(id) ? <a class="mono small" href={runHref(id)}>{id}</a> : <span class="mono small">{id}</span>}</li>)}
+            {allEvidence.map((e) => <li><a class="mono small break" href={evidenceHref(e)}>{e}</a></li>)}
+          </ul>
+        );
+        return collapse ? <details class="measure-group"><summary>Every run and evidence folder</summary>{list}</details> : list;
+      })()}
+    </>
+  )}
+</Layout>

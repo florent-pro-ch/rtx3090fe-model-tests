@@ -1,0 +1,26 @@
+---
+/**
+ * VRAM per GPU of a run, with what the figure means (run.vram.kind): a vLLM
+ * reservation, an after-load snapshot (nvidia-smi about 3 s after ready,
+ * before any request), a peak... Never presented as what the model needs
+ * unless the data says so.
+ */
+import Num from './Num.astro';
+import type { Run } from '../lib/data';
+import { vramKind, vramKindLabel, vramPerGpu } from '../lib/data';
+import { glossaryHref } from '../lib/site';
+interface Props { run: Run; nullText?: string; long?: boolean }
+const { run, nullText = '—', long = false } = Astro.props;
+const vr = vramPerGpu(run);
+const k = vramKindLabel(vramKind(run));
+---
+{vr.length ? (
+  <>
+    {vr.map((v, i) => <>{i > 0 && ' + '}<Num value={v} unit="MiB" run={run.run_id} /></>)}
+    {' '}{vramKind(run) === 'after-load' || vramKind(run) === 'reserved'
+      ? <a class="muted small vram-kind" href={glossaryHref('VRAM')} title={k.title}>{long ? `per GPU, ${k.short}` : k.short}</a>
+      : <span class="muted small vram-kind" title={k.title}>{long ? `per GPU, ${k.short}` : k.short}</span>}
+  </>
+) : (
+  <span class="num-null">{nullText}</span>
+)}

@@ -1,0 +1,7 @@
+node_modules/
+site/dist/
+site/.astro/
+.DS_Store
+__pycache__/
+# the harness quick start writes model answers here: never commit them
+/runs/

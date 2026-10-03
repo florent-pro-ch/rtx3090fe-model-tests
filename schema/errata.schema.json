@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "errata.schema.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "date",
+      "what",
+      "why"
+    ],
+    "properties": {
+      "date": {
+        "type": "string"
+      },
+      "what": {
+        "type": "string"
+      },
+      "why": {
+        "type": "string"
+      },
+      "affects": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

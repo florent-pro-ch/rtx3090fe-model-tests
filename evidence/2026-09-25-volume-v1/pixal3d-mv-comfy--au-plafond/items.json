@@ -1,0 +1,441 @@
+{
+  "items": [
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:06:11Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:10:15Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-1",
+      "ram_pic_mo": 28747,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 35949444,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10317
+      },
+      "wall_s": 243.4
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:10:15Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:14:22Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 30212,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37677340,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11433
+      },
+      "wall_s": 246.4
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:26:16Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:29:40Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-1",
+      "ram_pic_mo": 18334,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 38748808,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11191
+      },
+      "wall_s": 204.3
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:29:41Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:32:39Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 18168,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37293872,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9296
+      },
+      "wall_s": 178.6
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:20:34Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:26:16Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 19672,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37882668,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 14452
+      },
+      "wall_s": 341.5
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:32:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:36:11Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-1",
+      "ram_pic_mo": 18786,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 39592236,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10651
+      },
+      "wall_s": 210.6
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:36:11Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:40:43Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 19659,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 40200004,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10039
+      },
+      "wall_s": 271.7
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:14:22Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:20:34Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 28977,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37791940,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 13155
+      },
+      "wall_s": 371.3
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:47:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:49:59Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-1",
+      "ram_pic_mo": 18663,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 34650376,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9167
+      },
+      "wall_s": 173.2
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:50:00Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:52:59Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 18044,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 38147632,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9260
+      },
+      "wall_s": 178.9
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:06:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:06:11Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 28760,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 42191836,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 1080
+      },
+      "wall_s": 4.8
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:40:43Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T15:47:05Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 20829,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 37317224,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 16169
+      },
+      "wall_s": 382.1
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T15:52:59Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T16:02:40Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 21392,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 49399280,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 16855
+      },
+      "wall_s": 581.1
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T16:02:41Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T16:09:35Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-02",
+      "ram_pic_mo": 19818,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 41860776,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 14904
+      },
+      "wall_s": 413.9
+    },
+    {
+      "candidat": "pixal3d-mv-comfy",
+      "debut": "2026-09-30T16:09:35Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 1536
+        }
+      ],
+      "fin": "2026-09-30T16:15:39Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-03",
+      "ram_pic_mo": 19875,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 45459316,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12294
+      },
+      "wall_s": 363.4
+    }
+  ],
+  "n": 15,
+  "note": "per-item generation records; output files, output hashes and engine addresses removed"
+}

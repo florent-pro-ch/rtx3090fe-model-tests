@@ -1,0 +1,45 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/unlimited-ocr",
+    "--tensor-parallel-size",
+    "1",
+    "--max-model-len",
+    "32768",
+    "--max-num-seqs",
+    "4",
+    "--max-num-batched-tokens",
+    "8192",
+    "--limit-mm-per-prompt",
+    "{\"image\":1}",
+    "--gpu-memory-utilization",
+    "0.90",
+    "--trust-remote-code",
+    "--logits_processors",
+    "vllm.model_executor.models.unlimited_ocr:NGramPerReqLogitsProcessor",
+    "--no-enable-prefix-caching",
+    "--mm-processor-cache-gb",
+    "0",
+    "--served-model-name",
+    "unlimited-ocr"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

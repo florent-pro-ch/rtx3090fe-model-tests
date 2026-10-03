@@ -1,0 +1,38 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/Qwen3.8-27B-GSQ-RCO-IQ3_S-mtp.gguf",
+    "--alias",
+    "qwen38-gsq-rco",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "-ngl",
+    "999",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

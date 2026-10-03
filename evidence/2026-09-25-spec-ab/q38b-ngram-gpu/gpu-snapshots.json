@@ -1,0 +1,68 @@
+{
+  "snapshots": [
+    {
+      "file": "nvidia-smi-apres.txt",
+      "label": "after",
+      "rows": [
+        {
+          "gpu_index": 0,
+          "memory_used_mib": 0,
+          "temperature_c": 62
+        },
+        {
+          "gpu_index": 1,
+          "memory_used_mib": 0,
+          "temperature_c": 57
+        }
+      ]
+    },
+    {
+      "file": "nvidia-smi-avant.txt",
+      "label": "before",
+      "rows": [
+        {
+          "gpu_index": 0,
+          "memory_used_mib": 0,
+          "temperature_c": 61
+        },
+        {
+          "gpu_index": 1,
+          "memory_used_mib": 0,
+          "temperature_c": 56
+        }
+      ]
+    },
+    {
+      "file": "nvidia-smi-charge.txt",
+      "label": "load",
+      "rows": [
+        {
+          "gpu_index": 0,
+          "memory_used_mib": 21631,
+          "temperature_c": 64
+        },
+        {
+          "gpu_index": 1,
+          "memory_used_mib": 21631,
+          "temperature_c": 58
+        }
+      ]
+    },
+    {
+      "file": "nvidia-smi-pret.txt",
+      "label": "ready",
+      "rows": [
+        {
+          "gpu_index": 0,
+          "memory_used_mib": 21227,
+          "temperature_c": 49
+        },
+        {
+          "gpu_index": 1,
+          "memory_used_mib": 21227,
+          "temperature_c": 39
+        }
+      ]
+    }
+  ]
+}

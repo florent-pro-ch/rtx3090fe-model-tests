@@ -1,0 +1,41 @@
+{
+  "docker_options": [],
+  "engine_args": [
+    "--model",
+    "$MODELS/Qwen3.6-35B-A3B-AWQ",
+    "--tensor-parallel-size",
+    "2",
+    "--quantization",
+    "awq_marlin",
+    "--max-model-len",
+    "131072",
+    "--max-num-seqs",
+    "3",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.94",
+    "--kv-cache-dtype",
+    "fp8",
+    "--enable-prefix-caching",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "qwen3_coder",
+    "--reasoning-parser",
+    "qwen3",
+    "--default-chat-template-kwargs",
+    "{enable_thinking:false}"
+  ],
+  "env": {},
+  "gpus_device_list": null,
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "resident-args",
+  "parse_notes": [
+    "arguments read from a resident container (not started by the harness); docker options not recorded"
+  ],
+  "scrubbed": [
+    "host",
+    "model_path",
+    "port"
+  ]
+}

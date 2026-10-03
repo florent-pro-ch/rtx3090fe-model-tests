@@ -1,0 +1,93 @@
+---
+/**
+ * The rig: the host record (data/rig.json, when published) and the facts of
+ * each configuration. A fact whose evidence is "rig description" or
+ * data/rig.json points to the host record on this page.
+ */
+import Layout from '../layouts/Layout.astro';
+import Frame from '../components/Frame.astro';
+import Num from '../components/Num.astro';
+import Value from '../components/Value.astro';
+import Banner from '../components/Banner.astro';
+import { hardware, rig } from '../lib/data';
+import { configHref, evidenceHref, evidenceLink } from '../lib/site';
+
+const hw = hardware();
+const published = hw.filter((h) => !h.placeholder);
+const host = rig();
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const text = (v: unknown) => (typeof v === 'string' ? v : '');
+const hostData = host?.data ?? {};
+const hostTitle = text(hostData.title) || 'The host';
+const hostLead = text(hostData.summary) || text(hostData.description);
+const hostFacts = Array.isArray(hostData.facts) ? (hostData.facts as unknown[]).map((f) => (isObj(f) ? f : { fact: String(f) })) : [];
+const notRecorded = Array.isArray(hostData.not_recorded) ? (hostData.not_recorded as unknown[]).filter((x): x is string => typeof x === 'string') : [];
+// The record calls its source 'rig description'; the site cites it as "host record" everywhere.
+const evidenceNote = text(hostData.evidence_note).replace(/^'rig description' is\b/, 'The source of each fact above, cited as “host record” on the configuration pages and below, is');
+const hostCaveats = [hostData.caveats, hostData.caveat, hostData.not_published].flatMap((v) => (Array.isArray(v) ? v : typeof v === 'string' ? [v] : [])).filter((x): x is string => typeof x === 'string');
+const skip = new Set(['title', 'summary', 'description', 'facts', 'caveats', 'caveat', 'not_published', 'not_recorded', 'evidence_note', 'rig_id', 'canary', 'source', 'sources', 'evidence']);
+const empty = (v: unknown) => v === null || v === undefined || v === '' || (Array.isArray(v) && v.length === 0) || (isObj(v) && Object.keys(v).length === 0);
+const rest = Object.fromEntries(Object.entries(hostData).filter(([k, v]) => !skip.has(k) && !empty(v)));
+// A configuration with nothing to say (no description, no count, no fact) gets no section of its own.
+const shownHw = hw.filter((h) => h.description || h.gpus !== null || h.vram_gb_total !== null || h.facts.length > 0);
+const isRigEvidence = (e: string) => /^(rig description|data\/(hardware\/)?rig\.json)$/i.test(e.trim());
+const factLink = (e: string) => (isRigEvidence(e) ? (host ? '#host' : null) : evidenceLink(e));
+---
+<Layout title="The rig" description="The rig behind every number: four RTX 3090 Founders Edition cards in two NVLink pairs, each pair passed whole to its own virtual machine. Facts only, each with its evidence." nav="rig" crumbs={[{ label: 'rig' }]}>
+  <h1>The rig</h1>
+  <p class="lead">
+    Four RTX 3090 Founders Edition cards, bridged in two NVLink pairs (pair A and pair B). Each pair is passed whole to its
+    own virtual machine, so a model sees either one card or one pair. Only what a reader needs is described here.
+  </p>
+  <Banner kind="two-pairs" />
+
+  {host ? (
+    <Frame title="host">
+      <h2 id="host">{hostTitle}</h2>
+      {hostLead && <p>{hostLead}</p>}
+      {hostFacts.length === 0 && !hostLead && <p class="empty">The host record lists no fact yet.</p>}
+      {hostFacts.length > 0 && (
+        <ul>
+          {hostFacts.map((f) => {
+            const ev = typeof f.evidence === 'string' ? f.evidence : null;
+            const link = ev && !isRigEvidence(ev) ? evidenceLink(ev) : null;
+            return <li>{text(f.fact) || <Value value={f} />}{link ? <> · <a class="small" href={link}>evidence</a></> : ev && !isRigEvidence(ev) ? <span class="small muted"> · source: {ev}</span> : null}</li>;
+          })}
+        </ul>
+      )}
+      {Object.keys(rest).length > 0 && <Value value={rest} evidence={host.path} />}
+      {notRecorded.length > 0 && <><p class="small"><strong>Not recorded:</strong></p><ul class="small">{notRecorded.map((c) => <li>{c}</li>)}</ul></>}
+      {hostCaveats.length > 0 && <ul class="small muted">{hostCaveats.map((c) => <li>{c}</li>)}</ul>}
+      {evidenceNote && <p class="small muted">{evidenceNote}</p>}
+      <p class="small muted">Record: <a class="mono" href={evidenceHref(host.path)}>{host.path}</a>. Host names, addresses and machine ids are not published.</p>
+    </Frame>
+  ) : (
+    <p class="empty" id="host">No host record (data/rig.json) is published in this version; the facts below come from the configuration records.</p>
+  )}
+
+  {published.length === 0 && <p class="empty">No hardware record is published yet.</p>}
+  {shownHw.length > 0 && <h2 id="configurations">The configurations</h2>}
+  {shownHw.map((h) => (
+    <Frame title={h.hardware_id}>
+      <h3><a href={configHref(h.hardware_id)}>{h.label}</a></h3>
+      {h.description && <p>{h.description}</p>}
+      {(h.gpus !== null || h.vram_gb_total !== null) && (
+        <p>
+          {h.gpus !== null && <><Num value={h.gpus} /> GPU{h.gpus === 1 ? '' : 's'}</>}
+          {h.gpus !== null && h.vram_gb_total !== null && ' · '}
+          {h.vram_gb_total !== null && <><Num value={h.vram_gb_total} unit="GB" /> of VRAM in total</>}
+          {h.nvlink !== null && <> · NVLink {h.nvlink ? 'yes' : 'no'}</>}
+        </p>
+      )}
+      {h.facts.length > 0 && (
+        <ul>
+          {h.facts.map((f) => {
+            const ev = f.evidence ? String(f.evidence) : null;
+            const link = ev ? factLink(ev) : null;
+            return <li>{f.fact}{ev && (link ? <> · <a class="small" href={link}>{isRigEvidence(ev) ? 'host record' : 'evidence'}</a></> : <span class="small muted"> · source: {ev}</span>)}</li>;
+          })}
+        </ul>
+      )}
+    </Frame>
+  ))}
+</Layout>

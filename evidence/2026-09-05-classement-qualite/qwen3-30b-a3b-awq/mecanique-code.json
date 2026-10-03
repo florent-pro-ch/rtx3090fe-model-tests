@@ -1,0 +1,9 @@
+{
+  "erreur": 0,
+  "fuite_reflexion": 0,
+  "n": 31,
+  "non_cote": false,
+  "score_oracles_moy": 8.53,
+  "taux_erreur": 0.0,
+  "tronque": 0
+}

@@ -1,0 +1,286 @@
+---
+/**
+ * Page shell: header (site name + nav + theme switch; on a phone the nav
+ * folds behind a Menu button), main, footer (data as of, licences, canary),
+ * and the one-line local-preview banner when built with PREVIEW_LOCAL=1.
+ * Owns the only scripts of the site, all inline: the theme switch
+ * (localStorage, wrapped in try/catch), the phone menu, and the table
+ * sort/filter of <Table>. Fonts are self-hosted under the base path (Inter
+ * and JetBrains Mono, Latin subsets, OFL); no CDN, no external request.
+ * Open Graph: og:image is /og/<slug>.png on a model page (ogImage prop),
+ * /og/default.png elsewhere, as absolute URLs.
+ */
+import '../styles/global.css';
+import { SITE_NAME, REPO_URL, VERSION_LABEL, dataAsOf, canary, assertSiteRules } from '../lib/data';
+import { href, metaDescription, PREVIEW_LOCAL } from '../lib/site';
+
+interface Crumb { label: string; href?: string }
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  crumbs?: Crumb[];
+  nav?: string;
+  /** Canonical path when this page only points elsewhere (e.g. /methodology/pitfalls/ -> /pitfalls/). */
+  canonicalPath?: string;
+  /** Social preview image, a path under the base (model pages: og/<slug>.png); og/default.png when absent. */
+  ogImage?: string;
+}
+
+const { title, description, noindex = false, crumbs = [], nav = '', canonicalPath, ogImage = 'og/default.png' } = Astro.props;
+const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} · ${SITE_NAME}`;
+const desc = metaDescription(description);
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, Astro.site).href;
+const asOf = dataAsOf();
+const canaryText = canary();
+const ogImageUrl = new URL(href(ogImage), Astro.site).href;
+// Self-hosted fonts, served from public/fonts under the base path.
+const FONT_BASE = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/fonts/`;
+const fontFaces = `
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('${FONT_BASE}Inter-Variable-latin.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('${FONT_BASE}JetBrainsMono-Regular-latin.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url('${FONT_BASE}JetBrainsMono-Bold-latin.woff2') format('woff2'); }`;
+// Fails the build when a page would break a site rule (headline launch lines, A/B arms, the uncensored lab).
+assertSiteRules();
+
+const NAV = [
+  ['configs', 'Configurations', 'configs/'],
+  ['models', 'Models', 'models/'],
+  ['benches', 'Benches', 'benches/'],
+  ['rankings', 'Rankings', 'rankings/'],
+  ['compare', 'Compare', 'compare/'],
+  ['methodology', 'Methodology', 'methodology/'],
+  ['pitfalls', 'Pitfalls', 'pitfalls/'],
+  ['rig', 'Rig', 'rig/'],
+  ['data', 'Data', 'data/'],
+] as const;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${fullTitle}: ${desc}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <link rel="preload" href={`${FONT_BASE}Inter-Variable-latin.woff2`} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={`${FONT_BASE}JetBrainsMono-Regular-latin.woff2`} as="font" type="font/woff2" crossorigin />
+    <Fragment set:html={`<style>${fontFaces}</style>`} />
+    <link rel="icon" type="image/svg+xml" href={href('favicon.svg')} />
+    <link rel="sitemap" href={href('sitemap.xml')} />
+    <slot name="head" />
+    <script is:inline>
+      // ?theme=light|dark forces a theme for this view only (screenshots,
+      // sharing a link); otherwise the toggle's stored choice, else the system.
+      document.documentElement.className += ' js';
+      try {
+        var q = /[?&]theme=(light|dark)\b/.exec(location.search);
+        var t = q ? q[1] : localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="sr-only" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header">
+      <div class="wrap">
+        <a class="brand" href={href('/')}>
+          <svg width="30" height="20" viewBox="0 0 30 20" aria-hidden="true">
+            <rect x="1" y="1" width="28" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.75"></rect>
+            <circle cx="10" cy="10" r="5" fill="none" stroke="var(--green)" stroke-width="1.6"></circle>
+            <circle cx="21" cy="10" r="5" fill="none" stroke="var(--blue)" stroke-width="1.6"></circle>
+          </svg>
+          <span>{SITE_NAME}</span>
+        </a>
+        <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+          <svg class="icon-menu" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"></path></svg>
+          <svg class="icon-close" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"></path></svg>
+          <span class="menu-label">Menu</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          {NAV.map(([key, label, path]) => (
+            <a href={href(path)} aria-current={nav === key ? 'page' : undefined}>{label}</a>
+          ))}
+          <div class="nav-theme">
+            <span class="nav-theme-label" id="theme-label">Theme</span>
+            <div class="theme-switch" role="group" aria-label="Colour theme">
+              <button type="button" data-theme-set="auto" aria-pressed="true" title="Follow the system setting">auto</button>
+              <button type="button" data-theme-set="dark" aria-pressed="false">dark</button>
+              <button type="button" data-theme-set="light" aria-pressed="false">light</button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    {PREVIEW_LOCAL && (
+      <div class="preview-banner" role="note">
+        <p class="wrap">Local preview: source and evidence links point to the GitHub repository and resolve once it exists.</p>
+      </div>
+    )}
+    <main id="main" class="wrap">
+      {crumbs.length > 0 && (
+        <p class="crumbs">
+          <a href={href('/')}>home</a>
+          {crumbs.map((c) => (
+            <>
+              {' / '}
+              {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+            </>
+          ))}
+        </p>
+      )}
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <span class="mono">{VERSION_LABEL}</span> · Data as of <time class="mono" datetime={asOf ?? undefined}>{asOf ?? 'no data published yet'}</time>
+          {' · '}<a href={href('changelog/')}>changelog</a>
+          {' · '}<a href={href('glossary/')}>glossary</a>
+          {' · '}<a href={href('watchlist/')}>watchlist</a>
+          {' · '}<a href={href('data/')}>download the data</a>
+          {' · '}<a href={REPO_URL}>repository</a>
+        </p>
+        <p>
+          Code under the MIT licence; data and bench cards under CC BY 4.0. Model outputs keep the
+          restrictions of each model's own licence, flagged model by model; none are published in {VERSION_LABEL}.
+        </p>
+        <p>
+          Bench files and data files carry a canary string. Please keep them out of training corpora:{' '}
+          <span class="canary">{canaryText}</span>
+        </p>
+        <p>Numbers link to the run or the evidence they come from. Measured on the rig, never copied from a vendor.</p>
+      </div>
+    </footer>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        // Theme switch: auto (follow the system), dark, light; the choice is kept in localStorage.
+        var setters = document.querySelectorAll('[data-theme-set]');
+        function current() {
+          return root.getAttribute('data-theme') || 'auto';
+        }
+        function paint() {
+          var t = current();
+          Array.prototype.forEach.call(setters, function (b) {
+            b.setAttribute('aria-pressed', b.getAttribute('data-theme-set') === t ? 'true' : 'false');
+          });
+        }
+        Array.prototype.forEach.call(setters, function (b) {
+          b.addEventListener('click', function () {
+            var next = b.getAttribute('data-theme-set');
+            if (next === 'auto') root.removeAttribute('data-theme');
+            else root.setAttribute('data-theme', next);
+            try {
+              if (next === 'auto') localStorage.removeItem('theme');
+              else localStorage.setItem('theme', next);
+            } catch (e) {}
+            paint();
+          });
+        });
+        paint();
+
+        // Phone menu: the nav folds behind the Menu button (CSS, <= 640 px, only once this script runs).
+        var header = document.getElementById('site-header');
+        var toggle = document.getElementById('menu-toggle');
+        function setOpen(open) {
+          if (!header || !toggle) return;
+          header.classList.toggle('open', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          var label = toggle.querySelector('.menu-label');
+          if (label) label.textContent = open ? 'Close' : 'Menu';
+        }
+        if (toggle) {
+          toggle.addEventListener('click', function () {
+            setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+          });
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+              setOpen(false);
+              toggle.focus();
+            }
+          });
+          // ?menu=open opens it on load (screenshots).
+          if (/[?&]menu=open\b/.test(location.search)) setOpen(true);
+        }
+
+        // Sortable / filterable tables (see components/Table.astro).
+        var boxes = document.querySelectorAll('[data-table]');
+        Array.prototype.forEach.call(boxes, function (box) {
+          var table = box.querySelector('table');
+          if (!table || !table.tBodies[0]) return;
+          var body = table.tBodies[0];
+          var rows = Array.prototype.slice.call(body.rows);
+          var input = box.querySelector('input[data-filter]');
+          var selects = box.querySelectorAll('select[data-filter-col]');
+          var count = box.querySelector('[data-count]');
+          function apply() {
+            var q = input ? input.value.trim().toLowerCase() : '';
+            var shown = 0;
+            rows.forEach(function (tr) {
+              var ok = !q || tr.textContent.toLowerCase().indexOf(q) !== -1;
+              Array.prototype.forEach.call(selects, function (s) {
+                if (!ok || !s.value) return;
+                var cell = tr.cells[+s.getAttribute('data-filter-col')];
+                var v = cell ? (cell.getAttribute('data-f') || cell.textContent.trim()) : '';
+                if (v !== s.value) ok = false;
+              });
+              tr.hidden = !ok;
+              if (ok) shown++;
+            });
+            if (count) count.textContent = shown + ' / ' + rows.length + ' rows';
+          }
+          if (input) input.addEventListener('input', apply);
+          Array.prototype.forEach.call(selects, function (s) { s.addEventListener('change', apply); });
+          var ths = table.tHead ? table.tHead.rows[0].cells : [];
+          Array.prototype.forEach.call(ths, function (th, i) {
+            if (!th.hasAttribute('data-sort')) return;
+            th.tabIndex = 0;
+            function sort() {
+              var numeric = th.getAttribute('data-sort') === 'num';
+              var dir = th.getAttribute('aria-sort') === 'ascending' ? -1 : 1;
+              Array.prototype.forEach.call(ths, function (o) { o.removeAttribute('aria-sort'); });
+              th.setAttribute('aria-sort', dir === 1 ? 'ascending' : 'descending');
+              rows.sort(function (a, b) {
+                var ca = a.cells[i], cb = b.cells[i];
+                var va = ca ? (ca.getAttribute('data-v') !== null ? ca.getAttribute('data-v') : ca.textContent.trim()) : '';
+                var vb = cb ? (cb.getAttribute('data-v') !== null ? cb.getAttribute('data-v') : cb.textContent.trim()) : '';
+                if (numeric) {
+                  var na = parseFloat(va), nb = parseFloat(vb);
+                  var ea = isNaN(na), eb = isNaN(nb);
+                  if (ea && eb) return 0;
+                  if (ea) return 1;
+                  if (eb) return -1;
+                  return (na - nb) * dir;
+                }
+                return va.localeCompare(vb, 'en') * dir;
+              });
+              rows.forEach(function (tr) { body.appendChild(tr); });
+            }
+            th.addEventListener('click', sort);
+            th.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sort(); } });
+          });
+          apply();
+        });
+      })();
+    </script>
+  </body>
+</html>

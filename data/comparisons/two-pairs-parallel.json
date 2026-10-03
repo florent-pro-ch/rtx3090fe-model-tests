@@ -1,0 +1,2128 @@
+{
+  "caveats": [
+    "Two independent 48 GB machines: each pair is passed whole to its own VM, so nothing here pools VRAM or splits one model across the pairs.",
+    "Overlaps say that both pairs were busy at the same time; they are not a throughput measurement of the whole rig.",
+    "Power of the whole rig was never sampled."
+  ],
+  "comparison_id": "two-pairs-parallel",
+  "hardware": "2x2x3090fe-nvlink",
+  "method": "Read from timestamps already in the evidence: the 3D generation records (start, end, engine and card of every job), a medical VLM run's launch record and the harness logs of model-watch runs. Overlaps are computed from those windows; the pair of a run is read from its engine record or, where stated, from its campaign README. Every launch line in the lab's files is scanned for the number of GPUs it requests. The uncensored lab's runs and their copies are left out of every window and of the launch-line scan (refusal rates only).",
+  "model_id": null,
+  "question": "What has the rig done with both pairs at once, and what has it never done?",
+  "rows": [
+    {
+      "at": "2026-09-30T10:52:17Z",
+      "evidence": [
+        "evidence/2026-09-25-volume-v1/hunyuan3d21-shape-comfy/",
+        "evidence/2026-09-25-volume-v1/pixal3d-comfy/"
+      ],
+      "label": "3D generation bench: cards generating at the same moment (maximum)",
+      "metric": "max_cards_busy",
+      "run_ids": [
+        "2026-09-25-volume-v1/hunyuan3d21-shape-comfy",
+        "2026-09-25-volume-v1/pixal3d-comfy"
+      ],
+      "unit": "cards",
+      "value": 4
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "3D generation bench: generation jobs that used more than one card",
+      "metric": "multi_card_jobs",
+      "run_ids": [
+        "2026-09-25-volume-v1/hunyuan3d21-shape-comfy",
+        "2026-09-25-volume-v1/pixal3d-comfy",
+        "2026-09-25-volume-v1/pixal3d-mv-comfy",
+        "2026-09-25-volume-v1/trellis2-comfy",
+        "2026-09-25-volume-v1/triposplat-comfy"
+      ],
+      "unit": "jobs",
+      "value": 0
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "3D generation bench: generation jobs in all",
+      "metric": "jobs",
+      "run_ids": [
+        "2026-09-25-volume-v1/hunyuan3d21-shape-comfy",
+        "2026-09-25-volume-v1/pixal3d-comfy",
+        "2026-09-25-volume-v1/pixal3d-mv-comfy",
+        "2026-09-25-volume-v1/trellis2-comfy",
+        "2026-09-25-volume-v1/triposplat-comfy"
+      ],
+      "unit": "jobs",
+      "value": 460
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "3D generation bench: generation jobs on pair A",
+      "metric": "jobs",
+      "run_ids": [
+        "2026-09-25-volume-v1/hunyuan3d21-shape-comfy",
+        "2026-09-25-volume-v1/pixal3d-comfy",
+        "2026-09-25-volume-v1/triposplat-comfy"
+      ],
+      "unit": "jobs",
+      "value": 190
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "3D generation bench: generation jobs on pair B",
+      "metric": "jobs",
+      "run_ids": [
+        "2026-09-25-volume-v1/pixal3d-comfy",
+        "2026-09-25-volume-v1/pixal3d-mv-comfy",
+        "2026-09-25-volume-v1/trellis2-comfy"
+      ],
+      "unit": "jobs",
+      "value": 270
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "Pair A: MedGemma 1.5 4B, engines side by side (one per card)",
+      "metric": "engines",
+      "model_id": "google/medgemma-1.5-4b-it",
+      "run_ids": [
+        "2026-09-25-imagerie-med-v1/vlm-medgemma-15-4b"
+      ],
+      "unit": "engines",
+      "value": 2
+    },
+    {
+      "evidence": [
+        "evidence/2026-10-01-tests-veille/veille-orcasaq2-27b/"
+      ],
+      "label": "Pair B: OrcaSAQ-2-27B on one card, tutoring/code/refusal benches, while pair A served MedGemma",
+      "metric": "overlap_min",
+      "note": "the second run's pair is stated in its campaign README",
+      "pair_of_second_run": "B",
+      "run_ids": [
+        "2026-09-25-imagerie-med-v1/vlm-medgemma-15-4b",
+        "2026-10-01-tests-veille/veille-orcasaq2-27b"
+      ],
+      "unit": "min",
+      "value": 22.0
+    },
+    {
+      "evidence": [
+        "evidence/2026-10-01-tests-veille/veille-orcasaq2-27b/"
+      ],
+      "label": "OrcaSAQ-2-27B: bench on pair B, then judged by the local judge on pair A (judge on one pair, candidate on the other): minutes between the end of the bench and the judge being ready",
+      "metric": "gap_min",
+      "model_id": "qwen/qwen3.8-27b",
+      "note": "a handoff, not an overlap: the judge waited for pair A to be free; the judge's log is not published, its two timestamps are read by the exporter",
+      "run_ids": [
+        "2026-10-01-tests-veille/veille-orcasaq2-27b"
+      ],
+      "unit": "min",
+      "value": 13.6
+    },
+    {
+      "evidence": [
+        "evidence/2026-10-01-tests-veille/veille-orcasaq2-27b/"
+      ],
+      "label": "OrcaSAQ-2-27B: time the judge on pair A took to judge its answers",
+      "metric": "judge_min",
+      "model_id": "qwen/qwen3.8-27b",
+      "run_ids": [
+        "2026-10-01-tests-veille/veille-orcasaq2-27b"
+      ],
+      "unit": "min",
+      "value": 17.2
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "Logged judge runs (15) overlapping a logged candidate bench (52), all campaigns",
+      "metric": "overlaps",
+      "note": "every judge run waited for the benches it judged; the pairs worked in parallel on other jobs, never as judge and candidate at the same time",
+      "run_ids": [],
+      "unit": "windows",
+      "value": 0
+    },
+    {
+      "evidence": [
+        "evidence/2026-09-13-tests-veille/veille-neohorse-1-9b/",
+        "evidence/2026-09-13-tests-veille/veille-oxcoder-9b-gguf/"
+      ],
+      "label": "NeoHorse-1-9B on pair A (vLLM, one card) and OxCoder-9B on pair B (llama.cpp, one card), same benches",
+      "metric": "overlap_min",
+      "note": "pairs stated in the campaign README; windows from the harness logs",
+      "run_ids": [
+        "2026-09-13-tests-veille/veille-neohorse-1-9b",
+        "2026-09-13-tests-veille/veille-oxcoder-9b-gguf"
+      ],
+      "unit": "min",
+      "value": 9.4
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "Every recorded launch line: most GPUs requested by one model server",
+      "launch_lines_scanned": 171,
+      "metric": "max_gpus_per_server",
+      "run_ids": [],
+      "unit": "GPUs",
+      "value": 2
+    },
+    {
+      "evidence": [
+        "data/comparisons/two-pairs-parallel.json"
+      ],
+      "label": "Runs of one model across all four cards",
+      "metric": "single_model_runs",
+      "note": "no launch line requests more than two GPUs; each pair is its own VM",
+      "run_ids": [],
+      "unit": "runs",
+      "value": 0
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "src-002aa6c735688047"
+    },
+    {
+      "source_id": "src-00f1c883f32ee07e"
+    },
+    {
+      "source_id": "src-0204252d5e308bae"
+    },
+    {
+      "source_id": "src-0240514cca9d66f6"
+    },
+    {
+      "source_id": "src-02b011abd2ab2bba"
+    },
+    {
+      "source_id": "src-0367e008909c73f6"
+    },
+    {
+      "source_id": "src-03a5773a4c575895"
+    },
+    {
+      "source_id": "src-03f25b8fad678bbe"
+    },
+    {
+      "source_id": "src-03f92e587b9232c8"
+    },
+    {
+      "source_id": "src-04a24de1885eddac"
+    },
+    {
+      "source_id": "src-04b22c7c50cdaa1f"
+    },
+    {
+      "source_id": "src-04dd213f77ad31bd"
+    },
+    {
+      "source_id": "src-051ffb6663b91b47"
+    },
+    {
+      "source_id": "src-0537074a0547d4bf"
+    },
+    {
+      "source_id": "src-05ace55f267bc510"
+    },
+    {
+      "source_id": "src-0675ff89dcf1cae5"
+    },
+    {
+      "source_id": "src-06f492ea7c5ffa5e"
+    },
+    {
+      "source_id": "src-06fa0b337985b215"
+    },
+    {
+      "source_id": "src-0700be37223ecc17"
+    },
+    {
+      "source_id": "src-0776806713cd5268"
+    },
+    {
+      "source_id": "src-07c5e186da384803"
+    },
+    {
+      "source_id": "src-07d7344ea9308158"
+    },
+    {
+      "source_id": "src-089e9b9bde1db0f7"
+    },
+    {
+      "source_id": "src-08ab3f7b16d69f2c"
+    },
+    {
+      "source_id": "src-08b1638adc1f421b"
+    },
+    {
+      "source_id": "src-08ecfa9b03bbac55"
+    },
+    {
+      "source_id": "src-093bd7242a5be1bc"
+    },
+    {
+      "source_id": "src-09975e83c32ebada"
+    },
+    {
+      "source_id": "src-09a76423dcf3a298"
+    },
+    {
+      "source_id": "src-09d904f526d3b36d"
+    },
+    {
+      "source_id": "src-09f8593a8bd43b55"
+    },
+    {
+      "source_id": "src-0b1aebef51b5ccf1"
+    },
+    {
+      "source_id": "src-0b5a4ccd31c440d5"
+    },
+    {
+      "source_id": "src-0c0b8657db0d86d2"
+    },
+    {
+      "source_id": "src-0c2fecd61055db58"
+    },
+    {
+      "source_id": "src-0c59edf27c4901d0"
+    },
+    {
+      "source_id": "src-0d21650455bab8cd"
+    },
+    {
+      "source_id": "src-0d3aa1ab84eac90d"
+    },
+    {
+      "source_id": "src-0d59c86c876bf814"
+    },
+    {
+      "source_id": "src-0e06d0ccb5cc1ab5"
+    },
+    {
+      "source_id": "src-0e2a05253eb4de93"
+    },
+    {
+      "source_id": "src-0e50b486fafc7746"
+    },
+    {
+      "source_id": "src-0e5bbc8d5496c4b5"
+    },
+    {
+      "source_id": "src-0e60ed1a8fd47560"
+    },
+    {
+      "source_id": "src-0e724d39f44d85d6"
+    },
+    {
+      "source_id": "src-0fb9109dbba89702"
+    },
+    {
+      "source_id": "src-0feb1f24be6492b1"
+    },
+    {
+      "source_id": "src-10a8c6edf44ff9a3"
+    },
+    {
+      "source_id": "src-10e4fa29c11a525b"
+    },
+    {
+      "source_id": "src-1110e6cd1ad74cf9"
+    },
+    {
+      "source_id": "src-11386dd19baba5db"
+    },
+    {
+      "source_id": "src-125943cfe9a0795e"
+    },
+    {
+      "source_id": "src-137e97daf807ef82"
+    },
+    {
+      "source_id": "src-14161f4d5fa70475"
+    },
+    {
+      "source_id": "src-14b4cffad0449760"
+    },
+    {
+      "source_id": "src-153fd9a2594fe5ff"
+    },
+    {
+      "source_id": "src-1553cee96f8a39b3"
+    },
+    {
+      "source_id": "src-1643f5ed0eecd37d"
+    },
+    {
+      "source_id": "src-16b3d6c5b01baad5"
+    },
+    {
+      "source_id": "src-16b3e0a49e3c49ab"
+    },
+    {
+      "source_id": "src-16ed7f8fe57d057c"
+    },
+    {
+      "source_id": "src-16f932d98ac45e8a"
+    },
+    {
+      "source_id": "src-1730714c0cffde80"
+    },
+    {
+      "source_id": "src-17531b6e5dc51e4f"
+    },
+    {
+      "source_id": "src-17acb15b1797d916"
+    },
+    {
+      "source_id": "src-186b8388dfe40838"
+    },
+    {
+      "source_id": "src-18afa55439b037f1"
+    },
+    {
+      "source_id": "src-18e94e555ac0dfc0"
+    },
+    {
+      "source_id": "src-191399a28ae4f49a"
+    },
+    {
+      "source_id": "src-19a253e4ea441b5b"
+    },
+    {
+      "source_id": "src-1a12c788e96b93ed"
+    },
+    {
+      "source_id": "src-1a956581befe186f"
+    },
+    {
+      "source_id": "src-1adcdf2c86bc8de1"
+    },
+    {
+      "source_id": "src-1c089287e0c7e4ed"
+    },
+    {
+      "source_id": "src-1c5790035d2db3ac"
+    },
+    {
+      "source_id": "src-1c5b03daf4280045"
+    },
+    {
+      "source_id": "src-1cc986c8ae80543a"
+    },
+    {
+      "source_id": "src-1d3356fe4d288a0f"
+    },
+    {
+      "source_id": "src-1d5b3164353c68e6"
+    },
+    {
+      "source_id": "src-1d945fc6658d2d11"
+    },
+    {
+      "source_id": "src-1dc5bb4b3d7da6be"
+    },
+    {
+      "source_id": "src-1e81f098a4a0b080"
+    },
+    {
+      "source_id": "src-1feda6b69f51503a"
+    },
+    {
+      "source_id": "src-21b11d54041c8873"
+    },
+    {
+      "source_id": "src-22faf679bbaaedaa"
+    },
+    {
+      "source_id": "src-23b1e0548c9aef20"
+    },
+    {
+      "source_id": "src-241de43f3c38c7a0"
+    },
+    {
+      "source_id": "src-246afada73aa2713"
+    },
+    {
+      "source_id": "src-247f44e9dc62b97d"
+    },
+    {
+      "source_id": "src-24b6cd7681a058e6"
+    },
+    {
+      "source_id": "src-24d4978f601e3739"
+    },
+    {
+      "source_id": "src-24d8255938802b80"
+    },
+    {
+      "source_id": "src-253523bc44190ab9"
+    },
+    {
+      "source_id": "src-253932ce4c7cdfb4"
+    },
+    {
+      "source_id": "src-257586e453e391fe"
+    },
+    {
+      "source_id": "src-25a2f502a9f9ef85"
+    },
+    {
+      "source_id": "src-25b25ede9a42808d"
+    },
+    {
+      "source_id": "src-26f9b30343826776"
+    },
+    {
+      "source_id": "src-271330274ae6183a"
+    },
+    {
+      "source_id": "src-2798cb61e51f7575"
+    },
+    {
+      "source_id": "src-2816c0c6b93119de"
+    },
+    {
+      "source_id": "src-285cc424fa65e30c"
+    },
+    {
+      "source_id": "src-28777aa45e6219ed"
+    },
+    {
+      "source_id": "src-2a2e9b7011ea3e19"
+    },
+    {
+      "source_id": "src-2a48d9485158f870"
+    },
+    {
+      "source_id": "src-2a616a96164c9d50"
+    },
+    {
+      "source_id": "src-2ab3ea02ea865718"
+    },
+    {
+      "source_id": "src-2bd2d6d8f45a1795"
+    },
+    {
+      "source_id": "src-2d155344b601ee10"
+    },
+    {
+      "source_id": "src-2d2ab71ffbeaab1a"
+    },
+    {
+      "source_id": "src-2d96349f9999d64e"
+    },
+    {
+      "source_id": "src-2ee8cc979fa97c8a"
+    },
+    {
+      "source_id": "src-2f2850c69fb54b4d"
+    },
+    {
+      "source_id": "src-2f4b1473dbefe959"
+    },
+    {
+      "source_id": "src-2fa7fb7b779d1336"
+    },
+    {
+      "source_id": "src-2fa9990eb2641d27"
+    },
+    {
+      "source_id": "src-2fc67ea9bf5ff791"
+    },
+    {
+      "source_id": "src-30104d07c0a49e80"
+    },
+    {
+      "source_id": "src-3015def3ed99ca03"
+    },
+    {
+      "source_id": "src-3030c5fa78feb263"
+    },
+    {
+      "source_id": "src-30c548f045f025ae"
+    },
+    {
+      "source_id": "src-313cc6ed3d999827"
+    },
+    {
+      "source_id": "src-31971268f50e91ab"
+    },
+    {
+      "source_id": "src-31a9f7f9233008bd"
+    },
+    {
+      "source_id": "src-31bb72ead6b267e2"
+    },
+    {
+      "source_id": "src-31bea36235dc12aa"
+    },
+    {
+      "source_id": "src-320e22600237c3b7"
+    },
+    {
+      "source_id": "src-3285ecac0ae51c45"
+    },
+    {
+      "source_id": "src-338cf5ec06fa58a3"
+    },
+    {
+      "source_id": "src-34ad322a82c54a08"
+    },
+    {
+      "source_id": "src-3573eb7bc819f62b"
+    },
+    {
+      "source_id": "src-35800a2f24abae23"
+    },
+    {
+      "source_id": "src-3788429a31d32225"
+    },
+    {
+      "source_id": "src-3789f3be5af9c3ca"
+    },
+    {
+      "source_id": "src-383757c8914299dd"
+    },
+    {
+      "source_id": "src-38487f357b183239"
+    },
+    {
+      "source_id": "src-389675e9fabff250"
+    },
+    {
+      "source_id": "src-3942ede80e774366"
+    },
+    {
+      "source_id": "src-3943d036bae245de"
+    },
+    {
+      "source_id": "src-39e78a90a61e907d"
+    },
+    {
+      "source_id": "src-3a1238b5eccbcf9e"
+    },
+    {
+      "source_id": "src-3ad84e0761a31592"
+    },
+    {
+      "source_id": "src-3b26f6d9af767953"
+    },
+    {
+      "source_id": "src-3c6523e7f4d4ccc0"
+    },
+    {
+      "source_id": "src-3ca602bd2498e24c"
+    },
+    {
+      "source_id": "src-3daf626298383c14"
+    },
+    {
+      "source_id": "src-3de1f2158374c42f"
+    },
+    {
+      "source_id": "src-3e58b868aaf65cf3"
+    },
+    {
+      "source_id": "src-3e7d74f2c74d95ab"
+    },
+    {
+      "source_id": "src-3e9326e2cc56d29e"
+    },
+    {
+      "source_id": "src-3ea328c43110c2e9"
+    },
+    {
+      "source_id": "src-3ebc588eac210b71"
+    },
+    {
+      "source_id": "src-3ef30a50db5c8c33"
+    },
+    {
+      "source_id": "src-3f1a4666769d6e04"
+    },
+    {
+      "source_id": "src-3f213b89e1d0b612"
+    },
+    {
+      "source_id": "src-400b5d5b5774343b"
+    },
+    {
+      "source_id": "src-405396ebb1fafff5"
+    },
+    {
+      "source_id": "src-40ddb58996fc9fdd"
+    },
+    {
+      "source_id": "src-433f547e0386cf74"
+    },
+    {
+      "source_id": "src-434c1fdf118d308b"
+    },
+    {
+      "source_id": "src-449134decb843cd0"
+    },
+    {
+      "source_id": "src-44c3bfa5304aea75"
+    },
+    {
+      "source_id": "src-45ecc423a6922809"
+    },
+    {
+      "source_id": "src-46065568eefcd255"
+    },
+    {
+      "source_id": "src-466fcc61b78f6ba2"
+    },
+    {
+      "source_id": "src-467d01afa6e76e16"
+    },
+    {
+      "source_id": "src-467f274614e81c7e"
+    },
+    {
+      "source_id": "src-46c1d0587489edd3"
+    },
+    {
+      "source_id": "src-471bfacfa79d8096"
+    },
+    {
+      "source_id": "src-47485f2fadc7dd28"
+    },
+    {
+      "source_id": "src-47650e150b09ac05"
+    },
+    {
+      "source_id": "src-47a1cb4e74511827"
+    },
+    {
+      "source_id": "src-484174d61a67a955"
+    },
+    {
+      "source_id": "src-48ce5e5879cabb91"
+    },
+    {
+      "source_id": "src-49e2b4808ec7b080"
+    },
+    {
+      "source_id": "src-4a959d68f41e3b91"
+    },
+    {
+      "source_id": "src-4ab606eb5be00591"
+    },
+    {
+      "source_id": "src-4b3d12d0cc6db8d9"
+    },
+    {
+      "source_id": "src-4b722f0ae08501c3"
+    },
+    {
+      "source_id": "src-4c132302dad95f67"
+    },
+    {
+      "source_id": "src-4c8d05b085e723ac"
+    },
+    {
+      "source_id": "src-4d08b0aee9727258"
+    },
+    {
+      "source_id": "src-4dd1f6fd7db2f6b1"
+    },
+    {
+      "source_id": "src-4e26ea2ad0cc9894"
+    },
+    {
+      "source_id": "src-4ed9ed191d21dc1d"
+    },
+    {
+      "source_id": "src-4fe3d527618d1b5f"
+    },
+    {
+      "source_id": "src-4ffa2e77ed7d5825"
+    },
+    {
+      "source_id": "src-5039d87492d9f588"
+    },
+    {
+      "source_id": "src-5173e3e84579294a"
+    },
+    {
+      "source_id": "src-519e1a0300182894"
+    },
+    {
+      "source_id": "src-5231d8237d35aff5"
+    },
+    {
+      "source_id": "src-525dae1ab69dfc35"
+    },
+    {
+      "source_id": "src-52a98e36f4ec66de"
+    },
+    {
+      "source_id": "src-52dae1e01e4907b2"
+    },
+    {
+      "source_id": "src-53f9ae9832124018"
+    },
+    {
+      "source_id": "src-54097e27f48416ab"
+    },
+    {
+      "source_id": "src-54a3587734461dff"
+    },
+    {
+      "source_id": "src-54e903bfa5e0d781"
+    },
+    {
+      "source_id": "src-5549657472672ff7"
+    },
+    {
+      "source_id": "src-554acc879f6570ef"
+    },
+    {
+      "source_id": "src-556d04bfac72b7ba"
+    },
+    {
+      "source_id": "src-566914e257c14acc"
+    },
+    {
+      "source_id": "src-5744e2d70680182f"
+    },
+    {
+      "source_id": "src-57b1a010a756a558"
+    },
+    {
+      "source_id": "src-5816560f58aa2b42"
+    },
+    {
+      "source_id": "src-584088ba548860b5"
+    },
+    {
+      "source_id": "src-59ef520a73643d2a"
+    },
+    {
+      "source_id": "src-59f4197a192e4947"
+    },
+    {
+      "source_id": "src-5a11a32074a758d0"
+    },
+    {
+      "source_id": "src-5a13c3dc217daa41"
+    },
+    {
+      "source_id": "src-5ae8394ddb5e3e2e"
+    },
+    {
+      "source_id": "src-5b30480952ee5ad5"
+    },
+    {
+      "source_id": "src-5b828cd396da55ac"
+    },
+    {
+      "source_id": "src-5bddc0ab895721f6"
+    },
+    {
+      "source_id": "src-5c008237797c7bc8"
+    },
+    {
+      "source_id": "src-5cb45829bb74961d"
+    },
+    {
+      "source_id": "src-5cd02b139a31f6ea"
+    },
+    {
+      "source_id": "src-5cf5b318ad988585"
+    },
+    {
+      "source_id": "src-5d7ecb5fe0303b97"
+    },
+    {
+      "source_id": "src-5d96841842131eca"
+    },
+    {
+      "source_id": "src-5d9db2ad30b8bd79"
+    },
+    {
+      "source_id": "src-5daee60b80c563de"
+    },
+    {
+      "source_id": "src-5dc56453b092fca6"
+    },
+    {
+      "source_id": "src-5deeb79e4362f32e"
+    },
+    {
+      "source_id": "src-5df5136864148e08"
+    },
+    {
+      "source_id": "src-5ed439f7ca408402"
+    },
+    {
+      "source_id": "src-5fe69fb0a75a727b"
+    },
+    {
+      "source_id": "src-606e642ed55ce114"
+    },
+    {
+      "source_id": "src-6093f1abaab53d2a"
+    },
+    {
+      "source_id": "src-609d2c1b5aa598ef"
+    },
+    {
+      "source_id": "src-6130f476e7581133"
+    },
+    {
+      "source_id": "src-6133eb3092eb6e36"
+    },
+    {
+      "source_id": "src-615ef4dc9cea4a0e"
+    },
+    {
+      "source_id": "src-619b369cf94dbcb4"
+    },
+    {
+      "source_id": "src-61a1508fd08f5df6"
+    },
+    {
+      "source_id": "src-61d413a1d4358139"
+    },
+    {
+      "source_id": "src-62faede4bec5f041"
+    },
+    {
+      "source_id": "src-62fdc3a628f11017"
+    },
+    {
+      "source_id": "src-63151531b6976572"
+    },
+    {
+      "source_id": "src-632bc9a56f29da16"
+    },
+    {
+      "source_id": "src-634ddd3bd4c5651f"
+    },
+    {
+      "source_id": "src-63501340e7fb0cdb"
+    },
+    {
+      "source_id": "src-63cdf5d4d6b4a4c5"
+    },
+    {
+      "source_id": "src-6497a3ca4f2157bb"
+    },
+    {
+      "source_id": "src-649f65e9d17ff61e"
+    },
+    {
+      "source_id": "src-64d80cfd24e1ed5f"
+    },
+    {
+      "source_id": "src-65a24476e0615434"
+    },
+    {
+      "source_id": "src-65ba308cd51c961c"
+    },
+    {
+      "source_id": "src-65e66584c8377ecd"
+    },
+    {
+      "source_id": "src-660f837c3bafa1db"
+    },
+    {
+      "source_id": "src-675f361d05d8711f"
+    },
+    {
+      "source_id": "src-67d9b0ef99491b40"
+    },
+    {
+      "source_id": "src-6867b10e216ab13e"
+    },
+    {
+      "source_id": "src-687a024b163ed344"
+    },
+    {
+      "source_id": "src-68b1c521c850e54d"
+    },
+    {
+      "source_id": "src-68c9028bd27ab06b"
+    },
+    {
+      "source_id": "src-6969935e1c4cd285"
+    },
+    {
+      "source_id": "src-699c541b911cd0fd"
+    },
+    {
+      "source_id": "src-69af557bba051571"
+    },
+    {
+      "source_id": "src-69cc099e298dabbb"
+    },
+    {
+      "source_id": "src-69dedc410810af3b"
+    },
+    {
+      "source_id": "src-69e288e9e31f16ca"
+    },
+    {
+      "source_id": "src-6a0f821906194fe7"
+    },
+    {
+      "source_id": "src-6a205adb96162d64"
+    },
+    {
+      "source_id": "src-6a3ace1734a27a68"
+    },
+    {
+      "source_id": "src-6aa9bbc2bafc45b4"
+    },
+    {
+      "source_id": "src-6b0dfab0135556bf"
+    },
+    {
+      "source_id": "src-6b212b43d592ce9e"
+    },
+    {
+      "source_id": "src-6c6adb3b4a3c92fb"
+    },
+    {
+      "source_id": "src-6ca45aec3ea496fe"
+    },
+    {
+      "source_id": "src-6cf435050e091694"
+    },
+    {
+      "source_id": "src-6de263601bcd21d0"
+    },
+    {
+      "source_id": "src-6e2dbfd73a797d30"
+    },
+    {
+      "source_id": "src-6e46b4a93657e81b"
+    },
+    {
+      "source_id": "src-6e7e698187abcfc4"
+    },
+    {
+      "source_id": "src-6fd165f093fce453"
+    },
+    {
+      "source_id": "src-6fec48a9a431ec6e"
+    },
+    {
+      "source_id": "src-7062d1c66f6a4ef1"
+    },
+    {
+      "source_id": "src-706d976a73410b7e"
+    },
+    {
+      "source_id": "src-706dd73b49ad6e1e"
+    },
+    {
+      "source_id": "src-70bdfaf88dee23b3"
+    },
+    {
+      "source_id": "src-711eaf990345216c"
+    },
+    {
+      "source_id": "src-7147acaf169f32b5"
+    },
+    {
+      "source_id": "src-719336d118fa7247"
+    },
+    {
+      "source_id": "src-71a7a171590b86fd"
+    },
+    {
+      "source_id": "src-71bedeecf4cea668"
+    },
+    {
+      "source_id": "src-71dc2f75ecf385be"
+    },
+    {
+      "source_id": "src-71e47845a004a18d"
+    },
+    {
+      "source_id": "src-7251a84e0756d6d4"
+    },
+    {
+      "source_id": "src-72b41f43817cc204"
+    },
+    {
+      "source_id": "src-731805aa63039395"
+    },
+    {
+      "source_id": "src-732cb0b5c52e7179"
+    },
+    {
+      "source_id": "src-73341e3a296c61bc"
+    },
+    {
+      "source_id": "src-73588f17db945441"
+    },
+    {
+      "source_id": "src-7359261440a80f1e"
+    },
+    {
+      "source_id": "src-74e1704ce5bd671c"
+    },
+    {
+      "source_id": "src-756dd7dc05af39aa"
+    },
+    {
+      "source_id": "src-7581e7e408415509"
+    },
+    {
+      "source_id": "src-767ecb6f4cdf55b0"
+    },
+    {
+      "source_id": "src-769f062ff099e1c9"
+    },
+    {
+      "source_id": "src-76aaab40b49fc572"
+    },
+    {
+      "source_id": "src-772eb45d6743c701"
+    },
+    {
+      "source_id": "src-77d31020272ea017"
+    },
+    {
+      "source_id": "src-77fe8658ee65edd5"
+    },
+    {
+      "source_id": "src-787c2abdc3f0baf5"
+    },
+    {
+      "source_id": "src-7a0372326a9edd33"
+    },
+    {
+      "source_id": "src-7a39971861fd601c"
+    },
+    {
+      "source_id": "src-7aae22af4efe2ac5"
+    },
+    {
+      "source_id": "src-7c104b5f872acdf4"
+    },
+    {
+      "source_id": "src-7c479c202a6e541a"
+    },
+    {
+      "source_id": "src-7c94de0edf120c02"
+    },
+    {
+      "source_id": "src-7cb10f09c5111b9d"
+    },
+    {
+      "source_id": "src-7ccc1683f921d92d"
+    },
+    {
+      "source_id": "src-7d9656266b4fd870"
+    },
+    {
+      "source_id": "src-7eb7c264dab726bb"
+    },
+    {
+      "source_id": "src-7ecdcdea164ed1e5"
+    },
+    {
+      "source_id": "src-7ed5fdd88e94bf82"
+    },
+    {
+      "source_id": "src-7edbc5bb9f400d7b"
+    },
+    {
+      "source_id": "src-7ef0fcac3f274808"
+    },
+    {
+      "source_id": "src-7f37ecb90d4612c4"
+    },
+    {
+      "source_id": "src-7f3ad20ee975a093"
+    },
+    {
+      "source_id": "src-8098c3f6026cd9d3"
+    },
+    {
+      "source_id": "src-80cc8d341325ed8f"
+    },
+    {
+      "source_id": "src-80e48790b62012c7"
+    },
+    {
+      "source_id": "src-813789ab0ddd5587"
+    },
+    {
+      "source_id": "src-815c12cd8aaaa8fd"
+    },
+    {
+      "source_id": "src-820cc9f76006dbcb"
+    },
+    {
+      "source_id": "src-830d494bcc52fe9b"
+    },
+    {
+      "source_id": "src-83731ba855d7cd43"
+    },
+    {
+      "source_id": "src-845053acb349468d"
+    },
+    {
+      "source_id": "src-84abc6b0b91b7ff6"
+    },
+    {
+      "source_id": "src-84b6300a9d67c17d"
+    },
+    {
+      "source_id": "src-84c6bee3ad6b6263"
+    },
+    {
+      "source_id": "src-852d943870dfe516"
+    },
+    {
+      "source_id": "src-869c914d84454160"
+    },
+    {
+      "source_id": "src-86d0756c354763a0"
+    },
+    {
+      "source_id": "src-871e68033fb3a7a9"
+    },
+    {
+      "source_id": "src-87657c912a22cd04"
+    },
+    {
+      "source_id": "src-87a3399f01182639"
+    },
+    {
+      "source_id": "src-87b789ba457a3391"
+    },
+    {
+      "source_id": "src-88755ff7f28e3b1a"
+    },
+    {
+      "source_id": "src-88bb8df48f56e5f1"
+    },
+    {
+      "source_id": "src-88c56015ac62717f"
+    },
+    {
+      "source_id": "src-8926107729f6dcc4"
+    },
+    {
+      "source_id": "src-896f4a2a5dbdc3c1"
+    },
+    {
+      "source_id": "src-8a262669658f4935"
+    },
+    {
+      "source_id": "src-8b4c3528c789c843"
+    },
+    {
+      "source_id": "src-8b55692dd2facd8e"
+    },
+    {
+      "source_id": "src-8b7e86e74d4bfe25"
+    },
+    {
+      "source_id": "src-8be54418f59ec979"
+    },
+    {
+      "source_id": "src-8c538a07629ced83"
+    },
+    {
+      "source_id": "src-8cbcc29f5cf34c32"
+    },
+    {
+      "source_id": "src-8d4f0aa2676b51a0"
+    },
+    {
+      "source_id": "src-8df3ac8c45586e81"
+    },
+    {
+      "source_id": "src-8dff99fa7d85e80f"
+    },
+    {
+      "source_id": "src-8e22dec4c820533f"
+    },
+    {
+      "source_id": "src-8edd5509a0c278d8"
+    },
+    {
+      "source_id": "src-8fa78df7e67b1e3e"
+    },
+    {
+      "source_id": "src-8fade87fd975420f"
+    },
+    {
+      "source_id": "src-8fc8a3d57a6eea5b"
+    },
+    {
+      "source_id": "src-8fd7f8fa594326e6"
+    },
+    {
+      "source_id": "src-90478b8cca21b9fd"
+    },
+    {
+      "source_id": "src-9050d04657223861"
+    },
+    {
+      "source_id": "src-907eb65c95a3854d"
+    },
+    {
+      "source_id": "src-90b14a9b81f8389a"
+    },
+    {
+      "source_id": "src-90bc9c267ae22a2c"
+    },
+    {
+      "source_id": "src-92321d2a7581af97"
+    },
+    {
+      "source_id": "src-924ae4c5f1da1acb"
+    },
+    {
+      "source_id": "src-9251bb3f3606fd75"
+    },
+    {
+      "source_id": "src-927d99a773093ba4"
+    },
+    {
+      "source_id": "src-935de542659464f0"
+    },
+    {
+      "source_id": "src-942efac45230faf8"
+    },
+    {
+      "source_id": "src-945bb3a6339cf817"
+    },
+    {
+      "source_id": "src-94c3710441cd9722"
+    },
+    {
+      "source_id": "src-953359bed0f55741"
+    },
+    {
+      "source_id": "src-964f1ede4613f1f6"
+    },
+    {
+      "source_id": "src-9737a69ef819f49d"
+    },
+    {
+      "source_id": "src-979dad5721654605"
+    },
+    {
+      "source_id": "src-97a1325f41bdb0dd"
+    },
+    {
+      "source_id": "src-981220b2cbbcda5c"
+    },
+    {
+      "source_id": "src-9817aa285e037dd3"
+    },
+    {
+      "source_id": "src-9869f4807225fd03"
+    },
+    {
+      "source_id": "src-98fcb3b652a855e7"
+    },
+    {
+      "source_id": "src-99adb4b6b22a09ab"
+    },
+    {
+      "source_id": "src-99d4944064ac410b"
+    },
+    {
+      "source_id": "src-9a6f4561bb0d2176"
+    },
+    {
+      "source_id": "src-9ad64afc36ae9942"
+    },
+    {
+      "source_id": "src-9ae494d6f9471f3e"
+    },
+    {
+      "source_id": "src-9b2e6088a8418f77"
+    },
+    {
+      "source_id": "src-9b38443cf7b052d5"
+    },
+    {
+      "source_id": "src-9c34e0fa2fd5944c"
+    },
+    {
+      "source_id": "src-9c7e8837616358a3"
+    },
+    {
+      "source_id": "src-9ccc247a822bd378"
+    },
+    {
+      "source_id": "src-9d408f3bd3cc9495"
+    },
+    {
+      "source_id": "src-9d497f94da578b44"
+    },
+    {
+      "source_id": "src-9e1d9d68ec19cecb"
+    },
+    {
+      "source_id": "src-9e5b3c1d3d92abc7"
+    },
+    {
+      "source_id": "src-9e9c6b5a4d80a90a"
+    },
+    {
+      "source_id": "src-9eba0b5ce9d93657"
+    },
+    {
+      "source_id": "src-9fb776c695880063"
+    },
+    {
+      "source_id": "src-9fd3e5c4b9fc4813"
+    },
+    {
+      "source_id": "src-a01a6e52ea8c8f94"
+    },
+    {
+      "source_id": "src-a02e6fb44c81011a"
+    },
+    {
+      "source_id": "src-a044a1ab61c0dd01"
+    },
+    {
+      "source_id": "src-a0751d800dfb9b81"
+    },
+    {
+      "source_id": "src-a1291cf3034e96e3"
+    },
+    {
+      "source_id": "src-a143d0f45d6018b6"
+    },
+    {
+      "source_id": "src-a266f8f3974ad886"
+    },
+    {
+      "source_id": "src-a298b604e3dc0370"
+    },
+    {
+      "source_id": "src-a2d3fe4bc2374f15"
+    },
+    {
+      "source_id": "src-a2fcbcb602f6e027"
+    },
+    {
+      "source_id": "src-a311402e9460b82c"
+    },
+    {
+      "source_id": "src-a40ec62f189ed7dd"
+    },
+    {
+      "source_id": "src-a4266d8a77ddf317"
+    },
+    {
+      "source_id": "src-a441f46eff4551a8"
+    },
+    {
+      "source_id": "src-a4717c213a0a1a40"
+    },
+    {
+      "source_id": "src-a48ea0457362ff4f"
+    },
+    {
+      "source_id": "src-a4a92d518f6a30b6"
+    },
+    {
+      "source_id": "src-a4d3cba9fe2677d4"
+    },
+    {
+      "source_id": "src-a57207e001f5abbf"
+    },
+    {
+      "source_id": "src-a5a7524892631bea"
+    },
+    {
+      "source_id": "src-a5d9801904794a41"
+    },
+    {
+      "source_id": "src-a64fd014fbd22869"
+    },
+    {
+      "source_id": "src-a7f8aed60849771f"
+    },
+    {
+      "source_id": "src-a81c24915d2cab88"
+    },
+    {
+      "source_id": "src-a89962919d25cb80"
+    },
+    {
+      "source_id": "src-a91b616a8f950f3c"
+    },
+    {
+      "source_id": "src-a99cf6e5323e9541"
+    },
+    {
+      "source_id": "src-aa7f391e0ff3e09f"
+    },
+    {
+      "source_id": "src-aa80458307ffca40"
+    },
+    {
+      "source_id": "src-aaa3065aa5e6b32c"
+    },
+    {
+      "source_id": "src-aae69390fc989966"
+    },
+    {
+      "source_id": "src-ab2713a8a85f305f"
+    },
+    {
+      "source_id": "src-ab6558d2dd883adb"
+    },
+    {
+      "source_id": "src-ab9354ef54c610cc"
+    },
+    {
+      "source_id": "src-ac30b0c96eaf08cf"
+    },
+    {
+      "source_id": "src-acb79bb751e37542"
+    },
+    {
+      "source_id": "src-af61fdbc4dfee520"
+    },
+    {
+      "source_id": "src-afd56baf58a084a7"
+    },
+    {
+      "source_id": "src-afe8219c95b22219"
+    },
+    {
+      "source_id": "src-b174f1cd9f1b5d4b"
+    },
+    {
+      "source_id": "src-b179a49e88fdbea3"
+    },
+    {
+      "source_id": "src-b1beb26f57a01285"
+    },
+    {
+      "source_id": "src-b1f3943a898b1db8"
+    },
+    {
+      "source_id": "src-b23fa878d0cc2952"
+    },
+    {
+      "source_id": "src-b2d993fb93496ff7"
+    },
+    {
+      "source_id": "src-b33058597a4eda9f"
+    },
+    {
+      "source_id": "src-b41766897e1aca91"
+    },
+    {
+      "source_id": "src-b6176ba227494a1c"
+    },
+    {
+      "source_id": "src-b67996ac8adb3bfa"
+    },
+    {
+      "source_id": "src-b67c7df0d6d78712"
+    },
+    {
+      "source_id": "src-b6983720e82413eb"
+    },
+    {
+      "source_id": "src-b702bbb67c146906"
+    },
+    {
+      "source_id": "src-b7a39a845fa4120e"
+    },
+    {
+      "source_id": "src-b7c5f5d3d4e8de51"
+    },
+    {
+      "source_id": "src-b88745153435fd8c"
+    },
+    {
+      "source_id": "src-b8ed65a4841aea1c"
+    },
+    {
+      "source_id": "src-b979434a989f9c04"
+    },
+    {
+      "source_id": "src-ba5a5c7c27ac1a25"
+    },
+    {
+      "source_id": "src-ba9a0fb3ae7ca152"
+    },
+    {
+      "source_id": "src-bab6bd49d45f6451"
+    },
+    {
+      "source_id": "src-bad24db27004d485"
+    },
+    {
+      "source_id": "src-bb2257ae66c493d6"
+    },
+    {
+      "source_id": "src-bb24bf4b7b6167ec"
+    },
+    {
+      "source_id": "src-bc71d9a5c193d90b"
+    },
+    {
+      "source_id": "src-bcaf7f1b6e91391b"
+    },
+    {
+      "source_id": "src-bce8726a4b02753f"
+    },
+    {
+      "source_id": "src-bcec11a06b02a304"
+    },
+    {
+      "source_id": "src-bcf35d58cc09377d"
+    },
+    {
+      "source_id": "src-bd1312d92c896c42"
+    },
+    {
+      "source_id": "src-be5ec6483919d699"
+    },
+    {
+      "source_id": "src-be644ad9b49d2526"
+    },
+    {
+      "source_id": "src-bf6363abc5444dc2"
+    },
+    {
+      "source_id": "src-bf70eca91ab71a59"
+    },
+    {
+      "source_id": "src-bfc97a8b48d4bc1d"
+    },
+    {
+      "source_id": "src-c00e6d461b86e48a"
+    },
+    {
+      "source_id": "src-c0c9ff369b5368a3"
+    },
+    {
+      "source_id": "src-c137a2e986548c5c"
+    },
+    {
+      "source_id": "src-c193541adf506425"
+    },
+    {
+      "source_id": "src-c4196c571982d628"
+    },
+    {
+      "source_id": "src-c432d3cd0beed6d3"
+    },
+    {
+      "source_id": "src-c437adcffc3d78cf"
+    },
+    {
+      "source_id": "src-c478f7920c5d5847"
+    },
+    {
+      "source_id": "src-c4a97d2319637529"
+    },
+    {
+      "source_id": "src-c504593d9b14f732"
+    },
+    {
+      "source_id": "src-c53df69a03e4aed9"
+    },
+    {
+      "source_id": "src-c5b3ec45a1efe257"
+    },
+    {
+      "source_id": "src-c5f88b7607b4c92c"
+    },
+    {
+      "source_id": "src-c614bd1d22ea113c"
+    },
+    {
+      "source_id": "src-c68b0f44415fb379"
+    },
+    {
+      "source_id": "src-c74f3d6e79b1d808"
+    },
+    {
+      "source_id": "src-c75a034e5e9eb2eb"
+    },
+    {
+      "source_id": "src-c87d4131e2b4d6c5"
+    },
+    {
+      "source_id": "src-c8976e81a2ce88fa"
+    },
+    {
+      "source_id": "src-c8c76c7eae1f7355"
+    },
+    {
+      "source_id": "src-c993ef9ea8f1f5cf"
+    },
+    {
+      "source_id": "src-c9cb581bd31fe310"
+    },
+    {
+      "source_id": "src-ca718ffb4fc8cbcb"
+    },
+    {
+      "source_id": "src-caf5ee0ec7782438"
+    },
+    {
+      "source_id": "src-caf78c11936bb4d6"
+    },
+    {
+      "source_id": "src-cbc69d56f469cb1a"
+    },
+    {
+      "source_id": "src-cc673620e0b24cb8"
+    },
+    {
+      "source_id": "src-cc89ae2a82c36c4d"
+    },
+    {
+      "source_id": "src-cd3423419e51163c"
+    },
+    {
+      "source_id": "src-cda420b1b3ca98f2"
+    },
+    {
+      "source_id": "src-cdaa3aec70abe8bc"
+    },
+    {
+      "source_id": "src-cee2327e92a71581"
+    },
+    {
+      "source_id": "src-cefdaa7c811f7431"
+    },
+    {
+      "source_id": "src-cf0e31960d473b6b"
+    },
+    {
+      "source_id": "src-cf37a12fdafff1ab"
+    },
+    {
+      "source_id": "src-d012798468d72494"
+    },
+    {
+      "source_id": "src-d06ae166f4a26d6c"
+    },
+    {
+      "source_id": "src-d0fac541b81a9373"
+    },
+    {
+      "source_id": "src-d1001e7624161cc9"
+    },
+    {
+      "source_id": "src-d1560d5352086dee"
+    },
+    {
+      "source_id": "src-d161283eac116fe4"
+    },
+    {
+      "source_id": "src-d1cbcbcce74a26b7"
+    },
+    {
+      "source_id": "src-d22f6eea30773962"
+    },
+    {
+      "source_id": "src-d257e6483ff5e368"
+    },
+    {
+      "source_id": "src-d2951f1a2893df24"
+    },
+    {
+      "source_id": "src-d2f2800d71bc28cb"
+    },
+    {
+      "source_id": "src-d3098aca9fa9e659"
+    },
+    {
+      "source_id": "src-d3bf8a7d9d9b385c"
+    },
+    {
+      "source_id": "src-d3fdde64b67d05a0"
+    },
+    {
+      "source_id": "src-d419144c6a9277ff"
+    },
+    {
+      "source_id": "src-d4bb29af60e24850"
+    },
+    {
+      "source_id": "src-d4ea7643fe7e3f5c"
+    },
+    {
+      "source_id": "src-d501ca616b9a6bf4"
+    },
+    {
+      "source_id": "src-d5889d2b66255425"
+    },
+    {
+      "source_id": "src-d5b701da95a550de"
+    },
+    {
+      "source_id": "src-d5c6026464731cc0"
+    },
+    {
+      "source_id": "src-d677b71083c259f3"
+    },
+    {
+      "source_id": "src-d6a341a6ab94ebab"
+    },
+    {
+      "source_id": "src-d6d15e9b87c287c2"
+    },
+    {
+      "source_id": "src-d6d93008fb401c93"
+    },
+    {
+      "source_id": "src-d71383edbd6d61a0"
+    },
+    {
+      "source_id": "src-d72cf82a79fae13c"
+    },
+    {
+      "source_id": "src-d735e09e05dcdc0c"
+    },
+    {
+      "source_id": "src-d78dae69be3dd8d2"
+    },
+    {
+      "source_id": "src-d7a207c34a0a1817"
+    },
+    {
+      "source_id": "src-d7df377fd156d795"
+    },
+    {
+      "source_id": "src-d7e0c8bfb64f15d8"
+    },
+    {
+      "source_id": "src-d7f5c114c42db877"
+    },
+    {
+      "source_id": "src-d807c81b700b03cb"
+    },
+    {
+      "source_id": "src-d84b5382b9bf49ad"
+    },
+    {
+      "source_id": "src-d89ebcc510fdee9f"
+    },
+    {
+      "source_id": "src-d97248ab6796371e"
+    },
+    {
+      "source_id": "src-d9c224169a930d64"
+    },
+    {
+      "source_id": "src-d9cf132ea88f504b"
+    },
+    {
+      "source_id": "src-dabb71d5407e2bb1"
+    },
+    {
+      "source_id": "src-db3429376ac6bf4d"
+    },
+    {
+      "source_id": "src-db5b70cc0e88dee1"
+    },
+    {
+      "source_id": "src-dbc0631e85090371"
+    },
+    {
+      "source_id": "src-dbffb9fd61397885"
+    },
+    {
+      "source_id": "src-dc58e45727435b98"
+    },
+    {
+      "source_id": "src-dd33ae857afe7d79"
+    },
+    {
+      "source_id": "src-ddb1338fcdac321e"
+    },
+    {
+      "source_id": "src-de7f54a0578bf7e0"
+    },
+    {
+      "source_id": "src-deaf742d329f45f3"
+    },
+    {
+      "source_id": "src-dec516ab1e3ba89e"
+    },
+    {
+      "source_id": "src-dee71630295ab664"
+    },
+    {
+      "source_id": "src-df580bb14d6434d7"
+    },
+    {
+      "source_id": "src-dfe1dfad458fd4eb"
+    },
+    {
+      "source_id": "src-e07081f65b9265b8"
+    },
+    {
+      "source_id": "src-e09c6177f16499e0"
+    },
+    {
+      "source_id": "src-e0fe96ea1587ad01"
+    },
+    {
+      "source_id": "src-e123cec4c6235159"
+    },
+    {
+      "source_id": "src-e1341454ee1241d9"
+    },
+    {
+      "source_id": "src-e1de521d97c40b8b"
+    },
+    {
+      "source_id": "src-e201a06f0e865c6c"
+    },
+    {
+      "source_id": "src-e2138b4381975982"
+    },
+    {
+      "source_id": "src-e26b5c06dc108e9a"
+    },
+    {
+      "source_id": "src-e271751dbf2b6d60"
+    },
+    {
+      "source_id": "src-e29dba50bddd9b29"
+    },
+    {
+      "source_id": "src-e2eadfb5c407f764"
+    },
+    {
+      "source_id": "src-e31beed0cef16d83"
+    },
+    {
+      "source_id": "src-e3243493b90b3c74"
+    },
+    {
+      "source_id": "src-e3247b1011e08f50"
+    },
+    {
+      "source_id": "src-e445dc0dec53cb22"
+    },
+    {
+      "source_id": "src-e48c2aec680db87b"
+    },
+    {
+      "source_id": "src-e4ff9d34cc12d760"
+    },
+    {
+      "source_id": "src-e54f789f702b5f05"
+    },
+    {
+      "source_id": "src-e5644b8cf5f8f037"
+    },
+    {
+      "source_id": "src-e5ba47ac0711e0c7"
+    },
+    {
+      "source_id": "src-e5db4df776361921"
+    },
+    {
+      "source_id": "src-e63b89dba5bd162f"
+    },
+    {
+      "source_id": "src-e72eeb1d9a022b35"
+    },
+    {
+      "source_id": "src-e7f7f5dc3d7daac3"
+    },
+    {
+      "source_id": "src-e84f2b64729b55d3"
+    },
+    {
+      "source_id": "src-e929c13849f68efa"
+    },
+    {
+      "source_id": "src-e9c6166331a03124"
+    },
+    {
+      "source_id": "src-ea51214269b91034"
+    },
+    {
+      "source_id": "src-ea6671f5746df446"
+    },
+    {
+      "source_id": "src-eae13ccd79d43904"
+    },
+    {
+      "source_id": "src-eb20701216c2d195"
+    },
+    {
+      "source_id": "src-eb6efee1864edc3a"
+    },
+    {
+      "source_id": "src-eb844c9e91b75de3"
+    },
+    {
+      "source_id": "src-ebcfe12eda9017cb"
+    },
+    {
+      "source_id": "src-ec3be178d6b84f9e"
+    },
+    {
+      "source_id": "src-ecaf9ae36cf20fc3"
+    },
+    {
+      "source_id": "src-ecde20d97bdd987c"
+    },
+    {
+      "source_id": "src-ece79df844689332"
+    },
+    {
+      "source_id": "src-edbbeccce845583f"
+    },
+    {
+      "source_id": "src-eeea1d4651e8ab3c"
+    },
+    {
+      "source_id": "src-ef106981fb3e8f06"
+    },
+    {
+      "source_id": "src-ef3619b56c7e390a"
+    },
+    {
+      "source_id": "src-ef426fe6338dc9eb"
+    },
+    {
+      "source_id": "src-ef55731e9427053d"
+    },
+    {
+      "source_id": "src-f021bef13257b2d9"
+    },
+    {
+      "source_id": "src-f0476a43b0f185a6"
+    },
+    {
+      "source_id": "src-f06976c140cdfa17"
+    },
+    {
+      "source_id": "src-f290c29aaae3ff7d"
+    },
+    {
+      "source_id": "src-f2ce2125cc57af22"
+    },
+    {
+      "source_id": "src-f33028342a7f877b"
+    },
+    {
+      "source_id": "src-f331f4325ec15c1b"
+    },
+    {
+      "source_id": "src-f3cffba70696b9e1"
+    },
+    {
+      "source_id": "src-f3fec0f39edebcef"
+    },
+    {
+      "source_id": "src-f40157fc32d9d564"
+    },
+    {
+      "source_id": "src-f499e8d83369f2f3"
+    },
+    {
+      "source_id": "src-f516cf00078dd8f8"
+    },
+    {
+      "source_id": "src-f58bb7a93f7dbdb2"
+    },
+    {
+      "source_id": "src-f5a01ef9049d4c2d"
+    },
+    {
+      "source_id": "src-f5e63d1dc414be5d"
+    },
+    {
+      "source_id": "src-f61d7596ec85beb0"
+    },
+    {
+      "source_id": "src-f64a33765088f296"
+    },
+    {
+      "source_id": "src-f65e8cbda1658d2e"
+    },
+    {
+      "source_id": "src-f6a375c86bbfc535"
+    },
+    {
+      "source_id": "src-f6fc0584cd2c68ba"
+    },
+    {
+      "source_id": "src-f770a487c794c68a"
+    },
+    {
+      "source_id": "src-f8efadfd17e7c944"
+    },
+    {
+      "source_id": "src-f9b2dc1ebb309ab2"
+    },
+    {
+      "source_id": "src-f9df846c6b0ee069"
+    },
+    {
+      "source_id": "src-fa93b46e92061220"
+    },
+    {
+      "source_id": "src-facc89a5ab47e216"
+    },
+    {
+      "source_id": "src-fae3176fd4444449"
+    },
+    {
+      "source_id": "src-fb439fa5273f21dc"
+    },
+    {
+      "source_id": "src-fbd473659ecf27ba"
+    },
+    {
+      "source_id": "src-fcfd074a2fa25362"
+    },
+    {
+      "source_id": "src-fd488c0f56e1572a"
+    },
+    {
+      "source_id": "src-fd683e112ca75942"
+    },
+    {
+      "source_id": "src-fe8f356cd783519b"
+    },
+    {
+      "source_id": "src-ffa42a0847534b94"
+    },
+    {
+      "source_id": "src-ffc1c34407bb8c38"
+    },
+    {
+      "source_id": "src-fff936d574b7e87a"
+    }
+  ],
+  "title": "Two NVLink pairs used in parallel, never as one machine",
+  "verdict": "Both pairs have worked at the same time, each on its own job: up to 4 cards generating 3D at once with one engine per card, a medical VLM on pair A while a 27B was benchmarked on pair B (22.0 min of overlap). No model has run on four cards: no launch line requests more than 2 GPUs. The local judge and its candidate also sit on different pairs, one after the other: OrcaSAQ-2-27B was benched on pair B, then judged on pair A 13.6 min later; 0 of the 15 logged judge runs overlap a candidate bench."
+}

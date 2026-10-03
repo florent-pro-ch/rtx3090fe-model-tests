@@ -1,0 +1,15 @@
+{
+  "en_attente": 0,
+  "erreur": 0,
+  "format_ko": 14,
+  "fuite_reflexion": 0,
+  "hors_niveau": 0,
+  "n": 118,
+  "non_cote": false,
+  "pages_par_minute": 9.11,
+  "prompt_tokens_moy": 2087,
+  "secondes_moy": 6.58,
+  "taux_erreur": 0.0,
+  "tronque": 59,
+  "vide": 0
+}

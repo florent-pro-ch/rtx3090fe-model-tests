@@ -1,0 +1,4 @@
+{
+  "about": "Reviewed exceptions to the public gates. Each entry: tool (scan_public | check_size | check_links | check_language | check_media | verify_numbers, or *), file (a glob relative to the repo root), rule (the rule name the tool prints, or *), reason (required); verify_numbers also takes an optional value (one data-num). Keep this list short and specific.",
+  "exceptions": []
+}

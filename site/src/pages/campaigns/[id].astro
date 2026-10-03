@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Frame from '../../components/Frame.astro';
+import RunsTable from '../../components/RunsTable.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import Value from '../../components/Value.astro';
+import { rankingTitle, campaigns, runs, benchById, rankings, readRepoText, judgeAudit, LOT_B_ANCHOR } from '../../lib/data';
+import { benchHref, href, rankingHref } from '../../lib/site';
+
+export function getStaticPaths() {
+  const ids = new Set([...campaigns().map((c) => c.campaign_id), ...runs().map((r) => r.campaign)]);
+  return [...ids].sort().map((id) => ({ params: { id } }));
+}
+
+const { id } = Astro.params as { id: string };
+const c = campaigns().find((x) => x.campaign_id === id);
+const list = runs().filter((r) => r.campaign === id);
+const rks = rankings().filter((r) => r.campaign === id);
+const title = c?.title ?? id;
+const shown = new Set(['campaign_id', 'date', 'title', 'summary', 'status', 'benches', 'n_runs']);
+const rest = c ? Object.fromEntries(Object.entries(c).filter(([k]) => !shown.has(k))) : {};
+// Judge cross-checks keep their numbers in the judge audit (data/judge-audit.json), shown on the judge page.
+const judgeCheck = list.length === 0 && (readRepoText('data/judge-audit.json') ?? '').includes(`"${id}"`);
+const lotB = judgeAudit()?.lotB ?? null;
+---
+<Layout title={title} description={c?.summary ? c.summary : `Campaign ${id}: ${list.length} runs on the RTX 3090 FE rig.`} crumbs={[{ label: 'campaigns', href: href('campaigns/') }, { label: id }]}>
+  <h1>{title}</h1>
+  <p class="mono muted break">{id}</p>
+  {c && <p class="badges"><StatusBadge status={c.status} /></p>}
+  {c?.summary && <p class="lead">{c.summary}</p>}
+  {!c && <p class="empty">No campaign record is published for this folder; its runs are listed below.</p>}
+  {c && (c.benches ?? []).length > 0 && (
+    <p>Benches: {(c.benches ?? []).map((b, i) => <>{i > 0 && ', '}{benchById().has(b) ? <a class="mono" href={benchHref(b)}>{b}</a> : <span class="mono">{b}</span>}</>)}</p>
+  )}
+  {Object.keys(rest).length > 0 && <Frame title="campaign" chip={c?.date ?? null}><Value value={rest} /></Frame>}
+  {rks.length > 0 && (
+    <>
+      <h2>Rankings</h2>
+      <ul>{rks.map((r) => <li><a href={rankingHref(r.ranking_id)}>{rankingTitle(r)}</a></li>)}</ul>
+    </>
+  )}
+  {judgeCheck && (lotB?.campaign === id ? (
+    <p><strong>Results:</strong> this campaign re-graded the lab's answers rather than measuring new ones. Its lot-B verdicts,
+      by {lotB.judge}, are the published scores of every tutoring, vision and judged-code table (each table names its judge);
+      where the local judge and {lotB.judge} differ, with a second frontier judge's opinion beside them, is on the <a href={href(`methodology/judge/#${LOT_B_ANCHOR}`)}>judge page</a>{' '}
+      (from <code>data/judge-audit.json</code>).</p>
+  ) : (
+    <p><strong>Results:</strong> this campaign re-checked the judge rather than measuring models; its numbers are on the{' '}
+      <a href={href('methodology/judge/')}>judge page</a> (from <code>data/judge-audit.json</code>).</p>
+  ))}
+  {!(judgeCheck && list.length === 0) && <>
+  <h2 id="runs">Runs</h2>
+  <RunsTable runs={list} label="runs of this campaign" />
+  </>}
+</Layout>

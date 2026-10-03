@@ -1,0 +1,45 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/Qwen3-30B-A3B-Instruct-2507-AWQ-4bit",
+    "--tensor-parallel-size",
+    "2",
+    "--quantization",
+    "awq_marlin",
+    "--max-model-len",
+    "32768",
+    "--max-num-seqs",
+    "8",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.92",
+    "--kv-cache-dtype",
+    "fp8",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "hermes",
+    "--served-model-name",
+    "$MODELS/Qwen3-30B-A3B-Instruct-2507-AWQ-4bit"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "vllm/vllm-openai:v0.26.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

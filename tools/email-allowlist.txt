@@ -1,0 +1,12 @@
+# E-mail domains that may appear in the public tree (tools/scan_public.py, rule "email").
+# One domain per line; its subdomains are allowed too. Everything else is a finding.
+# Reserved example domains (RFC 2606) and their Swiss/French counterparts used by the benches:
+example.com
+example.org
+example.net
+exemple.ch
+exemple.fr
+# Technical identifiers that look like addresses (SSH algorithm names, GitHub noreply):
+openssh.com
+libssh.org
+users.noreply.github.com

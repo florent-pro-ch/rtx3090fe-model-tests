@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-orcasaq2-27b",
+ "debut": "2026-10-01T13:25:26Z",
+ "solo": {
+  "ttft_ms": 164,
+  "tok_s": 49.2,
+  "completion_tokens": 512,
+  "wall_s": 10.406
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 247.9,
+  "p50_latency_s": 16.52,
+  "wall_s": 16.52
+ },
+ "fin": "2026-10-01T13:26:03Z"
+}

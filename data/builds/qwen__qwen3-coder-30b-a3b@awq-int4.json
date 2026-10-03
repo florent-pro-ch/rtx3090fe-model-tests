@@ -1,0 +1,21 @@
+{
+  "build_id": "qwen/qwen3-coder-30b-a3b@awq-int4",
+  "engine_family": "vllm",
+  "harness_ids": [],
+  "inventory_id": "qwen3-coder-30b-a3b-awq",
+  "model_id": "qwen/qwen3-coder-30b-a3b",
+  "parse_notes": [
+    "source repository not recorded in the lab's files"
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "awq",
+    "label": "AWQ INT4"
+  },
+  "runs_count": 0,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": null
+}

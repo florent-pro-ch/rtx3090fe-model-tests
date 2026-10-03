@@ -1,0 +1,29 @@
+{
+  "block_size": 16,
+  "bras": "g26-dflash",
+  "cible": "veille-gemma4-26b-a4b",
+  "debut": "2026-09-25T18:11:35Z",
+  "fin": "2026-09-25T18:15:02Z",
+  "kv": {},
+  "moteur": "vllm",
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 45
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 30
+    }
+  ],
+  "passes": {},
+  "role": "spec",
+  "spec": {
+    "method": "dflash",
+    "model": "$MODELS/gemma-4-26b-a4b-it-dflash",
+    "num_speculative_tokens": null
+  },
+  "statut": "ECHEC-DEMARRAGE"
+}

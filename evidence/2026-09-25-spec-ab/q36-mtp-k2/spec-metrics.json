@@ -1,0 +1,480 @@
+{
+  "agrege": {
+    "c4-en": {
+      "agg_tok_s": 404.2,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 4.76,
+      "tokens": 8192,
+      "wall_s": 20.27
+    },
+    "c4-fr": {
+      "agg_tok_s": 369.5,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 5.46,
+      "tokens": 4096,
+      "wall_s": 11.08
+    },
+    "c8-en": {
+      "agg_tok_s": 739.5,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 4.91,
+      "tokens": 8192,
+      "wall_s": 11.08
+    },
+    "c8-fr": {
+      "agg_tok_s": 637.4,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 6.22,
+      "tokens": 4096,
+      "wall_s": 6.43
+    }
+  },
+  "bras": "q36-mtp-k2",
+  "cible": "qwen36-35b-a3b-awq",
+  "debut": "2026-09-25T15:49:38Z",
+  "erreurs": 0,
+  "fin": "2026-09-25T15:59:18Z",
+  "identite": {
+    "erreurs": 0,
+    "finish": {
+      "length": 24
+    },
+    "n": 24,
+    "tokens_max": 512,
+    "tokens_min": 512
+  },
+  "kv": {
+    "kv_cache_memoire_gib": 8.18,
+    "kv_cache_tokens": 1351333.0,
+    "poids_gib": 12.03
+  },
+  "moteur": "vllm",
+  "nvidia_smi_apres": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 71
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 60
+    }
+  ],
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 73
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 65
+    }
+  ],
+  "nvidia_smi_charge": [
+    {
+      "index": 0,
+      "memoire_mib": 23163,
+      "temperature_c": 74
+    },
+    {
+      "index": 1,
+      "memoire_mib": 23163,
+      "temperature_c": 64
+    }
+  ],
+  "nvidia_smi_pret": [
+    {
+      "index": 0,
+      "memoire_mib": 23157,
+      "temperature_c": 57
+    },
+    {
+      "index": 1,
+      "memoire_mib": 23157,
+      "temperature_c": 51
+    }
+  ],
+  "passes": {
+    "c4-en": {
+      "acceptation": {
+        "accepted_tokens": 5008.0,
+        "draft_tokens": 6354.0,
+        "drafts": 3177.0,
+        "longueur_acceptee_moyenne": 2.576,
+        "par_position": {
+          "0": 0.8678,
+          "1": 0.7085
+        },
+        "taux_acceptation": 0.7882
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2757.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 2251.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5008.0,
+        "vllm:spec_decode_num_draft_tokens_total": 6354.0,
+        "vllm:spec_decode_num_drafts_total": 3177.0
+      },
+      "secondes": 20.3
+    },
+    "c4-fr": {
+      "acceptation": {
+        "accepted_tokens": 2338.0,
+        "draft_tokens": 3510.0,
+        "drafts": 1755.0,
+        "longueur_acceptee_moyenne": 2.332,
+        "par_position": {
+          "0": 0.7778,
+          "1": 0.5544
+        },
+        "taux_acceptation": 0.6661
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1365.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 973.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2338.0,
+        "vllm:spec_decode_num_draft_tokens_total": 3510.0,
+        "vllm:spec_decode_num_drafts_total": 1755.0
+      },
+      "secondes": 11.1
+    },
+    "c8-en": {
+      "acceptation": {
+        "accepted_tokens": 4983.0,
+        "draft_tokens": 6410.0,
+        "drafts": 3205.0,
+        "longueur_acceptee_moyenne": 2.555,
+        "par_position": {
+          "0": 0.8605,
+          "1": 0.6942
+        },
+        "taux_acceptation": 0.7774
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2758.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 2225.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 4983.0,
+        "vllm:spec_decode_num_draft_tokens_total": 6410.0,
+        "vllm:spec_decode_num_drafts_total": 3205.0
+      },
+      "secondes": 11.1
+    },
+    "c8-fr": {
+      "acceptation": {
+        "accepted_tokens": 2351.0,
+        "draft_tokens": 3494.0,
+        "drafts": 1747.0,
+        "longueur_acceptee_moyenne": 2.346,
+        "par_position": {
+          "0": 0.7882,
+          "1": 0.5575
+        },
+        "taux_acceptation": 0.6729
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1377.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 974.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2351.0,
+        "vllm:spec_decode_num_draft_tokens_total": 3494.0,
+        "vllm:spec_decode_num_drafts_total": 1747.0
+      },
+      "secondes": 6.4
+    },
+    "identite": {
+      "acceptation": {
+        "accepted_tokens": 7292.0,
+        "draft_tokens": 9990.0,
+        "drafts": 4995.0,
+        "longueur_acceptee_moyenne": 2.46,
+        "par_position": {
+          "0": 0.8284,
+          "1": 0.6314
+        },
+        "taux_acceptation": 0.7299
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 4138.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 3154.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7292.0,
+        "vllm:spec_decode_num_draft_tokens_total": 9990.0,
+        "vllm:spec_decode_num_drafts_total": 4995.0
+      },
+      "secondes": 123.5
+    },
+    "solo": {
+      "acceptation": {
+        "accepted_tokens": 7356.0,
+        "draft_tokens": 9862.0,
+        "drafts": 4931.0,
+        "longueur_acceptee_moyenne": 2.492,
+        "par_position": {
+          "0": 0.8367,
+          "1": 0.655
+        },
+        "taux_acceptation": 0.7459
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 4126.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 3230.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7356.0,
+        "vllm:spec_decode_num_draft_tokens_total": 9862.0,
+        "vllm:spec_decode_num_drafts_total": 4931.0
+      },
+      "secondes": 115.8
+    }
+  },
+  "pret_en_secondes": 287.5,
+  "requetes": 96,
+  "role": "spec",
+  "solo": {
+    "en": {
+      "decode_tok_s_mediane": 118.4,
+      "decode_tok_s_moyenne": 113.1,
+      "n": 16,
+      "ttft_ms_mediane": 117
+    },
+    "fr": {
+      "decode_tok_s_mediane": 103.2,
+      "decode_tok_s_moyenne": 103.4,
+      "n": 8,
+      "ttft_ms_mediane": 119
+    },
+    "items": [
+      {
+        "decode_tok_s": 113.6,
+        "deltas": 201,
+        "id": "spe-fr-tut-01",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 103,
+        "wall_s": 4.6
+      },
+      {
+        "decode_tok_s": 103.1,
+        "deltas": 220,
+        "id": "spe-fr-tut-02",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 115,
+        "wall_s": 5.07
+      },
+      {
+        "decode_tok_s": 107.1,
+        "deltas": 204,
+        "id": "spe-fr-tut-03",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 4.89
+      },
+      {
+        "decode_tok_s": 105.1,
+        "deltas": 212,
+        "id": "spe-fr-tut-04",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 4.98
+      },
+      {
+        "decode_tok_s": 99.0,
+        "deltas": 227,
+        "id": "spe-fr-tut-05",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 117,
+        "wall_s": 5.28
+      },
+      {
+        "decode_tok_s": 96.9,
+        "deltas": 228,
+        "id": "spe-fr-tut-06",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 124,
+        "wall_s": 5.4
+      },
+      {
+        "decode_tok_s": 99.2,
+        "deltas": 225,
+        "id": "spe-fr-tut-07",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 120,
+        "wall_s": 5.27
+      },
+      {
+        "decode_tok_s": 103.2,
+        "deltas": 219,
+        "id": "spe-fr-tut-08",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 5.07
+      },
+      {
+        "decode_tok_s": 117.3,
+        "deltas": 188,
+        "id": "spe-code-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 102,
+        "wall_s": 4.46
+      },
+      {
+        "decode_tok_s": 119.3,
+        "deltas": 188,
+        "id": "spe-code-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 117,
+        "wall_s": 4.4
+      },
+      {
+        "decode_tok_s": 118.5,
+        "deltas": 189,
+        "id": "spe-code-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 4.43
+      },
+      {
+        "decode_tok_s": 126.8,
+        "deltas": 178,
+        "id": "spe-code-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 100,
+        "wall_s": 4.13
+      },
+      {
+        "decode_tok_s": 119.3,
+        "deltas": 186,
+        "id": "spe-code-05",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 106,
+        "wall_s": 4.39
+      },
+      {
+        "decode_tok_s": 111.8,
+        "deltas": 197,
+        "id": "spe-code-06",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 4.69
+      },
+      {
+        "decode_tok_s": 118.3,
+        "deltas": 189,
+        "id": "spe-code-07",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 102,
+        "wall_s": 4.42
+      },
+      {
+        "decode_tok_s": 122.7,
+        "deltas": 185,
+        "id": "spe-code-08",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 117,
+        "wall_s": 4.28
+      },
+      {
+        "decode_tok_s": 89.9,
+        "deltas": 251,
+        "id": "spe-en-prose-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 117,
+        "wall_s": 5.8
+      },
+      {
+        "decode_tok_s": 88.0,
+        "deltas": 253,
+        "id": "spe-en-prose-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 106,
+        "wall_s": 5.91
+      },
+      {
+        "decode_tok_s": 89.2,
+        "deltas": 249,
+        "id": "spe-en-prose-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 103,
+        "wall_s": 5.83
+      },
+      {
+        "decode_tok_s": 98.1,
+        "deltas": 230,
+        "id": "spe-en-prose-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 5.33
+      },
+      {
+        "decode_tok_s": 115.8,
+        "deltas": 192,
+        "id": "spe-en-math-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 118,
+        "wall_s": 4.53
+      },
+      {
+        "decode_tok_s": 123.8,
+        "deltas": 179,
+        "id": "spe-en-math-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 102,
+        "wall_s": 4.23
+      },
+      {
+        "decode_tok_s": 125.5,
+        "deltas": 179,
+        "id": "spe-en-math-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 119,
+        "wall_s": 4.19
+      },
+      {
+        "decode_tok_s": 125.8,
+        "deltas": 179,
+        "id": "spe-en-math-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 118,
+        "wall_s": 4.18
+      }
+    ]
+  },
+  "spec": {
+    "method": "mtp",
+    "num_speculative_tokens": 2
+  },
+  "statut": "TERMINE"
+}

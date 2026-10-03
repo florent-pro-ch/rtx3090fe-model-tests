@@ -1,0 +1,441 @@
+{
+  "items": [
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:41:59Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:44:39Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-1",
+      "ram_pic_mo": 40092,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 16717792,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8486
+      },
+      "wall_s": 159.9
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:44:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:47:28Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 41761,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 18933664,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8508
+      },
+      "wall_s": 168.6
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:54:22Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:57:06Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-1",
+      "ram_pic_mo": 42840,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 16819372,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8476
+      },
+      "wall_s": 163.1
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:57:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:59:51Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 42711,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 18148328,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8484
+      },
+      "wall_s": 165.3
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:51:03Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:54:22Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 44221,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 36778408,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8484
+      },
+      "wall_s": 199.5
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:59:51Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:02:28Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-1",
+      "ram_pic_mo": 43865,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 13734924,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8475
+      },
+      "wall_s": 156.4
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:02:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:05:26Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 43441,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 25862440,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8476
+      },
+      "wall_s": 177.5
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:47:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:51:02Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 44103,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 44610420,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8468
+      },
+      "wall_s": 213.9
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:08:31Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:11:08Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-1",
+      "ram_pic_mo": 44202,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 12434004,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8461
+      },
+      "wall_s": 157.2
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:11:08Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:13:48Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 44007,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 14301012,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8453
+      },
+      "wall_s": 159.3
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T11:41:56Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T11:41:59Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 5095,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 29477452,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 7347
+      },
+      "wall_s": 3.0
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:05:26Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:08:31Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 43213,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 29225140,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8501
+      },
+      "wall_s": 184.6
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:13:48Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:16:37Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 45990,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 18120356,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8515
+      },
+      "wall_s": 169.1
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:16:38Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:20:00Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-02",
+      "ram_pic_mo": 45549,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 38111240,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8453
+      },
+      "wall_s": 202.9
+    },
+    {
+      "candidat": "hunyuan3d21-shape-comfy",
+      "debut": "2026-09-30T12:20:01Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "octree_resolution",
+          "class_type": "VAEDecodeHunyuan3D",
+          "input": "octree_resolution",
+          "value": 512
+        }
+      ],
+      "fin": "2026-09-30T12:23:42Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-03",
+      "ram_pic_mo": 43801,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 47370248,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8453
+      },
+      "wall_s": 221.5
+    }
+  ],
+  "n": 15,
+  "note": "per-item generation records; output files, output hashes and engine addresses removed"
+}

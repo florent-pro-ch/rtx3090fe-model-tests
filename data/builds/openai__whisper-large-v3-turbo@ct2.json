@@ -1,0 +1,19 @@
+{
+  "build_id": "openai/whisper-large-v3-turbo@ct2",
+  "engine_family": "other",
+  "harness_ids": [],
+  "inventory_id": "faster-whisper-large-v3-turbo",
+  "model_id": "openai/whisper-large-v3-turbo",
+  "parse_notes": [],
+  "quant": {
+    "bits": null,
+    "format": "other",
+    "label": "CTranslate2 conversion (int8 or fp16 not recorded)"
+  },
+  "runs_count": 0,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "deepdml/faster-whisper-large-v3-turbo-ct2"
+}

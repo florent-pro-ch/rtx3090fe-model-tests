@@ -1,0 +1,18 @@
+{
+ "candidat": "dspark-dspark-rep1",
+ "debut": "2026-09-13T07:55:49Z",
+ "solo": {
+  "ttft_ms": 1059,
+  "tok_s": 132.4,
+  "completion_tokens": 512,
+  "wall_s": 3.867
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 855.7,
+  "p50_latency_s": 4.73,
+  "wall_s": 4.79
+ },
+ "fin": "2026-09-13T07:56:02Z"
+}

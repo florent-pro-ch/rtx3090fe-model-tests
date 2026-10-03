@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-paddleocr-vl-1-5"
+    ],
+    "inventory_ids": [
+      "paddleocr-vl-1-5-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "paddlepaddle/paddleocr-vl-1.5@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-25",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "paddlepaddle/paddleocr-vl-1.5",
+  "name": "PaddleOCR-VL-1.5",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 0.96,
+  "parse_notes": [],
+  "slug": "paddlepaddle__paddleocr-vl-1.5",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+  "vendor": "Baidu (PaddlePaddle)",
+  "verdict": {
+    "as_of": "2026-09-30",
+    "status": "rated-no-role",
+    "summary": "Sub-1B OCR model on one card: good transcription, near zero on the structured tasks under the fixed reader. Rated, no role assigned."
+  }
+}

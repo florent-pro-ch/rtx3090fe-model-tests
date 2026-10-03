@@ -1,0 +1,5 @@
+Rust is fast. Rust is safe. Rust is fun. Rust is loved. Rust is here.
+Go is simple. Go is quick. Go is boring? No, Go is fine.
+Python is easy. Python is slow. Python is everywhere.
+Zig is new. Zig is small.
+It's 2024 and code is king; don't panic.

@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen38-gsq-rco",
+ "debut": "2026-09-09T16:56:33Z",
+ "solo": {
+  "ttft_ms": 410,
+  "tok_s": 48.3,
+  "completion_tokens": 512,
+  "wall_s": 10.591
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 48.9,
+  "p50_latency_s": 47.12,
+  "wall_s": 83.75
+ },
+ "fin": "2026-09-09T16:58:19Z"
+}

@@ -1,0 +1,1766 @@
+{
+  "items": [
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:15:12Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:19:31Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-1",
+      "ram_pic_mo": 10875,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29516088,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11801
+      },
+      "wall_s": 259.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:20:54Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:24:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-2",
+      "ram_pic_mo": 10895,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29067140,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10075
+      },
+      "wall_s": 244.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:24:59Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:29:36Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 10798,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29823768,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9517
+      },
+      "wall_s": 277.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:24:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:28:18Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 10787,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30844484,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 9186
+      },
+      "wall_s": 252.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:19:32Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:24:06Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 10769,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30172404,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10567
+      },
+      "wall_s": 273.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:29:36Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:33:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-4",
+      "ram_pic_mo": 10720,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30680220,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9295
+      },
+      "wall_s": 262.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:28:19Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:32:59Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-5",
+      "ram_pic_mo": 11192,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30275756,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10775
+      },
+      "wall_s": 280.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:21:29Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:26:57Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-1",
+      "ram_pic_mo": 12148,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29890812,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9332
+      },
+      "wall_s": 327.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:20:27Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:26:29Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-2",
+      "ram_pic_mo": 11860,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30987004,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10804
+      },
+      "wall_s": 361.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:26:29Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:31:27Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 10611,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30282308,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11059
+      },
+      "wall_s": 297.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:31:46Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:36:11Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 11693,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30380236,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 7718
+      },
+      "wall_s": 264.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:26:57Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:31:46Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 10811,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30301416,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9326
+      },
+      "wall_s": 288.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:31:27Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:38:40Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-4",
+      "ram_pic_mo": 11824,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32148644,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11160
+      },
+      "wall_s": 432.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:36:11Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:41:13Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-5",
+      "ram_pic_mo": 11006,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29588216,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11253
+      },
+      "wall_s": 301.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:52:32Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:59:30Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-1",
+      "ram_pic_mo": 13649,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33717460,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 13539
+      },
+      "wall_s": 417.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:04:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:08:05Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-2",
+      "ram_pic_mo": 13571,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29402700,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11072
+      },
+      "wall_s": 216.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:08:05Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:16:45Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 14899,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 38349676,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 17141
+      },
+      "wall_s": 519.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:06:33Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:15:04Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 14860,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 38252304,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 15286
+      },
+      "wall_s": 511.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:59:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:06:32Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 14274,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31063532,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 17600
+      },
+      "wall_s": 422.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:16:45Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:21:29Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-4",
+      "ram_pic_mo": 13318,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 29361876,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10696
+      },
+      "wall_s": 283.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:15:04Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:20:27Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-5",
+      "ram_pic_mo": 13541,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30183136,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12088
+      },
+      "wall_s": 322.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:38:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:42:20Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-1",
+      "ram_pic_mo": 10673,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31288332,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10133
+      },
+      "wall_s": 219.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:41:13Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:45:35Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-2",
+      "ram_pic_mo": 11160,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31189844,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12486
+      },
+      "wall_s": 261.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:45:35Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:49:38Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 11312,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32126744,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10500
+      },
+      "wall_s": 243.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:46:36Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:50:13Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 11216,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31795700,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 8768
+      },
+      "wall_s": 216.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:42:20Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:46:36Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 11400,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31308044,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10508
+      },
+      "wall_s": 255.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:49:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:53:33Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-4",
+      "ram_pic_mo": 11042,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31405620,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9207
+      },
+      "wall_s": 234.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:50:13Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:54:56Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-5",
+      "ram_pic_mo": 11583,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32235224,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11128
+      },
+      "wall_s": 282.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:33:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:39:47Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-1",
+      "ram_pic_mo": 12046,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30211804,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12465
+      },
+      "wall_s": 348.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:32:59Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:38:52Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-2",
+      "ram_pic_mo": 11770,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30535528,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11600
+      },
+      "wall_s": 352.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:38:52Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:46:39Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 12684,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32007936,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12161
+      },
+      "wall_s": 466.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:47:37Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:55:49Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 13659,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31910460,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8786
+      },
+      "wall_s": 491.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:39:47Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:47:37Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 12638,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32603004,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12700
+      },
+      "wall_s": 469.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:46:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:52:32Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-4",
+      "ram_pic_mo": 12898,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30642380,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11434
+      },
+      "wall_s": 353.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:55:49Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:04:28Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-5",
+      "ram_pic_mo": 14498,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33890476,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 15509
+      },
+      "wall_s": 518.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:16:34Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:20:39Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-1",
+      "ram_pic_mo": 11217,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33291968,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11138
+      },
+      "wall_s": 245.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:20:20Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:24:15Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-2",
+      "ram_pic_mo": 11021,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33148092,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10121
+      },
+      "wall_s": 234.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:24:15Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:27:43Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 10805,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32591644,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9162
+      },
+      "wall_s": 207.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:24:16Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:27:26Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 10391,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32377624,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 8510
+      },
+      "wall_s": 189.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:20:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:24:16Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 11081,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32594432,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10265
+      },
+      "wall_s": 216.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:27:43Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:31:57Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-4",
+      "ram_pic_mo": 11143,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33318224,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11505
+      },
+      "wall_s": 253.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:27:27Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:31:43Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-5",
+      "ram_pic_mo": 11175,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 34084448,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10923
+      },
+      "wall_s": 255.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:01:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:05:56Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-1",
+      "ram_pic_mo": 10247,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31631680,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9501
+      },
+      "wall_s": 257.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:01:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:05:18Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-2",
+      "ram_pic_mo": 10237,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31055220,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 8220
+      },
+      "wall_s": 219.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:05:19Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:10:23Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 11106,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30756148,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11499
+      },
+      "wall_s": 304.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:10:36Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:16:31Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 11580,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30663692,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11006
+      },
+      "wall_s": 354.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:05:56Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:10:36Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 11365,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30897648,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10711
+      },
+      "wall_s": 279.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:10:23Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:15:12Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-4",
+      "ram_pic_mo": 11403,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32670696,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11697
+      },
+      "wall_s": 288.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T15:16:31Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T15:20:54Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-5",
+      "ram_pic_mo": 10552,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 30899192,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11328
+      },
+      "wall_s": 262.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:53:34Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T16:59:25Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-1",
+      "ram_pic_mo": 12152,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31125488,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12644
+      },
+      "wall_s": 351.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:54:56Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:02:08Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-2",
+      "ram_pic_mo": 12318,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31462484,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11331
+      },
+      "wall_s": 431.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:02:08Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:09:50Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 13139,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31150788,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12988
+      },
+      "wall_s": 462.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:07:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:14:34Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 12744,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32123736,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9085
+      },
+      "wall_s": 448.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T16:59:26Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:07:05Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 13248,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31081540,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10864
+      },
+      "wall_s": 459.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:09:51Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:16:34Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-4",
+      "ram_pic_mo": 12817,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31610644,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 13314
+      },
+      "wall_s": 402.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:14:34Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:20:20Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-5",
+      "ram_pic_mo": 12357,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31745952,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11119
+      },
+      "wall_s": 346.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:31:43Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:37:43Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 13036,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33018316,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 14579
+      },
+      "wall_s": 360.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:37:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:43:36Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 13117,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32771572,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 8744
+      },
+      "wall_s": 338.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:31:57Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:37:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 13029,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 31991280,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12269
+      },
+      "wall_s": 360.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:37:43Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:43:01Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-02",
+      "ram_pic_mo": 13001,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 35857028,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 13727
+      },
+      "wall_s": 318.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:43:36Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:50:06Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-03",
+      "ram_pic_mo": 13031,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 33959472,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 14504
+      },
+      "wall_s": 390.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:43:02Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:48:28Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-04",
+      "ram_pic_mo": 12728,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 39044520,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11321
+      },
+      "wall_s": 326.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:50:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:54:01Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-05",
+      "ram_pic_mo": 12976,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 32796432,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11213
+      },
+      "wall_s": 234.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:48:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:58:48Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-06",
+      "ram_pic_mo": 13327,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 45076128,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 13613
+      },
+      "wall_s": 619.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:54:01Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T17:58:03Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-07",
+      "ram_pic_mo": 11465,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 37038052,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 9973
+      },
+      "wall_s": 241.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:58:48Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:03:01Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-08",
+      "ram_pic_mo": 11494,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 37831132,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11861
+      },
+      "wall_s": 252.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T17:58:03Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:03:19Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-09",
+      "ram_pic_mo": 11744,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 38346208,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11485
+      },
+      "wall_s": 316.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:03:01Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:06:12Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-10",
+      "ram_pic_mo": 11549,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 40112916,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11163
+      },
+      "wall_s": 191.1
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:14:56Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:23:08Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-b-11",
+      "ram_pic_mo": 11100,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 40631008,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 13997
+      },
+      "wall_s": 491.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:23:08Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:31:39Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-b-11",
+      "ram_pic_mo": 11303,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 40601440,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10818
+      },
+      "wall_s": 511.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:06:20Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:14:56Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-11",
+      "ram_pic_mo": 11355,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 42428412,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12558
+      },
+      "wall_s": 516.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:31:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:37:40Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-12",
+      "ram_pic_mo": 10069,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 36903028,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11835
+      },
+      "wall_s": 360.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:37:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:41:59Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-13",
+      "ram_pic_mo": 9758,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 37227480,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12135
+      },
+      "wall_s": 258.0
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:41:59Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:44:52Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-14",
+      "ram_pic_mo": 9454,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 36869564,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10279
+      },
+      "wall_s": 172.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:44:52Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:49:00Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-15",
+      "ram_pic_mo": 9637,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 43081568,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11144
+      },
+      "wall_s": 247.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:49:00Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:53:38Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-16",
+      "ram_pic_mo": 9927,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 41056068,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 12838
+      },
+      "wall_s": 277.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:53:38Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T18:58:56Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-17",
+      "ram_pic_mo": 10356,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 39672552,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11202
+      },
+      "wall_s": 317.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T18:58:56Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T19:02:58Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-18",
+      "ram_pic_mo": 9401,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 40682240,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11856
+      },
+      "wall_s": 241.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T19:02:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T19:07:48Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-19",
+      "ram_pic_mo": 9913,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 40247388,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10779
+      },
+      "wall_s": 289.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-29T19:07:48Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-29T19:11:09Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-20",
+      "ram_pic_mo": 9055,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 39954980,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10422
+      },
+      "wall_s": 200.9
+    }
+  ],
+  "n": 80,
+  "note": "per-item generation records; output files, output hashes and engine addresses removed"
+}

@@ -1,0 +1,1766 @@
+{
+  "items": [
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:16:12Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:17:03Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-1",
+      "ram_pic_mo": 8170,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2719555,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4511
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:17:04Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:17:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-2",
+      "ram_pic_mo": 6060,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2847481,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4166
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:17:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:18:52Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 6029,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2797770,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4574
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:17:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:18:49Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 7790,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2850979,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4423
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:17:04Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:17:58Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 7790,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2762382,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4195
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:18:52Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:19:44Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-4",
+      "ram_pic_mo": 5895,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2809622,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4146
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:18:49Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:19:44Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-5",
+      "ram_pic_mo": 7790,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2761525,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4207
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:27:35Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:28:29Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-1",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2750526,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4149
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:27:14Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:28:08Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-2",
+      "ram_pic_mo": 7791,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2657201,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4367
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:28:08Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:29:02Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 7966,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2772055,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4184
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:29:24Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:30:15Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2764000,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4174
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:28:29Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:29:24Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 5546,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2763971,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4157
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:29:03Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:29:57Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-4",
+      "ram_pic_mo": 7791,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2784125,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4195
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:30:15Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:31:09Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-5",
+      "ram_pic_mo": 5546,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2680865,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4164
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:22:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:23:39Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-1",
+      "ram_pic_mo": 7914,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3009817,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4238
+      },
+      "wall_s": 69.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:23:25Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:24:40Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-2",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3098986,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4279
+      },
+      "wall_s": 75.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:24:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:25:43Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 5546,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3040922,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4255
+      },
+      "wall_s": 63.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:25:10Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:26:04Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 7791,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2991925,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4367
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:23:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:25:10Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 7791,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3109780,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4443
+      },
+      "wall_s": 90.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:25:43Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:27:35Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-4",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3192453,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4384
+      },
+      "wall_s": 111.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:26:04Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:27:14Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-5",
+      "ram_pic_mo": 7791,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3063672,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4616
+      },
+      "wall_s": 69.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:29:57Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:30:48Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-1",
+      "ram_pic_mo": 7994,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2693651,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4191
+      },
+      "wall_s": 51.4
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:31:10Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:32:04Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-2",
+      "ram_pic_mo": 5651,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2717245,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4153
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:32:04Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:32:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2704904,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4165
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:31:43Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:32:34Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2706440,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4199
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:30:49Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:31:43Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 8167,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2731140,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4182
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:32:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:33:53Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-4",
+      "ram_pic_mo": 5543,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2678952,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4180
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:32:35Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:33:29Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-5",
+      "ram_pic_mo": 8079,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2781783,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4197
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:19:44Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:20:35Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-1",
+      "ram_pic_mo": 5991,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2712506,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4363
+      },
+      "wall_s": 51.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:19:44Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:20:38Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-2",
+      "ram_pic_mo": 8126,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2790125,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4214
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:20:38Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:21:35Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 7790,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2884778,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4616
+      },
+      "wall_s": 57.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:21:33Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:22:30Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 5992,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2882489,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4185
+      },
+      "wall_s": 57.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:20:35Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:21:32Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 5989,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2872102,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4186
+      },
+      "wall_s": 57.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:21:36Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:22:30Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-4",
+      "ram_pic_mo": 8076,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2828847,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4463
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:22:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:23:24Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-5",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2974632,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4189
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:36:06Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:36:58Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-1",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2871934,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4195
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:37:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:38:40Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-2",
+      "ram_pic_mo": 6083,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3135497,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4284
+      },
+      "wall_s": 72.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:38:40Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:39:34Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 6095,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2861279,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4150
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:37:49Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:38:40Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2978528,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4189
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:36:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:37:49Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2898221,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4194
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:39:34Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:40:44Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-4",
+      "ram_pic_mo": 6051,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3275269,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4421
+      },
+      "wall_s": 69.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:38:41Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:39:35Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-5",
+      "ram_pic_mo": 7908,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2987079,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4179
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:13:26Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:14:23Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-1",
+      "ram_pic_mo": 5714,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2789437,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4151
+      },
+      "wall_s": 57.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:13:26Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:14:23Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-2",
+      "ram_pic_mo": 7789,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2697479,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4568
+      },
+      "wall_s": 57.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:14:23Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:15:18Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 8032,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2779125,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4210
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:15:18Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:16:09Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 6058,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2743554,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4161
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:14:23Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:15:18Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 6101,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2781712,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4153
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:15:18Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:16:12Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-4",
+      "ram_pic_mo": 7790,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2824578,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4214
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:16:09Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:17:03Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-5",
+      "ram_pic_mo": 6045,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2725266,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4153
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:33:53Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:34:44Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-1",
+      "ram_pic_mo": 5542,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2809889,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4172
+      },
+      "wall_s": 51.3
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:33:29Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:34:20Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-2",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2709605,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4200
+      },
+      "wall_s": 51.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:34:20Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:35:15Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2936289,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4511
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:35:39Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:36:33Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 5543,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2973968,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4421
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:34:44Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:35:39Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 5543,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2909632,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4661
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:35:15Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:36:06Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-4",
+      "ram_pic_mo": 7791,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2862027,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4193
+      },
+      "wall_s": 51.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:36:33Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:37:27Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-5",
+      "ram_pic_mo": 5544,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2737798,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4149
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:39:35Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:40:29Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 7920,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2921458,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4199
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:41:38Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:42:29Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 5543,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2858264,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4574
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:40:44Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:41:38Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 5544,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2887872,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4134
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:40:29Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:41:24Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-02",
+      "ram_pic_mo": 7792,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3035961,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4607
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:42:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:43:24Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-03",
+      "ram_pic_mo": 5544,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3042818,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4421
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:41:24Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:42:57Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-04",
+      "ram_pic_mo": 7793,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3165367,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4616
+      },
+      "wall_s": 93.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:43:24Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:44:18Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-05",
+      "ram_pic_mo": 5544,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2718264,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4189
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:42:57Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:43:52Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-06",
+      "ram_pic_mo": 7793,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3020448,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4399
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:44:19Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:45:13Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-07",
+      "ram_pic_mo": 5544,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2703408,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4152
+      },
+      "wall_s": 54.2
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:43:52Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:44:34Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-08",
+      "ram_pic_mo": 7793,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2728316,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4212
+      },
+      "wall_s": 42.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:45:13Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:46:04Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-09",
+      "ram_pic_mo": 5543,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2896699,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4164
+      },
+      "wall_s": 51.4
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:44:34Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:45:28Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-10",
+      "ram_pic_mo": 8052,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2797149,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4194
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:45:29Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:46:23Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 1,
+      "id": "bq-vol-b-11",
+      "ram_pic_mo": 8073,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3174084,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4218
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:46:59Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:47:50Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 2,
+      "id": "bq-vol-b-11",
+      "ram_pic_mo": 6028,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3125038,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4146
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:46:05Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:46:59Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-11",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3137314,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4155
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:46:23Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:47:17Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-12",
+      "ram_pic_mo": 8140,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2976993,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4182
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:47:50Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:48:36Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-13",
+      "ram_pic_mo": 5544,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2733569,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4191
+      },
+      "wall_s": 45.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:47:17Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:48:00Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-14",
+      "ram_pic_mo": 7793,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2791031,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4208
+      },
+      "wall_s": 42.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:48:36Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:49:30Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-15",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2887237,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4421
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:48:00Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:48:54Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-16",
+      "ram_pic_mo": 7793,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3145731,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4193
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:49:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:50:27Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-17",
+      "ram_pic_mo": 5545,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 3128265,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4191
+      },
+      "wall_s": 57.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:48:54Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:49:48Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-18",
+      "ram_pic_mo": 7794,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2797851,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4375
+      },
+      "wall_s": 54.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:50:28Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:51:19Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-19",
+      "ram_pic_mo": 5679,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2868421,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 4141
+      },
+      "wall_s": 51.1
+    },
+    {
+      "candidat": "triposplat-comfy",
+      "debut": "2026-09-30T13:49:49Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": null,
+      "fin": "2026-09-30T13:50:43Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-20",
+      "ram_pic_mo": 8161,
+      "reglage": "ref-v1",
+      "repli": false,
+      "sortie_bytes": 2863629,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 4199
+      },
+      "wall_s": 54.1
+    }
+  ],
+  "n": 80,
+  "note": "per-item generation records; output files, output hashes and engine addresses removed"
+}

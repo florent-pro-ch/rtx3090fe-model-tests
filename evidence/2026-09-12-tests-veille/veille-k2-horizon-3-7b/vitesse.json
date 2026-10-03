@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-k2-horizon-3-7b",
+ "debut": "2026-09-10T06:46:08Z",
+ "solo": {
+  "ttft_ms": 74,
+  "tok_s": 75.8,
+  "completion_tokens": 512,
+  "wall_s": 6.758
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 577.9,
+  "p50_latency_s": 7.08,
+  "wall_s": 7.09
+ },
+ "fin": "2026-09-10T06:46:28Z"
+}

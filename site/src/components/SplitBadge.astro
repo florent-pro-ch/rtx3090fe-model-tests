@@ -1,0 +1,24 @@
+---
+/** How a run used the cards: one card, tensor parallel, llama.cpp layer split, CPU offload. */
+import type { Run } from '../lib/data';
+import { splitGroup, isNum } from '../lib/data';
+interface Props { run: Run }
+const { run } = Astro.props;
+const g = splitGroup(run);
+const t = run.topology;
+const label =
+  g === 'none' ? '1 card'
+  : g === 'tensor' ? `TP${isNum(t.tp) ? t.tp : '?'}`
+  : g === 'layer' ? 'layer split'
+  : g === 'row' ? 'row split'
+  : g === 'cpu-offload' ? `CPU offload${isNum(t.cpu_offload_gb) ? ` ${t.cpu_offload_gb} GB` : ''}`
+  : t.split;
+// Figma badge set: TP2 and layer split in --blue (a pair at work), CPU offload amber.
+const tone = g === 'tensor' || g === 'layer' || g === 'row' ? 'blue' : g === 'cpu-offload' ? 'amber' : 'muted';
+const tip =
+  g === 'layer' ? 'llama.cpp gives each card a block of whole layers: not tensor parallelism'
+  : g === 'tensor' ? `tensor parallel ${isNum(t.tp) ? t.tp : '?'}: every layer split over the cards (vLLM)`
+  : g === 'cpu-offload' ? 'part of the model held in system RAM'
+  : undefined;
+---
+<span class={`badge plain tone-${tone}`} title={tip}>{label}</span>

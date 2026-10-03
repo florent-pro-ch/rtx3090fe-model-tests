@@ -1,0 +1,111 @@
+{
+  "budget_gpu_h": 2,
+  "candidat": "hunyuan3d21-shape-comfy",
+  "carte": "une",
+  "ecrit": "2026-09-30T11:41:55Z",
+  "etapes": [
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-1",
+      "ram_pic_mo": 8037,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 7593
+      },
+      "wall_s": 48.2
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-2",
+      "ram_pic_mo": 8041,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 8013
+      },
+      "wall_s": 42.1
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 8047,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 8045
+      },
+      "wall_s": 48.2
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-1",
+      "ram_pic_mo": 18292,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 7881
+      },
+      "wall_s": 90.9
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-2",
+      "ram_pic_mo": 18244,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 7873
+      },
+      "wall_s": 84.5
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 18386,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 7882
+      },
+      "wall_s": 93.3
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-1",
+      "ram_pic_mo": 38979,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 8493
+      },
+      "wall_s": 172.2
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-2",
+      "ram_pic_mo": 38924,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 8479
+      },
+      "wall_s": 162.6
+    },
+    {
+      "axe": "octree_resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 39582,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 8470
+      },
+      "wall_s": 181.7
+    }
+  ],
+  "gpu_h_utilise": 0.257,
+  "plafond": {
+    "octree_resolution": "512"
+  }
+}

@@ -1,0 +1,17 @@
+---
+/**
+ * The GPU chip motif of DESIGN.md (Figma component 5:97): one RTX 3090
+ * Founders Edition as a slot bracket, a fan circle with its hub and the label
+ * 3090. An SVG <g> in the 176 x 44 units of the Figma component; place it
+ * inside an <svg> with x / y.
+ */
+interface Props { x?: number; y?: number }
+const { x = 0, y = 0 } = Astro.props;
+---
+<g transform={`translate(${x} ${y})`}>
+  <rect class="sch-card" x="0.5" y="0.5" width="175" height="43" rx="6"></rect>
+  <path class="sch-slot" d="M3 0H5V44H3A3 3 0 0 1 0 41V3A3 3 0 0 1 3 0Z"></path>
+  <circle class="sch-fan" cx="35" cy="22" r="14.25"></circle>
+  <circle class="sch-hub" cx="35" cy="22" r="4"></circle>
+  <text class="sch-label" x="60" y="26">3090</text>
+</g>

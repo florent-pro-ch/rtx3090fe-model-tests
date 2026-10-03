@@ -1,0 +1,32 @@
+---
+/**
+ * /pitfalls/: methodology/PITFALLS.md, the Ampere (sm86) pitfalls, at the top
+ * level because it is the page most readers with a 3090 come for.
+ * /methodology/pitfalls/ points here.
+ */
+import Layout from '../layouts/Layout.astro';
+import { methodologyDocs } from '../lib/data';
+import { renderMarkdown } from '../lib/markdown';
+import { href } from '../lib/site';
+
+const d = methodologyDocs().find((x) => x.slug === 'pitfalls');
+const html = d ? renderMarkdown(d.markdown, d.file) : null;
+const title = d?.title ?? 'Ampere pitfalls';
+---
+<Layout
+  title={title}
+  description="What breaks or slows down on an RTX 3090 (sm86) with vLLM and llama.cpp: formats without native kernels, quantisations that do not help, and the errors each one gives — learnt on this rig."
+  nav="pitfalls"
+  noindex={!html}
+  crumbs={[{ label: 'pitfalls' }]}
+>
+  {html ? (
+    <article class="prose" set:html={html} />
+  ) : (
+    <>
+      <h1>{title}</h1>
+      <p class="empty">The pitfalls note is not published yet.</p>
+    </>
+  )}
+  <p class="small muted">Part of the <a href={href('methodology/')}>methodology</a>.</p>
+</Layout>

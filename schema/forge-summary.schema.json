@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forge-summary.schema.json",
+  "title": "Forge summary",
+  "type": "object",
+  "required": ["description", "curves_note", "checkpoints", "checkpoint_records", "with_loss_points", "with_scores", "score_definitions", "base_models", "method", "outcomes", "period", "not_published", "source"],
+  "properties": {
+    "description": {"type": "string"},
+    "curves_note": {"type": "string"},
+    "checkpoints": {"type": "integer"},
+    "checkpoint_records": {"type": "array", "items": {"type": "string"}},
+    "with_loss_points": {"type": "integer"},
+    "with_scores": {"type": "integer"},
+    "score_definitions": {"type": "object", "additionalProperties": {"type": "string"}},
+    "base_models": {"type": "array", "items": {"type": "object", "required": ["model_id", "checkpoints", "published_model"]}},
+    "method": {"type": "object"},
+    "outcomes": {"type": "object", "additionalProperties": {"type": "integer"}},
+    "period": {"type": "object"},
+    "related_rankings": {"type": "array", "items": {"type": "string"}},
+    "language": {"type": "string"},
+    "not_published": {"type": "array", "items": {"type": "string"}},
+    "source": {"type": "object", "required": ["source_id"]}
+  }
+}

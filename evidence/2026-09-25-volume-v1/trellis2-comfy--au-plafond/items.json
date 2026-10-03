@@ -1,0 +1,975 @@
+{
+  "items": [
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:06:46Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T06:19:28Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-1",
+      "ram_pic_mo": 12925,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 39087884,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 10101
+      },
+      "wall_s": 761.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:20:38Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T06:34:49Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-gear-3",
+      "ram_pic_mo": 13785,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 39255344,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 13592
+      },
+      "wall_s": 851.4
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:34:30Z",
+      "engine": "comfyui",
+      "erreur": "no /history entry after 900 s",
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T06:49:30Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-1",
+      "ram_pic_mo": 14378,
+      "reglage": "plafond",
+      "repli": false,
+      "statut": "timeout",
+      "vram_pic_mo": {
+        "1": 9434
+      },
+      "wall_s": 900.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:49:50Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:03:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-glyph-3",
+      "ram_pic_mo": 13119,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 39590792,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 11355
+      },
+      "wall_s": 847.7
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:34:49Z",
+      "engine": "comfyui",
+      "erreur": "no /history entry after 900 s",
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T06:49:50Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-mug-3",
+      "ram_pic_mo": 14259,
+      "reglage": "plafond",
+      "repli": false,
+      "statut": "timeout",
+      "vram_pic_mo": {
+        "0": 19471
+      },
+      "wall_s": 900.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:49:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:01:32Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-1",
+      "ram_pic_mo": 13111,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 40586204,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 11036
+      },
+      "wall_s": 721.3
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:03:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:15:58Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-rods-3",
+      "ram_pic_mo": 15260,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 43581068,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 10708
+      },
+      "wall_s": 719.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:19:28Z",
+      "engine": "comfyui",
+      "erreur": "no /history entry after 900 s",
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T06:34:29Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-stairs-3",
+      "ram_pic_mo": 14011,
+      "reglage": "plafond",
+      "repli": false,
+      "statut": "timeout",
+      "vram_pic_mo": {
+        "1": 15821
+      },
+      "wall_s": 901.5
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:15:58Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:27:24Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-1",
+      "ram_pic_mo": 14029,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 47112748,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12561
+      },
+      "wall_s": 686.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:16:33Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:27:30Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-star-3",
+      "ram_pic_mo": 13878,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 43979152,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 9868
+      },
+      "wall_s": 656.6
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T06:06:46Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T06:20:37Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-table-3",
+      "ram_pic_mo": 12843,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 41830456,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "0": 12966
+      },
+      "wall_s": 831.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:01:32Z",
+      "engine": "comfyui",
+      "erreur": "no /history entry after 900 s",
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:16:33Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-a-vehicle-3",
+      "ram_pic_mo": 15465,
+      "reglage": "plafond",
+      "repli": false,
+      "statut": "timeout",
+      "vram_pic_mo": {
+        "1": 15748
+      },
+      "wall_s": 901.2
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:27:25Z",
+      "engine": "comfyui",
+      "erreur": "no /history entry after 900 s",
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:42:26Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-01",
+      "ram_pic_mo": 14456,
+      "reglage": "plafond",
+      "repli": false,
+      "statut": "timeout",
+      "vram_pic_mo": {
+        "0": 15175
+      },
+      "wall_s": 900.9
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:27:30Z",
+      "engine": "comfyui",
+      "erreur": null,
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:41:58Z",
+      "gpus_cellule": [
+        1
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-02",
+      "ram_pic_mo": 14481,
+      "reglage": "plafond",
+      "repli": false,
+      "sortie_bytes": 57043260,
+      "statut": "ok",
+      "vram_pic_mo": {
+        "1": 15024
+      },
+      "wall_s": 867.8
+    },
+    {
+      "candidat": "trellis2-comfy",
+      "debut": "2026-09-30T07:42:26Z",
+      "engine": "comfyui",
+      "erreur": "no /history entry after 900 s",
+      "etape": [
+        {
+          "axe": "resolution",
+          "class_type": "Trellis2UpsampleStage",
+          "input": "target_resolution",
+          "value": 2048
+        },
+        {
+          "axe": "texture",
+          "class_type": "UnwrapMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeTextureFromVoxel",
+          "input": "texture_size",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "RenderUVAtlas",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeNormalMapFromMesh",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "texture",
+          "class_type": "BakeAmbientOcclusion",
+          "input": "resolution",
+          "value": 4096
+        },
+        {
+          "axe": "faces",
+          "class_type": "DecimateMesh",
+          "input": "target_face_count",
+          "value": 700000
+        }
+      ],
+      "fin": "2026-09-30T07:57:28Z",
+      "gpus_cellule": [
+        0
+      ],
+      "graine": 0,
+      "id": "bq-vol-b-03",
+      "ram_pic_mo": 15985,
+      "reglage": "plafond",
+      "repli": false,
+      "statut": "timeout",
+      "vram_pic_mo": {
+        "0": 13401
+      },
+      "wall_s": 901.6
+    }
+  ],
+  "n": 15,
+  "note": "per-item generation records; output files, output hashes and engine addresses removed"
+}

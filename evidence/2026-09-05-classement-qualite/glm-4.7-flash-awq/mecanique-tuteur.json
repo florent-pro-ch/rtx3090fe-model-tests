@@ -1,0 +1,13 @@
+{
+  "consigne_ko": 0,
+  "consigne_ok": 1,
+  "erreur": 39,
+  "fuite_reflexion": 0,
+  "n": 40,
+  "non_cote": true,
+  "secondes_moy": 0.72,
+  "taux_erreur": 0.975,
+  "tokens_moy": 87,
+  "tronque": 0,
+  "vide": 0
+}

@@ -1,0 +1,60 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "labo-muse-glimmer",
+      "muse-glimmer-gguf"
+    ],
+    "inventory_ids": [
+      "muse-glimmer-30b-gguf-kquant"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "meta-models/muse-glimmer-30b@gguf-kquant"
+  ],
+  "category": "vlm",
+  "first_tested": "2026-08-12",
+  "last_tested": "2026-09-05",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "meta-models/muse-glimmer-30b",
+  "name": "Muse Glimmer 30B",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 30.0,
+  "parse_notes": [],
+  "slug": "meta-models__muse-glimmer-30b",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+  "vendor": "Meta",
+  "verdict": {
+    "as_of": "2026-08-12",
+    "status": "rejected",
+    "summary": "Dense 30B multimodal model tried as a GGUF under llama.cpp; rejected as a serving option on throughput."
+  }
+}

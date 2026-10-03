@@ -1,0 +1,23 @@
+{
+  "note": "read by the driver once the server answered /v1/models, before the agent bench started",
+  "snapshots": [
+    {
+      "file": "nvidia-smi-loaded.txt",
+      "label": "load",
+      "rows": [
+        {
+          "gpu_index": 0,
+          "memory_used_mib": 22591,
+          "power_w": 23.07,
+          "temperature_c": 55
+        },
+        {
+          "gpu_index": 1,
+          "memory_used_mib": 22591,
+          "power_w": 20.32,
+          "temperature_c": 49
+        }
+      ]
+    }
+  ]
+}

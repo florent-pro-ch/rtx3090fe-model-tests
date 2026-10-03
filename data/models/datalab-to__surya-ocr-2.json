@@ -1,0 +1,62 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-surya-ocr-2"
+    ],
+    "inventory_ids": [
+      "surya-ocr-2-0-65b-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "datalab-to/surya-ocr-2@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-26",
+  "licence": {
+    "flags": [
+      "revenue-threshold",
+      "use-restrictions"
+    ],
+    "name": "OpenRAIL-M (modified)",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "datalab-to/surya-ocr-2",
+  "name": "Surya OCR 2",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 0.69,
+  "parse_notes": [],
+  "slug": "datalab-to__surya-ocr-2",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/datalab-to/surya-ocr-2",
+  "vendor": "Datalab",
+  "verdict": {
+    "as_of": "2026-09-29",
+    "status": "rated-no-role",
+    "summary": "Small OCR model with the same HTML-versus-text reader limit as Chandra OCR 2. Rated, no role assigned."
+  }
+}

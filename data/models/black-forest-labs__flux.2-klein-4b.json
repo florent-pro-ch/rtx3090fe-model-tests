@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [],
+    "inventory_ids": [
+      "flux2-klein-4b"
+    ]
+  },
+  "arch": "unknown",
+  "builds": [
+    "black-forest-labs/flux.2-klein-4b@bf16"
+  ],
+  "category": "image-gen",
+  "first_tested": "2026-08-08",
+  "last_tested": "2026-08-08",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "black-forest-labs/flux.2-klein-4b",
+  "name": "FLUX.2 klein 4B",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 4.0,
+  "parse_notes": [
+    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
+  ],
+  "slug": "black-forest-labs__flux.2-klein-4b",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B",
+  "vendor": "Black Forest Labs",
+  "verdict": {
+    "as_of": "2026-10-01",
+    "status": "reservations",
+    "summary": "Listed; no run record published."
+  }
+}

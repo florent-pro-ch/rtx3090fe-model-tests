@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [],
+    "inventory_ids": [
+      "evie-preview-45b"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "tencent/evie-preview-4.5b@bf16"
+  ],
+  "category": "visual-retriever",
+  "first_tested": "2026-09-04",
+  "last_tested": "2026-09-04",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "tencent/evie-preview-4.5b",
+  "name": "EVIE-Preview-4.5B",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 4.5,
+  "parse_notes": [
+    "licence read from the model card (the lab had not recorded it)"
+  ],
+  "slug": "tencent__evie-preview-4.5b",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/tencent/EVIE-Preview-4.5B",
+  "vendor": "Tencent",
+  "verdict": {
+    "as_of": "2026-09-04",
+    "status": "kept",
+    "summary": "Visual page retriever: found the right page first every time on a small synthetic French set. Kept as a retrieval building block."
+  }
+}

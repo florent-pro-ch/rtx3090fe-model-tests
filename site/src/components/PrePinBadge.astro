@@ -1,0 +1,17 @@
+---
+/**
+ * Marks a run whose engine is older than the pin (pre_pin true: vLLM before
+ * 0.29.0, a floating llama.cpp tag or a build before b10830, or an unpinned
+ * engine before 2026-09-10), or whose engine is unknown or withheld
+ * (pre_pin null). Links to the glossary.
+ */
+import { glossaryHref } from '../lib/site';
+interface Props { prePin?: boolean | null; unknown?: boolean }
+const { prePin, unknown = true } = Astro.props;
+---
+{prePin === true && (
+  <a class="badge tone-amber badge-link" href={glossaryHref('pre-pin')} title="Engine older than the pinned versions (vLLM before 0.29.0, a floating llama.cpp tag or build, or a run before 2026-09-10 on an unpinned engine): not reproducible as is. See the glossary.">pre-pin</a>
+)}
+{prePin === null && unknown && (
+  <a class="badge tone-muted badge-link" href={glossaryHref('pre-pin')} title="The engine and its version are unknown or not published for this run: it cannot be called pinned.">pin unknown</a>
+)}

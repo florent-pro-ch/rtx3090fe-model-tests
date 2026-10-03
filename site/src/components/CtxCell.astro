@@ -1,0 +1,34 @@
+---
+/**
+ * The context one request could use (servedContextInfo in lib/data.ts).
+ * llama.cpp splits its ctx_size across its slots (-np): a server with 8,192
+ * tokens and 8 slots gives each request 1,024. The per-request figure is
+ * shown; the server-wide total and the slot count are in the title. A
+ * per-request figure computed here (ctx_size / slots, not recorded as such)
+ * is plain text, since <Num> only shows numbers stored in the data.
+ */
+import Num from './Num.astro';
+import type { Run } from '../lib/data';
+import { servedContextInfo } from '../lib/data';
+import { fmtNum } from '../lib/site';
+
+interface Props { run: Run; nullText?: string; long?: boolean }
+const { run, nullText = '—', long = false } = Astro.props;
+const c = servedContextInfo(run);
+const split = !!c && c.total !== null && c.slots !== null;
+const tip = split
+  ? `${fmtNum(c!.perRequest)} per request (${fmtNum(c!.total!)} over ${c!.slots} slots): llama.cpp splits its context across its slots`
+  : undefined;
+---
+{!c ? (
+  <span class="num-null" title="No number in the data">{nullText}</span>
+) : split ? (
+  <span title={tip}>
+    {c.derived
+      ? <span class="num-v">{fmtNum(c.perRequest)}<span class="num-unit">tokens</span></span>
+      : <Num value={c.perRequest} unit="tokens" run={run.run_id} title={tip} />}
+    {' '}<span class="muted small nowrap">per request{long && <> (<Num value={c.total} unit="tokens" run={run.run_id} /> over <Num value={c.slots} run={run.run_id} /> slots)</>}</span>
+  </span>
+) : (
+  <Num value={c.perRequest} unit="tokens" run={run.run_id} />
+)}

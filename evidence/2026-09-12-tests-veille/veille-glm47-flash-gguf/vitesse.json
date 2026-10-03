@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-glm47-flash-gguf",
+ "debut": "2026-09-12T20:53:08Z",
+ "solo": {
+  "ttft_ms": 84,
+  "tok_s": 115.4,
+  "completion_tokens": 512,
+  "wall_s": 4.438
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 115.8,
+  "p50_latency_s": 19.91,
+  "wall_s": 35.38
+ },
+ "fin": "2026-09-12T20:53:52Z"
+}

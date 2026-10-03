@@ -1,0 +1,14 @@
+{
+  "maison": {
+    "complete_pct": 67,
+    "n": 9,
+    "renderable_pct": 100,
+    "secondes_moy": 13.2
+  },
+  "reference": {
+    "complete_pct": 76,
+    "n": 46,
+    "renderable_pct": 100,
+    "secondes_moy": 27.3
+  }
+}

@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-swift-qwen38-27b-w4a16",
+ "debut": "2026-09-22T10:05:04Z",
+ "solo": {
+  "ttft_ms": 161,
+  "tok_s": 75.7,
+  "completion_tokens": 512,
+  "wall_s": 6.765
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 474.9,
+  "p50_latency_s": 8.62,
+  "wall_s": 8.62
+ },
+ "fin": "2026-09-22T10:05:26Z"
+}

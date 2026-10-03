@@ -1,0 +1,30 @@
+{
+  "block_size": 8,
+  "bras": "g31-rh-dspark-16k",
+  "cible": "gemma-4-31b-qat",
+  "debut": "2026-09-25T18:58:29Z",
+  "fin": "2026-09-25T19:02:21Z",
+  "kv": {},
+  "moteur": "vllm",
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 44
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 37
+    }
+  ],
+  "passes": {},
+  "role": "spec",
+  "spec": {
+    "draft_tensor_parallel_size": 1,
+    "method": "dspark",
+    "model": "$MODELS/gemma-4-31b-it-rh-dspark",
+    "num_speculative_tokens": null
+  },
+  "statut": "ECHEC-DEMARRAGE"
+}

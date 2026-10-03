@@ -1,0 +1,19 @@
+{
+  "build_id": "allenai/olmocr-2-7b-1025@unknown-2026-07",
+  "engine_family": "vllm",
+  "harness_ids": [],
+  "inventory_id": "olmocr2",
+  "model_id": "allenai/olmocr-2-7b-1025",
+  "parse_notes": [],
+  "quant": {
+    "bits": null,
+    "format": "unknown",
+    "label": "not recorded (a container served in July 2026)"
+  },
+  "runs_count": 0,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "allenai/olmOCR-2"
+}

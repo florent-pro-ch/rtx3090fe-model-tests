@@ -1,0 +1,32 @@
+---
+/**
+ * An aggregate-throughput figure with its concurrency and the number of
+ * requests the server could decode at once (llama.cpp slots, vLLM
+ * max_num_seqs). A llama.cpp run with one slot serves the requests one after
+ * another: its aggregate is labelled "1 slot (serialised)", it is not
+ * batching.
+ */
+import Num from './Num.astro';
+import type { Run } from '../lib/data';
+import { aggSlots, isNum } from '../lib/data';
+interface Props { run: Run; long?: boolean; nullText?: string }
+const { run, long = false, nullText = '—' } = Astro.props;
+const v = run.metrics.agg_tok_s;
+const c = run.metrics.agg_concurrency;
+const s = aggSlots(run);
+const word = s.engine === 'vllm' ? (s.slots === 1 ? 'sequence at once' : 'sequences at once') : (s.slots === 1 ? 'slot' : 'slots');
+---
+{isNum(v) ? (
+  <>
+    <Num value={v} unit="tok/s" run={run.run_id} />{long && <span class="muted small"> aggregate</span>}
+    {!long && <br />}<span class="muted small nowrap">{long ? ' at ' : ''}{isNum(c) && <>c=<Num value={c} run={run.run_id} /></>}
+      {s.slots !== null ? (
+        <>{isNum(c) && ' · '}{s.engine === 'vllm' && 'up to '}<Num value={s.slots} run={run.run_id} /> {word}{s.serialised && s.engine !== 'vllm' && <> (<abbr title="one llama.cpp slot (-np 1): the requests were served one after another, so this is serialised single-stream speed, not batching">serialised</abbr>)</>}</>
+      ) : s.engine === 'llamacpp' ? (
+        <>{isNum(c) && ' · '}slots not recorded</>
+      ) : null}
+    </span>
+  </>
+) : (
+  <Num value={v} unit="tok/s" run={run.run_id} nullText={nullText} />
+)}

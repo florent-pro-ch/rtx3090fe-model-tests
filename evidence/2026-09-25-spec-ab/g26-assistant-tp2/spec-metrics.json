@@ -1,0 +1,493 @@
+{
+  "agrege": {
+    "c4-en": {
+      "agg_tok_s": 990.6,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 1.89,
+      "tokens": 8192,
+      "wall_s": 8.27
+    },
+    "c4-fr": {
+      "agg_tok_s": 754.6,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 2.35,
+      "tokens": 4096,
+      "wall_s": 5.43
+    },
+    "c8-en": {
+      "agg_tok_s": 1444.7,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 2.28,
+      "tokens": 8192,
+      "wall_s": 5.67
+    },
+    "c8-fr": {
+      "agg_tok_s": 1113.2,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 2.89,
+      "tokens": 4096,
+      "wall_s": 3.68
+    }
+  },
+  "bras": "g26-assistant-tp2",
+  "cible": "veille-gemma4-26b-a4b-tp2",
+  "debut": "2026-09-25T20:04:44Z",
+  "erreurs": 0,
+  "fin": "2026-09-25T20:11:08Z",
+  "identite": {
+    "erreurs": 0,
+    "finish": {
+      "length": 24
+    },
+    "n": 24,
+    "tokens_max": 512,
+    "tokens_min": 512
+  },
+  "kv": {
+    "kv_cache_memoire_gib": 9.64,
+    "kv_cache_tokens": 91842.0,
+    "poids_gib": 9.9
+  },
+  "moteur": "vllm",
+  "nvidia_smi_apres": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 70
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 63
+    }
+  ],
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 72
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 64
+    }
+  ],
+  "nvidia_smi_charge": [
+    {
+      "index": 0,
+      "memoire_mib": 22085,
+      "temperature_c": 75
+    },
+    {
+      "index": 1,
+      "memoire_mib": 22085,
+      "temperature_c": 67
+    }
+  ],
+  "nvidia_smi_pret": [
+    {
+      "index": 0,
+      "memoire_mib": 22081,
+      "temperature_c": 53
+    },
+    {
+      "index": 1,
+      "memoire_mib": 22081,
+      "temperature_c": 43
+    }
+  ],
+  "passes": {
+    "c4-en": {
+      "acceptation": {
+        "accepted_tokens": 5597.0,
+        "draft_tokens": 7800.0,
+        "drafts": 2600.0,
+        "longueur_acceptee_moyenne": 3.153,
+        "par_position": {
+          "0": 0.8458,
+          "1": 0.7046,
+          "2": 0.6023
+        },
+        "taux_acceptation": 0.7176
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2199.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1832.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 1566.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5597.0,
+        "vllm:spec_decode_num_draft_tokens_total": 7800.0,
+        "vllm:spec_decode_num_drafts_total": 2600.0
+      },
+      "secondes": 8.3
+    },
+    "c4-fr": {
+      "acceptation": {
+        "accepted_tokens": 2519.0,
+        "draft_tokens": 4731.0,
+        "drafts": 1577.0,
+        "longueur_acceptee_moyenne": 2.597,
+        "par_position": {
+          "0": 0.7089,
+          "1": 0.525,
+          "2": 0.3633
+        },
+        "taux_acceptation": 0.5324
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1118.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 828.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 573.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2519.0,
+        "vllm:spec_decode_num_draft_tokens_total": 4731.0,
+        "vllm:spec_decode_num_drafts_total": 1577.0
+      },
+      "secondes": 5.4
+    },
+    "c8-en": {
+      "acceptation": {
+        "accepted_tokens": 5581.0,
+        "draft_tokens": 7848.0,
+        "drafts": 2616.0,
+        "longueur_acceptee_moyenne": 3.133,
+        "par_position": {
+          "0": 0.8391,
+          "1": 0.7011,
+          "2": 0.5933
+        },
+        "taux_acceptation": 0.7111
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 2195.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 1834.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 1552.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 5581.0,
+        "vllm:spec_decode_num_draft_tokens_total": 7848.0,
+        "vllm:spec_decode_num_drafts_total": 2616.0
+      },
+      "secondes": 5.7
+    },
+    "c8-fr": {
+      "acceptation": {
+        "accepted_tokens": 2466.0,
+        "draft_tokens": 4881.0,
+        "drafts": 1627.0,
+        "longueur_acceptee_moyenne": 2.516,
+        "par_position": {
+          "0": 0.6853,
+          "1": 0.4954,
+          "2": 0.335
+        },
+        "taux_acceptation": 0.5052
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 1115.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 806.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 545.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 2466.0,
+        "vllm:spec_decode_num_draft_tokens_total": 4881.0,
+        "vllm:spec_decode_num_drafts_total": 1627.0
+      },
+      "secondes": 3.7
+    },
+    "identite": {
+      "acceptation": {
+        "accepted_tokens": 8103.0,
+        "draft_tokens": 12567.0,
+        "drafts": 4189.0,
+        "longueur_acceptee_moyenne": 2.934,
+        "par_position": {
+          "0": 0.7954,
+          "1": 0.634,
+          "2": 0.5049
+        },
+        "taux_acceptation": 0.6448
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 3332.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 2656.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 2115.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 8103.0,
+        "vllm:spec_decode_num_draft_tokens_total": 12567.0,
+        "vllm:spec_decode_num_drafts_total": 4189.0
+      },
+      "secondes": 39.3
+    },
+    "solo": {
+      "acceptation": {
+        "accepted_tokens": 7944.0,
+        "draft_tokens": 13056.0,
+        "drafts": 4352.0,
+        "longueur_acceptee_moyenne": 2.825,
+        "par_position": {
+          "0": 0.75,
+          "1": 0.5986,
+          "2": 0.4768
+        },
+        "taux_acceptation": 0.6085
+      },
+      "compteurs": {
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[0]": 3264.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[1]": 2605.0,
+        "vllm:spec_decode_num_accepted_tokens_per_pos_total[2]": 2075.0,
+        "vllm:spec_decode_num_accepted_tokens_total": 7944.0,
+        "vllm:spec_decode_num_draft_tokens_total": 13056.0,
+        "vllm:spec_decode_num_drafts_total": 4352.0
+      },
+      "secondes": 39.9
+    }
+  },
+  "pret_en_secondes": 277.2,
+  "requetes": 96,
+  "role": "spec",
+  "solo": {
+    "en": {
+      "decode_tok_s_mediane": 381.2,
+      "decode_tok_s_moyenne": 361.0,
+      "n": 16,
+      "ttft_ms_mediane": 53
+    },
+    "fr": {
+      "decode_tok_s_mediane": 292.4,
+      "decode_tok_s_moyenne": 274.4,
+      "n": 8,
+      "ttft_ms_mediane": 52
+    },
+    "items": [
+      {
+        "decode_tok_s": 319.8,
+        "deltas": 183,
+        "id": "spe-fr-tut-01",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 52,
+        "wall_s": 1.65
+      },
+      {
+        "decode_tok_s": 207.2,
+        "deltas": 164,
+        "id": "spe-fr-tut-02",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 54,
+        "wall_s": 2.52
+      },
+      {
+        "decode_tok_s": 332.0,
+        "deltas": 174,
+        "id": "spe-fr-tut-03",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 51,
+        "wall_s": 1.59
+      },
+      {
+        "decode_tok_s": 224.2,
+        "deltas": 174,
+        "id": "spe-fr-tut-04",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 51,
+        "wall_s": 2.33
+      },
+      {
+        "decode_tok_s": 287.4,
+        "deltas": 203,
+        "id": "spe-fr-tut-05",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 52,
+        "wall_s": 1.83
+      },
+      {
+        "decode_tok_s": 312.5,
+        "deltas": 186,
+        "id": "spe-fr-tut-06",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 55,
+        "wall_s": 1.69
+      },
+      {
+        "decode_tok_s": 215.1,
+        "deltas": 176,
+        "id": "spe-fr-tut-07",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 54,
+        "wall_s": 2.43
+      },
+      {
+        "decode_tok_s": 297.4,
+        "deltas": 196,
+        "id": "spe-fr-tut-08",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 52,
+        "wall_s": 1.77
+      },
+      {
+        "decode_tok_s": 355.6,
+        "deltas": 160,
+        "id": "spe-code-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 53,
+        "wall_s": 1.49
+      },
+      {
+        "decode_tok_s": 376.0,
+        "deltas": 153,
+        "id": "spe-code-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 51,
+        "wall_s": 1.41
+      },
+      {
+        "decode_tok_s": 397.0,
+        "deltas": 145,
+        "id": "spe-code-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 53,
+        "wall_s": 1.34
+      },
+      {
+        "decode_tok_s": 405.9,
+        "deltas": 141,
+        "id": "spe-code-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 51,
+        "wall_s": 1.31
+      },
+      {
+        "decode_tok_s": 382.8,
+        "deltas": 151,
+        "id": "spe-code-05",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 55,
+        "wall_s": 1.39
+      },
+      {
+        "decode_tok_s": 368.4,
+        "deltas": 156,
+        "id": "spe-code-06",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 53,
+        "wall_s": 1.44
+      },
+      {
+        "decode_tok_s": 388.3,
+        "deltas": 148,
+        "id": "spe-code-07",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 54,
+        "wall_s": 1.37
+      },
+      {
+        "decode_tok_s": 379.6,
+        "deltas": 151,
+        "id": "spe-code-08",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 54,
+        "wall_s": 1.4
+      },
+      {
+        "decode_tok_s": 268.2,
+        "deltas": 215,
+        "id": "spe-en-prose-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 25,
+        "wall_s": 1.93
+      },
+      {
+        "decode_tok_s": 259.7,
+        "deltas": 224,
+        "id": "spe-en-prose-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 22,
+        "wall_s": 1.99
+      },
+      {
+        "decode_tok_s": 259.9,
+        "deltas": 221,
+        "id": "spe-en-prose-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 54,
+        "wall_s": 2.02
+      },
+      {
+        "decode_tok_s": 293.8,
+        "deltas": 198,
+        "id": "spe-en-prose-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 51,
+        "wall_s": 1.79
+      },
+      {
+        "decode_tok_s": 415.8,
+        "deltas": 139,
+        "id": "spe-en-math-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 51,
+        "wall_s": 1.28
+      },
+      {
+        "decode_tok_s": 420.6,
+        "deltas": 136,
+        "id": "spe-en-math-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 55,
+        "wall_s": 1.27
+      },
+      {
+        "decode_tok_s": 413.4,
+        "deltas": 140,
+        "id": "spe-en-math-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 54,
+        "wall_s": 1.29
+      },
+      {
+        "decode_tok_s": 391.6,
+        "deltas": 145,
+        "id": "spe-en-math-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 55,
+        "wall_s": 1.36
+      }
+    ]
+  },
+  "spec": {
+    "method": "draft_model",
+    "model": "$MODELS/gemma-4-26b-a4b-it-assistant",
+    "num_speculative_tokens": 3
+  },
+  "statut": "TERMINE"
+}

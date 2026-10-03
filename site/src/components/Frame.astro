@@ -1,0 +1,27 @@
+---
+/**
+ * The console frame of DESIGN.md (Figma Console bar 5:109): a title bar with
+ * three dots, a mono title and a right-aligned date chip, a separator under
+ * it. No shadow. `bare`: the title as given, without the "3090fe · " prefix.
+ * `heading`: a visually hidden h2 with the title (off when the body brings its
+ * own heading). `flush`: no padding around the body (rows that draw their own).
+ * `short`: the title shown on a phone instead of the full one (Figma 12:441),
+ * so a long title is never cut by an ellipsis there.
+ */
+interface Props { title: string; short?: string; chip?: string | null; id?: string; bare?: boolean; heading?: boolean; flush?: boolean; class?: string }
+const { title, short, chip, id, bare = false, heading = true, flush = false, class: cls = '' } = Astro.props;
+const full = bare ? title : `3090fe · ${title}`;
+---
+<section class={`frame ${cls}`} id={id}>
+  <div class="frame-bar" aria-hidden="true">
+    <span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+    {short
+      ? <span class="frame-title has-short"><span class="frame-title-full">{full}</span><span class="frame-title-short">{short}</span></span>
+      : <span class="frame-title">{full}</span>}
+    {chip && <span class="frame-chip">{chip}</span>}
+  </div>
+  <div class={`frame-body${flush ? ' flush' : ''}`}>
+    {heading && <h2 class="sr-only">{title}</h2>}
+    <slot />
+  </div>
+</section>

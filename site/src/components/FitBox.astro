@@ -1,0 +1,112 @@
+---
+/**
+ * One cell per hardware configuration for a model:
+ *  - "fits · measured": the headline run (see the headline-run rule) with its
+ *    build, protocol, single-stream speed, aggregate and VRAM;
+ *  - "runs, with part of the model in system RAM": the same, when the headline
+ *    run kept part of the model in system RAM (it runs; it does not fit);
+ *  - "fits · ran": runs ended ok there, but none eligible for a headline
+ *    (e.g. speculative-decoding, A/B treatment or quality-only runs);
+ *  - the statuses of runs that never ended ok (e.g. failed-start);
+ *  - or "Not measured on this configuration." (on the two pairs, while no model
+ *    has run on four cards: "Two pairs: never one model on four cards.")
+ * Runs of the uncensored lab show no figure here (refusal rates only).
+ */
+import Num from './Num.astro';
+import AggCell from './AggCell.astro';
+import StatusBadge from './StatusBadge.astro';
+import PrePinBadge from './PrePinBadge.astro';
+import Vram from './Vram.astro';
+import CtxCell from './CtxCell.astro';
+import { hardware, headlineRun, runsOnConfig, soloTokS, vramPerGpu, runDate, isNum, splitGroup, buildLabel, isHouseProtocol, distinctRuns, servedContext, readySeconds, kvPoolTokens, readyWithDebug, usesSpeculation, headlineCandidates } from '../lib/data';
+import { compareHref, configHref, engineLabel, href, runHref, topoLabel } from '../lib/site';
+import { NEVER_FOUR, fourCardRuns } from '../lib/configs';
+
+interface Props { modelId: string }
+const { modelId } = Astro.props;
+const cells = hardware().map((h) => {
+  const head = headlineRun(modelId, h.hardware_id);
+  const others = distinctRuns(runsOnConfig(h.hardware_id).filter((r) => r.model_id === modelId));
+  const ok = others.filter((r) => r.status === 'ok');
+  const spill = !!head && splitGroup(head) === 'cpu-offload';
+  const okSpill = ok.length > 0 && ok.every((r) => splitGroup(r) === 'cpu-offload');
+  // A headline that needs an in-house engine image (house/..., not published): name the best stock-engine alternative.
+  const house = !!head && typeof head.engine.image === 'string' && head.engine.image.startsWith('house/');
+  const stock = house ? headlineCandidates(modelId, h.hardware_id).find((r) => !(typeof r.engine.image === 'string' && r.engine.image.startsWith('house/'))) ?? null : null;
+  return { h, head, others, ok, spill, okSpill, house, stock };
+});
+const short = (id: string) => id.split('/').slice(1).join('/') || id;
+const four = fourCardRuns();
+---
+<div class="fitbox">
+  {cells.map(({ h, head, others, ok, spill, okSpill, house, stock }) => (
+    <div class={`fit-cell ${head || ok.length ? 'measured' : others.length ? 'ran' : 'none'}`}>
+      <h3><a href={configHref(h.hardware_id)}>{h.label}</a></h3>
+      {head ? (
+        <>
+          <p class="badges">
+            {spill
+              ? <span class="badge tone-amber" title="part of the model was held in system RAM: it runs, it does not fit on the cards">runs, with part of the model in system RAM</span>
+              : <span class="badge tone-green">fits · measured</span>}
+            <PrePinBadge prePin={head.engine.pre_pin} />
+          </p>
+          <p>
+            <Num value={soloTokS(head)} unit="tok/s" run={head.run_id} /> <span class="muted small">single stream</span>
+            {isNum(head.metrics.agg_tok_s) && (
+              <><br /><AggCell run={head} long /></>
+            )}
+            {vramPerGpu(head).length > 0 && (
+              <><br /><Vram run={head} long /></>
+            )}
+          </p>
+          {(servedContext(head) !== null || readySeconds(head) !== null || kvPoolTokens(head) !== null) && (
+            <p class="small">
+              {servedContext(head) !== null && <>context <CtxCell run={head} long /></>}
+              {readySeconds(head) !== null && <>{servedContext(head) !== null && ' · '}ready in <Num value={readySeconds(head)} unit="s" run={head.run_id} />{readyWithDebug(head) && <span class="muted" title="measured with NCCL debug logging on: not comparable with other runs"> (debug logging on)</span>}</>}
+              {kvPoolTokens(head) !== null && <>{(servedContext(head) !== null || readySeconds(head) !== null) && ' · '}KV pool <Num value={kvPoolTokens(head)} unit="tokens" run={head.run_id} /></>}
+            </p>
+          )}
+          <p class="small muted">
+            {buildLabel(head)} · {engineLabel(head.engine, { prePin: true })} · {topoLabel(head.topology)} · <span class="mono">{head.protocol ?? 'no protocol'}</span>
+            {!isHouseProtocol(head.protocol) && <> <a class="badge plain tone-amber badge-link" href={href('methodology/#headline-run-rule')}>other protocol</a></>}
+            {' '}· <time class="mono">{runDate(head) ?? 'undated'}</time>
+            {' '}· <a href={runHref(head.run_id)}>headline run</a>
+            {others.length > 1 && <>, <Num value={others.length - 1} href="#runs" /> other run{others.length - 1 === 1 ? '' : 's'} here</>}
+          </p>
+          {house && (
+            <p class="small muted">
+              Needs a custom engine image (<span class="mono">{String(head.engine.image).split(':')[0]}</span>) that is not published.
+              {stock ? <> Stock-engine alternative: <a href={runHref(stock.run_id)}>{buildLabel(stock)}, {engineLabel(stock.engine, { prePin: true })}</a>, <Num value={soloTokS(stock)} unit="tok/s" run={stock.run_id} /> single stream.</> : ' No stock-engine run of this model here.'}
+            </p>
+          )}
+        </>
+      ) : ok.length ? (
+        <>
+          <p class="badges">{okSpill
+            ? <span class="badge tone-amber" title="part of the model was held in system RAM">runs, with part of the model in system RAM</span>
+            : <span class="badge tone-green" title="at least one run on this configuration ended with status ok">fits · ran</span>}</p>
+          <p class="small muted">
+            No headline single-stream figure here. <Num value={ok.length} href="#runs" /> run{ok.length === 1 ? '' : 's'}
+            {' '}({[...new Set(ok.map((r) => r.kind))].sort().join(', ')}) ended ok:{' '}
+            {ok.slice(0, 6).map((r, i) => <>{i > 0 && ', '}<a href={runHref(r.run_id)} class="mono">{short(r.run_id)}</a>{usesSpeculation(r) && <span class="muted" title="decoded with a speculative-decoding drafter: never a headline figure"> (drafter)</span>}</>)}
+            {ok.length > 6 && ', …'}.
+          </p>
+        </>
+      ) : others.length ? (
+        <>
+          <p class="badges">{[...new Set(others.map((r) => r.status))].sort().map((s) => <StatusBadge status={s} />)}</p>
+          <p class="small muted">
+            Tried on this configuration, never ended ok:{' '}
+            {others.map((r, i) => <>{i > 0 && ', '}<a href={runHref(r.run_id)} class="mono">{short(r.run_id)}</a></>)}.
+          </p>
+        </>
+      ) : h.hardware_id === '2x2x3090fe-nvlink' && four.value === 0 ? (
+        <p class="muted">
+          {NEVER_FOUR} <span class="small"><Num value={four.value} href={compareHref('two-pairs-parallel')} /> runs of one model across the four cards; each pair is its own machine.</span>
+        </p>
+      ) : (
+        <p class="muted">Not measured on this configuration.</p>
+      )}
+    </div>
+  ))}
+</div>

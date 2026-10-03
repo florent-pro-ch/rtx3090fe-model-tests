@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "build.schema.json",
+  "title": "One executable artefact of a model (a quantisation, a GGUF, an adapter)",
+  "type": "object",
+  "required": [
+    "build_id",
+    "model_id",
+    "quant",
+    "engine_family"
+  ],
+  "properties": {
+    "build_id": {
+      "type": "string",
+      "description": "<model_id>@<quant-slug>"
+    },
+    "model_id": {
+      "type": "string"
+    },
+    "quant": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "enum": [
+            "bf16",
+            "fp16",
+            "fp8",
+            "awq",
+            "gptq",
+            "w4a16",
+            "w8a8",
+            "gguf",
+            "exl3",
+            "mxfp4",
+            "nvfp4",
+            "bnb",
+            "other",
+            "unknown"
+          ]
+        },
+        "bits": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "format",
+        "label"
+      ]
+    },
+    "source_repo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "size_gb": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "engine_family": {
+      "enum": [
+        "vllm",
+        "llamacpp",
+        "transformers",
+        "comfyui",
+        "sglang",
+        "other",
+        "unknown"
+      ]
+    },
+    "inventory_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "harness_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parse_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runs_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Distinct run records of this build in data/runs (copies left out); 0 means listed but never run here."
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "build_id": "tokenrhythm/neohorse-1-4b@gguf-q4_k_m",
+  "campaign": "2026-09-13-tests-veille-pm",
+  "duplicate_of": null,
+  "ended_at": "2026-09-13T11:40:56Z",
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b10830",
+    "name": "llamacpp",
+    "pre_pin": false,
+    "version": "b10830"
+  },
+  "engine_args": {
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_gpu_layers": 999,
+    "parallel_slots": 1
+  },
+  "evidence": [
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/gpu-snapshots.json",
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/launch.json",
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/mecanique-code.json",
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/mecanique-refus.json",
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/mecanique-tuteur.json",
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/pret-en-secondes.txt",
+    "evidence/2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf/vitesse.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "speed+quality",
+  "metrics": {
+    "agg_concurrency": 8,
+    "agg_ok": 8,
+    "agg_tok_s": 168.4,
+    "agg_wall_s": 24.32,
+    "p50_latency_s": 13.69,
+    "ready_s": 6,
+    "solo_completion_tokens": 512,
+    "solo_tok_s": 166.1,
+    "solo_ttft_ms": 146,
+    "solo_wall_s": 3.082
+  },
+  "model_id": "tokenrhythm/neohorse-1-4b",
+  "parse_notes": [],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-09-13-tests-veille-pm/veille-neohorse-1-4b-gguf",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-180a6e289c5d9611"
+  },
+  "started_at": "2026-09-13T11:40:25Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      3525
+    ],
+    "snapshot": "load"
+  }
+}

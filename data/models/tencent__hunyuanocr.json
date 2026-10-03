@@ -1,0 +1,61 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-hunyuanocr"
+    ],
+    "inventory_ids": [
+      "hunyuanocr-1-5-1b-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "tencent/hunyuanocr@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-26",
+  "licence": {
+    "flags": [
+      "territory"
+    ],
+    "name": "Tencent Hunyuan community (territory clause)",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "tencent/hunyuanocr",
+  "name": "HunyuanOCR",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 1.1,
+  "parse_notes": [],
+  "slug": "tencent__hunyuanocr",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/tencent/HunyuanOCR",
+  "vendor": "Tencent",
+  "verdict": {
+    "as_of": "2026-09-29",
+    "status": "not-rated",
+    "summary": "Refused to start under the pinned vLLM (a RoPE-channel mismatch on the Transformers backend). Not rated. Its licence excludes some territories."
+  }
+}

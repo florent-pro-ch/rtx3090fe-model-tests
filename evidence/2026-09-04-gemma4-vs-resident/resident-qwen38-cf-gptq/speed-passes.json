@@ -1,0 +1,47 @@
+{
+  "note": "numbers from the fixed T0-T5 bench of 2026-09-04; answers and transcripts are not exported",
+  "passes": [
+    {
+      "agg_concurrency": 8,
+      "agg_ok": 8,
+      "agg_tok_s": 536.4,
+      "agg_total_tokens": 4096,
+      "ended_at": "2026-09-04T22:00:16Z",
+      "p50_latency_s": 7.44,
+      "pass": "defaut",
+      "solo_completion_tokens": 512,
+      "solo_tok_s": 78.5,
+      "solo_ttft_s": 0.118,
+      "solo_wall_s": 6.52,
+      "started_at": "2026-09-04T21:59:36Z",
+      "t0_seconds": 1.27,
+      "t1_completion_tokens": 349,
+      "t1_seconds": 3.58,
+      "t2_completion_tokens": 254,
+      "t2_seconds": 2.37,
+      "t4_completion_tokens": 257,
+      "t4_seconds": 2.69
+    },
+    {
+      "agg_concurrency": 8,
+      "agg_ok": 8,
+      "agg_tok_s": 370.8,
+      "agg_total_tokens": 2663,
+      "ended_at": "2026-09-04T21:59:36Z",
+      "p50_latency_s": 4.66,
+      "pass": "no-thinking",
+      "solo_completion_tokens": 347,
+      "solo_tok_s": 90.5,
+      "solo_ttft_s": 0.084,
+      "solo_wall_s": 3.84,
+      "started_at": "2026-09-04T21:59:10Z",
+      "t0_seconds": 0.45,
+      "t1_completion_tokens": 137,
+      "t1_seconds": 1.53,
+      "t2_completion_tokens": 634,
+      "t2_seconds": 5.65,
+      "t4_completion_tokens": 273,
+      "t4_seconds": 2.66
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-10-02",
+    "what": "Claude Fable 5.1's test-retest duel agreement on lot A was stated as 91.7 %; it is 90.0 % (9 of 10 duels).",
+    "why": "The lab's count had taken code-review verdicts (yes / partly / no) for duels and counted each duel twice; the corrected count still meets the gate's 90 % threshold.",
+    "affects": [
+      "data/judge-audit.json",
+      "methodology/JUDGE.md"
+    ]
+  },
+  {
+    "date": "2026-10-02",
+    "what": "The duel criteria of the lot-A judge gate were labelled 'same duel winner' until 2026-10-02; they are now labelled 'same duel verdict (a winner, a tie, or incoherent)'.",
+    "why": "The lab's rule has compared duel verdicts, an incoherent duel included, since before GPT-6 Astra graded lot A; the old label described the strict reading instead, under which the gate would not pass (cross_checks[id=cloud-lot-a].inter_family.strict_reading_passes). Both readings are now published.",
+    "affects": [
+      "data/judge-audit.json",
+      "methodology/JUDGE.md"
+    ]
+  }
+]

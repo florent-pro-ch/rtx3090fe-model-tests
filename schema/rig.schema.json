@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rig.schema.json",
+  "title": "The rig: minimum server architecture behind every number",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "rig_id",
+    "description",
+    "evidence_note",
+    "facts",
+    "not_recorded",
+    "sources"
+  ],
+  "properties": {
+    "rig_id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "evidence_note": {
+      "type": "string"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "fact",
+          "evidence"
+        ],
+        "properties": {
+          "key": {
+            "enum": [
+              "gpus",
+              "nvlink",
+              "nvlink_speed",
+              "pcie",
+              "pair_vms",
+              "driver",
+              "power_limit",
+              "dual_bios",
+              "host_cpu",
+              "host_ram",
+              "psu"
+            ],
+            "description": "Only the approved list of rig facts: anything else about the host stays out of the public record."
+          },
+          "fact": {
+            "type": "string"
+          },
+          "evidence": {
+            "const": "rig description"
+          }
+        }
+      }
+    },
+    "not_recorded": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

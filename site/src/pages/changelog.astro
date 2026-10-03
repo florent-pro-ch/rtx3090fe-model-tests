@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { changelogMarkdown, errata } from '../lib/data';
+import { renderMarkdown } from '../lib/markdown';
+
+const md = changelogMarkdown();
+const html = md ? renderMarkdown(md, 'CHANGELOG.md') : null;
+const errs = errata();
+---
+<Layout title="Changelog" description="What changed in the published data, and every number that was corrected or withdrawn, with the reason." crumbs={[{ label: 'changelog' }]}>
+  <h1>Changelog</h1>
+  <h2 id="errata">Errata</h2>
+  <p class="small muted">A number corrected or withdrawn is recorded here, with the reason; it is never silently changed.</p>
+  {errs.length === 0 ? (
+    <p class="empty">No erratum recorded.</p>
+  ) : (
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Date</th><th scope="col">What</th><th scope="col">Why</th><th scope="col">Affects</th></tr></thead>
+        <tbody>
+          {errs.map((e) => (
+            <tr>
+              <td class="mono small nowrap">{e.date}</td>
+              <td>{e.what}</td>
+              <td class="small">{e.why}</td>
+              <td class="mono small break">{(e.affects ?? []).join(', ') || '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+  <h2 id="changes">Changes</h2>
+  {html ? <article class="prose" set:html={html} /> : <p class="empty">No changelog is published yet.</p>}
+</Layout>

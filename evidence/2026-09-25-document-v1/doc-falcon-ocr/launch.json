@@ -1,0 +1,28 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "$WORK/serveur_falcon_ocr.py",
+    "--model",
+    "$MODELS/falcon-ocr",
+    "--served-model-name",
+    "falcon-ocr"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "house/transformers-bnb:0.29.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "image",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

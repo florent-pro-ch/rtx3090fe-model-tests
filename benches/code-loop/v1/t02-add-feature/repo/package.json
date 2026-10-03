@@ -1,0 +1,7 @@
+{
+  "name": "tinylib",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dependency-free utility modules for Node 24 (ESM)."
+}

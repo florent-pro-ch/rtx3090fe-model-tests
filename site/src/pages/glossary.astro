@@ -1,0 +1,11 @@
+---
+/** GLOSSARY.md rendered as a page, so status words and terms can be linked from every page. */
+import Layout from '../layouts/Layout.astro';
+import { readRepoText } from '../lib/data';
+import { renderMarkdown } from '../lib/markdown';
+const md = readRepoText('GLOSSARY.md');
+const html = md ? renderMarkdown(md, 'GLOSSARY.md') : null;
+---
+<Layout title="Glossary" description="The words of the RTX 3090 FE model tests: statuses, scores, file names of the evidence and the keys inside them." crumbs={[{ label: 'glossary' }]}>
+  {html ? <article class="prose" set:html={html} /> : <><h1>Glossary</h1><p class="empty">The glossary is not published yet.</p></>}
+</Layout>

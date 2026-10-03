@@ -1,0 +1,80 @@
+# critical — every gate on every push and pull request, then the site build.
+# A red run here blocks the Pages deployment (pages.yml waits for this workflow).
+name: critical
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: critical-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: gates and site build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5, resolved 2026-10-02
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6, resolved 2026-10-02
+        with:
+          python-version: "3.12"
+
+      - name: Install jsonschema and pytest
+        run: python -m pip install --disable-pip-version-check "jsonschema>=4.23,<5" "pytest>=8,<9"
+
+      # G5 and the site link check need the built site: they run after the build below.
+      # G9 (gitleaks over the whole history) is not run here, since the checkout is
+      # shallow: it is a manual gate before any publication (tools/README.md).
+      - name: Run every repository gate (tools/check_all.sh; site gates after the build)
+        run: bash tools/check_all.sh
+
+      # check_all.sh above already runs them; this step fails on its own so a red harness is easy to spot.
+      - name: Harness tests (harness/, pytest)
+        run: python -m pytest -q -p no:cacheprovider harness/tests
+
+      - name: Set up Node 24
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5, resolved 2026-10-02
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Build the site
+        working-directory: site
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Generated figures are fresh (figures/, README banner block)
+        run: node tools/build_figures.mjs --check
+
+      - name: Leak scan of the built site (G2 on site/dist)
+        run: python tools/scan_public.py site/dist
+
+      - name: Every number of the built site traced to data/ (G5 on site/dist)
+        run: python tools/verify_numbers.py
+
+      - name: Every internal link of the built site resolves
+        working-directory: site
+        run: node scripts/check-links.mjs dist
+
+      - name: Theme colour contrast reaches WCAG AA
+        working-directory: site
+        run: node scripts/contrast.mjs
+
+      - name: Media metadata including the built site (G7)
+        run: python tools/check_media.py
+
+      - name: Size gate including the built site (G3)
+        run: python tools/check_size.py

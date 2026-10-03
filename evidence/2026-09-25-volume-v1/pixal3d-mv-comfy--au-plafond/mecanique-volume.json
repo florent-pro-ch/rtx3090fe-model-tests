@@ -1,0 +1,11 @@
+{
+  "erreur": 0,
+  "faits": 15,
+  "n": 15,
+  "non_cote": false,
+  "non_executes": 0,
+  "ok": 15,
+  "taux_echec": 0.0,
+  "taux_erreur": 0.0,
+  "timeout": 0
+}

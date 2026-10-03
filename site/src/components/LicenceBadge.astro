@@ -1,0 +1,23 @@
+---
+/** Licence and access are two separate facts: the licence name with its flags,
+ * then open/gated access. Flags (non-commercial, territorial clause...) are amber.
+ * The licence badge links to the licence's source when it is a URL; otherwise
+ * the source is given in its tooltip. */
+interface Props { licence: { name: string; flags?: string[]; source?: string | null }; access?: string | null }
+const { licence, access } = Astro.props;
+const flags = licence?.flags ?? [];
+const src = licence?.source ?? null;
+const srcUrl = src && /^https?:\/\//.test(src) ? src : null;
+const tip = src ? `licence, recorded from: ${src}` : 'licence (source not recorded)';
+---
+<span class="badges">
+  {srcUrl ? (
+    <a class="badge plain tone-muted mono" href={srcUrl} rel="noopener" title={tip}>{licence?.name || 'unknown licence'} ↗</a>
+  ) : (
+    <span class="badge plain tone-muted mono" title={tip}>{licence?.name || 'unknown licence'}</span>
+  )}
+  {flags.map((f) => <span class="badge plain tone-amber" title="licence flag">{f}</span>)}
+  {access && access !== 'unknown' && (
+    <span class={`badge plain ${access === 'gated' ? 'tone-amber' : 'tone-green'}`} title="access">{access}</span>
+  )}
+</span>

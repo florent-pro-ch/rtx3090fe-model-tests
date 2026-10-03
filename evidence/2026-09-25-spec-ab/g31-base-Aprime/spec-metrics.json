@@ -1,0 +1,423 @@
+{
+  "agrege": {
+    "c4-en": {
+      "agg_tok_s": 239.1,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 8.58,
+      "tokens": 8192,
+      "wall_s": 34.27
+    },
+    "c4-fr": {
+      "agg_tok_s": 239.1,
+      "conc": 4,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 8.55,
+      "tokens": 4096,
+      "wall_s": 17.13
+    },
+    "c8-en": {
+      "agg_tok_s": 427.4,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 16,
+      "ok": 16,
+      "p50_latency_s": 9.55,
+      "tokens": 8192,
+      "wall_s": 19.17
+    },
+    "c8-fr": {
+      "agg_tok_s": 428.0,
+      "conc": 8,
+      "erreurs": 0,
+      "n": 8,
+      "ok": 8,
+      "p50_latency_s": 9.57,
+      "tokens": 4096,
+      "wall_s": 9.57
+    }
+  },
+  "bras": "g31-base-Aprime",
+  "cible": "gemma-4-31b-qat",
+  "debut": "2026-09-25T16:41:51Z",
+  "erreurs": 0,
+  "fin": "2026-09-25T16:52:27Z",
+  "identite": {
+    "erreurs": 0,
+    "finish": {
+      "length": 24
+    },
+    "n": 24,
+    "tokens_max": 512,
+    "tokens_min": 512
+  },
+  "kv": {
+    "kv_cache_memoire_gib": 9.38,
+    "kv_cache_tokens": 38912.0,
+    "poids_gib": 10.67
+  },
+  "moteur": "vllm",
+  "nvidia_smi_apres": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 68
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 62
+    }
+  ],
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 68
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 61
+    }
+  ],
+  "nvidia_smi_charge": [
+    {
+      "index": 0,
+      "memoire_mib": 21581,
+      "temperature_c": 73
+    },
+    {
+      "index": 1,
+      "memoire_mib": 21581,
+      "temperature_c": 66
+    }
+  ],
+  "nvidia_smi_pret": [
+    {
+      "index": 0,
+      "memoire_mib": 21489,
+      "temperature_c": 47
+    },
+    {
+      "index": 1,
+      "memoire_mib": 21489,
+      "temperature_c": 37
+    }
+  ],
+  "passes": {
+    "c4-en": {
+      "acceptation": {
+        "accepted_tokens": null,
+        "draft_tokens": null,
+        "drafts": null,
+        "longueur_acceptee_moyenne": null,
+        "par_position": {},
+        "taux_acceptation": null
+      },
+      "compteurs": {},
+      "secondes": 34.3
+    },
+    "c4-fr": {
+      "acceptation": {
+        "accepted_tokens": null,
+        "draft_tokens": null,
+        "drafts": null,
+        "longueur_acceptee_moyenne": null,
+        "par_position": {},
+        "taux_acceptation": null
+      },
+      "compteurs": {},
+      "secondes": 17.1
+    },
+    "c8-en": {
+      "acceptation": {
+        "accepted_tokens": null,
+        "draft_tokens": null,
+        "drafts": null,
+        "longueur_acceptee_moyenne": null,
+        "par_position": {},
+        "taux_acceptation": null
+      },
+      "compteurs": {},
+      "secondes": 19.2
+    },
+    "c8-fr": {
+      "acceptation": {
+        "accepted_tokens": null,
+        "draft_tokens": null,
+        "drafts": null,
+        "longueur_acceptee_moyenne": null,
+        "par_position": {},
+        "taux_acceptation": null
+      },
+      "compteurs": {},
+      "secondes": 9.6
+    },
+    "identite": {
+      "acceptation": {
+        "accepted_tokens": null,
+        "draft_tokens": null,
+        "drafts": null,
+        "longueur_acceptee_moyenne": null,
+        "par_position": {},
+        "taux_acceptation": null
+      },
+      "compteurs": {},
+      "secondes": 187.2
+    },
+    "solo": {
+      "acceptation": {
+        "accepted_tokens": null,
+        "draft_tokens": null,
+        "drafts": null,
+        "longueur_acceptee_moyenne": null,
+        "par_position": {},
+        "taux_acceptation": null
+      },
+      "compteurs": {},
+      "secondes": 187.6
+    }
+  },
+  "pret_en_secondes": 176.5,
+  "requetes": 96,
+  "role": "base_Aprime",
+  "solo": {
+    "en": {
+      "decode_tok_s_mediane": 66.0,
+      "decode_tok_s_moyenne": 66.0,
+      "n": 16,
+      "ttft_ms_mediane": 74
+    },
+    "fr": {
+      "decode_tok_s_mediane": 66.0,
+      "decode_tok_s_moyenne": 66.0,
+      "n": 8,
+      "ttft_ms_mediane": 67
+    },
+    "items": [
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 500,
+        "id": "spe-fr-tut-01",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 66,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 504,
+        "id": "spe-fr-tut-02",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 68,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 502,
+        "id": "spe-fr-tut-03",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 74,
+        "wall_s": 7.82
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 503,
+        "id": "spe-fr-tut-04",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 66,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 505,
+        "id": "spe-fr-tut-05",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 74,
+        "wall_s": 7.82
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 500,
+        "id": "spe-fr-tut-06",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 67,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 486,
+        "id": "spe-fr-tut-07",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 67,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 499,
+        "id": "spe-fr-tut-08",
+        "langue": "fr",
+        "tokens": 512,
+        "ttft_ms": 67,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 65.9,
+        "deltas": 512,
+        "id": "spe-code-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 82,
+        "wall_s": 7.84
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 512,
+        "id": "spe-code-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 76,
+        "wall_s": 7.82
+      },
+      {
+        "decode_tok_s": 65.9,
+        "deltas": 512,
+        "id": "spe-code-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 81,
+        "wall_s": 7.84
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 512,
+        "id": "spe-code-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 82,
+        "wall_s": 7.83
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 512,
+        "id": "spe-code-05",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 74,
+        "wall_s": 7.82
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 510,
+        "id": "spe-code-06",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 75,
+        "wall_s": 7.82
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 512,
+        "id": "spe-code-07",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 83,
+        "wall_s": 7.83
+      },
+      {
+        "decode_tok_s": 65.8,
+        "deltas": 512,
+        "id": "spe-code-08",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 89,
+        "wall_s": 7.85
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 507,
+        "id": "spe-en-prose-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 52,
+        "wall_s": 7.79
+      },
+      {
+        "decode_tok_s": 66.1,
+        "deltas": 504,
+        "id": "spe-en-prose-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 52,
+        "wall_s": 7.78
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 507,
+        "id": "spe-en-prose-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 61,
+        "wall_s": 7.8
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 474,
+        "id": "spe-en-prose-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 60,
+        "wall_s": 7.8
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 512,
+        "id": "spe-en-math-01",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 67,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 504,
+        "id": "spe-en-math-02",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 74,
+        "wall_s": 7.82
+      },
+      {
+        "decode_tok_s": 66.0,
+        "deltas": 502,
+        "id": "spe-en-math-03",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 66,
+        "wall_s": 7.81
+      },
+      {
+        "decode_tok_s": 65.9,
+        "deltas": 512,
+        "id": "spe-en-math-04",
+        "langue": "en",
+        "tokens": 512,
+        "ttft_ms": 86,
+        "wall_s": 7.84
+      }
+    ]
+  },
+  "spec": null,
+  "statut": "TERMINE"
+}

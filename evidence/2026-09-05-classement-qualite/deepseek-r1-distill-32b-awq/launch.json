@@ -1,0 +1,42 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/deepseek-r1-distill-qwen-32b-awq",
+    "--tensor-parallel-size",
+    "2",
+    "--quantization",
+    "awq_marlin",
+    "--max-model-len",
+    "16384",
+    "--max-num-seqs",
+    "8",
+    "--gpu-memory-utilization",
+    "0.92",
+    "--kv-cache-dtype",
+    "fp8",
+    "--reasoning-parser",
+    "deepseek_r1",
+    "--served-model-name",
+    "$MODELS/deepseek-r1-distill-qwen-32b-awq"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "vllm/vllm-openai:v0.26.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

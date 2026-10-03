@@ -1,0 +1,18 @@
+{
+ "candidat": "nvlink-with-nvlink",
+ "debut": "2026-09-12T22:35:54Z",
+ "solo": {
+  "ttft_ms": 174,
+  "tok_s": 78.6,
+  "completion_tokens": 330,
+  "wall_s": 4.199
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 396.6,
+  "p50_latency_s": 5.04,
+  "wall_s": 7.23
+ },
+ "fin": "2026-09-12T22:36:09Z"
+}

@@ -1,0 +1,83 @@
+---
+/**
+ * The headline table of a configuration: one row per model (headline-run
+ * rule), sorted by single-stream speed, with the build (quantisation) and the
+ * protocol of each figure, VRAM per GPU and its meaning, engine and version
+ * with the pre-pin badge, the split mode, and the date linking to the run.
+ * The rule's own text (methodology/headline-rule.md) is the note under it.
+ */
+import Num from './Num.astro';
+import AggCell from './AggCell.astro';
+import Table from './Table.astro';
+import Vram from './Vram.astro';
+import PrePinBadge from './PrePinBadge.astro';
+import SplitBadge from './SplitBadge.astro';
+import HeadlineRule from './HeadlineRule.astro';
+import CtxCell from './CtxCell.astro';
+import type { Run } from '../lib/data';
+import { isNum, modelById, modelName, runDate, soloTokS, ttftMs, vramPerGpu, isHouseProtocol, buildLabel, repetitions, servedContext, readySeconds, kvPoolTokens, readyWithDebug, aggSlots } from '../lib/data';
+import { configHref, engineLabel, glossaryHref, href, modelHref, runHref } from '../lib/site';
+import { hardwareById } from '../lib/data';
+
+interface Props { heads: { model_id: string; run: Run }[]; label?: string; showSplit?: boolean; firstCol?: 'model' | 'config'; rule?: boolean }
+const { heads, label = 'headline runs', showSplit = true, firstCol = 'model', rule = true } = Astro.props;
+const anyOther = heads.some(({ run }) => !isHouseProtocol(run.protocol));
+const anyKv = heads.some(({ run }) => kvPoolTokens(run) !== null);
+const anySerial = heads.some(({ run }) => aggSlots(run).serialised && isNum(run.metrics.agg_tok_s));
+---
+<Table label={label} search={heads.length > 8}>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col" data-sort>{firstCol === 'model' ? 'Model' : 'Configuration'}</th>
+        <th scope="col" data-sort>Build</th>
+        <th scope="col" class="num" data-sort="num">Single stream</th>
+        <th scope="col" class="num" data-sort="num">Aggregate</th>
+        <th scope="col" class="num" data-sort="num">TTFT</th>
+        <th scope="col" class="num" data-sort="num" title="context one request could use: max_model_len (vLLM); for llama.cpp, ctx_size divided by the slots (-np), since llama.cpp splits its context across them (the total is in each cell's tooltip)">Context</th>
+        <th scope="col" class="num" data-sort="num" title="seconds from launch to a ready server">Ready</th>
+        {anyKv && <th scope="col" class="num" data-sort="num" title="KV-cache pool the engine logged, in tokens">KV pool</th>}
+        <th scope="col" class="num" data-sort="num">VRAM per GPU</th>
+        <th scope="col" data-sort>Engine</th>
+        {showSplit && <th scope="col" data-sort>Split</th>}
+        <th scope="col" data-sort>Protocol</th>
+        <th scope="col" data-sort>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {heads.map(({ model_id, run }) => {
+        const m = modelById().get(model_id);
+        const vr = vramPerGpu(run);
+        const house = isHouseProtocol(run.protocol);
+        const reps = repetitions(run);
+        return (
+          <tr>
+            <td><div class="cell-min">{firstCol === 'config'
+              ? <a href={configHref(run.hardware)}>{hardwareById(run.hardware)?.label ?? run.hardware}</a>
+              : m ? <a href={modelHref(m.slug)}>{m.name}</a> : <span>{modelName(model_id)}</span>}</div></td>
+            <td class="small"><span title={run.build_id ?? 'build not recorded'}>{buildLabel(run)}</span></td>
+            <td class="num" data-v={String(soloTokS(run))}><Num value={soloTokS(run)} unit="tok/s" run={run.run_id} /></td>
+            <td class="num" data-v={isNum(run.metrics.agg_tok_s) ? String(run.metrics.agg_tok_s) : ''}><AggCell run={run} /></td>
+            <td class="num" data-v={ttftMs(run) ?? ''}><Num value={ttftMs(run)} unit="ms" run={run.run_id} nullText="—" /></td>
+            <td class="num" data-v={servedContext(run) ?? ''}><CtxCell run={run} /></td>
+            <td class="num" data-v={readySeconds(run) ?? ''}><Num value={readySeconds(run)} unit="s" run={run.run_id} nullText="—" />{readyWithDebug(run) && <sup class="muted" title="ready time measured with NCCL debug logging on: not comparable with other runs">*</sup>}</td>
+            {anyKv && <td class="num" data-v={kvPoolTokens(run) ?? ''}><Num value={kvPoolTokens(run)} unit="tokens" run={run.run_id} nullText="—" /></td>}
+            <td class="num" data-v={vr.length ? String(Math.max(...vr)) : ''}><Vram run={run} /></td>
+            <td><span class="mono small engine">{engineLabel(run.engine)}</span> <PrePinBadge prePin={run.engine.pre_pin} /></td>
+            {showSplit && <td><SplitBadge run={run} /></td>}
+            <td class="small nowrap" data-v={run.protocol ?? ''}>
+              <span class="mono">{run.protocol ?? 'no protocol'}</span>
+              {!house && <><br /><a class="badge plain tone-amber badge-link" href={href('methodology/#headline-run-rule')} title="not the house speed protocol: not directly comparable with the house-protocol rows">other protocol</a></>}
+              {reps > 1 && <><br /><span class="muted"><Num value={reps} run={run.run_id} /> repetitions</span></>}
+            </td>
+            <td class="mono small nowrap" data-v={runDate(run) ?? ''}><a href={runHref(run.run_id)} title={`run ${run.run_id}`}>{runDate(run) ?? 'undated'}</a></td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</Table>
+{anySerial && <p class="small muted">An aggregate marked <em>1 slot (serialised)</em> comes from a llama.cpp server started with one slot (<code>-np 1</code>): the eight requests were served one after another, so it is single-stream speed, not batching. llama.cpp runs with 4 or 8 slots are in the run lists.</p>}
+{heads.some(({ run }) => readyWithDebug(run)) && <p class="small muted">* Ready time measured with NCCL debug logging on: not comparable with other runs.</p>}
+{anyOther && <p class="small muted">Rows marked <em>other protocol</em> were not measured under the house speed protocol (<code>speed-house/v1</code>); see <a href={glossaryHref('speed-house/v1')}>the glossary</a> and the protocol notes in the methodology.</p>}
+{rule && <HeadlineRule compact />}

@@ -1,0 +1,1067 @@
+[
+  {
+    "builds": [
+      "allenai/olmocr-2-7b-1025@bf16",
+      "allenai/olmocr-2-7b-1025@unknown-2026-07"
+    ],
+    "category": "ocr",
+    "model_id": "allenai/olmocr-2-7b-1025",
+    "name": "olmOCR-2-7B-1025",
+    "slug": "allenai__olmocr-2-7b-1025",
+    "vendor": "Ai2 (Allen Institute)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "alonsoko/gemma-4-31b-it-abliterated-heretic@awq-w4a16"
+    ],
+    "category": "vlm",
+    "model_id": "alonsoko/gemma-4-31b-it-abliterated-heretic",
+    "name": "Gemma 4 31B IT abliterated (heretic)",
+    "slug": "alonsoko__gemma-4-31b-it-abliterated-heretic",
+    "vendor": "alonsoko",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "audio8/ark-asr-3b@bf16"
+    ],
+    "category": "asr",
+    "model_id": "audio8/ark-asr-3b",
+    "name": "ARK-ASR-3B",
+    "slug": "audio8__ark-asr-3b",
+    "vendor": "Audio8",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "audio8/audio8-tts-preview-0.6b@onnx-int4"
+    ],
+    "category": "tts",
+    "model_id": "audio8/audio8-tts-preview-0.6b",
+    "name": "Audio8 TTS Preview 0.6B",
+    "slug": "audio8__audio8-tts-preview-0.6b",
+    "vendor": "Audio8",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "baai/bge-m3@fp16-fp32-tei"
+    ],
+    "category": "embedding",
+    "model_id": "baai/bge-m3",
+    "name": "bge-m3",
+    "slug": "baai__bge-m3",
+    "vendor": "BAAI",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "baai/bge-reranker-v2-m3@unknown"
+    ],
+    "category": "reranker",
+    "model_id": "baai/bge-reranker-v2-m3",
+    "name": "bge-reranker-v2-m3",
+    "slug": "baai__bge-reranker-v2-m3",
+    "vendor": "BAAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "baidu/unlimited-ocr@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "baidu/unlimited-ocr",
+    "name": "Unlimited-OCR",
+    "slug": "baidu__unlimited-ocr",
+    "vendor": "Baidu",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "black-forest-labs/flux.2-klein-4b@bf16"
+    ],
+    "category": "image-gen",
+    "model_id": "black-forest-labs/flux.2-klein-4b",
+    "name": "FLUX.2 klein 4B",
+    "slug": "black-forest-labs__flux.2-klein-4b",
+    "vendor": "Black Forest Labs",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "breezeblue/breeze-tts-2@bf16"
+    ],
+    "category": "tts",
+    "model_id": "breezeblue/breeze-tts-2",
+    "name": "Breeze TTS 2",
+    "slug": "breezeblue__breeze-tts-2",
+    "vendor": "BreezeBlue",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "cross-encoder/ms-marco-minilm-l-6-v2@unknown"
+    ],
+    "category": "reranker",
+    "model_id": "cross-encoder/ms-marco-minilm-l-6-v2",
+    "name": "ms-marco-MiniLM-L-6-v2",
+    "slug": "cross-encoder__ms-marco-minilm-l-6-v2",
+    "vendor": "sentence-transformers",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "datalab-to/chandra-ocr-2@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "datalab-to/chandra-ocr-2",
+    "name": "Chandra OCR 2",
+    "slug": "datalab-to__chandra-ocr-2",
+    "vendor": "Datalab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "datalab-to/surya-ocr-2@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "datalab-to/surya-ocr-2",
+    "name": "Surya OCR 2",
+    "slug": "datalab-to__surya-ocr-2",
+    "vendor": "Datalab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "davidau/qwen3.6-27b-fable-fusion-711@gptq-int4"
+    ],
+    "category": "vlm",
+    "model_id": "davidau/qwen3.6-27b-fable-fusion-711",
+    "name": "Qwen3.6-27B-Fable-Fusion-711",
+    "slug": "davidau__qwen3.6-27b-fable-fusion-711",
+    "vendor": "DavidAU (community merge)",
+    "verdict_status": "serves-lane"
+  },
+  {
+    "builds": [
+      "davidau/qwen3.8-27b-cold-fusion-gain-v1.1@gguf-i1-q4_k_m",
+      "davidau/qwen3.8-27b-cold-fusion-gain-v1.1@gptq-w4a16"
+    ],
+    "category": "vlm",
+    "model_id": "davidau/qwen3.8-27b-cold-fusion-gain-v1.1",
+    "name": "Qwen3.8-27B-Cold-Fusion-GAIN-V1.1",
+    "slug": "davidau__qwen3.8-27b-cold-fusion-gain-v1.1",
+    "vendor": "DavidAU (community merge)",
+    "verdict_status": "serves-lane"
+  },
+  {
+    "builds": [
+      "deepseek-ai/deepseek-ocr-2@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "deepseek-ai/deepseek-ocr-2",
+    "name": "DeepSeek-OCR-2",
+    "slug": "deepseek-ai__deepseek-ocr-2",
+    "vendor": "DeepSeek",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "deepseek-ai/deepseek-r1-distill-qwen-32b@awq-int4"
+    ],
+    "category": "llm",
+    "model_id": "deepseek-ai/deepseek-r1-distill-qwen-32b",
+    "name": "DeepSeek-R1-Distill-Qwen-32B",
+    "slug": "deepseek-ai__deepseek-r1-distill-qwen-32b",
+    "vendor": "DeepSeek",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "dots-studio/dots.ocr@bf16",
+      "dots-studio/dots.ocr@unknown-2026-07"
+    ],
+    "category": "ocr",
+    "model_id": "dots-studio/dots.ocr",
+    "name": "dots.ocr",
+    "slug": "dots-studio__dots.ocr",
+    "vendor": "rednote-hilab / dots-studio",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "empero-ai/qwen3.8-9b-distill@bf16"
+    ],
+    "category": "llm",
+    "model_id": "empero-ai/qwen3.8-9b-distill",
+    "name": "Qwen3.8-9B-Distill",
+    "slug": "empero-ai__qwen3.8-9b-distill",
+    "vendor": "Empero AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "funaudiollm/fun-cosyvoice3-0.5b-2512@fp16-fp32-official",
+      "funaudiollm/fun-cosyvoice3-0.5b-2512@onnx-community-port"
+    ],
+    "category": "tts",
+    "model_id": "funaudiollm/fun-cosyvoice3-0.5b-2512",
+    "name": "Fun-CosyVoice3-0.5B-2512",
+    "slug": "funaudiollm__fun-cosyvoice3-0.5b-2512",
+    "vendor": "FunAudioLLM (Alibaba)",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "google/gemma-3-27b-it@awq-int4-qat"
+    ],
+    "category": "llm",
+    "model_id": "google/gemma-3-27b-it",
+    "name": "Gemma 3 27B IT",
+    "slug": "google__gemma-3-27b-it",
+    "vendor": "Google",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "google/gemma-4-26b-a4b-it@awq-w4a16"
+    ],
+    "category": "vlm",
+    "model_id": "google/gemma-4-26b-a4b-it",
+    "name": "Gemma 4 26B-A4B IT",
+    "slug": "google__gemma-4-26b-a4b-it",
+    "vendor": "Google",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "google/gemma-4-26b-a4b-it-assistant@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "google/gemma-4-26b-a4b-it-assistant",
+    "name": "Gemma 4 26B-A4B assistant draft model",
+    "slug": "google__gemma-4-26b-a4b-it-assistant",
+    "vendor": "google",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "google/gemma-4-31b-it@w4a16-qat"
+    ],
+    "category": "vlm",
+    "model_id": "google/gemma-4-31b-it",
+    "name": "Gemma 4 31B IT",
+    "slug": "google__gemma-4-31b-it",
+    "vendor": "Google",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "google/gemma-4-31b-it-assistant@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "google/gemma-4-31b-it-assistant",
+    "name": "Gemma 4 31B assistant draft model",
+    "slug": "google__gemma-4-31b-it-assistant",
+    "vendor": "google",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "google/medgemma-1.5-4b-it@bf16"
+    ],
+    "category": "medical-imaging",
+    "model_id": "google/medgemma-1.5-4b-it",
+    "name": "MedGemma 1.5 4B IT",
+    "slug": "google__medgemma-1.5-4b-it",
+    "vendor": "Google (Health AI Developer Foundations)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "hexgrad/kokoro-82m@onnx-fp32"
+    ],
+    "category": "tts",
+    "model_id": "hexgrad/kokoro-82m",
+    "name": "Kokoro-82M",
+    "slug": "hexgrad__kokoro-82m",
+    "vendor": "hexgrad",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "ibm-granite/granite-4.2-3b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "ibm-granite/granite-4.2-3b",
+    "name": "Granite 4.2 3B",
+    "slug": "ibm-granite__granite-4.2-3b",
+    "vendor": "IBM",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "ibm-granite/granite-4.2-8b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "ibm-granite/granite-4.2-8b",
+    "name": "Granite 4.2 8B",
+    "slug": "ibm-granite__granite-4.2-8b",
+    "vendor": "IBM",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "ifm/k2-horizon-0.9b@bf16-forced"
+    ],
+    "category": "llm",
+    "model_id": "ifm/k2-horizon-0.9b",
+    "name": "K2-Horizon-0.9B",
+    "slug": "ifm__k2-horizon-0.9b",
+    "vendor": "IFM / MBZUAI",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "ifm/k2-horizon-3.7b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "ifm/k2-horizon-3.7b",
+    "name": "K2-Horizon-3.7B",
+    "slug": "ifm__k2-horizon-3.7b",
+    "vendor": "IFM / MBZUAI",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "ifm/k2-horizon-7b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "ifm/k2-horizon-7b",
+    "name": "K2-Horizon-7B",
+    "slug": "ifm__k2-horizon-7b",
+    "vendor": "IFM / MBZUAI",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "inclusionai/ling-3.0-flash@gguf-q4_k_m"
+    ],
+    "category": "moe-llm",
+    "model_id": "inclusionai/ling-3.0-flash",
+    "name": "Ling-3.0-flash",
+    "slug": "inclusionai__ling-3.0-flash",
+    "vendor": "inclusionAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "jetspec/jetspec-qwen3-8b@bf16"
+    ],
+    "category": "draft-head",
+    "model_id": "jetspec/jetspec-qwen3-8b",
+    "name": "JetSpec head for Qwen3-8B",
+    "slug": "jetspec__jetspec-qwen3-8b",
+    "vendor": "hao-ai-lab (JetSpec)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "jinaai/jina-ocr-v1@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "jinaai/jina-ocr-v1",
+    "name": "Jina-OCR-v1",
+    "slug": "jinaai__jina-ocr-v1",
+    "vendor": "Jina AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "lightonai/lightonocr-2-1b@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "lightonai/lightonocr-2-1b",
+    "name": "LightOnOCR-2-1B",
+    "slug": "lightonai__lightonocr-2-1b",
+    "vendor": "LightOn",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "m-a-p/yue2-3b@as-published"
+    ],
+    "category": "music",
+    "model_id": "m-a-p/yue2-3b",
+    "name": "YuE2-3B",
+    "slug": "m-a-p__yue2-3b",
+    "vendor": "m-a-p",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "meta-models/muse-glimmer-30b@gguf-kquant"
+    ],
+    "category": "vlm",
+    "model_id": "meta-models/muse-glimmer-30b",
+    "name": "Muse Glimmer 30B",
+    "slug": "meta-models__muse-glimmer-30b",
+    "vendor": "Meta",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "meta-models/muse-glimmer-30b-dflash-drafter@gguf-kquant"
+    ],
+    "category": "draft-head",
+    "model_id": "meta-models/muse-glimmer-30b-dflash-drafter",
+    "name": "Muse Glimmer 30B DFlash drafter",
+    "slug": "meta-models__muse-glimmer-30b-dflash-drafter",
+    "vendor": "Meta",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "microsoft/fara1.5-27b@awq-w4a16"
+    ],
+    "category": "vlm",
+    "model_id": "microsoft/fara1.5-27b",
+    "name": "Fara1.5-27B",
+    "slug": "microsoft__fara1.5-27b",
+    "vendor": "Microsoft",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "microsoft/trellis.2-4b@int8-convrot"
+    ],
+    "category": "3d-gen",
+    "model_id": "microsoft/trellis.2-4b",
+    "name": "TRELLIS.2-4B",
+    "slug": "microsoft__trellis.2-4b",
+    "vendor": "Microsoft",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "mistralai/ministral-3-14b-instruct-2512@bnb-4bit-unsloth"
+    ],
+    "category": "llm",
+    "model_id": "mistralai/ministral-3-14b-instruct-2512",
+    "name": "Ministral-3-14B-Instruct-2512",
+    "slug": "mistralai__ministral-3-14b-instruct-2512",
+    "vendor": "Mistral AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "mistralai/ministral-3-8b-instruct-2512@bnb-4bit-unsloth"
+    ],
+    "category": "vlm",
+    "model_id": "mistralai/ministral-3-8b-instruct-2512",
+    "name": "Ministral-3-8B-Instruct-2512",
+    "slug": "mistralai__ministral-3-8b-instruct-2512",
+    "vendor": "Mistral AI",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "mistralai/mistral-small-3.2-24b-instruct-2506@awq-sym-int4",
+      "mistralai/mistral-small-3.2-24b-instruct-2506@bnb-4bit",
+      "mistralai/mistral-small-3.2-24b-instruct-2506@fp8"
+    ],
+    "category": "vlm",
+    "model_id": "mistralai/mistral-small-3.2-24b-instruct-2506",
+    "name": "Mistral-Small-3.2-24B-Instruct-2506",
+    "slug": "mistralai__mistral-small-3.2-24b-instruct-2506",
+    "vendor": "Mistral AI",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "nex-agi/nex-n2.5-mini@gguf-q4_k_m",
+      "nex-agi/nex-n2.5-mini@w4a16-autoround"
+    ],
+    "category": "moe-llm",
+    "model_id": "nex-agi/nex-n2.5-mini",
+    "name": "Nex-N2.5-mini",
+    "slug": "nex-agi__nex-n2.5-mini",
+    "vendor": "nex-agi",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "nousresearch/hermes-4.3-36b@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "nousresearch/hermes-4.3-36b",
+    "name": "Hermes-4.3-36B",
+    "slug": "nousresearch__hermes-4.3-36b",
+    "vendor": "Nous Research",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b@gguf-q4_k_m-ollama",
+      "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b@w4a16"
+    ],
+    "category": "moe-llm",
+    "model_id": "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b",
+    "name": "NVIDIA Nemotron 3.5 Lightning 30B-A3B",
+    "slug": "nvidia__nvidia-nemotron-3.5-lightning-30b-a3b",
+    "vendor": "NVIDIA",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "openai/gpt-oss-20b@mxfp4"
+    ],
+    "category": "moe-llm",
+    "model_id": "openai/gpt-oss-20b",
+    "name": "gpt-oss-20b",
+    "slug": "openai__gpt-oss-20b",
+    "vendor": "OpenAI",
+    "verdict_status": "parked"
+  },
+  {
+    "builds": [
+      "openai/whisper-large-v3-turbo@ct2"
+    ],
+    "category": "asr",
+    "model_id": "openai/whisper-large-v3-turbo",
+    "name": "Whisper large-v3-turbo (faster-whisper CTranslate2)",
+    "slug": "openai__whisper-large-v3-turbo",
+    "vendor": "OpenAI (CTranslate2 conversion)",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "openbmb/minicpm5-2b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "openbmb/minicpm5-2b",
+    "name": "MiniCPM5-2B",
+    "slug": "openbmb__minicpm5-2b",
+    "vendor": "OpenBMB",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "openbmb/minicpm5-2b-dspark@bf16"
+    ],
+    "category": "draft-head",
+    "model_id": "openbmb/minicpm5-2b-dspark",
+    "name": "MiniCPM5-2B DSpark draft head",
+    "slug": "openbmb__minicpm5-2b-dspark",
+    "vendor": "OpenBMB",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "orcarouter/qwen3.8-27b-uncensored@w4a16-autoround"
+    ],
+    "category": "vlm",
+    "model_id": "orcarouter/qwen3.8-27b-uncensored",
+    "name": "Qwen3.8-27B-Uncensored",
+    "slug": "orcarouter__qwen3.8-27b-uncensored",
+    "vendor": "orcarouter",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "orionllm/oxcoder-9b@gguf-q4_k_m"
+    ],
+    "category": "coder",
+    "model_id": "orionllm/oxcoder-9b",
+    "name": "OxCoder-9B",
+    "slug": "orionllm__oxcoder-9b",
+    "vendor": "OrionLLM",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "ornith-ai/ornith-1.5-35b-a3b@w4a16-sym-g32"
+    ],
+    "category": "moe-llm",
+    "model_id": "ornith-ai/ornith-1.5-35b-a3b",
+    "name": "Ornith-1.5-35B-A3B",
+    "slug": "ornith-ai__ornith-1.5-35b-a3b",
+    "vendor": "ornith-ai",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "paddlepaddle/paddleocr-vl-1.5@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "paddlepaddle/paddleocr-vl-1.5",
+    "name": "PaddleOCR-VL-1.5",
+    "slug": "paddlepaddle__paddleocr-vl-1.5",
+    "vendor": "Baidu (PaddlePaddle)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "phonellm/phonellm-alpha-1@gguf-i1-q4_k_m"
+    ],
+    "category": "moe-llm",
+    "model_id": "phonellm/phonellm-alpha-1",
+    "name": "PhoneLLM alpha-1",
+    "slug": "phonellm__phonellm-alpha-1",
+    "vendor": "PhoneLLM",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "prism-ml/ternary-bonsai-2-27b@gguf-pq2_0"
+    ],
+    "category": "llm",
+    "model_id": "prism-ml/ternary-bonsai-2-27b",
+    "name": "Ternary-Bonsai-2-27B",
+    "slug": "prism-ml__ternary-bonsai-2-27b",
+    "vendor": "PrismML",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "qwen/qwen-image-20b@gguf-q4_k_m"
+    ],
+    "category": "image-gen",
+    "model_id": "qwen/qwen-image-20b",
+    "name": "Qwen-Image 20B",
+    "slug": "qwen__qwen-image-20b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "qwen/qwen2.5-coder-32b@awq-int4"
+    ],
+    "category": "coder",
+    "model_id": "qwen/qwen2.5-coder-32b",
+    "name": "Qwen2.5-Coder-32B",
+    "slug": "qwen__qwen2.5-coder-32b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "qwen/qwen3-30b-a3b-instruct-2507@int4-compressed-tensors"
+    ],
+    "category": "moe-llm",
+    "model_id": "qwen/qwen3-30b-a3b-instruct-2507",
+    "name": "Qwen3-30B-A3B-Instruct-2507",
+    "slug": "qwen__qwen3-30b-a3b-instruct-2507",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "qwen/qwen3-8b@bf16",
+      "qwen/qwen3-8b@bnb-4bit-unsloth"
+    ],
+    "category": "llm",
+    "model_id": "qwen/qwen3-8b",
+    "name": "Qwen3-8B",
+    "slug": "qwen__qwen3-8b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "qwen/qwen3-coder-30b-a3b@awq-int4"
+    ],
+    "category": "coder",
+    "model_id": "qwen/qwen3-coder-30b-a3b",
+    "name": "Qwen3-Coder-30B-A3B",
+    "slug": "qwen__qwen3-coder-30b-a3b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "qwen/qwen3-tts-12hz-1.7b-customvoice@bf16"
+    ],
+    "category": "tts",
+    "model_id": "qwen/qwen3-tts-12hz-1.7b-customvoice",
+    "name": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    "slug": "qwen__qwen3-tts-12hz-1.7b-customvoice",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "qwen/qwen3.6-35b-a3b@awq-int4"
+    ],
+    "category": "moe-llm",
+    "model_id": "qwen/qwen3.6-35b-a3b",
+    "name": "Qwen3.6-35B-A3B",
+    "slug": "qwen__qwen3.6-35b-a3b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "parked"
+  },
+  {
+    "builds": [
+      "qwen/qwen3.8-27b@awq-int4-cyankiwi",
+      "qwen/qwen3.8-27b@exl3-3.21bpw-orcasaq2",
+      "qwen/qwen3.8-27b@gguf-iq3_s-mtp-gsq-rco",
+      "qwen/qwen3.8-27b@gguf-q4_k_m-imatrix",
+      "qwen/qwen3.8-27b@gguf-ridge-3.7bpw",
+      "qwen/qwen3.8-27b@int8-w8a16-mtp",
+      "qwen/qwen3.8-27b@nvfp4-mixed-modelopt",
+      "qwen/qwen3.8-27b@w4a16-autoround"
+    ],
+    "category": "vlm",
+    "model_id": "qwen/qwen3.8-27b",
+    "name": "Qwen3.8-27B",
+    "slug": "qwen__qwen3.8-27b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "qwen/qwen3.8-flash-next@gguf-ud-q3_k_xl"
+    ],
+    "category": "moe-llm",
+    "model_id": "qwen/qwen3.8-flash-next",
+    "name": "Qwen3.8-Flash-Next",
+    "slug": "qwen__qwen3.8-flash-next",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "radar-generalist/radar@authors-checkpoints"
+    ],
+    "category": "medical-imaging",
+    "model_id": "radar-generalist/radar",
+    "name": "RADAR (CT foundation model)",
+    "slug": "radar-generalist__radar",
+    "vendor": "Alibaba DAMO Academy",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "radixark/qwen3.8-27b-dspark@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "radixark/qwen3.8-27b-dspark",
+    "name": "DSpark drafter for Qwen3.8-27B",
+    "slug": "radixark__qwen3.8-27b-dspark",
+    "vendor": "RadixArk",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "redhatai/gemma-4-31b-it-speculator.dflash@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "redhatai/gemma-4-31b-it-speculator.dflash",
+    "name": "DFlash speculator for Gemma 4 31B (Red Hat AI)",
+    "slug": "redhatai__gemma-4-31b-it-speculator.dflash",
+    "vendor": "RedHatAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "redhatai/gemma-4-31b-it-speculator.dspark@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "redhatai/gemma-4-31b-it-speculator.dspark",
+    "name": "DSpark speculator for Gemma 4 31B (Red Hat AI)",
+    "slug": "redhatai__gemma-4-31b-it-speculator.dspark",
+    "vendor": "RedHatAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "redhatai/gemma-4-31b-it-speculator.eagle3@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "redhatai/gemma-4-31b-it-speculator.eagle3",
+    "name": "EAGLE-3 speculator for Gemma 4 31B",
+    "slug": "redhatai__gemma-4-31b-it-speculator.eagle3",
+    "vendor": "RedHatAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "resembleai/chatterbox@fp32"
+    ],
+    "category": "tts",
+    "model_id": "resembleai/chatterbox",
+    "name": "Chatterbox Multilingual V3",
+    "slug": "resembleai__chatterbox",
+    "vendor": "Resemble AI",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "sahilchachra/qwen3.6-35b-a3b-uncensored-heretic@awq-int4"
+    ],
+    "category": "moe-llm",
+    "model_id": "sahilchachra/qwen3.6-35b-a3b-uncensored-heretic",
+    "name": "Qwen3.6-35B-A3B uncensored (heretic)",
+    "slug": "sahilchachra__qwen3.6-35b-a3b-uncensored-heretic",
+    "vendor": "sahilchachra",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "stardoc-ai/teleocr@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "stardoc-ai/teleocr",
+    "name": "TeleOCR",
+    "slug": "stardoc-ai__teleocr",
+    "vendor": "StarDoc-AI / TeleAI",
+    "verdict_status": "not-rated"
+  },
+  {
+    "builds": [
+      "superwhisper/s1-mini@bf16"
+    ],
+    "category": "text-normalizer",
+    "model_id": "superwhisper/s1-mini",
+    "name": "S1-Mini 0.6B",
+    "slug": "superwhisper__s1-mini",
+    "vendor": "Superwhisper",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "swiss-ai/apertus-8b-instruct-2509@bf16",
+      "swiss-ai/apertus-8b-instruct-2509@bnb-4bit-on-load"
+    ],
+    "category": "llm",
+    "model_id": "swiss-ai/apertus-8b-instruct-2509",
+    "name": "Apertus-8B-Instruct-2509",
+    "slug": "swiss-ai__apertus-8b-instruct-2509",
+    "vendor": "Swiss AI (EPFL / ETH Zurich)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "tencent/evie-preview-4.5b@bf16"
+    ],
+    "category": "visual-retriever",
+    "model_id": "tencent/evie-preview-4.5b",
+    "name": "EVIE-Preview-4.5B",
+    "slug": "tencent__evie-preview-4.5b",
+    "vendor": "Tencent",
+    "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "tencent/hunyuan3d-2.1@bf16-shape-only"
+    ],
+    "category": "3d-gen",
+    "model_id": "tencent/hunyuan3d-2.1",
+    "name": "Hunyuan3D-2.1 (shape)",
+    "slug": "tencent__hunyuan3d-2.1",
+    "vendor": "Tencent",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "tencent/hunyuanocr@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "tencent/hunyuanocr",
+    "name": "HunyuanOCR",
+    "slug": "tencent__hunyuanocr",
+    "vendor": "Tencent",
+    "verdict_status": "not-rated"
+  },
+  {
+    "builds": [
+      "tencentarc/pixal3d@int8-convrot-four-views",
+      "tencentarc/pixal3d@int8-convrot-one-view"
+    ],
+    "category": "3d-gen",
+    "model_id": "tencentarc/pixal3d",
+    "name": "Pixal3D",
+    "slug": "tencentarc__pixal3d",
+    "vendor": "TencentARC",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "thesysdev/oui-1@bf16"
+    ],
+    "category": "interface",
+    "model_id": "thesysdev/oui-1",
+    "name": "OUI-1",
+    "slug": "thesysdev__oui-1",
+    "vendor": "Thesys",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "thomson-reuters/thomson-1.0-small@awq-int4"
+    ],
+    "category": "moe-llm",
+    "model_id": "thomson-reuters/thomson-1.0-small",
+    "name": "Thomson-1.0-Small",
+    "slug": "thomson-reuters__thomson-1.0-small",
+    "vendor": "Thomson Reuters",
+    "verdict_status": "serves-lane"
+  },
+  {
+    "builds": [
+      "tiiuae/falcon-ocr@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "tiiuae/falcon-ocr",
+    "name": "Falcon-OCR",
+    "slug": "tiiuae__falcon-ocr",
+    "vendor": "TII",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "tokenrhythm/neohorse-1-4b@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "tokenrhythm/neohorse-1-4b",
+    "name": "NeoHorse-1-4B",
+    "slug": "tokenrhythm__neohorse-1-4b",
+    "vendor": "TokenRhythm",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "tokenrhythm/neohorse-1-9b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "tokenrhythm/neohorse-1-9b",
+    "name": "NeoHorse-1-9B",
+    "slug": "tokenrhythm__neohorse-1-9b",
+    "vendor": "TokenRhythm",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "tongyi-mai/z-image-turbo@bf16"
+    ],
+    "category": "image-gen",
+    "model_id": "tongyi-mai/z-image-turbo",
+    "name": "Z-Image-Turbo",
+    "slug": "tongyi-mai__z-image-turbo",
+    "vendor": "Tongyi-MAI (Alibaba)",
+    "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "ukisai/swift-qwen3.8-27b@awq-w4a16"
+    ],
+    "category": "llm",
+    "model_id": "ukisai/swift-qwen3.8-27b",
+    "name": "Swift-Qwen3.8-27B",
+    "slug": "ukisai__swift-qwen3.8-27b",
+    "vendor": "UkisAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "urchade/gliner_multi-v2.1@unknown"
+    ],
+    "category": "other",
+    "model_id": "urchade/gliner_multi-v2.1",
+    "name": "GLiNER multi v2.1",
+    "slug": "urchade__gliner_multi-v2.1",
+    "vendor": "urchade",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "vast-ai/triposplat@bf16"
+    ],
+    "category": "3d-gen",
+    "model_id": "vast-ai/triposplat",
+    "name": "TripoSplat",
+    "slug": "vast-ai__triposplat",
+    "vendor": "VAST-AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "vectara/hallucination_evaluation_model@unknown"
+    ],
+    "category": "other",
+    "model_id": "vectara/hallucination_evaluation_model",
+    "name": "HHEM hallucination judge",
+    "slug": "vectara__hallucination_evaluation_model",
+    "vendor": "Vectara",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "xhtoken/spark-x2.5-4b@bf16",
+      "xhtoken/spark-x2.5-4b@gguf-q8_0"
+    ],
+    "category": "llm",
+    "model_id": "xhtoken/spark-x2.5-4b",
+    "name": "Spark-X2.5-4B",
+    "slug": "xhtoken__spark-x2.5-4b",
+    "vendor": "XHToken",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "z-lab/gemma-4-26b-a4b-it-dflash@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "z-lab/gemma-4-26b-a4b-it-dflash",
+    "name": "DFlash drafter for Gemma 4 26B-A4B",
+    "slug": "z-lab__gemma-4-26b-a4b-it-dflash",
+    "vendor": "z-lab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "z-lab/gemma-4-31b-it-dflash@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "z-lab/gemma-4-31b-it-dflash",
+    "name": "DFlash drafter for Gemma 4 31B (z-lab)",
+    "slug": "z-lab__gemma-4-31b-it-dflash",
+    "vendor": "z-lab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "z-lab/qwen3.8-27b-dflash2@as-published"
+    ],
+    "category": "draft-head",
+    "model_id": "z-lab/qwen3.8-27b-dflash2",
+    "name": "DFlash2 drafter for Qwen3.8-27B",
+    "slug": "z-lab__qwen3.8-27b-dflash2",
+    "vendor": "z-lab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "zai-org/glm-4.7-flash@awq-int4",
+      "zai-org/glm-4.7-flash@gguf-iq4_xs"
+    ],
+    "category": "moe-llm",
+    "model_id": "zai-org/glm-4.7-flash",
+    "name": "GLM-4.7-Flash",
+    "slug": "zai-org__glm-4.7-flash",
+    "vendor": "Z.ai (Zhipu)",
+    "verdict_status": "parked"
+  },
+  {
+    "builds": [
+      "zai-org/glm-ocr@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "zai-org/glm-ocr",
+    "name": "GLM-OCR",
+    "slug": "zai-org__glm-ocr",
+    "vendor": "Z.ai",
+    "verdict_status": "rated-no-role"
+  }
+]

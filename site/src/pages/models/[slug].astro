@@ -1,0 +1,361 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Banner from '../../components/Banner.astro';
+import Frame from '../../components/Frame.astro';
+import FitBox from '../../components/FitBox.astro';
+import TargetSummary from '../../components/TargetSummary.astro';
+import BarChart from '../../components/BarChart.astro';
+import RunsTable from '../../components/RunsTable.astro';
+import Table from '../../components/Table.astro';
+import HeadlineTable from '../../components/HeadlineTable.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import LicenceBadge from '../../components/LicenceBadge.astro';
+import GraderBadge from '../../components/GraderBadge.astro';
+import RobustnessBadge from '../../components/RobustnessBadge.astro';
+import type { Model } from '../../lib/data';
+import { rankingTitle, judgeRobustness, rowRankInterval, rankRangeTitle, judgeKeyOf, ROBUSTNESS_ANCHOR,
+  HARDWARE_IDS, models, runsOfModel, headlineRun, soloTokS, runDate, rankingRowsOfModel, buildsOfModel,
+  launchFor, launchLine, benchById, modelHasNumbers, isJudged, isNum, hardwareById, isForge, isCurrentRanking,
+  runCount, visibleQuality, rowNotRated, rowOtherJudge, JUDGES, notRatedText, rowItemsNotGraded, isTwoOrders, otherJudgeText, judgedByText, drafterRunsOf, drafterRankingRows, buildLabel, isHouseProtocol, distinctRuns, comparisons,
+} from '../../lib/data';
+import { benchHref, compareHref, evidenceHref, href, hwShort, rankingHref, runHref, STATUS_LABEL } from '../../lib/site';
+import RunsTableDrafter from '../../components/RunsTable.astro';
+
+export function getStaticPaths() {
+  return models().map((m) => ({ params: { slug: m.slug }, props: { m } }));
+}
+
+const { m } = Astro.props as { m: Model };
+const runs = runsOfModel(m.model_id)
+  .slice()
+  .sort((a, b) => (runDate(b) ?? '').localeCompare(runDate(a) ?? '') || a.run_id.localeCompare(b.run_id));
+const heads = HARDWARE_IDS.map((hw) => ({ hw, run: headlineRun(m.model_id, hw) }));
+const headSet = new Set(heads.filter((x) => x.run).map((x) => x.run!.run_id));
+const allRankRows = rankingRowsOfModel(m.model_id);
+// Current rankings only; rows carried in earlier (superseded) snapshots are listed apart.
+// The speculative-decoding A/B ranks drafter arms by speed, not quality: kept off the quality table, linked below it.
+const isSpeedAB = (r: { bench_id: string }) => /^spec-ab\//.test(r.bench_id);
+const speedAbRows = allRankRows.filter((x) => isSpeedAB(x.ranking) && isCurrentRanking(x.ranking));
+const rankRows = allRankRows.filter((x) => isCurrentRanking(x.ranking) && !isSpeedAB(x.ranking));
+const olderRows = allRankRows.filter((x) => !isCurrentRanking(x.ranking) && !isSpeedAB(x.ranking));
+const rankedBenches = new Set(allRankRows.map((x) => x.ranking.bench_id));
+const runQuality = runs.flatMap((r) => visibleQuality(r).map((q) => ({ run: r, q }))).filter(({ q }) => !rankedBenches.has(q.bench_id));
+const rc = runCount(runs);
+const drafterRuns = drafterRunsOf(m);
+const drafterRows = drafterRankingRows(m);
+// The local judge's own page (exact name match only: a candidate's name may contain a judge's word).
+const isJudgeModel = m.name.toLowerCase() === JUDGES.local.name.toLowerCase();
+const anyJudged = rankRows.some((x) => isJudged(x.ranking.grader)) || runQuality.some((x) => isJudged(x.q.grader));
+const buildList = buildsOfModel(m);
+// Per-target summary rows of comparisons (e.g. speculative decoding) whose target is this model.
+const SUMMARY_KEYS = ['summary_rows', 'per_target', 'targets', 'summary'];
+const targetSummaries = comparisons().flatMap((c) => {
+  const k = SUMMARY_KEYS.find((x) => Array.isArray(c[x]) && (c[x] as unknown[]).every((r) => typeof r === 'object' && r !== null && !Array.isArray(r)));
+  if (!k) return [];
+  return (c[k] as Record<string, unknown>[]).filter((r) => r.target === m.model_id || r.model_id === m.model_id).map((row) => ({ c, row }));
+});
+const sumLabel = (k: string) => k.replace(/_pct$/, ' (%)').replace(/_/g, ' ').replace(/\bfr\b/, 'FR').replace(/\ben\b/, 'EN').replace(/^c8\b/, '8 requests').replace(/^./, (x) => x.toUpperCase());
+const launches = heads
+  .filter((x) => x.run)
+  .map((x) => ({ hw: x.hw, run: x.run!, launch: launchFor(x.run!) }))
+  .filter((x) => x.launch !== null);
+const evidenceDirs = [...new Set(runs.flatMap((r) => r.evidence))].sort();
+const benchIds = [...new Set([...allRankRows.map((x) => x.ranking.bench_id), ...runs.flatMap((r) => r.quality.map((q) => q.bench_id))])].filter(Boolean).sort();
+const prePinRuns = runs.filter((r) => r.engine.pre_pin);
+const indexable = modelHasNumbers(m.model_id);
+const measuredOn = heads.filter((x) => x.run).map((x) => `${soloTokS(x.run!)} tok/s on ${hwShort(x.hw)}`);
+// Listed in the lab's records with no run, no drafter run and no score: nothing was measured here.
+const noRecord = runs.length === 0 && drafterRuns.length === 0 && allRankRows.length === 0 && runQuality.length === 0;
+const description = noRecord
+  ? `${m.name} (${m.model_id}): listed in the lab's records; no run record published for RTX 3090 FE cards.`
+  : `${m.name} (${m.model_id}) on RTX 3090 FE: ${measuredOn.length ? `single stream ${measuredOn.join(', ')}` : 'no single-stream speed figure'}; verdict: ${STATUS_LABEL[m.verdict.status] ?? m.verdict.status}; ${rc.distinct} distinct run${rc.distinct === 1 ? '' : 's'}${rc.copies ? ` (+${rc.copies} copies)` : ''}, ${rankRows.length} entr${rankRows.length === 1 ? 'y' : 'ies'} in the latest rankings.`;
+// One table per judge, never two judges' scores in one table: the tables' judge, the local judge, any other
+// judge, then the scores no model judge gave (oracles, tests, metrics).
+type GroupKey = 'table' | 'local' | 'other-judge' | 'oracle';
+const groupOf = (g: Parameters<typeof judgeKeyOf>[0]): GroupKey => (isJudged(g ?? undefined) ? (judgeKeyOf(g) ?? 'other-judge') : 'oracle');
+const GROUP_TEXT: Record<GroupKey, { title: string; short: string; lead: string }> = {
+  table: { title: `Judged by ${JUDGES.table.name}`, short: JUDGES.table.name, lead: `${JUDGES.table.scope[0].toUpperCase()}${JUDGES.table.scope.slice(1)}: every score in this table is ${JUDGES.table.name}'s (Anthropic, cloud); the code bench mixes its judged items with oracle items.` },
+  local: { title: `Judged by the local judge, ${JUDGES.local.name}`, short: 'the local judge', lead: `${JUDGES.local.scope[0].toUpperCase()}${JUDGES.local.scope.slice(1)}: every score in this table is the local judge's.` },
+  'other-judge': { title: 'Judged by another model judge', short: 'another judge', lead: 'Each row names its judge.' },
+  oracle: { title: 'Graded without a model judge', short: 'no model judge', lead: 'Oracles, tests, exact answers and metrics: no model judge is involved.' },
+};
+const GROUP_ORDER: GroupKey[] = ['table', 'local', 'other-judge', 'oracle'];
+const qualityGroups = GROUP_ORDER.map((key) => ({
+  key,
+  ...GROUP_TEXT[key],
+  rankRows: rankRows.filter((x) => groupOf(x.ranking.grader) === key),
+  runQuality: runQuality.filter((x) => groupOf(x.q.grader) === key),
+})).filter((g) => g.rankRows.length + g.runQuality.length > 0);
+/** The rated rows of a ranking: those with a rank (a row not rated, or not graded yet by the table's judge, has none). */
+const ratedCount = (ranking: { rows: { rank?: unknown }[] }) => ranking.rows.filter((r) => isNum(r.rank)).length;
+const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(ci[0]) && isNum(ci[1]) ? (ci as [number, number]) : null);
+---
+<Layout
+  title={m.name}
+  description={description}
+  noindex={!indexable}
+  nav="models"
+  crumbs={[{ label: 'models', href: href('models/') }, { label: m.slug }]}
+  ogImage={`og/${m.slug}.png`}
+>
+  <h1>{m.name}</h1>
+  <p class="mono muted break">{m.model_id}</p>
+  <p class="badges">
+    <StatusBadge status={m.verdict.status} />
+    <LicenceBadge licence={m.licence} access={m.access} />
+    <span class="badge plain tone-muted">{m.category}</span>
+    {m.arch && m.arch !== 'unknown' && <span class="badge plain tone-muted">{m.arch}</span>}
+    {isForge(m) && <span class="badge plain tone-amber">private fine-tune</span>}
+  </p>
+  {(isNum(m.params_b_total) || isNum(m.params_b_active)) && (
+    <p class="small">
+      Parameters: <Num value={m.params_b_total} unit="B" nullText="unknown" /> total
+      {isNum(m.params_b_active) && <>, <Num value={m.params_b_active} unit="B" /> active</>}
+    </p>
+  )}
+  {m.verdict.summary && (
+    <p class="lead">{m.verdict.summary}{m.verdict.as_of && <span class="muted small"> (as of <time class="mono">{m.verdict.as_of}</time>)</span>}</p>
+  )}
+  {!indexable && !noRecord && <p class="small muted">This model has no measured number yet; the page is kept for the record and is not indexed.</p>}
+  {noRecord && <p class="small muted">Nothing on this page is a measurement made here; the page is kept for the record and is not indexed.</p>}
+
+  {noRecord ? (
+    <Frame title="fits on">
+      <p class="muted" id="runs">Listed; no run record published.</p>
+    </Frame>
+  ) : runs.length === 0 && drafterRuns.length > 0 ? (
+    <Banner kind="info"><p id="runs"><strong>Measured only as a speculative-decoding drafter.</strong> This model has no run of its own: its <Num value={drafterRuns.length} href="#as-drafter" /> run{drafterRuns.length === 1 ? '' : 's'} decoded another model with it as the drafter, and are read against that model without a drafter (<a href="#as-drafter">below</a>).</p></Banner>
+  ) : (
+  <Frame title="fits on" chip={m.last_tested ? `last tested ${m.last_tested}` : null}>
+    <FitBox modelId={m.model_id} />
+  </Frame>
+  )}
+
+  {!noRecord && !(runs.length === 0 && drafterRuns.length > 0) && (
+  <>
+  <h2 id="speed">Speed per configuration</h2>
+  {headSet.size === 0 ? (
+    <p class="empty">No single-stream speed in the data for this model.</p>
+  ) : (
+    <BarChart
+      title={`${m.name}: headline single-stream speed per configuration`}
+      unit="tok/s"
+      caption={`one headline run per configuration, never an average; each bar names its build${new Set(heads.filter((x) => x.run).map((x) => x.run!.protocol ?? '')).size > 1 ? '; the bars come from different protocols and are not directly comparable' : ''}`}
+      evidenceHref={`#runs`}
+      evidenceLabel="every run"
+      items={heads.filter((x) => x.run).map((x) => ({
+        label: hwShort(x.hw),
+        value: soloTokS(x.run!),
+        run: x.run!.run_id,
+        tone: x.run!.engine.pre_pin ? 'amber' : 'blue',
+        note: [buildLabel(x.run!), runDate(x.run!) ?? '', x.run!.engine.pre_pin ? 'pre-pin' : '', isHouseProtocol(x.run!.protocol) ? '' : `${x.run!.protocol ?? 'no protocol'} (other protocol)`].filter(Boolean).join(' · '),
+      }))}
+    />
+  )}
+  {headSet.size > 0 && (
+    <HeadlineTable
+      heads={heads.filter((x) => x.run).map((x) => ({ model_id: m.model_id, run: x.run! }))}
+      label="headline run per configuration"
+      firstCol="config"
+    />
+  )}
+  <p class="small muted">
+    VRAM is labelled per run: <em>reserved</em> is vLLM's reservation, <em>after load</em> is nvidia-smi about 3 s after the
+    server was ready (5 s in the 2026-09-04 campaigns), before any request.
+  </p>
+  <h3 id="runs">Every run</h3>
+  <p class="small muted"><Num value={rc.distinct} href="#runs" /> distinct run{rc.distinct === 1 ? '' : 's'}{rc.copies > 0 && <>, plus <Num value={rc.copies} href="#runs" /> byte cop{rc.copies === 1 ? 'y' : 'ies'} of earlier runs (marked <em>copy</em>)</>}.</p>
+  <RunsTable runs={runs} showModel={false} label="runs of this model" headline={headSet} />
+  </>
+  )}
+
+  {launches.length > 0 && (
+    <>
+      <h2 id="launch">Launch line</h2>
+      <p class="small muted">The headline run's launch record, scrubbed (host paths replaced by <code>$MODELS</code>, names and ports removed).</p>
+      {launches.map(({ hw, run, launch }) => {
+        const line = launchLine(launch!.data);
+        return (
+          <div>
+            <p class="small"><strong>{hwShort(hw)}</strong> · <a class="mono" href={runHref(run.run_id)}>{run.run_id}</a> · <a href={evidenceHref(launch!.path)}>launch.json</a></p>
+            <pre class="launch"><code>{line ?? JSON.stringify(launch!.data, null, 2)}</code></pre>
+          </div>
+        );
+      })}
+    </>
+  )}
+
+  {(drafterRuns.length > 0 || drafterRows.length > 0) && (
+    <>
+      <h2 id="as-drafter">Measured as a speculative-decoding drafter</h2>
+      <p class="small muted">
+        This model was measured as the drafter of another model: its numbers are the speed of the target model decoded with
+        it, read against the same target without a drafter in the{' '}
+        <a href={href('compare/spec-decoding-3090/')}>speculative-decoding comparison</a>
+        {drafterRows.length > 0 && <> and the <a href={rankingHref(drafterRows[0].ranking.ranking_id)}>{rankingTitle(drafterRows[0].ranking)}</a></>}.
+      </p>
+      <RunsTableDrafter runs={drafterRuns} label="runs with this model as drafter" />
+    </>
+  )}
+
+  {!noRecord && <h2 id="quality">Quality per bench</h2>}
+  {(anyJudged || isJudgeModel) && <Banner kind="judge" judgeModel={isJudgeModel} graders={[...rankRows.map((x) => x.ranking.grader), ...runQuality.map((x) => x.q.grader)]} />}
+  {noRecord ? null : rankRows.length === 0 && runQuality.length === 0 && olderRows.length === 0 ? (
+    <p class="empty">No quality score in the data for this model.</p>
+  ) : (
+    <>
+    {qualityGroups.map((g) => (
+      <>
+        <h3 id={`quality-${g.key}`} class="quality-group">{g.title}</h3>
+        <p class="small muted">{g.lead}</p>
+        <Table label={`quality scores, ${g.short}`} search={false}>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" data-sort>Bench</th>
+                <th scope="col" data-sort>Grader</th>
+                <th scope="col" class="num" data-sort="num">Score</th>
+                <th scope="col" class="num">CI95</th>
+                <th scope="col" class="num" data-sort="num">Rank</th>
+                <th scope="col" data-sort>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {g.rankRows.map(({ ranking, row }) => {
+                const notRated = rowNotRated(row);
+                const other = rowOtherJudge(ranking, row);
+                const ci = notRated ? null : ciText(row.ci95);
+                const runLink = row.run_id ?? null;
+                const rated = ratedCount(ranking);
+                return (
+                  <tr>
+                    <td>{benchById().has(ranking.bench_id) ? <a class="mono small" href={benchHref(ranking.bench_id)}>{ranking.bench_id}</a> : <span class="mono small">{ranking.bench_id}</span>}{row.label && <><br /><span class="small muted">{row.label}</span></>}{other && <><br /><a class="flag" href={href('methodology/judge/')}>graded by {other}; not comparable</a></>}{rowItemsNotGraded(row) && <><br /><span class="flag">{rowItemsNotGraded(row)!.text}</span></>}</td>
+                    <td data-v={ranking.grader.kind}><GraderBadge grader={ranking.grader} />{judgeRobustness(ranking) && <><br /><RobustnessBadge ranking={ranking} /></>}</td>
+                    <td class="num" data-v={!notRated && isNum(row.score) ? String(row.score) : ''}>{notRated ? <span class="num-null" title={notRatedText(row).title}>{notRatedText(row).short}</span> : <Num value={row.score} run={runLink} fallback={rankingHref(ranking.ranking_id)} />}</td>
+                    <td class="num">{ci ? <><Num value={ci[0]} href={rankingHref(ranking.ranking_id)} />–<Num value={ci[1]} href={rankingHref(ranking.ranking_id)} /></> : <span class="num-null">—</span>}</td>
+                    <td class="num" data-v={isNum(row.rank) ? String(row.rank) : ''}>{isNum(row.rank) ? <><Num value={row.rank} href={rankingHref(ranking.ranking_id)} /> <span class="muted small" title={rated < ranking.rows.length ? `${rated} rated rows; ${ranking.rows.length - rated} other row${ranking.rows.length - rated === 1 ? ' is' : 's are'} not rated or not graded yet` : 'rated rows of this ranking'}>of <Num value={rated} href={rankingHref(ranking.ranking_id)} /></span>{(() => { const iv = rowRankInterval(row); return iv && iv[0] !== iv[1] ? <><br /><span class="small muted nowrap" title={rankRangeTitle(ranking, row)}>ranks <Num value={iv[0]} href={rankingHref(ranking.ranking_id)} />–<Num value={iv[1]} href={rankingHref(ranking.ranking_id)} /> across <a href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>judges</a></span></> : null; })()}</> : <span class="num-null">—</span>}</td>
+                    <td><a class="small" href={rankingHref(ranking.ranking_id)}>{rankingTitle(ranking)}</a></td>
+                  </tr>
+                );
+              })}
+              {g.runQuality.map(({ run, q }) => {
+                const ci = ciText(q.ci95);
+                return (
+                  <tr>
+                    <td>{benchById().has(q.bench_id) ? <a class="mono small" href={benchHref(q.bench_id)}>{q.bench_id}</a> : <span class="mono small">{q.bench_id}</span>}</td>
+                    <td data-v={q.grader?.kind ?? ''}><GraderBadge grader={q.grader} /></td>
+                    <td class="num" data-v={isNum(q.score) ? String(q.score) : ''}><Num value={q.score} run={run.run_id} /></td>
+                    <td class="num">{ci ? <><Num value={ci[0]} run={run.run_id} />–<Num value={ci[1]} run={run.run_id} /></> : <span class="num-null">—</span>}</td>
+                    <td class="num"><span class="num-null">—</span></td>
+                    <td><a class="mono small" href={runHref(run.run_id)}>{run.run_id}</a></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </Table>
+      </>
+    ))}
+    {qualityGroups.length === 0 && <p class="small muted">No current ranking holds this model; earlier snapshots are listed below.</p>}
+    </>
+  )}
+  {speedAbRows.length > 0 && (
+    <p class="small muted">
+      Speculative-decoding arms of this model (<Num value={speedAbRows.length} href={rankingHref(speedAbRows[0].ranking.ranking_id)} />) are speed
+      measurements, not quality: see <a href={rankingHref(speedAbRows[0].ranking.ranking_id)}>{rankingTitle(speedAbRows[0].ranking)}</a>
+      {' '}and the <a href={href('compare/spec-decoding-3090/')}>speculative-decoding comparison</a>.
+    </p>
+  )}
+  {olderRows.length > 0 && (
+    <details>
+      <summary class="small">Earlier snapshots of the same pools: <Num value={olderRows.length} href="#quality" /> entries</summary>
+      <ul>
+        {olderRows.map(({ ranking, row }) => (
+          <li class="small">
+            <a href={rankingHref(ranking.ranking_id)}>{ranking.ranking_id}</a> <GraderBadge grader={ranking.grader} /> <RobustnessBadge ranking={ranking} />
+            {' '}{rowNotRated(row) ? notRatedText(row).short : <>score <Num value={row.score} run={row.run_id ?? null} fallback={rankingHref(ranking.ranking_id)} /></>}
+            {rowOtherJudge(ranking, row) && <> <span class="flag">graded by {rowOtherJudge(ranking, row)}; not comparable</span></>}
+            {isNum(row.rank) && <>, rank <Num value={row.rank} href={rankingHref(ranking.ranking_id)} /></>}
+          </li>
+        ))}
+      </ul>
+    </details>
+  )}
+
+  <h2 id="caveats">Caveats</h2>
+  <ul>
+    {prePinRuns.length > 0 && (
+      <li><Num value={prePinRuns.length} href="#runs" /> run{prePinRuns.length === 1 ? '' : 's'} used an engine that was not pinned yet (vLLM 0.26 or a floating llama.cpp tag); they rank after pinned runs.</li>
+    )}
+    {m.licence.flags.length > 0 && <li>Licence flags: {m.licence.flags.join(', ')}. Model outputs keep this licence's restrictions.</li>}
+    {m.access === 'gated' && <li>Gated on its upstream hub: accept the licence there before downloading.</li>}
+    {m.notes && <li>{m.notes}</li>}
+    {(m.parse_notes ?? []).map((n) => <li class="small muted">{n}</li>)}
+    {heads.every((x) => !x.run) && !noRecord && <li>No configuration has a single-stream speed figure for this model.</li>}
+    {!noRecord && <li>Every figure is one measured run on this rig; other drivers, engines or prompts give other numbers.</li>}
+  </ul>
+
+  {targetSummaries.length > 0 && (
+    <>
+      <h2 id="comparison-summaries">In the comparisons</h2>
+      {targetSummaries.map(({ c, row }) => (
+        <Frame title={c.comparison_id}>
+          <p><a href={compareHref(c.comparison_id)}>{c.title}</a>{typeof row.hardware === 'string' && <span class="muted small"> · {hwShort(row.hardware)}</span>}{typeof row.build === 'string' && <span class="muted small"> · {row.build}</span>}</p>
+          {typeof c.summary_note === 'string' && <p class="small muted">{c.summary_note}</p>}
+          {'best_arm' in row ? <TargetSummary rows={[row]} compId={c.comparison_id} showTarget={false} /> : (
+          <dl class="kv">
+            {Object.entries(row).filter(([k, v]) => !['target', 'model_id', 'hardware', 'run_ids', 'evidence', 'label'].includes(k) && (isNum(v) || typeof v === 'string' || typeof v === 'boolean')).map(([k, v]) => (
+              <><dt>{sumLabel(k)}</dt><dd>{isNum(v) ? <Num value={v} unit={/_pct$/.test(k) ? '%' : /solo_(fr|en)$|tok_s/.test(k) ? 'tok/s' : ''} href={compareHref(c.comparison_id)} /> : typeof v === 'boolean' ? (v ? 'yes' : 'no') : String(v)}</dd></>
+            ))}
+          </dl>
+          )}
+        </Frame>
+      ))}
+    </>
+  )}
+
+  {buildList.length > 0 && (
+    <>
+      <h2 id="builds">Builds</h2>
+      <Table label="builds" search={false}>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Build</th>
+              <th scope="col">Quantisation</th>
+              <th scope="col" class="num">Bits</th>
+              <th scope="col">Engine family</th>
+              <th scope="col" class="num">Size</th>
+              <th scope="col">Source</th>
+              <th scope="col" class="num" title="distinct runs of this model with this build">Runs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {buildList.map((b) => (
+              <tr>
+                <td class="mono small break">{b.build_id}</td>
+                <td class="small">{b.quant.label} <span class="muted">({b.quant.format})</span></td>
+                <td class="num"><Num value={b.quant.bits} nullText="—" /></td>
+                <td class="small mono">{b.engine_family}</td>
+                <td class="num"><Num value={b.size_gb} unit="GB" nullText="—" /></td>
+                <td class="small mono break">{b.source_repo ?? '—'}</td>
+                <td class="num">{(() => { const n = distinctRuns(runsOfModel(m.model_id)).filter((r) => r.build_id === b.build_id).length; return n > 0 ? <Num value={n} href="#runs" /> : <span class="badge plain tone-muted" title="the build is listed in the lab's inventory; no run record uses it">listed, never run here</span>; })()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Table>
+    </>
+  )}
+
+  <h2 id="links">Links</h2>
+  <ul>
+    {m.upstream_url && /^https?:\/\//.test(m.upstream_url) ? <li><a href={m.upstream_url} rel="noopener">Upstream model card</a> <span class="mono small muted break">{m.upstream_url}</span></li> : <li class="muted">No upstream link recorded.</li>}
+    {m.licence.source && (/^https?:\/\//.test(m.licence.source) ? <li><a href={m.licence.source} rel="noopener">Licence text</a></li> : <li class="muted">Licence recorded from: {m.licence.source}</li>)}
+    {m.lineage.base_model_id && <li>Base model: <span class="mono small">{m.lineage.base_model_id}</span> ({m.lineage.kind})</li>}
+    {benchIds.map((b) => (benchById().has(b) ? <li>Bench card: <a class="mono" href={benchHref(b)}>{b}</a></li> : null))}
+    {evidenceDirs.slice(0, 40).map((e) => <li>Evidence: <a class="mono small break" href={evidenceHref(e)}>{e}</a></li>)}
+    {evidenceDirs.length > 40 && <li class="muted">… and more evidence folders, listed on each run page.</li>}
+  </ul>
+</Layout>

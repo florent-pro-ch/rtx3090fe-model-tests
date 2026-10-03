@@ -1,0 +1,212 @@
+{
+  "budget_gpu_h": 2,
+  "candidat": "trellis2-comfy",
+  "carte": "une",
+  "ecrit": "2026-09-30T06:06:45Z",
+  "etapes": [
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 9683,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 10038
+      },
+      "wall_s": 213.6
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 9488,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 10874
+      },
+      "wall_s": 190.8
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 10082,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 9767
+      },
+      "wall_s": 220.4
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 9860,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 10695
+      },
+      "wall_s": 271.2
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 9734,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 9757
+      },
+      "wall_s": 216.4
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 11505,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 12185
+      },
+      "wall_s": 353.8
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 11087,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 10772
+      },
+      "wall_s": 410.6
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 10072,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 12633
+      },
+      "wall_s": 288.9
+    },
+    {
+      "axe": "resolution",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 12421,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 15495
+      },
+      "wall_s": 712.0
+    },
+    {
+      "axe": "texture",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 11064,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 10772
+      },
+      "wall_s": 395.6
+    },
+    {
+      "axe": "texture",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 10077,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 12240
+      },
+      "wall_s": 292.0
+    },
+    {
+      "axe": "texture",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 12463,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 15175
+      },
+      "wall_s": 708.9
+    },
+    {
+      "axe": "texture",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 11244,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 11313
+      },
+      "wall_s": 879.2
+    },
+    {
+      "axe": "texture",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 11111,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 11396
+      },
+      "wall_s": 647.5
+    },
+    {
+      "axe": "texture",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 12692,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 13279
+      },
+      "wall_s": 1021.1
+    },
+    {
+      "axe": "faces",
+      "erreur": null,
+      "item": "bq-vol-a-table-3",
+      "ram_pic_mo": 11633,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 14787
+      },
+      "wall_s": 870.2
+    },
+    {
+      "axe": "faces",
+      "erreur": null,
+      "item": "bq-vol-a-star-3",
+      "ram_pic_mo": 11128,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 12240
+      },
+      "wall_s": 653.4
+    },
+    {
+      "axe": "faces",
+      "erreur": null,
+      "item": "bq-vol-b-01",
+      "ram_pic_mo": 12449,
+      "succes": true,
+      "vram_pic_mo": {
+        "0": 14518
+      },
+      "wall_s": 1015.2
+    }
+  ],
+  "gpu_h_utilise": 2.6,
+  "plafond": {
+    "faces": "700000",
+    "resolution": "2048",
+    "texture": "4096"
+  }
+}

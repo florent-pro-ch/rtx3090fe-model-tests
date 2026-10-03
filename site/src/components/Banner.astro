@@ -1,0 +1,140 @@
+---
+/**
+ * Mandatory caveats. kind="judge": judged scores come from one judge per
+ * table, never two. `graders` are the graders of the judged scores the page
+ * shows: when they all name one judge, the banner is that judge's text
+ * (methodology/judge-banner.md for Claude Fable 5.1's tables,
+ * methodology/judge-banner-local.md for the local judge's), else, and on a
+ * page not about one table (no `graders`), one line naming both judges and
+ * what each grades. A built-in text says the same when a file is absent.
+ * judgeModel: the page of the local judge model itself. kind="two-pairs":
+ * the two-pairs configuration has never run one model on four cards. Any
+ * other content: pass a slot. The judge banner also states what the
+ * judge-robustness badges and rank ranges mean (ROBUSTNESS_INFO,
+ * methodology/JUDGE.md).
+ * robustness (home page): instead of that legend, one row of badges — per
+ * bench of the latest judged rankings, how far its order held under the other
+ * judge, then lot B, the census by the tables' judge (the calibration gate in
+ * its tooltip), and the human grade — dated from data/judge-audit.json. Never
+ * on the uncensored-lab pages (their guard bans the bench names), so it is off
+ * by default.
+ */
+import { href } from '../lib/site';
+import {
+  CLOUD_GATE_ANCHOR, JUDGES, LOT_B_ANCHOR, judgeAudit, judgeBannerMarkdown, judgeKeysOf, judgeRobustness, isJudged, isTwoOrders,
+  latestRankingPerBench, robustnessFigures, ROBUSTNESS_ANCHOR, ROBUSTNESS_INFO,
+} from '../lib/data';
+import type { Grader, JudgeKey, RobustnessStatus } from '../lib/data';
+import { rankingHref } from '../lib/site';
+import { renderMarkdown } from '../lib/markdown';
+interface Props {
+  kind?: 'judge' | 'two-pairs' | 'info' | 'warn';
+  judgeModel?: boolean;
+  robustness?: boolean;
+  /** graders of the judged scores on the page; omitted on a page not about one table */
+  graders?: (Grader | null | undefined)[];
+}
+const { kind = 'warn', judgeModel = false, robustness = false, graders } = Astro.props;
+const keys: JudgeKey[] = graders ? judgeKeysOf(graders) : [];
+const one: JudgeKey | null = keys.length === 1 ? keys[0] : null;
+const robust = robustness && kind === 'judge'
+  ? latestRankingPerBench()
+      .filter((k) => isJudged(k.grader))
+      .map((k) => ({ k, jr: judgeRobustness(k) }))
+      .filter((x) => x.jr && x.jr.status !== 'untested')
+  : [];
+const twoOrders = robust.length > 0 && robust.every((x) => isTwoOrders(x.jr));
+const audit = robustness ? judgeAudit() : null;
+const md = kind === 'judge' && one ? judgeBannerMarkdown(one) : null;
+const html = md ? renderMarkdown(md.markdown, md.file) : null;
+const badgeOrder: RobustnessStatus[] = ['rank-stable', 'partly-stable', 'judge-sensitive', 'untested'];
+const T = JUDGES.table;
+const L = JUDGES.local;
+---
+{kind === 'judge' ? (
+  <aside class="banner" role="note" data-judge={one ?? 'both'}>
+    {judgeModel && (
+      <p>
+        <strong>This model is also the local judge</strong>, which grades {L.scope}. It never grades its own answers:
+        in the tutoring and code tables they are graded by {T.name}, like every other row.
+      </p>
+    )}
+    {html ? (
+      <div class="banner-md" set:html={html} />
+    ) : one === 'table' ? (
+      <p>
+        <strong>Judged by {T.name}</strong> (Anthropic, cloud), which re-graded the tutoring, vision and judged-code
+        calls of the lab's campaigns (a few are marked not graded); no table mixes its scores with the local judge's. No human has graded these items. Read a
+        gap of a few points between two candidates as a tie, and use the CI95 and the tie groups.
+      </p>
+    ) : one === 'local' ? (
+      <p>
+        <strong>Judged by the local judge, {L.label}; no human calibration.</strong>{' '}
+        The judge belongs to the Qwen lineage: candidates of the same lineage are flagged, and it may favour them. Read a gap
+        of a few points between two candidates as a tie, and use the CI95 and the tie groups.
+      </p>
+    ) : (
+      <p>
+        <strong>One judge per table, never two.</strong> {T.scope[0].toUpperCase() + T.scope.slice(1)} are judged by{' '}
+        <strong>{T.name}</strong> (Anthropic, cloud); {L.scope} by the local judge, <strong>{L.name}</strong>. Each table,
+        badge and banner names its own judge. No human has graded an item. Read a gap of a few points between two candidates
+        as a tie.
+      </p>
+    )}
+    {!html && <p class="small"><a href={href('methodology/judge/')}>How the judges work and what they get wrong</a>.</p>}
+    {robustness ? (
+      <p class="banner-row small">
+        {robust.length > 0 && (
+          twoOrders
+            ? <span class="muted">{T.name}'s order against the local judge's:</span>
+            : <span class="muted">Second judge{audit?.secondJudgeDate && <>, <time class="mono">{audit.secondJudgeDate}</time></>}:</span>
+        )}
+        {robust.map(({ k, jr }) => (
+          <a class={`badge tone-${ROBUSTNESS_INFO[jr!.status].tone} badge-link`} href={rankingHref(k.ranking_id)} title={`${ROBUSTNESS_INFO[jr!.status].meaning}. Latest ${k.bench_id} ranking: ${robustnessFigures(jr, k)}`} data-robustness={jr!.status}>
+            {k.bench_id.split('/')[0]} · {ROBUSTNESS_INFO[jr!.status].label}{jr!.kendall_tau !== null && <> · τ {jr!.kendall_tau.toFixed(2)}</>}
+          </a>
+        ))}
+        {audit?.lotB ? (
+          <>
+            <span class="muted">Tables' judge{audit.lotB.date && <>, <time class="mono">{audit.lotB.date}</time></>}:</span>
+            <a class="badge plain tone-muted badge-link" href={href(`methodology/judge/#${LOT_B_ANCHOR}`)} title={`${audit.lotB.title}${audit.cloudGate ? `. Before it, the calibration gate: ${audit.cloudGate.label}.` : '.'}`} data-lot-b={audit.lotB.nGraded}>{audit.lotB.label}</a>
+          </>
+        ) : audit?.cloudGate && (
+          <>
+            <span class="muted">Frontier judges{audit.cloudGate.date && <>, <time class="mono">{audit.cloudGate.date}</time></>}:</span>
+            <a class="badge plain tone-muted badge-link" href={href(`methodology/judge/#${CLOUD_GATE_ANCHOR}`)} title={audit.cloudGate.title} data-cloud-gate={audit.cloudGate.status}>{audit.cloudGate.label}</a>
+          </>
+        )}
+        {audit && <a class="badge plain tone-muted badge-link" href={href('methodology/judge/')} title={audit.humanStatus ?? 'human calibration'}>human grade · {audit.humanItems ? `${audit.humanItems} items` : 'none'}</a>}
+        <a class="small" href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>What the badges mean</a>
+      </p>
+    ) : one === 'local' ? (
+      <p class="small">
+        <strong>Judge-robustness badges.</strong> No other judge ranked the rows of the local judge's tables:{' '}
+        <span class={`badge plain tone-${ROBUSTNESS_INFO.untested.tone}`}>{ROBUSTNESS_INFO.untested.label}</span>.{' '}
+        <a href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>How the badges are computed</a>.
+      </p>
+    ) : (
+    <p class="small">
+      <strong>Judge-robustness badges.</strong> Every table judged by {T.name} was also ranked whole by the local judge,
+      {' '}{L.name}, with its own scores and duels; each table says how far the two orders agree (ranks and Kendall τ only:
+      a table never shows the local judge's scores):{' '}
+      {badgeOrder.map((k, i) => (
+        <>
+          <span class={`badge plain tone-${ROBUSTNESS_INFO[k].tone}`}>{ROBUSTNESS_INFO[k].label}</span>: {ROBUSTNESS_INFO[k].meaning}{i < badgeOrder.length - 1 ? '; ' : '. '}
+        </>
+      ))}
+      A range next to a rank, such as (3–4), is on the table's own numbering: the rank shown, and that rank moved by
+      the row's shift between the two judges among the rows both ranked; its tooltip gives the two ranks behind it.{' '}
+      <a href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)}>How the badges are computed</a>.
+    </p>
+    )}
+  </aside>
+) : kind === 'two-pairs' ? (
+  <aside class="banner" role="note">
+    <p><strong>Two independent 48 GB machines. No model has run on four cards here.</strong>
+      {' '}Each NVLink pair (pair A, pair B) is passed whole to its own virtual machine; the pairs only ever ran side by side.</p>
+  </aside>
+) : (
+  <aside class={`banner ${kind === 'info' ? 'info' : ''}`} role="note"><slot /></aside>
+)}

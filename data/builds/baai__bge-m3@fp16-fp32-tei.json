@@ -1,0 +1,19 @@
+{
+  "build_id": "baai/bge-m3@fp16-fp32-tei",
+  "engine_family": "other",
+  "harness_ids": [],
+  "inventory_id": "bge-m3",
+  "model_id": "baai/bge-m3",
+  "parse_notes": [],
+  "quant": {
+    "bits": null,
+    "format": "other",
+    "label": "FP16/FP32 under Text Embeddings Inference"
+  },
+  "runs_count": 0,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "BAAI/bge-m3"
+}

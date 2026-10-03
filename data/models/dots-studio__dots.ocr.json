@@ -1,0 +1,63 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-dots-ocr"
+    ],
+    "inventory_ids": [
+      "dots-ocr",
+      "dots-ocr-3b-bf16-2026-09"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "dots-studio/dots.ocr@bf16",
+    "dots-studio/dots.ocr@unknown-2026-07"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-29",
+  "licence": {
+    "flags": [],
+    "name": "MIT",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "dots-studio/dots.ocr",
+  "name": "dots.ocr",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 3.04,
+  "parse_notes": [
+    "first_tested is the first dated record; earlier undated runs (spring-summer 2026) exist"
+  ],
+  "slug": "dots-studio__dots.ocr",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/dots-studio/dots.ocr",
+  "vendor": "rednote-hilab / dots-studio",
+  "verdict": {
+    "as_of": "2026-09-29",
+    "status": "rated-no-role",
+    "summary": "Document OCR model. A July 2026 container left no measurement; the September run on one card scored low on the document-reading bench outside plain transcription."
+  }
+}

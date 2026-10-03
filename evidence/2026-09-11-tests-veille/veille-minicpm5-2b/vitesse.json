@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-minicpm5-2b",
+ "debut": "2026-09-09T19:12:36Z",
+ "solo": {
+  "ttft_ms": 71,
+  "tok_s": 135.0,
+  "completion_tokens": 512,
+  "wall_s": 3.792
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 1010.6,
+  "p50_latency_s": 4.05,
+  "wall_s": 4.05
+ },
+ "fin": "2026-09-09T19:12:48Z"
+}

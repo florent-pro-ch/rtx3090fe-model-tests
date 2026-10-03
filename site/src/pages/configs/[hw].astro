@@ -1,0 +1,241 @@
+---
+/**
+ * A configuration page. One card and one pair: the headline table per model
+ * (headline-run rule, applied within each split mode on the pair: tensor
+ * parallel, llama.cpp layer split, CPU offload), a bar chart of single-stream
+ * speed on one shared axis, every run, comparisons, what was never measured.
+ * Two pairs: no model ever ran on four cards, so the page leads with that
+ * banner, then what both pairs did side by side, the facts, and the
+ * never-measured list.
+ */
+import Layout from '../../layouts/Layout.astro';
+import Num from '../../components/Num.astro';
+import Banner from '../../components/Banner.astro';
+import Frame from '../../components/Frame.astro';
+import BarChart from '../../components/BarChart.astro';
+import RunsTable from '../../components/RunsTable.astro';
+import HeadlineTable from '../../components/HeadlineTable.astro';
+import ComparisonList from '../../components/ComparisonList.astro';
+import { rankingTitle,
+  HARDWARE_IDS, hardwareById, headlinesBySplit, runsOnConfig, runsOnConfigUnknownTopology,
+  modelById, modelName, soloTokS, runDate, isNum, dataAsOf, comparisons, comparisonById, comparisonRows, runById,
+  runCount, buildLabel, isHouseProtocol, topScoresOnConfig, isJudged, rowOtherJudge,
+} from '../../lib/data';
+import { configHref, compareHref, evidenceLink, glossaryHref, href, modelHref, runHref, rankingHref, benchHref } from '../../lib/site';
+import GraderBadge from '../../components/GraderBadge.astro';
+import PrePinBadge from '../../components/PrePinBadge.astro';
+import Schematic from '../../components/schematic/Schematic.astro';
+
+export function getStaticPaths() {
+  return HARDWARE_IDS.map((hw) => ({ params: { hw } }));
+}
+
+const { hw } = Astro.params as { hw: string };
+const h = hardwareById(hw)!;
+const pairsPage = hw === '2x2x3090fe-nvlink';
+const groups = headlinesBySplit(hw);
+const heads = groups.flatMap((g) => g.heads);
+const all = runsOnConfig(hw)
+  .slice()
+  .sort((a, b) => (runDate(b) ?? '').localeCompare(runDate(a) ?? '') || a.run_id.localeCompare(b.run_id));
+const unknownTopo = runsOnConfigUnknownTopology(hw);
+const headSet = new Set(heads.map((x) => x.run.run_id));
+const dates = heads.map((x) => runDate(x.run)).filter((d): d is string => !!d).sort();
+const span = dates.length ? (dates[0] === dates.at(-1) ? dates[0] : `${dates[0]} to ${dates.at(-1)}`) : null;
+const axisMax = Math.max(0, ...heads.map((x) => soloTokS(x.run) ?? 0));
+const nModels = new Set(heads.map((x) => x.model_id)).size;
+const description = pairsPage
+  ? `${h.label}: two independent 48 GB machines; no model has run on four cards. What both pairs did side by side, and what was never measured.`
+  : `${h.label}: ${nModels} models with a measured single-stream speed, ${runCount(all).distinct} distinct runs with a known topology${runCount(all).copies ? ` (+${runCount(all).copies} copies of earlier runs)` : ''}, and what was never measured.`;
+const name = (id: string) => modelById().get(id)?.name ?? modelName(id);
+const comps = comparisons().filter((c) => (Array.isArray(c.hardware) ? (c.hardware as unknown[]).includes(hw) : c.hardware === hw));
+const pairsComp = pairsPage ? comparisonById('two-pairs-parallel') : undefined;
+const pairsRows = comparisonRows(pairsComp);
+const runOf = (ids: string[]) => ids.find((id) => runById().has(id)) ?? null;
+const factLink = (e: unknown) => (typeof e === 'string' ? evidenceLink(e) : null);
+const isRigFact = (e: unknown) => typeof e === 'string' && /^(rig description|data\/(hardware\/)?rig\.json)$/i.test(e.trim());
+const rc = runCount(all);
+const top = pairsPage ? [] : topScoresOnConfig(hw);
+const topJudged = top.some(({ ranking }) => isJudged(ranking.grader));
+---
+<Layout title={h.label} description={description} nav="configs" crumbs={[{ label: 'configurations', href: href('configs/') }, { label: hw }]}>
+  <h1>{h.label}</h1>
+  <p class="mono muted">{hw}</p>
+  {pairsPage && <Banner kind="two-pairs" />}
+  {h.description && !pairsPage && <p class="lead">{h.description}</p>}
+  {h.placeholder && <p class="empty">No hardware record for this configuration is published yet.</p>}
+
+  <div class="config-head">
+  <figure class="schematic-well config-schematic">
+    <Schematic hw={hw} width={pairsPage ? 520 : 300} />
+  </figure>
+  {(h.gpus !== null || h.vram_gb_total !== null || h.nvlink !== null) && (
+    <dl class="kv">
+      {h.gpus !== null && <><dt>GPUs</dt><dd><Num value={h.gpus} href={href('rig/')} /></dd></>}
+      {h.vram_gb_total !== null && <><dt>VRAM in total</dt><dd><Num value={h.vram_gb_total} unit="GB" href={href('rig/')} />{pairsPage && <span class="muted small"> — two separate 48 GB pools, never one</span>}</dd></>}
+      {h.nvlink !== null && <><dt>NVLink</dt><dd>{h.nvlink ? (pairsPage ? 'yes, within each pair' : 'yes') : 'no'}</dd></>}
+      {h.mode && <><dt>Mode</dt><dd class="mono">{h.mode}</dd></>}
+      {pairsPage
+        ? isNum(h.single_model_runs) && <><dt>Runs of one model on all four cards</dt><dd><Num value={h.single_model_runs} href={pairsComp ? compareHref('two-pairs-parallel') : '#not-measured'} /></dd></>
+        : <><dt>Runs</dt><dd><Num value={rc.distinct} href="#all-runs" /> <span class="muted small">distinct runs with a known topology{rc.copies > 0 && <>, +<Num value={rc.copies} href="#all-runs" /> copies of earlier runs</>}</span></dd></>}
+    </dl>
+  )}
+  </div>
+
+  {pairsPage && pairsComp && (
+    <>
+      <h2 id="side-by-side">What both pairs did at once</h2>
+      {typeof pairsComp.verdict === 'string' && <p>{pairsComp.verdict}</p>}
+      {pairsRows.length > 0 && (
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Measured</th><th scope="col" class="num">Value</th></tr></thead>
+            <tbody>
+              {pairsRows.map((r) => (
+                <tr>
+                  <td class="small">{r.label}{r.evidence.length === 0 && <sup class="muted" title="read from lab logs that are not published">†</sup>}</td>
+                  <td class="num">{r.evidence.length === 0
+                    ? <Num value={r.value} unit={r.unit ?? ''} href={evidenceLink('data/comparisons/two-pairs-parallel.json')} title="read from lab logs that are not published: the value is in the comparison record" />
+                    : <Num value={r.value} unit={r.unit ?? ''} run={runOf(r.run_ids)} evidence={runOf(r.run_ids) ? null : (r.evidence[0] ?? null)} fallback={compareHref('two-pairs-parallel')} />}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {pairsRows.some((r) => r.evidence.length === 0) && (
+        <p class="small muted">† Read from the lab's own logs (job records, harness logs, a campaign README), which are not published; each such figure links to the comparison record (<a href={evidenceLink('data/comparisons/two-pairs-parallel.json')!}>data/comparisons/two-pairs-parallel.json</a>) that holds it.</p>
+      )}
+      {Array.isArray(pairsComp.caveats) && (
+        <ul class="small muted">{(pairsComp.caveats as unknown[]).filter((x) => typeof x === 'string').map((x) => <li>{x as string}</li>)}</ul>
+      )}
+      <p class="small">Full record, method and evidence: <a href={compareHref('two-pairs-parallel')}>{pairsComp.title}</a>.</p>
+    </>
+  )}
+
+  {h.facts.length > 0 && (
+    <Frame title="facts">
+      <ul>
+        {h.facts.map((f) => (
+          <li>{f.fact}{f.evidence && (factLink(f.evidence) ? <> · <a href={factLink(f.evidence)!} class="small">{isRigFact(f.evidence) ? 'host record' : 'evidence'}</a></> : <span class="small muted"> · source: {String(f.evidence)}</span>)}</li>
+        ))}
+      </ul>
+    </Frame>
+  )}
+
+  {pairsPage && (
+    <>
+      <h2 id="not-measured">Never measured on two pairs</h2>
+      {h.never_measured.length === 0 ? (
+        <p class="empty">No list of unmeasured items is published for this configuration yet.</p>
+      ) : (
+        <ul>{h.never_measured.map((x) => <li><span class="badge plain tone-muted">never measured</span> {x}</li>)}</ul>
+      )}
+      {comps.filter((c) => c.comparison_id !== 'two-pairs-parallel').length > 0 && <ComparisonList comps={comps.filter((c) => c.comparison_id !== 'two-pairs-parallel')} />}
+      {all.length > 0 && (
+        <>
+          <h2 id="all-runs">Runs recorded on this configuration</h2>
+          <RunsTable runs={all} showHardware={false} label="runs on this configuration" headline={headSet} />
+        </>
+      )}
+      <p class="small muted">For models, see <a href={configHref('1x3090fe')}>one card</a> and <a href={configHref('2x3090fe-nvlink')}>one NVLink pair</a>: every model ran on one of those. Data as of <time class="mono">{dataAsOf() ?? 'n/a'}</time>.</p>
+    </>
+  )}
+
+  {!pairsPage && (
+    <>
+      <h2 id="headline">Headline speed per model</h2>
+      <p class="small muted">
+        One figure per model{groups.length > 1 ? ' and split mode' : ''}, chosen by the <a href={href('methodology/#headline-run-rule')}>headline-run rule</a>{' '}
+        (its text is under each table). Never an average; every other run is listed below. Sorted by single-stream speed; each
+        row names its build and protocol. VRAM is labelled per run:{' '}<em>reserved</em> is vLLM's reservation,{' '}
+        <a href={glossaryHref('after-load')}><em>after load</em></a> is nvidia-smi read about 3 s after the server was ready (5 s in the 2026-09-04 campaigns), before any request; neither is a
+        peak nor what the model needs.
+      </p>
+      {groups.length === 0 ? (
+        <p class="empty">No run with a single-stream speed on this configuration in the data.</p>
+      ) : (
+        groups.map(({ group, heads: gh }) => (
+          <section aria-labelledby={`split-${group.id}`}>
+            {groups.length > 1 || group.id !== 'none' ? <h3 id={`split-${group.id}`}>{group.title} <span class="muted small">· <Num value={gh.length} href={`#split-${group.id}`} /> model{gh.length === 1 ? '' : 's'}</span></h3> : <span id={`split-${group.id}`}></span>}
+            {group.note && <p class="small muted split-note">{group.note}</p>}
+            <BarChart
+              title={`Single-stream decode speed, ${h.label}${groups.length > 1 ? `, ${group.title.toLowerCase()}` : ''}`}
+              unit="tok/s"
+              caption={`headline run per model, labelled with its build; bars start at zero${groups.length > 1 ? ', one axis for every split mode on this page' : ''}; amber = engine not pinned yet`}
+              date={(() => { const d = gh.map((x) => runDate(x.run)).filter((v): v is string => !!v).sort(); return d.length ? (d[0] === d.at(-1) ? d[0] : `${d[0]} to ${d.at(-1)}`) : null; })()}
+              evidenceHref="#all-runs"
+              evidenceLabel="every run"
+              max={axisMax}
+              items={gh.map(({ model_id, run }) => ({
+                label: name(model_id),
+                value: soloTokS(run),
+                run: run.run_id,
+                href: modelById().get(model_id) ? modelHref(modelById().get(model_id)!.slug) : null,
+                tone: run.engine.pre_pin ? 'amber' : 'blue',
+                note: [buildLabel(run), run.engine.pre_pin ? 'pre-pin' : '', isHouseProtocol(run.protocol) ? '' : (run.protocol ?? 'no protocol')].filter(Boolean).join(' · ') || undefined,
+              }))}
+            />
+            <HeadlineTable heads={gh} label={`headline runs, ${group.title.toLowerCase()}`} showSplit={group.id !== 'none'} />
+          </section>
+        ))
+      )}
+      {span && <p class="small muted">Headline runs measured {span}.</p>}
+
+      {top.length > 0 && (
+        <>
+          <h2 id="top-scores">Top scores that ran here</h2>
+          <p class="small muted">
+            For each bench, the best rows of its latest ranking whose run was on this configuration (the run record names
+            the hardware). Scores of different benches are not comparable; each links to its full ranking.
+          </p>
+          {topJudged && <Banner kind="judge" graders={top.map(({ ranking }) => ranking.grader)} />}
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">Bench</th><th scope="col">Model</th><th scope="col">Build</th><th scope="col" class="num">Score</th><th scope="col">Run</th></tr></thead>
+              <tbody>
+                {top.flatMap(({ ranking, rows }) => rows.map(({ row, run }, i) => (
+                  <tr>
+                    <td class="small">{i === 0 ? <><a class="mono" href={benchHref(ranking.bench_id)}>{ranking.bench_id}</a> <GraderBadge grader={ranking.grader} /><br /><a class="muted" href={rankingHref(ranking.ranking_id)}>{rankingTitle(ranking)}</a></> : <span class="muted mono">{ranking.bench_id}</span>}</td>
+                    <td><div class="cell-min">{modelById().get(row.model_id) ? <a href={modelHref(modelById().get(row.model_id)!.slug)}>{name(row.model_id)}</a> : <span>{name(row.model_id)}</span>}</div></td>
+                    <td class="small">{buildLabel(run)}</td>
+                    <td class="num"><Num value={row.score} run={run.run_id} />{rowOtherJudge(ranking, row) && <span class="muted small" title={`graded by ${rowOtherJudge(ranking, row)}: not comparable with the other rows`}> †</span>}</td>
+                    <td class="mono small nowrap"><a href={runHref(run.run_id)}>{runDate(run) ?? 'undated'}</a> <PrePinBadge prePin={run.engine.pre_pin} unknown={false} /></td>
+                  </tr>
+                )))}
+              </tbody>
+            </table>
+          </div>
+          {top.some(({ ranking, rows }) => rows.some(({ row }) => rowOtherJudge(ranking, row))) && <p class="small muted">† graded by another judge than the ranking's own: not comparable with the other rows.</p>}
+        </>
+      )}
+
+      <h2 id="all-runs">Every run on this configuration</h2>
+      <p class="small muted">
+        Runs whose topology is known from their launch record, newest first: <Num value={rc.distinct} href="#all-runs" /> distinct
+        runs{rc.copies > 0 && <>, plus <Num value={rc.copies} href="#all-runs" /> byte copies of earlier runs carried into later campaigns (marked <em>copy</em>)</>}.
+        Failed starts are kept: they say what does not fit.
+      </p>
+      <RunsTable runs={all} showHardware={false} label="runs on this configuration" headline={headSet} />
+      {unknownTopo.length > 0 && (
+        <p class="small muted">
+          <Num value={unknownTopo.length} /> more run{unknownTopo.length === 1 ? ' is' : 's are'} recorded on this hardware
+          with an unknown topology and {unknownTopo.length === 1 ? 'is' : 'are'} left out of this page:{' '}
+          {unknownTopo.map((r, i) => <>{i > 0 && ', '}<a class="mono" href={runHref(r.run_id)}>{r.run_id}</a></>)}.
+        </p>
+      )}
+
+      <ComparisonList comps={comps} />
+
+      <h2 id="not-measured">Not measured</h2>
+      {h.never_measured.length === 0 ? (
+        <p class="empty">No list of unmeasured items is published for this configuration yet.</p>
+      ) : (
+        <ul>
+          {h.never_measured.map((x) => <li><span class="badge plain tone-muted">not measured</span> {x}</li>)}
+        </ul>
+      )}
+      <p class="small muted">Data as of <time class="mono">{dataAsOf() ?? 'n/a'}</time>.</p>
+    </>
+  )}
+</Layout>

@@ -1,0 +1,18 @@
+{
+ "candidat": "phonellm-gguf",
+ "debut": "2026-09-05T09:34:22Z",
+ "solo": {
+  "ttft_ms": 192,
+  "tok_s": 194.8,
+  "completion_tokens": 432,
+  "wall_s": 2.218
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 381.6,
+  "p50_latency_s": 8.14,
+  "wall_s": 10.74
+ },
+ "fin": "2026-09-05T09:34:37Z"
+}

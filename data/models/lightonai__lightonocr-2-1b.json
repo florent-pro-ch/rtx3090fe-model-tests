@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-lightonocr-2-1b"
+    ],
+    "inventory_ids": [
+      "lightonocr-2-1b-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "lightonai/lightonocr-2-1b@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-25",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "lightonai/lightonocr-2-1b",
+  "name": "LightOnOCR-2-1B",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 1.0,
+  "parse_notes": [],
+  "slug": "lightonai__lightonocr-2-1b",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/lightonai/LightOnOCR-2-1B",
+  "vendor": "LightOn",
+  "verdict": {
+    "as_of": "2026-09-30",
+    "status": "rated-no-role",
+    "summary": "1B OCR model on one card: fair transcription, near zero on the structured tasks under the fixed reader. Rated, no role assigned."
+  }
+}

@@ -1,0 +1,6 @@
+{
+ "candidat": "glm-4.7-flash-awq",
+ "debut": "2026-09-05T09:00:50Z",
+ "error": "[Errno 104] Connection reset by peer",
+ "fin": "2026-09-05T09:00:50Z"
+}

@@ -1,0 +1,29 @@
+{
+  "bras": "g31-eagle3-16k",
+  "cible": "gemma-4-31b-qat",
+  "debut": "2026-09-25T18:51:04Z",
+  "fin": "2026-09-25T18:54:47Z",
+  "kv": {},
+  "moteur": "vllm",
+  "nvidia_smi_avant": [
+    {
+      "index": 0,
+      "memoire_mib": 0,
+      "temperature_c": 43
+    },
+    {
+      "index": 1,
+      "memoire_mib": 0,
+      "temperature_c": 35
+    }
+  ],
+  "passes": {},
+  "role": "spec",
+  "spec": {
+    "draft_tensor_parallel_size": 1,
+    "method": "eagle3",
+    "model": "$MODELS/gemma-4-31b-it-eagle3",
+    "num_speculative_tokens": 3
+  },
+  "statut": "ECHEC-DEMARRAGE"
+}

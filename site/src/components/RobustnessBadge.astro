@@ -1,0 +1,30 @@
+---
+/**
+ * How far a judged ranking's order depends on its judge (ranking.judge_robustness):
+ * rank-stable / partly stable / judge-sensitive / untested. For Claude Fable 5.1's
+ * tables (method two-full-orders) the other judge, the local judge, ranked the whole
+ * table with its own scores and duels: ranks and τ only. Links to the badge
+ * definitions in methodology/JUDGE.md. Renders nothing for a ranking without
+ * judge_robustness (a ranking checked by code).
+ */
+import type { Ranking } from '../lib/data';
+import { isTwoOrders, judgeRobustness, otherJudgeText, robustnessFigures, ROBUSTNESS_ANCHOR, ROBUSTNESS_INFO } from '../lib/data';
+import { href } from '../lib/site';
+interface Props { ranking: Ranking }
+const jr = judgeRobustness(Astro.props.ranking);
+const info = jr ? ROBUSTNESS_INFO[jr.status] : null;
+const tau = jr && jr.kendall_tau !== null ? jr.kendall_tau.toFixed(2) : null;
+const plural = (n: number) => (n === 1 ? '' : 's');
+const tip = !jr || !info
+  ? ''
+  : jr.status === 'untested'
+    ? `${info.meaning}. Click for the definitions.`
+    : isTwoOrders(jr)
+      ? `${info.meaning}. This table's order against that of ${otherJudgeText(jr)}: ${robustnessFigures(jr, Astro.props.ranking)}. Click for the definitions.`
+      : `${info.meaning}${tau !== null ? `. Kendall τ ${tau}` : ''}, ${jr.rows_regraded} row${plural(jr.rows_regraded)} re-graded by ${jr.second_judge ?? 'a second judge'}${jr.rows_compared !== null ? ` over ${jr.rows_compared} compared` : ''}. Click for the definitions.`;
+---
+{jr && info && (
+  <a class={`badge tone-${info.tone} badge-link`} href={href(`methodology/judge/#${ROBUSTNESS_ANCHOR}`)} title={tip} data-robustness={jr.status}>
+    {info.label}{tau !== null && <span class="mono"> · τ {tau}</span>}
+  </a>
+)}

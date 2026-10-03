@@ -1,0 +1,22 @@
+{
+  "name": "rtx3090fe-model-tests-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site of rtx3090fe-model-tests: every model test run on RTX 3090 Founders Edition cards, built from ../data at build time.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "^7.3.5",
+    "marked": "^18.0.14"
+  }
+}
