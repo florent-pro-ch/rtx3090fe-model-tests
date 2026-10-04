@@ -1,0 +1,18 @@
+{
+ "candidat": "en-gemma-3-27b-qat-awq",
+ "debut": "2026-10-03T19:13:01Z",
+ "solo": {
+  "ttft_ms": 116,
+  "tok_s": 72.4,
+  "completion_tokens": 512,
+  "wall_s": 7.07
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 526.0,
+  "p50_latency_s": 7.78,
+  "wall_s": 7.79
+ },
+ "fin": "2026-10-03T19:13:23Z"
+}

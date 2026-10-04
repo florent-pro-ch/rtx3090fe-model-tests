@@ -39,6 +39,12 @@ tags = ["network", "privacy"]
 regexTarget = "secret"
 regexes = ['''^(?:00:){5}00$''', '''(?i)^(?:ff:){5}ff$''']
 
+[[rules]]
+id = "gpu-uuid"
+description = "NVIDIA card identifier (GPU-/MIG- UUID, as NVML and nvidia-smi report it): names one physical card"
+regex = '''(?i)\b(?:GPU|MIG)-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b'''
+tags = ["hardware", "privacy"]
+
 [[allowlists]]
 description = "SHA-256 fingerprints (bench manifests, evidence records) are not secrets"
 regexTarget = "secret"

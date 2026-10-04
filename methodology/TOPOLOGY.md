@@ -91,6 +91,12 @@ The only like-for-like comparison of one model on one card and on a pair is
 the base arm of the speculative-decoding campaign, Gemma 4 26B-A4B served both
 ways ([data/comparisons/gemma4-26b-1-vs-2-cards.json](../data/comparisons/gemma4-26b-1-vs-2-cards.json),
 runs in [data/runs/2026-09-25-spec-ab/](../data/runs/2026-09-25-spec-ab/)).
+The 2026-10-03 speed campaign measured the same model both ways again under
+the house protocol, from the launch lines of its two headline runs, which
+differ in more than the card count (prefix caching off on the pair only,
+memory share 0.92 against 0.90, the image limit): 139.9 against 193.4 tok/s
+single stream and 775.2 against 1118.4 at eight requests
+([data/runs/2026-10-03-vitesse-en/](../data/runs/2026-10-03-vitesse-en/)).
 Every other "one card versus two" reading compares different models.
 
 ## Does the NVLink bridge matter?
@@ -141,6 +147,14 @@ The percentages, with their method and caveats, are in the comparison records
 [nvlink-ab-moe.json](../data/comparisons/nvlink-ab-moe.json) (from the
 unrounded means of the three passes for the MoE model).
 
+All three arms of both campaigns ran with NCCL's debug logging on
+(`NCCL_DEBUG=INFO`). The dense model's reference arm,
+`2026-09-13-nvlink-ab/with-nvlink`, gave 78.6 tok/s single stream and 396.6
+at eight requests; its launch line without the logging, measured again on
+2026-10-03, gave 79.1 and 528.7. That later run, not the reference arm, is
+now the model's headline. The percentages above compare arms that all had the
+logging on; whether the logging alone explains the gap was not tested.
+
 **Reading.** Without the bridge, a tensor-parallel pair loses roughly a tenth
 of its single-stream speed and roughly a quarter of its batched throughput,
 for a dense model and for a sparse one alike. The bridge changes **no memory
@@ -182,11 +196,17 @@ exists and lists what is missing.
 
 ## Not measured on any configuration
 
-- **Power and energy**: board power was never sampled during generation; there
-  is no tokens-per-joule figure and no power-limit sweep.
+- **Power-limit sweeps and power at the wall**: every card ran at its stock
+  350 W limit. Energy is read per card from NVIDIA's counter during the speed
+  passes run since 2026-10-03 ([SPEED-PROTOCOL.md](SPEED-PROTOCOL.md)), never
+  for the host, its CPU and RAM or the power supplies; no run measured
+  earlier has an energy figure, and none is estimated.
 - **Sustained thermals**: no long-run temperature series under load.
 - **PCIe link width or generation effects** (x8 versus x16, Gen3 versus Gen4).
-- **An English speed reference under the house protocol**: its prompt is
-  French ([SPEED-PROTOCOL.md](SPEED-PROTOCOL.md)). The only English figures
-  are those of the speculative-decoding campaign, whose protocol reports French
-  and English apart.
+- **English speed under the house protocol outside the 2026-10-03
+  campaign**: that campaign measured the house pass's English twin beside a
+  French pass on 18 headline rows ([SPEED-PROTOCOL.md](SPEED-PROTOCOL.md));
+  every other house-protocol run has French figures only. The earlier English
+  figures come from speculative-decoding tests, each under its own protocol:
+  the speculative-decoding A/B (`spec-ab/v1`), which reports French and
+  English apart, and one DSpark probe (`dspark-probe/v1`).

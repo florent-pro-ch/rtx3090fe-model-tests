@@ -201,8 +201,8 @@ weights and, in v0 (2026-10-02), no model outputs.
 - The upstream model page is the authority. Read it before reusing a model or
   anything derived from it; a licence flag here is a reading aid, not legal
   advice.
-- Scores and speeds are this lab's measurements of those models and are
-  published under CC BY 4.0 with the rest of [data/](data/).
+- Scores, speeds and energy figures are this lab's measurements of those
+  models and are published under CC BY 4.0 with the rest of [data/](data/).
 
 ## Fonts
 
@@ -238,4 +238,6 @@ The measurements were taken with open-source engines and tools (vLLM,
 llama.cpp, ComfyUI, a headless coding agent for the agent-loop bench, Blender
 for the 3D renders, faster-whisper for speech recognition, among others).
 They are not redistributed here; each keeps its own licence. The engine and
-image tag of every run are recorded in its `data/runs/` record.
+image tag of every run are recorded in its `data/runs/` record. The energy
+figures read NVIDIA's management library (NVML), part of the installed
+driver; nothing of it is redistributed.

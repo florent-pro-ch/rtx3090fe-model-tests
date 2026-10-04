@@ -12,7 +12,7 @@
     "format": "awq",
     "label": "AWQ INT4 from the QAT checkpoint"
   },
-  "runs_count": 1,
+  "runs_count": 2,
   "size_gb": null,
   "source": {
     "source_id": "src-22c474888f1d7390"

@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 527.5,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 7.76,
+    "wall_s": 7.77
+  },
+  "candidat": "en-deepseek-r1-distill-32b-awq",
+  "debut": "2026-10-03T18:59:22Z",
+  "fin": "2026-10-03T18:59:45Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 69.1,
+    "ttft_ms": 64,
+    "wall_s": 7.409
+  }
+}

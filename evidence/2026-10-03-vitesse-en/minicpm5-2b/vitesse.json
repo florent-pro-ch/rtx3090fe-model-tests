@@ -1,0 +1,18 @@
+{
+ "candidat": "en-minicpm5-2b",
+ "debut": "2026-10-03T18:57:21Z",
+ "solo": {
+  "ttft_ms": 98,
+  "tok_s": 132.4,
+  "completion_tokens": 512,
+  "wall_s": 3.868
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 1018.1,
+  "p50_latency_s": 4.02,
+  "wall_s": 4.02
+ },
+ "fin": "2026-10-03T18:57:33Z"
+}

@@ -1,0 +1,18 @@
+{
+ "candidat": "en-oxcoder-9b-gguf",
+ "debut": "2026-10-03T19:20:15Z",
+ "solo": {
+  "ttft_ms": 107,
+  "tok_s": 116.9,
+  "completion_tokens": 512,
+  "wall_s": 4.38
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 118.0,
+  "p50_latency_s": 19.5,
+  "wall_s": 34.72
+ },
+ "fin": "2026-10-03T19:20:59Z"
+}

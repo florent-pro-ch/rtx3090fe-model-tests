@@ -14,7 +14,7 @@
     "format": "w4a16",
     "label": "W4A16 compressed-tensors from Google's QAT checkpoint"
   },
-  "runs_count": 25,
+  "runs_count": 26,
   "size_gb": null,
   "source": {
     "source_id": "src-22c474888f1d7390"

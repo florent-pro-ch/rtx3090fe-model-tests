@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 1067.5,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 3.48,
+    "wall_s": 3.58
+  },
+  "candidat": "en-gemma4-26b-a4b-paire",
+  "debut": "2026-10-03T19:05:16Z",
+  "fin": "2026-10-03T19:05:24Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 495,
+    "tok_s": 193.6,
+    "ttft_ms": 71,
+    "wall_s": 2.557
+  }
+}

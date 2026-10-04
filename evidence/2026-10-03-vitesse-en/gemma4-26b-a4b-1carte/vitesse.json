@@ -1,0 +1,18 @@
+{
+ "candidat": "en-gemma4-26b-a4b-1carte",
+ "debut": "2026-10-03T19:01:15Z",
+ "solo": {
+  "ttft_ms": 103,
+  "tok_s": 139.9,
+  "completion_tokens": 512,
+  "wall_s": 3.659
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 775.2,
+  "p50_latency_s": 5.28,
+  "wall_s": 5.28
+ },
+ "fin": "2026-10-03T19:01:28Z"
+}

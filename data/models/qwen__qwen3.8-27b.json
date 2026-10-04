@@ -33,7 +33,7 @@
   ],
   "category": "vlm",
   "first_tested": "2026-08-23",
-  "last_tested": "2026-10-01",
+  "last_tested": "2026-10-03",
   "licence": {
     "flags": [],
     "name": "Apache-2.0",

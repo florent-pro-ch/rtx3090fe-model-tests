@@ -1,0 +1,18 @@
+{
+ "candidat": "en-muse-glimmer-gguf",
+ "debut": "2026-10-03T19:00:27Z",
+ "solo": {
+  "ttft_ms": 209,
+  "tok_s": 44.5,
+  "completion_tokens": 512,
+  "wall_s": 11.496
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 82.4,
+  "p50_latency_s": 31.13,
+  "wall_s": 49.72
+ },
+ "fin": "2026-10-03T19:01:40Z"
+}

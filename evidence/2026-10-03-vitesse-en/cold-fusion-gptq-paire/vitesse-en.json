@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 529.7,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 7.73,
+    "wall_s": 7.73
+  },
+  "candidat": "en-cold-fusion-gptq-paire",
+  "debut": "2026-10-03T19:17:47Z",
+  "fin": "2026-10-03T19:18:08Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 78.7,
+    "ttft_ms": 107,
+    "wall_s": 6.502
+  }
+}

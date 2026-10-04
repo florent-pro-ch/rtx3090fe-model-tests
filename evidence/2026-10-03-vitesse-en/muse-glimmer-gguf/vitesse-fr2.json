@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 82.1,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 31.19,
+    "wall_s": 49.88
+  },
+  "candidat": "en-muse-glimmer-gguf",
+  "debut": "2026-10-03T19:02:53Z",
+  "fin": "2026-10-03T19:04:06Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 44.4,
+    "ttft_ms": 211,
+    "wall_s": 11.541
+  }
+}

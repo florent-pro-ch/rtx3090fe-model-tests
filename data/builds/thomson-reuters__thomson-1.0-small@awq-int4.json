@@ -15,7 +15,7 @@
     "format": "awq",
     "label": "AWQ INT4 (cyankiwi)"
   },
-  "runs_count": 6,
+  "runs_count": 7,
   "size_gb": 24.4,
   "source": {
     "source_id": "src-22c474888f1d7390"

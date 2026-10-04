@@ -7,7 +7,8 @@ only (no private literal lives in this file):
   private IPv4 (RFC 1918, the 100.64/10 shared/CGNAT range, 169.254/16 link-local),
   private IPv6 (fe80::/10 link-local, fc00::/7 unique-local), MAC addresses, home
   directories (home/<user>, Users/<user>, the root home), ssh or scp targets (a user
-  at a host), a user at an IP address,
+  at a host), a user at an IP address, NVIDIA card identifiers (GPU-/MIG- UUIDs, which
+  NVML and nvidia-smi report and which name one physical card),
   API tokens (OpenAI/Anthropic-style sk-, Hugging Face hf_, GitHub ghp_/github_pat_,
   AWS AKIA/ASIA, Slack xox*-, Google AIza, JWTs, long Bearer tokens), private key
   blocks, secret-bearing file names (.env, id_rsa, *.pem, *.key...), and e-mail
@@ -49,6 +50,7 @@ RX = {
     "ipv4-private": re.compile(r"(?<![\w.@~^])(?<!==)(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?![\w.]*\d)"),
     "ipv6-private": re.compile(r"(?i)(?<![\w:.])(?:fe[89ab][0-9a-f]|f[cd][0-9a-f]{2}):(?::?[0-9a-f]{1,4}){1,7}(?![\w:])"),
     "mac-address": re.compile(r"(?i)(?<![\w:-])[0-9a-f]{2}([:-])(?:[0-9a-f]{2}\1){4}[0-9a-f]{2}(?![\w:-])"),
+    "gpu-uuid": re.compile(r"(?i)\b(?:GPU|MIG)-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b"),
     "home-path": re.compile(r"(?<![\w.~])/home/(?!runner\b)[A-Za-z0-9_.-]+"),
     "users-path": re.compile(r"(?<![\w.])/(?:Users)/[A-Za-z0-9_.-]+"),
     "root-path": re.compile(r"(?<![\w.~])/(?:root)/"),

@@ -8,3 +8,5 @@ For one model on one hardware configuration, the headline figure comes from the 
 4. Then the most recent run.
 
 Only a distinct run that ended `ok`, with a known topology and a measured solo speed, can be the headline: a copy of another run (`duplicate_of`), a speculative-decoding run with a drafter, the treatment arm of an A/B test (`engine_args.ab_arm: "treatment"`, or NVLink switched off in software, `topology.p2p: "off-software"`), and a run of the uncensored-model study or a copy of one (refusal rates only) never are.
+
+The English twin of the house pass (`speed-house/v1-en`) and the French pass repeated in the same session are shown beside the headline figure of the run that measured them; neither is ever the headline, and neither counts as a repetition. Energy per token, where it was measured, is shown the same way and plays no part in the choice.

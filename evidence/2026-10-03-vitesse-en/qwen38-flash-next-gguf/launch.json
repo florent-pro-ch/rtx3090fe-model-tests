@@ -1,0 +1,37 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+    "--alias",
+    "qwen38-flash-next",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b10830",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "labels",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

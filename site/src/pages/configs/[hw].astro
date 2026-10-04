@@ -156,8 +156,10 @@ const topJudged = top.some(({ ranking }) => isJudged(ranking.grader));
         One figure per model{groups.length > 1 ? ' and split mode' : ''}, chosen by the <a href={href('methodology/#headline-run-rule')}>headline-run rule</a>{' '}
         (its text is under each table). Never an average; every other run is listed below. Sorted by single-stream speed; each
         row names its build and protocol. VRAM is labelled per run:{' '}<em>reserved</em> is vLLM's reservation,{' '}
-        <a href={glossaryHref('after-load')}><em>after load</em></a> is nvidia-smi read about 3 s after the server was ready (5 s in the 2026-09-04 campaigns), before any request; neither is a
-        peak nor what the model needs.
+        <a href={glossaryHref('after-load')}><em>after load</em></a> is nvidia-smi read about 3 s after the server was ready (5 s in the 2026-09-04 campaigns and the 2026-10-03 speed campaign), before any request; neither is a
+        peak nor what the model needs. Where a headline run measured them, two more columns give that same run's{' '}
+        <em>English (same session)</em> single-stream speed (the house pass with the prompt in English) and its{' '}
+        <em>tokens per joule at 8</em> requests (the GPU boards' energy); they sit beside the French figure, never in its place.
       </p>
       {groups.length === 0 ? (
         <p class="empty">No run with a single-stream speed on this configuration in the data.</p>
@@ -169,7 +171,7 @@ const topJudged = top.some(({ ranking }) => isJudged(ranking.grader));
             <BarChart
               title={`Single-stream decode speed, ${h.label}${groups.length > 1 ? `, ${group.title.toLowerCase()}` : ''}`}
               unit="tok/s"
-              caption={`headline run per model, labelled with its build; bars start at zero${groups.length > 1 ? ', one axis for every split mode on this page' : ''}; amber = engine not pinned yet`}
+              caption={`headline run per model, labelled with its build; French prompt only; bars start at zero${groups.length > 1 ? ', one axis for every split mode on this page' : ''}; amber = engine not pinned yet`}
               date={(() => { const d = gh.map((x) => runDate(x.run)).filter((v): v is string => !!v).sort(); return d.length ? (d[0] === d.at(-1) ? d[0] : `${d[0]} to ${d.at(-1)}`) : null; })()}
               evidenceHref="#all-runs"
               evidenceLabel="every run"

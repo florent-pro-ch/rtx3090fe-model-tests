@@ -16,7 +16,7 @@
     "format": "gptq",
     "label": "GPTQ W4A16 group 128, symmetric (JC1DA)"
   },
-  "runs_count": 15,
+  "runs_count": 16,
   "size_gb": 19.59,
   "source": {
     "source_id": "src-22c474888f1d7390"

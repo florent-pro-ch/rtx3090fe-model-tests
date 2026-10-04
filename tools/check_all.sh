@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # check_all.sh — every public quality gate, in one go (what CI runs first).
 #
-#   G2 scan_public.py     generic leak patterns (addresses, home paths, tokens, e-mails)
+#   G2 scan_public.py     generic leak patterns (addresses, home paths, GPU UUIDs, tokens, e-mails)
 #   G3 check_size.py      file and repo size, no media/log/weights
-#      validate.py        data/**/*.json against schema/*.schema.json, --strict (0 warnings)
+#      validate.py        data/**/*.json against schema/*.schema.json, --strict (0 warnings);
+#                         also the en_/fr2_ speed keys, the energy keys and never-measured lists
 #   G4 verify_benches.py  frozen benches: SHA-256 recomputed, withheld files listed
 #   G5 verify_numbers.py  every <Num> of site/dist traced to data/; README block fresh
 #   G6 check_links.py     relative Markdown links and anchors resolve to files git ships
@@ -21,7 +22,7 @@
 #   G8 check_language.py  no French in English prose and data fields
 #      harness tests      python3 -m pytest harness/tests (the vendored bench harness; needs
 #                         pytest, skipped and said so when it is not installed)
-#   G9 gitleaks           the git history (only when gitleaks is installed; required
+#   G9 gitleaks           the git history, GPU UUIDs included (only when gitleaks is installed; required
 #                         before any publication, see tools/README.md). Under CI=true
 #                         (GitHub Actions) a skipped G9 is a failure: CI installs a
 #                         pinned gitleaks and checks out the whole history.

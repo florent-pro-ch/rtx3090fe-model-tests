@@ -4,6 +4,107 @@ Every release says what changed in the published data, never only in the
 prose. A figure removed or corrected after publication is also logged in
 [data/errata.json](data/errata.json).
 
+## 2026-10-03, after v0: English speed beside French, and energy per token; 17 headline figures from new runs
+
+Not a new release: an addition after v0, logged here as such.
+
+- **A new campaign, `2026-10-03-vitesse-en` (18 runs).** It re-measured 18
+  headline rows of the one-card and NVLink-pair pages: seventeen models, with
+  Gemma 4 26B-A4B on both. Each was served again from its headline run's
+  launch line on the pinned engines (vLLM 0.29.0, llama.cpp b10830; where the
+  recorded image was pre-pin, the engine's pinned image was used).
+  Thomson-1.0-Small's headline run recorded no launch line, so its line was
+  rebuilt from the configuration of the resident container that replaced, on
+  vLLM 0.29.0, the 0.26.0 container of that run; its run record's parse note
+  says so. Each model had one session on one server,
+  the same day: one discarded warm-up request, then the house speed pass in
+  French, its English twin (`speed-house/v1-en`), and the French pass again.
+  18 of 18 completed.
+- **English speed, measured beside French.** The English twin sends the house
+  prompt in English; everything else is unchanged. The reading rule was fixed
+  before the first pass: a difference only beyond twice the gap between the
+  two French passes and beyond 3 %.
+  - No language difference on 15 rows.
+  - On Gemma 4 26B-A4B at eight requests (one card and pair) and
+    Spark-X2.5-4B GGUF (single stream and at eight), English answers stopped
+    before the 512-token cap that every French answer reached (at eight
+    requests, some or all of the eight), so language and answer length are
+    not separated there.
+  - The two French passes stayed within 0.7 % of each other in single-stream
+    speed and 0.9 % at eight requests.
+  - The first French pass had the highest time to first token on 17 of 18
+    rows.
+  - Run records carry the English figures in `en_*` keys and the second
+    French pass in `fr2_*` keys. Neither is ever a headline.
+- **Energy per token, measured for the first time** (`nvml-energy/v1`). It
+  comes from NVIDIA's energy counter of the model's cards, read around each
+  timed part of every pass: GPU boards only, not the host. In the first French
+  pass, one request gave 0.07 to 0.49 tokens per joule. At eight requests it
+  was about 4 to 8 times that under vLLM, about twice on the
+  two-slot llama.cpp server, and about the same on one-slot servers. The
+  figures are in the run records (`*_energy_j`, `*_power_mean_w`,
+  `*_power_peak_w`, `*_tok_per_j`, and an `energy` block) and in
+  `energy*.json` evidence. The energy records carry no card identifier and no
+  driver version. No run measured before 2026-10-03 has an energy figure, and
+  none is estimated.
+- **Headline figures from the new runs on 17 rows; the headline rule is
+  unchanged.** Single stream, then eight requests, in tok/s.
+  - One card:
+    - Gemma 4 26B-A4B 139.2 → 139.9 and 778.8 → 775.2.
+    - NeoHorse-1-9B 47.4 → 47.6 and 360.7 → 361.7.
+    - Spark-X2.5-4B GGUF 116.0 → 112.3 and 117.1 → 113.2.
+    - Granite 4.2 3B (was pre-pin) 94.0 → 95.0 and 696.4 → 701.4.
+    - Qwen3.8-9B-Distill 47.6 → 47.7 and 183.8 → 183.8.
+    - OxCoder-9B GGUF 116.2 → 116.9 and 117.2 → 118.0.
+    - NeoHorse-1-4B GGUF 166.1 → 167.6 and 168.4 → 169.3.
+  - NVLink pair:
+    - Gemma 4 26B-A4B (was a `spec-ab/v1` run) 195.6 → 193.4 and 1004.2 → 1118.4.
+    - Qwen3.8-27B W4A16 75.8 → 76.4 and 475.4 → 481.3.
+    - Thomson-1.0-Small (was pre-pin, vLLM 0.26.0; the same engine arguments
+      on 0.29.0; the cause of the change was not isolated) 173.9 → 159.5 and
+      985.8 → 902.4.
+    - Qwen3.6-27B-Fable-Fusion-711 64.1 → 64.9 and 445.2 → 451.1.
+    - Gemma 4 31B 66.0 → 66.4 and 452.3 → 455.4.
+    - Qwen3.8-Flash-Next GGUF (was pre-pin; part of the model in system RAM)
+      36.2 → 36.2 and 35.8 → 36.4.
+    - DeepSeek-R1-Distill-Qwen-32B (was pre-pin) 69.3 → 69.4 and 528.7 → 526.3.
+    - Muse Glimmer 30B GGUF (was pre-pin) 44.4 → 44.5 and 82.1 → 82.4.
+    - Gemma 3 27B QAT (was pre-pin) 72.4 → 72.4 and 526.2 → 526.0.
+    - Qwen3.8-27B Cold-Fusion 78.6 → 79.1 and 396.6 → 528.7 (the NVLink A/B
+      reference arm's launch line without NCCL debug logging).
+  - Time to first token moved most, in milliseconds, for Gemma 4 31B
+    (755 → 126 ms) and Thomson-1.0-Small (140 → 273 ms).
+  - Ready time and the after-load snapshot (taken 5 s after ready) also come
+    from the new runs.
+  - MiniCPM5-2B on one card keeps its 2026-09-13 headline, whose speed pass
+    was repeated three times (step 3 of the rule).
+  - The earlier runs are unchanged and listed beside the new ones. These
+    replacements are also logged in [data/errata.json](data/errata.json), as
+    an addition, not a correction.
+- **Pages.** The configuration pages' "not measured" lists, the README,
+  SPEED-PROTOCOL, TOPOLOGY, METHODOLOGY, GLOSSARY and DESIGN now say where
+  English speed and energy per token are measured, and what they cover. The
+  headline tables show the headline run's own English figure and tokens per
+  joule at eight requests beside it. Elsewhere a cell reads "not measured";
+  "other protocol" where the headline run was measured under another
+  protocol, whose English figures, if any, stay on its run page; or "other
+  run", a link, where the campaign measured the model in a run that is not
+  the headline (MiniCPM5-2B). The headline rule's text says the English twin
+  and the repeated French pass are shown beside the headline, never as it.
+  v0's section below keeps its "known gaps" line as released.
+- **Schema and gates.** `schema/run.schema.json` types a closed `energy`
+  block. `tools/validate.py` checks:
+  - that `en_*`/`fr2_*` keys appear only beside a French house-protocol
+    figure, and complete;
+  - that tokens per joule equals tokens ÷ energy;
+  - that no configuration lists as never measured what its runs measured
+    (an item about English speed names the protocol it means).
+  `tools/scan_public.py` and gitleaks flag GPU UUIDs.
+- **The portable harness.** `harness/evalue.py --mode vitesse --prompt-lang
+  en` sends the English twin. `harness/energie.py` reads the energy of the
+  cards given with `--gpus` (opt-in; Linux with the NVIDIA driver). The
+  harness tests grow from 71 to 96.
+
 ## 2026-10-03, after v0: OrcaSAQ-2 graded by Claude Fable 5.1
 
 Not a new release: an addition after v0, logged here as such.

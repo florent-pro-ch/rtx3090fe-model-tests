@@ -1,0 +1,18 @@
+{
+ "candidat": "en-thomson-1-awq",
+ "debut": "2026-10-03T19:15:54Z",
+ "solo": {
+  "ttft_ms": 273,
+  "tok_s": 159.5,
+  "completion_tokens": 512,
+  "wall_s": 3.211
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 902.4,
+  "p50_latency_s": 4.54,
+  "wall_s": 4.54
+ },
+ "fin": "2026-10-03T19:16:05Z"
+}

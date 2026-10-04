@@ -1,0 +1,18 @@
+{
+ "candidat": "en-spark-x25-4b-gguf",
+ "debut": "2026-10-03T19:35:19Z",
+ "solo": {
+  "ttft_ms": 81,
+  "tok_s": 112.3,
+  "completion_tokens": 512,
+  "wall_s": 4.558
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 113.2,
+  "p50_latency_s": 20.37,
+  "wall_s": 36.17
+ },
+ "fin": "2026-10-03T19:36:04Z"
+}

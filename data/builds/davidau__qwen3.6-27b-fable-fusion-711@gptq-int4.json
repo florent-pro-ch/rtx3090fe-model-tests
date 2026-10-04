@@ -15,7 +15,7 @@
     "format": "gptq",
     "label": "GPTQ INT4 (Marlin)"
   },
-  "runs_count": 8,
+  "runs_count": 9,
   "size_gb": 19.6,
   "source": {
     "source_id": "src-22c474888f1d7390"

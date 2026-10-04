@@ -15,7 +15,7 @@
   ],
   "category": "llm",
   "first_tested": "2026-09-21",
-  "last_tested": "2026-09-25",
+  "last_tested": "2026-10-03",
   "licence": {
     "flags": [],
     "name": "Apache-2.0",

@@ -54,6 +54,9 @@ export function unitForKey(key: string): string {
   // Statistic suffixes do not change the unit: solo_tok_s_max, solo_ttft_ms_median...
   const k = key.toLowerCase().replace(/_(mean|median|min|max|p50|p90|p95|p99|avg|std)$/, '');
   const table: [RegExp, string][] = [
+    // energy of a speed pass (nvml-energy/v1): solo_tok_per_j, agg_energy_j, en_solo_energy_j...
+    [/_tok_per_j$/, 'tok/J'],
+    [/_energy_j$/, 'J'],
     [/_tok_s$/, 'tok/s'],
     [/_tok_per_s$/, 'tok/s'],
     [/_it_s$/, 'it/s'],

@@ -15,7 +15,7 @@
     "format": "gguf",
     "label": "GGUF kquant (the publisher's 17 GB file)"
   },
-  "runs_count": 2,
+  "runs_count": 3,
   "size_gb": 15.6,
   "source": {
     "source_id": "src-22c474888f1d7390"

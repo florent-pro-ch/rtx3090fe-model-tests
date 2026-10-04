@@ -171,7 +171,7 @@
         "data/comparisons/two-pairs-parallel.json"
       ],
       "label": "Every recorded launch line: most GPUs requested by one model server",
-      "launch_lines_scanned": 171,
+      "launch_lines_scanned": 189,
       "metric": "max_gpus_per_server",
       "run_ids": [],
       "unit": "GPUs",
@@ -524,6 +524,9 @@
       "source_id": "src-2d96349f9999d64e"
     },
     {
+      "source_id": "src-2df2f6a552b2e4f9"
+    },
+    {
       "source_id": "src-2ee8cc979fa97c8a"
     },
     {
@@ -671,6 +674,9 @@
       "source_id": "src-434c1fdf118d308b"
     },
     {
+      "source_id": "src-43b67a251b9c849d"
+    },
+    {
       "source_id": "src-449134decb843cd0"
     },
     {
@@ -768,6 +774,9 @@
     },
     {
       "source_id": "src-52a98e36f4ec66de"
+    },
+    {
+      "source_id": "src-52b53fb4baa44fa8"
     },
     {
       "source_id": "src-52dae1e01e4907b2"
@@ -1106,6 +1115,9 @@
       "source_id": "src-787c2abdc3f0baf5"
     },
     {
+      "source_id": "src-79ebf449538f49c5"
+    },
+    {
       "source_id": "src-7a0372326a9edd33"
     },
     {
@@ -1193,6 +1205,9 @@
       "source_id": "src-852d943870dfe516"
     },
     {
+      "source_id": "src-868800b709ce809b"
+    },
+    {
       "source_id": "src-869c914d84454160"
     },
     {
@@ -1259,6 +1274,9 @@
       "source_id": "src-8e22dec4c820533f"
     },
     {
+      "source_id": "src-8e5af074056b2cb0"
+    },
+    {
       "source_id": "src-8edd5509a0c278d8"
     },
     {
@@ -1287,6 +1305,9 @@
     },
     {
       "source_id": "src-90bc9c267ae22a2c"
+    },
+    {
+      "source_id": "src-910894457690fc65"
     },
     {
       "source_id": "src-92321d2a7581af97"
@@ -1386,6 +1407,12 @@
     },
     {
       "source_id": "src-9eba0b5ce9d93657"
+    },
+    {
+      "source_id": "src-9ee05ed2079910cc"
+    },
+    {
+      "source_id": "src-9f17260b428ee0ea"
     },
     {
       "source_id": "src-9fb776c695880063"
@@ -1496,6 +1523,9 @@
       "source_id": "src-ab9354ef54c610cc"
     },
     {
+      "source_id": "src-ac1e3abf89135fdc"
+    },
+    {
       "source_id": "src-ac30b0c96eaf08cf"
     },
     {
@@ -1559,7 +1589,13 @@
       "source_id": "src-b88745153435fd8c"
     },
     {
+      "source_id": "src-b8c95d298a73861c"
+    },
+    {
       "source_id": "src-b8ed65a4841aea1c"
+    },
+    {
+      "source_id": "src-b912713c1c5eb2ed"
     },
     {
       "source_id": "src-b979434a989f9c04"
@@ -1581,6 +1617,9 @@
     },
     {
       "source_id": "src-bb24bf4b7b6167ec"
+    },
+    {
+      "source_id": "src-bb3b1a754440d3e1"
     },
     {
       "source_id": "src-bc71d9a5c193d90b"
@@ -1757,6 +1796,9 @@
       "source_id": "src-d3098aca9fa9e659"
     },
     {
+      "source_id": "src-d39ce3c282f05cec"
+    },
+    {
       "source_id": "src-d3bf8a7d9d9b385c"
     },
     {
@@ -1794,6 +1836,9 @@
     },
     {
       "source_id": "src-d6d93008fb401c93"
+    },
+    {
+      "source_id": "src-d6e626d0b4d01126"
     },
     {
       "source_id": "src-d71383edbd6d61a0"
@@ -1851,6 +1896,9 @@
     },
     {
       "source_id": "src-dbffb9fd61397885"
+    },
+    {
+      "source_id": "src-dc1f2aa4d5c01227"
     },
     {
       "source_id": "src-dc58e45727435b98"
@@ -2048,6 +2096,9 @@
       "source_id": "src-f499e8d83369f2f3"
     },
     {
+      "source_id": "src-f4e1301c88687afe"
+    },
+    {
       "source_id": "src-f516cf00078dd8f8"
     },
     {
@@ -2058,6 +2109,9 @@
     },
     {
       "source_id": "src-f5e63d1dc414be5d"
+    },
+    {
+      "source_id": "src-f61b2bc1591cd5f8"
     },
     {
       "source_id": "src-f61d7596ec85beb0"

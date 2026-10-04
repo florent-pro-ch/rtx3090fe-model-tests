@@ -14,9 +14,14 @@ figure contradicts this file, the page or the figure is wrong.
   A pre-pin run carries its label ([methodology/METHODOLOGY.md](methodology/METHODOLOGY.md#engine-pins-and-the-pre-pin-label)).
 - **What was not measured is shown as not measured.** An empty cell reads
   "not measured on this configuration", never a blank, a zero or an estimate.
+- **An energy figure names its scope.** Tokens per joule is shown only where
+  the speed pass measured it (`nvml-energy/v1`, since 2026-10-03), as the GPU
+  boards' energy; elsewhere the cell reads "not measured", or links to the
+  run that measured it when that run is not the headline, never an estimate.
 - **English throughout**, except measurement material (bench items, prompts),
-  which is shown in French, marked `lang="fr"`, with an English gloss beside
-  it when a reader needs one.
+  which is shown in its own language: French, marked `lang="fr"`, apart from
+  the English twin of the speed prompt, with an English gloss beside it when
+  a reader needs one.
 - **Nothing that identifies the machines, in text or in pixels**: no address,
   host name, port, path, container name or account. The two NVLink pairs are
   "pair A" and "pair B".

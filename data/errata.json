@@ -39,5 +39,17 @@
       "data/rankings/tuteur-v1--2026-10-01-tests-veille.json",
       "data/rankings/code-v1--2026-10-01-tests-veille.json"
     ]
+  },
+  {
+    "date": "2026-10-03",
+    "what": "The headline speed figures (single-stream and eight-request throughput, time to first token, ready time and the after-load memory snapshot) of 17 model rows now come from 17 of the 18 runs of the 2026-10-03 speed campaign: on one card Gemma 4 26B-A4B, NeoHorse-1-9B, Spark-X2.5-4B GGUF, Granite 4.2 3B, Qwen3.8-9B-Distill, OxCoder-9B GGUF and NeoHorse-1-4B GGUF; on the NVLink pair Gemma 4 26B-A4B, Qwen3.8-27B W4A16, Thomson-1.0-Small, Qwen3.6-27B-Fable-Fusion-711, Gemma 4 31B, Qwen3.8-Flash-Next GGUF, DeepSeek-R1-Distill-Qwen-32B, Muse Glimmer 30B GGUF, Gemma 3 27B QAT and Qwen3.8-27B Cold-Fusion. Six of the earlier headlines were pre-pin runs and one a speculative-decoding-protocol run (spec-ab/v1). The largest moves: Thomson-1.0-Small 173.9 → 159.5 tok/s single stream and 985.8 → 902.4 at eight (the earlier run on vLLM 0.26.0, the new one on 0.29.0 with the same engine arguments; the cause was not isolated); Qwen3.8-27B Cold-Fusion 396.6 → 528.7 at eight; Gemma 4 26B-A4B on the pair 1004.2 (spec-ab/v1) → 1118.4 at eight; Spark-X2.5-4B GGUF 116.0 → 112.3 single stream and 117.1 → 113.2 at eight.",
+    "why": "An addition, not a correction: the 2026-10-03 runs (pinned engine, house protocol, most recent) take the headline under the unchanged rule (methodology/headline-rule.md); the earlier runs and their figures are unchanged and listed beside them. MiniCPM5-2B keeps its 2026-09-13 headline, whose speed pass was repeated three times.",
+    "affects": [
+      "data/runs/2026-10-03-vitesse-en/",
+      "data/indexes/runs.json",
+      "data/hardware/1x3090fe.json",
+      "data/hardware/2x3090fe-nvlink.json",
+      "data/campaigns/2026-10-03-vitesse-en.json"
+    ]
   }
 ]

@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 449.6,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 9.11,
+    "wall_s": 9.11
+  },
+  "candidat": "en-fable-711-gptq-paire",
+  "debut": "2026-10-03T19:19:56Z",
+  "fin": "2026-10-03T19:20:21Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 64.6,
+    "ttft_ms": 117,
+    "wall_s": 7.922
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 119.1,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 13.62,
+    "wall_s": 24.17
+  },
+  "candidat": "en-spark-x25-4b-gguf",
+  "debut": "2026-10-03T19:36:04Z",
+  "fin": "2026-10-03T19:36:35Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 360,
+    "tok_s": 118.0,
+    "ttft_ms": 74,
+    "wall_s": 3.052
+  }
+}

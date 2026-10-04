@@ -16,7 +16,7 @@
     "format": "w4a16",
     "label": "compressed-tensors AWQ/W4A16 4-bit (cyankiwi)"
   },
-  "runs_count": 14,
+  "runs_count": 16,
   "size_gb": 17.2,
   "source": {
     "source_id": "src-22c474888f1d7390"

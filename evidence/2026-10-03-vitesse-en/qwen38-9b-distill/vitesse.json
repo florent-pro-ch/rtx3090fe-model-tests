@@ -1,0 +1,18 @@
+{
+ "candidat": "en-qwen38-9b-distill",
+ "debut": "2026-10-03T19:06:24Z",
+ "solo": {
+  "ttft_ms": 120,
+  "tok_s": 47.7,
+  "completion_tokens": 512,
+  "wall_s": 10.732
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 183.8,
+  "p50_latency_s": 16.71,
+  "wall_s": 22.28
+ },
+ "fin": "2026-10-03T19:07:08Z"
+}

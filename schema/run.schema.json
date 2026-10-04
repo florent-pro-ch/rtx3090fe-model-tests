@@ -193,7 +193,65 @@
     },
     "metrics": {
       "type": "object",
-      "description": "Typed numbers, unit in key: solo_tok_s, solo_ttft_ms (first, cold pass when the run has repetitions; solo_ttft_ms_mean is the mean over them), agg_tok_s, agg_concurrency, p50_latency_s, ready_s, kv_pool_tokens, acceptance_rate, seconds_per_item..."
+      "description": "Typed numbers, unit in key: solo_tok_s, solo_ttft_ms (first, cold pass when the run has repetitions; solo_ttft_ms_mean is the mean over them), agg_tok_s, agg_concurrency, p50_latency_s, ready_s, kv_pool_tokens, acceptance_rate, seconds_per_item... On a speed-house/v1 run with a French prompt (since 2026-10-03): en_<house key>: the English twin (protocol speed-house/v1-en) measured in the same session; fr2_<house key>: the French pass repeated after it, a drift check, never a repetition; <prefix>{solo|agg}_{energy_j|power_mean_w|power_peak_w|tok_per_j} (prefix none, en_ or fr2_): NVML board energy of the cards used (see energy); <prefix>agg_completion_tokens: tokens of the eight answers. tools/validate.py checks these keys' presence and types (TWIN, ENERGY)."
+    },
+    "energy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Present only when the speed passes read NVIDIA's energy counter (nvml-energy/v1, since 2026-10-03): what the *_energy_j, *_power_*_w and *_tok_per_j metrics cover. Neither this object nor the energy*.json evidence carries a card identifier or the driver version.",
+      "required": [
+        "protocol",
+        "scope",
+        "gpus_counted",
+        "source",
+        "passes"
+      ],
+      "properties": {
+        "protocol": {
+          "const": "nvml-energy/v1"
+        },
+        "scope": {
+          "const": "gpu-board",
+          "description": "the GPU boards of the cards the model used, summed; not the host's CPU, RAM or power supplies"
+        },
+        "gpus_counted": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "equals topology.gpus"
+        },
+        "period_s": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "seconds between two light board-power readings"
+        },
+        "source": {
+          "enum": [
+            "counter",
+            "power-readings",
+            "mixed"
+          ],
+          "description": "counter: the cumulative energy counter decided on every card and part; power-readings: the 1-s board-power readings did (the counter did not move or went back); mixed: some of each"
+        },
+        "passes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "fr",
+              "en",
+              "fr2"
+            ]
+          }
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(fr|en|fr2):(solo_stream|solo|agg):(counter-readings-disagree|restart-likely|power-readings|mixed)$"
+          }
+        }
+      }
     },
     "vram": {
       "type": "object",

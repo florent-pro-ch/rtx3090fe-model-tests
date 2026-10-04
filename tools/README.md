@@ -10,9 +10,9 @@ off until the repository variable `PAGES_ENABLED` is set to `true`
 
 | Gate | Script | What fails it |
 |---|---|---|
-| G2 | [`scan_public.py`](scan_public.py) | private IPv4/IPv6 addresses, MAC addresses, home directories, ssh targets, API tokens, private keys, secret-bearing file names, e-mail addresses outside [`email-allowlist.txt`](email-allowlist.txt) |
+| G2 | [`scan_public.py`](scan_public.py) | private IPv4/IPv6 addresses, MAC addresses, home directories, ssh targets, NVIDIA card identifiers (`GPU-`/`MIG-` UUIDs), API tokens, private keys, secret-bearing file names, e-mail addresses outside [`email-allowlist.txt`](email-allowlist.txt) |
 | G3 | [`check_size.py`](check_size.py) | a file over 5 MiB, a tree over 50 MiB (without `node_modules`, `dist`, `.git`), any audio, array, log or model-weight file |
-| schema | [`validate.py`](validate.py) | a `data/**/*.json` that does not parse, or a record that does not match its `schema/<type>.schema.json`, the type chosen by path: models, builds, runs, benches, hardware, campaigns, rankings, comparisons, item scores, the forge summary and checkpoints, the runs index, the rig, the watchlist, the errata and the judge audit (`validate.py --help` lists the paths); with `--strict`, which `check_all.sh` runs, any warning: a `data/` JSON file whose path matches no type, broken references between records (a comparison row naming a missing run or evidence path included), misnamed files, duplicate ids, a runs index or a count that disagrees with the records |
+| schema | [`validate.py`](validate.py) | a `data/**/*.json` that does not parse, or a record that does not match its `schema/<type>.schema.json`, the type chosen by path: models, builds, runs, benches, hardware, campaigns, rankings, comparisons, item scores, the forge summary and checkpoints, the runs index, the rig, the watchlist, the errata and the judge audit (`validate.py --help` lists the paths); with `--strict`, which `check_all.sh` runs, any warning: a `data/` JSON file whose path matches no type, broken references between records (a comparison row naming a missing run or evidence path included), misnamed files, duplicate ids, a runs index or a count that disagrees with the records. Errors even without `--strict`: one judge per table, judged numbers in prose, and the speed keys the run schema leaves open — `en_*` (the English twin) and `fr2_*` (the French pass repeated) only beside a French `speed-house/v1` run and complete, the energy keys only with the closed `energy` object, tokens per joule equal to tokens ÷ energy, and no configuration listing as never measured what its runs measured (an item about English speed names the protocol it means) |
 | G4 | [`verify_benches.py`](verify_benches.py) | a frozen bench file whose SHA-256 differs from its manifest; a null hash on anything but a file withheld for privacy (listed "withheld, not hashed"); a set hash given for a set that holds one |
 | G5 | [`verify_numbers.py`](verify_numbers.py) | a number of the built site (`data-num` of `<Num>`) whose text is not its rounding, or whose value is not in the JSON it links to (run, ranking, model, bench, campaign, comparison, config, or the file on GitHub); a stale generated block in `README.md` (`build_readme.py --check`). Numbers in prose on model, config and compare pages, and counts the page computes, are warnings |
 | G6 | [`check_links.py`](check_links.py) | a relative Markdown link or anchor that does not resolve, that leaves the repository, or that points at a file git would not ship (ignored, or an empty folder) |
@@ -21,7 +21,7 @@ off until the repository variable `PAGES_ENABLED` is set to `true`
 | site contrast | [`site/scripts/contrast.mjs`](../site/scripts/contrast.mjs) | a text/background colour pair of the site's theme tokens below WCAG AA (4.5:1), in either theme (needs Node) |
 | G7 | [`check_media.py`](check_media.py) | a PNG, JPEG, WebP, PDF or SVG (outside `benches/`, built site included) with EXIF GPS or camera fields, an author/artist/creator/copyright field, or metadata text holding a home or absolute path; frozen bench media are reported, never failed |
 | G8 | [`check_language.py`](check_language.py) | French in English prose or in the English fields of `data/` |
-| G9 | `gitleaks` with [`.gitleaks.toml`](../.gitleaks.toml) | a secret, private address, home directory or MAC address in any commit of the history |
+| G9 | `gitleaks` with [`.gitleaks.toml`](../.gitleaks.toml) | a secret, private address, home directory, MAC address or NVIDIA card identifier in any commit of the history |
 
 ```sh
 bash tools/check_all.sh            # every gate, non-zero if any failed
@@ -71,5 +71,5 @@ optional `"value"` narrows it to one `data-num`; an unused `verify_numbers` exce
 fails the gate). An exception without a reason fails the gate.
 
 [`.gitleaks.toml`](../.gitleaks.toml) extends gitleaks' default rules with the same
-address, home-directory and MAC shapes, for scans of the git history
+address, home-directory, MAC and card-identifier shapes, for scans of the git history
 (`gitleaks git . --redact`) as well as of the tree (`gitleaks dir . --redact`).

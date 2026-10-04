@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 480.0,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 8.53,
+    "wall_s": 8.53
+  },
+  "candidat": "en-qwen38-base-w4a16-paire",
+  "debut": "2026-10-03T19:12:03Z",
+  "fin": "2026-10-03T19:12:25Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 76.2,
+    "ttft_ms": 113,
+    "wall_s": 6.722
+  }
+}

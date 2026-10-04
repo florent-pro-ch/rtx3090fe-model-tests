@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 117.4,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 19.62,
+    "wall_s": 34.88
+  },
+  "candidat": "en-oxcoder-9b-gguf",
+  "debut": "2026-10-03T19:21:43Z",
+  "fin": "2026-10-03T19:22:27Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 117.3,
+    "ttft_ms": 77,
+    "wall_s": 4.366
+  }
+}

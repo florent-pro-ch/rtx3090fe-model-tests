@@ -38,6 +38,26 @@ Judged numbers in prose (errors): a score-like number in a model or campaign sum
 code, vision, a judge or a score must be a score or sub-score of the current judged tables for that model, that
 campaign or a model the summary names.
 
+English twin, energy and never-measured lists (errors, also without --strict; the run schema leaves metrics open, so
+these keys are typed here, fail-closed):
+  TWIN    a metrics key starting with en_ (the English twin of the house pass, speed-house/v1-en) or fr2_ (the French
+          pass repeated in the same session) is one of the known speed or energy keys, numeric, and sits only on a run
+          of protocol speed-house/v1 with prompt_lang fr and a numeric solo_tok_s; each prefix present carries
+          {p}solo_tok_s, {p}solo_ttft_ms, {p}solo_completion_tokens, {p}agg_tok_s, {p}agg_concurrency and {p}agg_ok;
+          a record of protocol speed-house/v1-en itself never carries solo_tok_s (it is never a headline).
+  ENERGY  a key {p}{solo|agg}_{energy_j|power_mean_w|power_peak_w|tok_per_j} (p: none, en_ or fr2_) comes with the
+          closed `energy` object and the object with such keys; energy.gpus_counted equals topology.gpus; every
+          prefix with energy keys is listed in energy.passes; {p}{s}_tok_per_j is within 6e-5 of the tokens
+          ({p}solo_completion_tokens, {p}agg_completion_tokens) divided by {p}{s}_energy_j, as the harness wrote them
+          (4 and 3 decimals); 0 < {p}{s}_power_mean_w <= 400 W per card counted.
+  NEVER   a hardware record does not list "energy per token (tok/J)" as never measured while a run on it carries a
+          *_tok_per_j key, nor an item starting "an English-prompt reference under the house speed protocol" while a
+          run on it carries en_solo_tok_s. More generally, an item naming energy per token (tok/J, tokens per joule;
+          not the wall) or English, limited by "before YYYY-MM-DD" or not, fails when a run on that configuration,
+          started before that date if one is given, carries such a figure; an item naming English is exempt when it
+          restricts itself to the house protocol or to speculative decoding (it says "house", "speculative" or
+          "spec-ab"), the protocols that report English apart.
+
 Integrity checks (warnings): duplicate ids, file names that do not match their id,
 and references between records (run -> model/build, build -> model, model ->
 builds, ranking -> bench/runs, item scores -> run/bench/model/build and their
@@ -278,6 +298,136 @@ def summary_numbers(objs: dict) -> list[str]:
         check(rel, (m.get("verdict") or {}).get("summary"), by_model.get(m.get("model_id"), set()))
     for rel, c in objs["campaign"]:
         check(rel, c.get("summary"), by_campaign.get(c.get("campaign_id"), set()))
+    return errs
+
+
+# The house speed pass's keys (speed-house/v1), the energy keys beside them (nvml-energy/v1), and the prefixes of the
+# English twin (speed-house/v1-en) and of the French pass repeated in the same session.
+HOUSE_SPEED = "speed-house/v1"
+HOUSE_SPEED_EN = "speed-house/v1-en"
+HOUSE_KEYS = ("solo_tok_s", "solo_ttft_ms", "solo_completion_tokens", "solo_wall_s", "agg_tok_s", "agg_concurrency",
+              "agg_ok", "p50_latency_s", "agg_wall_s")
+TWIN_REQUIRED = ("solo_tok_s", "solo_ttft_ms", "solo_completion_tokens", "agg_tok_s", "agg_concurrency", "agg_ok")
+ENERGY_KEY = re.compile(r"^(en_|fr2_)?(solo|agg)_(energy_j|power_mean_w|power_peak_w|tok_per_j)$")
+ENERGY_KEYS = tuple(f"{s}_{q}" for s in ("solo", "agg") for q in ("energy_j", "power_mean_w", "power_peak_w", "tok_per_j")) \
+    + ("agg_completion_tokens",)
+TWIN_PREFIX = re.compile(r"^(en_|fr2_)(.+)$")
+PASS_OF_PREFIX = {"": "fr", "en_": "en", "fr2_": "fr2"}
+TOK_PER_J_TOL = 6e-5
+MAX_MEAN_W_PER_GPU = 400
+NEVER_ENERGY_ITEM = "energy per token (tok/J)"
+NEVER_ENGLISH_PREFIX = "an English-prompt reference under the house speed protocol"
+NEVER_NAMES_ENERGY = re.compile(r"(?i)energy per token|tokens per joule|tok/J")
+NEVER_NAMES_ENGLISH = re.compile(r"(?i)\benglish\b")
+NEVER_ENGLISH_QUALIFIED = re.compile(r"(?i)\bhouse\b|speculative|spec-ab")
+NEVER_BEFORE = re.compile(r"\bbefore (\d{4}-\d{2}-\d{2})\b")
+ENGLISH_FIGURE_KEY = re.compile(r"(^|_)en_")  # en_* (house twin), *_en_* (spec-ab/v1), probe_en_* (dspark-probe/v1)
+
+
+def _num(v) -> bool:
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
+def twin_energy_never(objs: dict) -> list[str]:
+    """TWIN, ENERGY and NEVER (module docstring): errors, also without --strict."""
+    errs = []
+    on_hw = defaultdict(lambda: {"tok_per_j": [], "en": [], "tok_per_j_dated": [], "en_any_dated": []})
+    for rel, o in objs["run"]:
+        m = o.get("metrics") or {}
+        if not isinstance(m, dict):
+            continue
+        proto, lang = o.get("protocol"), o.get("prompt_lang")
+        # TWIN
+        if str(proto or "").strip().lower() == HOUSE_SPEED_EN and "solo_tok_s" in m:
+            errs.append(f"TWIN    {rel}: a {HOUSE_SPEED_EN} record carries solo_tok_s (the English twin sits in the en_* "
+                        f"keys of the French {HOUSE_SPEED} run, never as a run of its own)")
+        twin = sorted(k for k in m if TWIN_PREFIX.match(k))
+        if twin:
+            if proto != HOUSE_SPEED or lang != "fr" or not _num(m.get("solo_tok_s")):
+                errs.append(f"TWIN    {rel}: {twin[0]} (and {len(twin) - 1} more en_/fr2_ key(s)) on a run that is not "
+                            f"{HOUSE_SPEED} with prompt_lang fr and a numeric solo_tok_s (protocol {proto!r}, "
+                            f"prompt_lang {lang!r})")
+            for k in twin:
+                rest = TWIN_PREFIX.match(k).group(2)
+                if rest not in HOUSE_KEYS and rest not in ENERGY_KEYS:
+                    errs.append(f"TWIN    {rel}: unknown key {k!r} (en_/fr2_ prefix only the house speed keys and the "
+                                "energy keys)")
+                elif not _num(m[k]):
+                    errs.append(f"TWIN    {rel}: {k} is {m[k]!r}, not a number")
+            for p in sorted({TWIN_PREFIX.match(k).group(1) for k in twin}):
+                missing = [p + k for k in TWIN_REQUIRED if not _num(m.get(p + k))]
+                if missing:
+                    errs.append(f"TWIN    {rel}: the {p[:-1]} pass lacks numeric {', '.join(missing)}")
+        # ENERGY
+        ekeys = sorted(k for k in m if ENERGY_KEY.match(k))
+        en = o.get("energy")
+        if ekeys and not isinstance(en, dict):
+            errs.append(f"ENERGY  {rel}: {ekeys[0]} (and {len(ekeys) - 1} more energy key(s)) without the energy object")
+        if isinstance(en, dict) and not ekeys:
+            errs.append(f"ENERGY  {rel}: an energy object but no energy key in metrics")
+        if isinstance(en, dict):
+            gpus = (o.get("topology") or {}).get("gpus")
+            if en.get("gpus_counted") != gpus:
+                errs.append(f"ENERGY  {rel}: energy.gpus_counted {en.get('gpus_counted')!r} != topology.gpus {gpus!r}")
+            passes = en.get("passes") if isinstance(en.get("passes"), list) else []
+            for p in sorted({ENERGY_KEY.match(k).group(1) or "" for k in ekeys}):
+                if PASS_OF_PREFIX[p] not in passes:
+                    errs.append(f"ENERGY  {rel}: {p or 'unprefixed'} energy keys but energy.passes {passes} has no "
+                                f"{PASS_OF_PREFIX[p]!r}")
+        n_gpu = en.get("gpus_counted") if isinstance(en, dict) and _num(en.get("gpus_counted")) else None
+        for k in ekeys:
+            v = m[k]
+            if not _num(v):
+                errs.append(f"ENERGY  {rel}: {k} is {v!r}, not a number")
+                continue
+            p, s, q = ENERGY_KEY.match(k).groups()
+            p = p or ""
+            if q == "energy_j" and v < 0:
+                errs.append(f"ENERGY  {rel}: {k} {v} < 0")
+            if q == "power_mean_w" and n_gpu is not None and not (0 < v <= MAX_MEAN_W_PER_GPU * n_gpu):
+                errs.append(f"ENERGY  {rel}: {k} {v} W outside 0 < W <= {MAX_MEAN_W_PER_GPU} x {n_gpu!r} card(s)")
+            if q == "tok_per_j":
+                tok, e = m.get(f"{p}{s}_completion_tokens"), m.get(f"{p}{s}_energy_j")
+                if not (_num(tok) and _num(e) and e > 0):
+                    errs.append(f"ENERGY  {rel}: {k} without numeric {p}{s}_completion_tokens and positive "
+                                f"{p}{s}_energy_j to check it against")
+                elif abs(tok / e - v) > TOK_PER_J_TOL:
+                    errs.append(f"ENERGY  {rel}: {k} {v} is not {p}{s}_completion_tokens / {p}{s}_energy_j "
+                                f"({tok} / {e} = {round(tok / e, 6)})")
+        started = str(o.get("started_at") or "")[:10] or (re.match(r"\d{4}-\d{2}-\d{2}", str(o.get("run_id") or ""))
+                                                           or [""])[0]
+        if any(ENERGY_KEY.match(k).group(3) == "tok_per_j" for k in ekeys):
+            on_hw[o.get("hardware")]["tok_per_j"].append(o.get("run_id"))
+            on_hw[o.get("hardware")]["tok_per_j_dated"].append((started, o.get("run_id")))
+        if _num(m.get("en_solo_tok_s")):
+            on_hw[o.get("hardware")]["en"].append(o.get("run_id"))
+        if any(ENGLISH_FIGURE_KEY.search(k) and _num(v) for k, v in m.items()):
+            on_hw[o.get("hardware")]["en_any_dated"].append((started, o.get("run_id")))
+    # NEVER
+    for rel, h in objs["hardware"]:
+        items = [x.strip() for x in h.get("never_measured") or [] if isinstance(x, str)]
+        seen = on_hw.get(h.get("hardware_id"), {"tok_per_j": [], "en": [], "tok_per_j_dated": [], "en_any_dated": []})
+        if NEVER_ENERGY_ITEM in items and seen["tok_per_j"]:
+            errs.append(f"NEVER   {rel}: lists {NEVER_ENERGY_ITEM!r} as never measured, but {len(seen['tok_per_j'])} "
+                        f"run(s) on it carry tokens per joule ({sorted(seen['tok_per_j'])[0]}...)")
+        if any(x.startswith(NEVER_ENGLISH_PREFIX) for x in items) and seen["en"]:
+            errs.append(f"NEVER   {rel}: lists {NEVER_ENGLISH_PREFIX!r}... as never measured, but {len(seen['en'])} "
+                        f"run(s) on it carry en_solo_tok_s ({sorted(seen['en'])[0]}...)")
+        for x in items:
+            if x == NEVER_ENERGY_ITEM or x.startswith(NEVER_ENGLISH_PREFIX):
+                continue  # the exact items above
+            before = NEVER_BEFORE.search(x)
+            def hits(dated):
+                return sorted(r for d, r in dated if not before or (d and d < before.group(1)))
+            if NEVER_NAMES_ENERGY.search(x) and "wall" not in x.lower() and hits(seen["tok_per_j_dated"]):
+                h_ = hits(seen["tok_per_j_dated"])
+                errs.append(f"NEVER   {rel}: lists {x!r} as never measured, but {len(h_)} run(s) on it"
+                            f"{' started before ' + before.group(1) if before else ''} carry tokens per joule ({h_[0]}...)")
+            if NEVER_NAMES_ENGLISH.search(x) and not NEVER_ENGLISH_QUALIFIED.search(x) and hits(seen["en_any_dated"]):
+                h_ = hits(seen["en_any_dated"])
+                errs.append(f"NEVER   {rel}: lists {x!r} as never measured, but {len(h_)} run(s) on it"
+                            f"{' started before ' + before.group(1) if before else ''} carry English-prompt figures "
+                            f"({h_[0]}...): name the protocol the item means (the house protocol)")
     return errs
 
 
@@ -588,6 +738,7 @@ def main(argv=None) -> int:
                 errors.append(f"ONEJUDGE {rel}: row {who!r}: its item file gives {round(100 * sum(sc) / len(sc), 1)} over "
                               f"{len(sc)} items, the row {row['score']} over {ex.get('n_scored')}")
     errors.extend(summary_numbers(objs))
+    errors.extend(twin_energy_never(objs))
     for rel, o in objs["judge-audit"]:
         lj = o.get("local_judge") or {}
         benches = [b.get("bench") for b in ((lj.get("same_lineage_share") or {}).get("by_bench") or {}).values()]

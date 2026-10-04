@@ -1,0 +1,139 @@
+{
+  "ended_at": "2026-10-03T19:08:36Z",
+  "gpus": [
+    {
+      "index": 0,
+      "memory_used_mib_at_start": 21732,
+      "name": "NVIDIA GeForce RTX 3090",
+      "power_limit_w": 350.0
+    }
+  ],
+  "nvml_available": true,
+  "passes": {
+    "aggregate": {
+      "concurrency": 8,
+      "counter_readings_disagree": false,
+      "duration_s": 22.331,
+      "energy_j": 7686.021,
+      "j_per_token": 1.8765,
+      "mean_w": 344.2,
+      "ok": 8,
+      "peak_w_1s": 349.5,
+      "per_gpu": [
+        {
+          "counter_energy_j": 7686.021,
+          "counter_moved": true,
+          "counter_readings_disagree": false,
+          "counter_step_min_j": 63.743,
+          "counter_updates": 23,
+          "counter_vs_readings": -0.014,
+          "counter_went_back": false,
+          "end": {
+            "sm_clock_mhz": 1830,
+            "temperature_c": 77
+          },
+          "energy_j": 7686.021,
+          "index": 0,
+          "peak_w": 349.5,
+          "readings": 24,
+          "readings_energy_j": 7794.386,
+          "source": "counter",
+          "start": {
+            "sm_clock_mhz": 1830,
+            "temperature_c": 76
+          }
+        }
+      ],
+      "request_s": 22.33,
+      "restart_likely": false,
+      "source": "counter",
+      "tokens": 4096,
+      "tokens_per_j": 0.5329
+    },
+    "solo": {
+      "counter_readings_disagree": false,
+      "duration_s": 10.773,
+      "energy_j": 3723.703,
+      "j_per_token": 7.2729,
+      "mean_w": 345.7,
+      "peak_w_1s": 349.6,
+      "per_gpu": [
+        {
+          "counter_energy_j": 3723.703,
+          "counter_moved": true,
+          "counter_readings_disagree": false,
+          "counter_step_min_j": 238.33,
+          "counter_updates": 11,
+          "counter_vs_readings": -0.009,
+          "counter_went_back": false,
+          "end": {
+            "sm_clock_mhz": 1830,
+            "temperature_c": 76
+          },
+          "energy_j": 3723.703,
+          "index": 0,
+          "peak_w": 349.6,
+          "readings": 12,
+          "readings_energy_j": 3759.228,
+          "source": "counter",
+          "start": {
+            "sm_clock_mhz": 1830,
+            "temperature_c": 76
+          }
+        }
+      ],
+      "request_s": 10.77,
+      "restart_likely": false,
+      "source": "counter",
+      "tokens": 512,
+      "tokens_per_j": 0.1375
+    },
+    "solo_stream": {
+      "counter_readings_disagree": false,
+      "deltas": 512,
+      "duration_s": 10.791,
+      "energy_j": 3711.793,
+      "mean_w": 344.0,
+      "peak_w_1s": 349.6,
+      "per_gpu": [
+        {
+          "counter_energy_j": 3711.793,
+          "counter_moved": true,
+          "counter_readings_disagree": false,
+          "counter_step_min_j": 237.236,
+          "counter_updates": 11,
+          "counter_vs_readings": -0.01,
+          "counter_went_back": false,
+          "end": {
+            "sm_clock_mhz": 1830,
+            "temperature_c": 76
+          },
+          "energy_j": 3711.793,
+          "index": 0,
+          "peak_w": 349.6,
+          "readings": 12,
+          "readings_energy_j": 3750.312,
+          "source": "counter",
+          "start": {
+            "sm_clock_mhz": 1845,
+            "temperature_c": 76
+          }
+        }
+      ],
+      "request_s": 10.79,
+      "restart_likely": false,
+      "source": "counter"
+    }
+  },
+  "period_s": 1.0,
+  "prompt_lang": "fr",
+  "protocol": "nvml-energy/v1",
+  "speed_protocol": "speed-house/v1",
+  "started_at": "2026-10-03T19:07:52Z",
+  "total_solo_and_aggregate": {
+    "energy_j": 11409.724,
+    "j_per_token": 2.4761,
+    "tokens": 4608,
+    "tokens_per_j": 0.4039
+  }
+}

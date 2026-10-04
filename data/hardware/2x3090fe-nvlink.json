@@ -38,11 +38,15 @@
     "physical bridge-out A/B (the NVLink A/B is a software proxy)",
     "nccl-tests and nvbandwidth",
     "llama.cpp NVLink A/B",
-    "a KV-pool and maximum-context table across models, one card against two (measured for Gemma 4 26B only)"
+    "a KV-pool and maximum-context table across models, one card against two (measured for Gemma 4 26B only)",
+    "energy per token for runs measured before 2026-10-03",
+    "English-prompt speed under the house protocol outside the 2026-10-03 speed campaign (the speculative-decoding A/B arms, spec-ab/v1, report English apart)",
+    "power-limit sweep",
+    "power at the wall (host CPU, RAM, power supplies)"
   ],
   "nvlink": true,
   "runs_counting_rule": "single_model_runs counts distinct run records of one model on this configuration, whatever their status; single_model_run_copies counts the byte-identical copies of earlier runs, shown apart as '+N copies'.",
   "single_model_run_copies": 3,
-  "single_model_runs": 122,
+  "single_model_runs": 132,
   "vram_gb_total": 48
 }

@@ -14,7 +14,7 @@
     "format": "gguf",
     "label": "GGUF Q4_K_M (mradermacher)"
   },
-  "runs_count": 3,
+  "runs_count": 4,
   "size_gb": 5.6,
   "source": {
     "source_id": "src-22c474888f1d7390"

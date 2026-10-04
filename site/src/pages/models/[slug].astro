@@ -170,7 +170,7 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
   )}
   <p class="small muted">
     VRAM is labelled per run: <em>reserved</em> is vLLM's reservation, <em>after load</em> is nvidia-smi about 3 s after the
-    server was ready (5 s in the 2026-09-04 campaigns), before any request.
+    server was ready (5 s in the 2026-09-04 campaigns and the 2026-10-03 speed campaign), before any request.
   </p>
   <h3 id="runs">Every run</h3>
   <p class="small muted"><Num value={rc.distinct} href="#runs" /> distinct run{rc.distinct === 1 ? '' : 's'}{rc.copies > 0 && <>, plus <Num value={rc.copies} href="#runs" /> byte cop{rc.copies === 1 ? 'y' : 'ies'} of earlier runs (marked <em>copy</em>)</>}.</p>

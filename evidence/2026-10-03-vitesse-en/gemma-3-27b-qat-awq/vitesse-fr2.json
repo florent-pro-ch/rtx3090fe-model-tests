@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 523.7,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 7.82,
+    "wall_s": 7.82
+  },
+  "candidat": "en-gemma-3-27b-qat-awq",
+  "debut": "2026-10-03T19:13:45Z",
+  "fin": "2026-10-03T19:14:07Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 72.1,
+    "ttft_ms": 55,
+    "wall_s": 7.102
+  }
+}

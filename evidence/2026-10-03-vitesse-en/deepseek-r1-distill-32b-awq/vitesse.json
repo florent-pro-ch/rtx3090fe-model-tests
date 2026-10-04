@@ -1,0 +1,18 @@
+{
+ "candidat": "en-deepseek-r1-distill-32b-awq",
+ "debut": "2026-10-03T18:58:36Z",
+ "solo": {
+  "ttft_ms": 123,
+  "tok_s": 69.4,
+  "completion_tokens": 512,
+  "wall_s": 7.375
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 526.3,
+  "p50_latency_s": 7.78,
+  "wall_s": 7.78
+ },
+ "fin": "2026-10-03T18:58:59Z"
+}

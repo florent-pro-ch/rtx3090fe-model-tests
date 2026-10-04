@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 899.8,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 4.55,
+    "wall_s": 4.55
+  },
+  "candidat": "en-thomson-1-awq",
+  "debut": "2026-10-03T19:16:16Z",
+  "fin": "2026-10-03T19:16:27Z",
+  "langue": "fr",
+  "protocole": "speed-house/v1",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 159.3,
+    "ttft_ms": 121,
+    "wall_s": 3.214
+  }
+}

@@ -1,0 +1,18 @@
+{
+ "candidat": "en-fable-711-gptq-paire",
+ "debut": "2026-10-03T19:19:06Z",
+ "solo": {
+  "ttft_ms": 167,
+  "tok_s": 64.9,
+  "completion_tokens": 512,
+  "wall_s": 7.885
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 451.1,
+  "p50_latency_s": 9.08,
+  "wall_s": 9.08
+ },
+ "fin": "2026-10-03T19:19:31Z"
+}

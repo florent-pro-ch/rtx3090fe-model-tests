@@ -145,7 +145,20 @@ export interface Run {
   duplicate_of?: string | null;
   scrubbed_fields?: string[];
   parse_notes?: string[];
+  /** NVML board energy of the speed passes (nvml-energy/v1, since 2026-10-03); absent on every earlier run. */
+  energy?: RunEnergy | null;
   [k: string]: unknown;
+}
+
+/** The closed `energy` object of a run record (schema/run.schema.json): what its *_energy_j and *_tok_per_j keys cover. */
+export interface RunEnergy {
+  protocol: string;
+  scope: string;
+  gpus_counted: number;
+  period_s?: number;
+  source: string;
+  passes: string[];
+  flags?: string[];
 }
 
 export interface Bench {
@@ -490,6 +503,7 @@ function normRun(r: Dict): Run {
     source: isObj(r.source) ? { source_id: str(r.source.source_id), ...(typeof r.source.sha256 === 'string' ? { sha256: r.source.sha256 } : {}) } : { source_id: '' },
     parse_notes: strArr(r.parse_notes),
     scrubbed_fields: strArr(r.scrubbed_fields),
+    energy: isObj(r.energy) ? { ...r.energy, passes: strArr(r.energy.passes), flags: strArr(r.energy.flags) } as RunEnergy : null,
   } as Run;
 }
 
@@ -918,6 +932,39 @@ export function isHouseProtocol(p: string | null | undefined): boolean {
   return typeof p === 'string' && p.trim().toLowerCase() === HOUSE_PROTOCOL;
 }
 
+/**
+ * The house pass's English twin (since 2026-10-03): the same pass with the prompt in English. Its figures sit in the
+ * en_* keys of the French run that measured them, shown beside that run's figure, never as a headline.
+ */
+export const HOUSE_PROTOCOL_EN = 'speed-house/v1-en';
+/** A run record of the English twin itself (protocol speed-house/v1-en): never a headline candidate. */
+export function isEnglishTwin(r: Run): boolean {
+  return typeof r.protocol === 'string' && r.protocol.trim().toLowerCase() === HOUSE_PROTOCOL_EN;
+}
+
+/** The fixed caveat of an English figure whose language difference cannot be told from its answer length. */
+export const LANGUAGE_LENGTH_CAVEAT = 'language and answer length are not separated';
+/**
+ * True when the English figure of one part of a run's house pass ('solo' or 'agg') carries LANGUAGE_LENGTH_CAVEAT,
+ * read from that run's own metrics only. Both conditions must hold:
+ *  - a language difference is called, by the reading rule fixed before the first pass of the 2026-10-03 campaign:
+ *    the English figure (en_<part>_tok_s) differs from the French one (<part>_tok_s) by more than twice the gap
+ *    between the two French passes (fr2_<part>_tok_s) and by more than 3 %;
+ *  - the English answers stopped earlier: fewer English completion tokens (en_<part>_completion_tokens) than in
+ *    either French pass (<part>_completion_tokens, fr2_<part>_completion_tokens).
+ * A missing key means no caveat (nothing to compare).
+ */
+export function englishLengthCaveat(r: Run, part: 'solo' | 'agg'): boolean {
+  const m = r.metrics;
+  const fr = m[`${part}_tok_s`], fr2 = m[`fr2_${part}_tok_s`], en = m[`en_${part}_tok_s`];
+  const frTok = m[`${part}_completion_tokens`], fr2Tok = m[`fr2_${part}_completion_tokens`], enTok = m[`en_${part}_completion_tokens`];
+  if (![fr, fr2, en, frTok, fr2Tok, enTok].every(isNum) || (fr as number) <= 0) return false;
+  const diff = Math.abs((en as number) - (fr as number));
+  const called = diff > 2 * Math.abs((fr2 as number) - (fr as number)) && diff > 0.03 * (fr as number);
+  const stoppedEarlier = (enTok as number) < Math.min(frTok as number, fr2Tok as number);
+  return called && stoppedEarlier;
+}
+
 /** Repetitions of a run's measurement: metrics.repetitions, passes or n_passes; 1 when none is recorded. */
 export function repetitions(r: Run): number {
   for (const k of ['repetitions', 'passes', 'n_passes']) {
@@ -952,9 +999,13 @@ export function isABTreatment(r: Run): boolean {
  * Candidates: the model's runs on that hardware configuration that are status
  *   "ok", not duplicate_of another run, not a speculative-decoding drafter
  *   arm, not an A/B treatment arm (engine_args.ab_arm "treatment" or
- *   topology.p2p "off-software"), with a known topology and a numeric
+ *   topology.p2p "off-software"), not a record of the house pass's English
+ *   twin (protocol "speed-house/v1-en"), with a known topology and a numeric
  *   metrics.solo_tok_s. Runs of the uncensored lab and its copies are never
- *   candidates (refusal rates only).
+ *   candidates (refusal rates only). The English twin and the French pass
+ *   repeated in the same session live in the en_* and fr2_* keys of the
+ *   French run that measured them: shown beside its figure, never the
+ *   headline, never a repetition.
  * Order (first difference wins):
  *   1. pinned engine (engine.pre_pin false) before pre-pin;
  *   2. the house protocol "speed-house/v1" strictly before any other protocol;
@@ -989,6 +1040,7 @@ function headlineEligible(r: Run): boolean {
     soloTokS(r) !== null &&
     !usesSpeculation(r) &&
     !isABTreatment(r) &&
+    !isEnglishTwin(r) &&
     !isRefusalOnly(r)
   );
 }
@@ -1253,7 +1305,7 @@ export function vramKindLabel(kind: string | null): { short: string; title: stri
     case 'reserved':
       return { short: 'reserved', title: 'vLLM reservation (gpu-memory-utilization), read after load: not what the model needs' };
     case 'after-load':
-      return { short: 'after load', title: 'nvidia-smi read about 3 s after the server was ready (5 s in the 2026-09-04 campaigns), before any request: not a peak' };
+      return { short: 'after load', title: 'nvidia-smi read about 3 s after the server was ready (5 s in the 2026-09-04 campaigns and the 2026-10-03 speed campaign), before any request: not a peak' };
     case 'peak':
       return { short: 'peak', title: 'maximum observed during the run' };
     case 'needed':
@@ -1896,6 +1948,8 @@ const BANNED_HEADLINE_LAUNCH = [/NCCL_P2P_DISABLE/, /--disable-custom-all-reduce
  *  - a headline run's launch line switches peer-to-peer or the custom
  *    all-reduce off (an A/B treatment shown as the figure to copy);
  *  - a headline run is an A/B treatment arm or a refusal-only run;
+ *  - a headline run is a record of the English twin (speed-house/v1-en) or
+ *    has an English prompt (its English figures belong beside a French one);
  *  - a ranking still shows a non-refusal score of a refusal-only run.
  * Called once from the layout (memoised).
  */
@@ -1910,6 +1964,8 @@ export const assertSiteRules = memo((): true => {
     for (const r of heads) {
       if (isABTreatment(r)) errors.push(`headline ${r.run_id} is an A/B treatment arm`);
       if (isRefusalOnly(r)) errors.push(`headline ${r.run_id} belongs to the refusal-only lab`);
+      if (isEnglishTwin(r)) errors.push(`headline ${r.run_id} is a record of the English twin (${HOUSE_PROTOCOL_EN})`);
+      if (r.prompt_lang === 'en') errors.push(`headline ${r.run_id} has an English prompt (prompt_lang "en")`);
       const l = launchFor(r);
       const line = l ? (launchLine(l.data) ?? JSON.stringify(l.data)) : '';
       for (const re of BANNED_HEADLINE_LAUNCH) if (re.test(line)) errors.push(`headline ${r.run_id}: launch line contains ${re.source}`);
@@ -1985,9 +2041,29 @@ export function kvPoolTokens(r: Run): number | null {
   return isNum(r.metrics.kv_pool_tokens) ? r.metrics.kv_pool_tokens : null;
 }
 
-/** A ready time measured with NCCL debug logging on (not comparable with other runs). */
+/**
+ * The exporter's parse note on a run launched with NCCL debug logging on (its NCCL_DEBUG_NOTE). Only this prefix
+ * counts: other notes name the variable without the run having it, e.g. "launch line of run X without
+ * NCCL_DEBUG=INFO" on a run served from that line with the logging removed.
+ */
+const NCCL_DEBUG_NOTE = /^launched with NCCL_DEBUG=INFO\b/;
+const debugLaunchCache = new Map<string, boolean>();
+
+/** A launch record whose environment switches NCCL's debug logging on (NCCL_DEBUG=INFO or TRACE). */
+function launchWithDebug(r: Run): boolean {
+  const hit = debugLaunchCache.get(r.run_id);
+  if (hit !== undefined) return hit;
+  const l = launchFor(r);
+  const env = l && isObj(l.data) && isObj(l.data.env) ? l.data.env : {};
+  const v = env.NCCL_DEBUG;
+  const on = typeof v === 'string' && /^(info|trace)$/i.test(v.trim());
+  debugLaunchCache.set(r.run_id, on);
+  return on;
+}
+
+/** A ready time measured with NCCL debug logging on (not comparable with other runs): the exporter's note, or the launch env. */
 export function readyWithDebug(r: Run): boolean {
-  return (r.parse_notes ?? []).some((n) => /NCCL[_ ]DEBUG|debug logging/i.test(n));
+  return (r.parse_notes ?? []).some((n) => NCCL_DEBUG_NOTE.test(n)) || launchWithDebug(r);
 }
 
 /** The date of a ranking: generated_at, else its campaign's date prefix. */

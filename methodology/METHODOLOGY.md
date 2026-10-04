@@ -21,7 +21,9 @@ v0 (2026-10-02). The speed side has its own page
   bench: an oracle (tests, exact answers, geometry), a metric, or a model
   judge.
 - **Speed never enters Q.** It is measured by a separate pass, shown greyed
-  next to the quality score, and only ever used to break a tie.
+  next to the quality score, and only ever used to break a tie. Energy per
+  token, where it was measured, is shown beside the speed and never enters Q
+  or a tie-break either.
 - **Physical gates rank nothing.** Fitting on the cards, an engine that can
   serve the model, a licence that has been read: these are prerequisites. A
   model that fails one is a result ("does not fit", "engine door closed"), not
@@ -269,6 +271,8 @@ For one model on one hardware configuration, the headline figure comes from the 
 
 Only a distinct run that ended `ok`, with a known topology and a measured solo speed, can be the headline: a copy of another run (`duplicate_of`), a speculative-decoding run with a drafter, the treatment arm of an A/B test (`engine_args.ab_arm: "treatment"`, or NVLink switched off in software, `topology.p2p: "off-software"`), and a run of the uncensored-model study or a copy of one (refusal rates only) never are.
 
+The English twin of the house pass (`speed-house/v1-en`) and the French pass repeated in the same session are shown beside the headline figure of the run that measured them; neither is ever the headline, and neither counts as a repetition. Energy per token, where it was measured, is shown the same way and plays no part in the choice.
+
 <!-- /gen:headline-rule -->
 
 The house protocol is described in [SPEED-PROTOCOL.md](SPEED-PROTOCOL.md);
@@ -301,7 +305,8 @@ knowing that.
 
 The VRAM figure of a run is an **after-load snapshot (nvidia-smi a few
 seconds after the server is ready, before the first request: 3 s in the house
-harness, 5 s in the two 2026-09-04 campaigns); for vLLM a reservation**. A
+harness, 5 s in the two 2026-09-04 campaigns and the 2026-10-03 speed
+campaign); for vLLM a reservation**. A
 campaign that took it at another moment says so in the parse notes of its run
 records. It is read per GPU, in MiB ([SPEED-PROTOCOL.md](SPEED-PROTOCOL.md), step 4). It
 is **not a peak**: nothing samples memory while the benches and the speed

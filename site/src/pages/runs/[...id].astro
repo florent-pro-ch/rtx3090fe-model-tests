@@ -12,6 +12,7 @@ import {
   runs, modelById, buildById, campaignById, benchById, headlineRun, runDate, vramPerGpu, vramKind, isNum,
   listRepoFiles, repoPathExists, launchFor, launchLine, isJudged, topologyKnown, hardwareById, itemScoresOf,
   VERSION_LABEL, isRefusalOnly, visibleQuality, REFUSAL_BENCH, isABTreatment, aggSlots, readyWithDebug, usesSpeculation, notGradedReasonText, notYetText, judgeKeyOf, JUDGES, scoresWithheld,
+  englishLengthCaveat, LANGUAGE_LENGTH_CAVEAT,
 } from '../../lib/data';
 import { benchHref, campaignHref, configHref, engineLabel, evidenceHref, href, hwShort, modelHref, runHref, topoLabel } from '../../lib/site';
 
@@ -67,9 +68,21 @@ const METRIC_LABEL: Record<string, string> = {
   tasks_passed: 'tasks passed', tasks_total: 'tasks', turns: 'agent turns', tool_calls: 'tool calls', tool_errors: 'tool errors',
   tokens_in: 'tokens in', tokens_out: 'tokens out', items: 'items', items_ok: 'items that ran', solo_acceptance_rate: 'single-stream draft acceptance rate',
   solo_mean_acceptance_length: 'single-stream mean acceptance length', agent_killed_or_timed_out: 'agent runs killed or timed out', verify_timeouts: 'verification timeouts',
+  // energy of the speed pass (nvml-energy/v1): the GPU boards of the cards used, summed
+  solo_energy_j: 'single-stream energy (GPU boards)', solo_power_mean_w: 'single-stream mean board power',
+  solo_power_peak_w: 'single-stream highest 1-s board power', solo_tok_per_j: 'single-stream tokens per joule (GPU boards)',
+  agg_energy_j: 'aggregate energy (GPU boards)', agg_power_mean_w: 'aggregate mean board power',
+  agg_power_peak_w: 'aggregate highest 1-s board power', agg_tok_per_j: 'aggregate tokens per joule (GPU boards)',
+  agg_completion_tokens: 'aggregate completion tokens (eight answers)',
 };
 const metricLabel = (k: string): string | null => {
   if (METRIC_LABEL[k]) return METRIC_LABEL[k];
+  // the house pass's English twin (en_*) and the French pass repeated in the same session (fr2_*), beside the French keys
+  const t = k.match(/^(en|fr2)_(.+)$/);
+  if (t) {
+    const what = METRIC_LABEL[t[2]] ?? t[2].replace(/_/g, ' ');
+    return `${what}, ${t[1] === 'en' ? 'English prompt (speed-house/v1-en)' : 'French prompt again, same session'}`;
+  }
   const m = k.match(/^(solo|c4|c8)_(fr|en)_(.+)$/);
   if (m) {
     const lang = m[2] === 'fr' ? 'French prompts' : 'English prompts';
@@ -82,6 +95,10 @@ const metricLabel = (k: string): string | null => {
   return null;
 };
 const slots = aggSlots(r);
+// English figures of the house pass under the fixed caveat (englishLengthCaveat in lib/data.ts), per part
+const enCaveat: Record<string, boolean> = lab ? {} : { en_solo_tok_s: englishLengthCaveat(r, 'solo'), en_agg_tok_s: englishLengthCaveat(r, 'agg') };
+const enCaveatParts = [enCaveat.en_solo_tok_s && 'in single stream', enCaveat.en_agg_tok_s && 'at eight requests'].filter((x): x is string => !!x);
+const enCaveatTwo = enCaveatParts.length > 1;
 ---
 <Layout
   title={`Run ${r.run_id}`}
@@ -142,6 +159,7 @@ const slots = aggSlots(r);
               <td class="num"><Value value={r.metrics[k]} k={k} run={r.run_id} />
                 {k === 'agg_tok_s' && slots.slots !== null && <><br /><span class="muted small">{slots.engine === 'vllm' ? 'max_num_seqs' : 'llama.cpp slots'} <Num value={slots.slots} run={r.run_id} />{slots.serialised && slots.engine !== 'vllm' && ': requests served one after another (serialised), not batching'}</span></>}
                 {k === 'ready_s' && readyWithDebug(r) && <><br /><span class="muted small">measured with NCCL debug logging on: not comparable with other runs</span></>}
+                {enCaveat[k] && <><br /><span class="flag" title="the English figure differs from the French one beyond the reading rule fixed before the first pass, but the English answers stopped before the token count the French answers reached (the completion-token rows of this table)">{LANGUAGE_LENGTH_CAVEAT}</span></>}
               </td>
             </tr>
           ))}
@@ -154,6 +172,22 @@ const slots = aggSlots(r);
         </tbody>
       </table>
     </div>
+  )}
+  {enCaveatParts.length > 0 && (
+    <p class="small muted">
+      The English {enCaveatTwo ? 'figures' : 'figure'} {enCaveatParts.join(' and ')} {enCaveatTwo ? 'differ' : 'differs'} from the
+      French {enCaveatTwo ? 'ones' : 'one'} beyond the reading rule fixed before the first pass (more than twice the gap between
+      the two French passes and more than 3 %), but the English answers stopped before the token count every French answer
+      reached, so {LANGUAGE_LENGTH_CAVEAT}.
+    </p>
+  )}
+  {!lab && r.energy && (
+    <p class="small muted">
+      Energy (<code>{r.energy.protocol}</code>): NVIDIA's energy counter of the GPU boards of the{' '}
+      {r.energy.gpus_counted === 1 ? 'card' : <><Num value={r.energy.gpus_counted} run={r.run_id} /> cards</>} the model used{r.energy.gpus_counted === 1 ? '' : ', summed'};
+      not the host's CPU, RAM or power supplies. Source: {r.energy.source === 'counter' ? 'the counter, read at the start and end of each timed part' : r.energy.source === 'power-readings' ? 'the 1-s power readings' : 'the counter on some cards, the 1-s power readings on others'}.
+      {(r.energy.flags ?? []).length > 0 && <> Flags: {(r.energy.flags ?? []).map((f, i) => <>{i > 0 && ', '}<code>{f}</code></>)}.</>}
+    </p>
   )}
 
   {quality.length > 0 && (
@@ -279,8 +313,9 @@ const slots = aggSlots(r);
   )}
   <p class="small muted">
     Evidence file names stay in French where the harness wrote them (<code>vitesse.json</code> = speed,{' '}
+    <code>vitesse-en.json</code> = English speed, <code>vitesse-fr2.json</code> = French speed again,{' '}
     <code>pret-en-secondes.txt</code> = seconds until ready, <code>mecanique-*.json</code> = mechanics,{' '}
-    <code>scores-*.json</code> = scores); see the glossary in the repository.
+    <code>scores-*.json</code> = scores; <code>energy*.json</code> = energy per timed part); see the glossary in the repository.
   </p>
 
   {((r.parse_notes ?? []).length > 0 || (r.scrubbed_fields ?? []).length > 0) && (

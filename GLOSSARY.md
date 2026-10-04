@@ -2,11 +2,14 @@
 
 Everything in this repository is in English except **measurement material**:
 bench items, prompts sent to models and the scoring files frozen with them
-stay in French, byte for byte, because translating an instrument invalidates
-every measurement already taken with it. That material is tagged `lang: "fr"`
-in [data/](data/). A few French names also survive in folder names, evidence
-file names, run ids and the harness's identifiers. This page explains each
-one, and the English terms the records use, for v0 (2026-10-02).
+stay in their own language, byte for byte: French, apart from the English
+twin of the speed prompt (`speed-house/v1-en`, since 2026-10-03), a second
+instrument measured beside the French one, never a replacement. Translating
+an instrument invalidates every measurement already taken with it. The
+French material is tagged `lang: "fr"` in [data/](data/). A few French
+names also survive in folder names, evidence file names, run ids and the
+harness's identifiers. This page explains each one, and the English terms
+the records use, for v0 (2026-10-02).
 
 The English keys of [data/](data/) are the reference: when a French key of an
 evidence file reaches a record, it is renamed (`rangs` → `ranks`, `ic95` →
@@ -67,6 +70,8 @@ some carry French words or short codes.
 | `rep1`, `rep2`, `rep3` | repetitions | Evidence sub-folders of repeated speed passes in one container. |
 | `-A`, `-Aprime` | arm A, arm A′ | Speculative decoding: the base model served twice without speculation, to measure the engine's own non-determinism. |
 | `resident` | resident | See [Places and roles](#places-and-roles). |
+| `vitesse-en` | English speed | The 2026-10-03 campaign that measured the house speed pass in French, in English and in French again. |
+| `-1carte`, `-paire` | one card, pair | A run measured on one card (`-1carte`) or on the NVLink pair (`-paire`). Only Gemma 4 26B-A4B was measured both ways in the 2026-10-03 speed campaign. |
 | `fable-711-*` | — | Builds of Qwen3.6-27B-Fable-Fusion-711, a community merge of Qwen3.6-27B. The name is its author's; the judge, Claude Fable 5.1, never saw candidate names; whether the merge was trained on Claude outputs is not known. |
 
 ## Files in a run's evidence folder
@@ -77,9 +82,12 @@ record is `data/runs/<campaign>/<run>.json`.
 | File | English | Content |
 |---|---|---|
 | `vitesse.json` | speed | The house speed pass: `solo` (one request) and `agrege` (eight at once). See [methodology/SPEED-PROTOCOL.md](methodology/SPEED-PROTOCOL.md). |
+| `vitesse-en.json` | English speed | The English twin of the house pass (`speed-house/v1-en`), same keys; also records `protocole` and `langue`. Its figures are the run record's `en_*` keys. |
+| `vitesse-fr2.json` | speed, French, second | The French pass again after the English one, on the same server: the session's drift, never a headline and never a repetition. Its figures are the run record's `fr2_*` keys. |
+| `energy.json`, `energy-en.json`, `energy-fr2.json` | energy | The energy of each timed part of the French, English and second French passes, from NVIDIA's energy counter (NVML), with English keys; card identifiers and the driver version are left out. The harness writes it as `vitesse-energie.json` with French keys ([harness/energie.py](harness/energie.py) maps them). |
 | `pret-en-secondes.txt` | ready in seconds (`pret`: ready) | Seconds from container start to the server's first successful model listing. |
 | `lancement.txt` → `launch.json` | launch | The exact container command, re-serialised as JSON with machine-specific parts removed. |
-| `nvidia-smi-*` → `gpu-snapshots.json` | GPU snapshots | Per-GPU readings of memory used, and of temperature or board power where the capture asked for them: `avant` (before, labelled `before`), `charge` or `pret` (loaded, labelled `load`: the after-load snapshot, a few seconds after the server is ready and before the first request; for vLLM a reservation), `apres` / `apres-banc` (after the benches). None is taken during generation, so none is a peak. |
+| `nvidia-smi-*` → `gpu-snapshots.json` | GPU snapshots | Per-GPU readings of memory used, and of temperature or board power where the capture asked for them: `avant` (before, labelled `before`), `charge` or `pret` (loaded, labelled `load`: the after-load snapshot, a few seconds after the server is ready and before the first request; for vLLM a reservation), `apres` / `apres-banc` (after the benches). None is taken during generation, so none is a peak. The 2026-10-03 snapshots also record the SM clock (`sm_clock_mhz`). |
 | `mecanique-<bench>.json` | mechanics | Request-level counters for one bench (see below). |
 | `scores-<bench>.json` | scores | Per-item and aggregate scores of one bench. |
 | `reponses-<bench>.json` | answers | The model's answers. **Not published in v0 (2026-10-02).** |
@@ -102,6 +110,8 @@ record is `data/runs/<campaign>/<run>.json`.
 | `solo` | solo | The single-request pass of the speed protocol. |
 | `agrege` | aggregate | The concurrent pass of the speed protocol. |
 | `conc` | concurrency | Number of simultaneous requests (8 in the house protocol). |
+| `protocole` | protocol | The speed protocol of a speed file other than `vitesse.json` (`speed-house/v1` or `speed-house/v1-en`). |
+| `langue` | language | The prompt's language in such a file (`fr`, `en`). |
 | `debut`, `fin` | started_at, ended_at | UTC timestamps. |
 | `vide` | empty | Answers with no content. |
 | `tronque` | truncated | Answers cut by the token limit (`finish_reason = length`). |
@@ -158,7 +168,7 @@ first line; the run record is authoritative.
 |---|---|---|
 | `BANC-TERMINE`, `BANC-AUDIO-TERMINE`, `BANC-INTERFACE-TERMINE` | benches finished (audio, interface) | `ok` |
 | `TERMINE`, `JUGE-TERMINE` | finished, judge finished | `ok` |
-| `DONE`, `OK` | (early campaigns wrote English words) | `ok` |
+| `DONE`, `OK` | (early campaigns and the 2026-10-03 speed campaign wrote English words) | `ok` |
 | `ECHEC-DEMARRAGE` | failed to start | `failed-start` |
 | `ECHEC` | failed | `failed` |
 | `INTERROMPU` | interrupted | `interrupted` |
@@ -217,9 +227,10 @@ signs are given for readers of older material:
 | **headline run** | The one run whose figures a page shows for a model on a configuration, chosen by the rule in [methodology/headline-rule.md](methodology/headline-rule.md). |
 | **pre-pin** (`engine.pre_pin: true`) | A run whose engine is older than the pin of 2026-09-10: vLLM before 0.29.0 (in practice 0.26), a floating llama.cpp tag or a build before b10830, or any run started before 2026-09-10 on an engine that was not pinned (see [methodology/METHODOLOGY.md](methodology/METHODOLOGY.md#engine-pins-and-the-pre-pin-label)). Not wrong, but measured on a different engine. A pinned run has `engine.pre_pin: false`. |
 | **pin unknown** (`engine.pre_pin: null`) | The run's engine or its version is unknown, or not published (the uncensored lab and its copies). Such a run is never treated as pinned. |
-| **house speed protocol** (`speed-house/v1`) | The one fixed speed pass: a French prompt, one solo request, then eight at once, on the model as served ([methodology/SPEED-PROTOCOL.md](methodology/SPEED-PROTOCOL.md)). `speed-house/v0` is its earlier version (the 2026-09-04 campaigns). A figure from any other protocol names it. |
+| **house speed protocol** (`speed-house/v1`, `speed-house/v1-en`) | The one fixed speed pass: a French prompt, one solo request, then eight at once, on the model as served ([methodology/SPEED-PROTOCOL.md](methodology/SPEED-PROTOCOL.md)). `speed-house/v0` is its earlier version (the 2026-09-04 campaigns). `speed-house/v1-en` is its English twin (since 2026-10-03), measured beside the French pass and never pooled with it. A figure from any other protocol names it. |
+| **energy per token** (`nvml-energy/v1`) | The energy the model's cards drew during one timed part of a speed pass, read from NVIDIA's cumulative counter (NVML), divided by the tokens produced; shown as tokens per joule. GPU boards only, not the host. Measured since 2026-10-03; earlier runs show "not measured". |
 | **slots** (`engine_args.parallel_slots`) | How many requests a llama.cpp server decodes at once (`-np`); vLLM's counterpart is `max_num_seqs`. A one-slot server serves the eight requests of the aggregate pass one after another, so its aggregate is shown as "1 slot (serialised)": single-stream speed, not batching. |
-| **VRAM** (`vram.kind`) | The memory figure of a run, per GPU: a snapshot a few seconds after the server is ready and before the first request (3 s in the house harness, 5 s in the two 2026-09-04 campaigns). Never a peak under load. See [methodology/METHODOLOGY.md](methodology/METHODOLOGY.md#memory-figures). |
+| **VRAM** (`vram.kind`) | The memory figure of a run, per GPU: a snapshot a few seconds after the server is ready and before the first request (3 s in the house harness, 5 s in the two 2026-09-04 campaigns and the 2026-10-03 speed campaign). Never a peak under load. See [methodology/METHODOLOGY.md](methodology/METHODOLOGY.md#memory-figures). |
 | **reserved** (`vram.kind: "reserved"`) | vLLM: the snapshot shows the share of the card that `--gpu-memory-utilization` lets vLLM take, filled with KV cache, not what the model needs. |
 | **after-load** (`vram.kind: "after-load"`) | Other engines, such as llama.cpp: the snapshot shows the weights and what the engine allocated at start for its configured context. |
 | **CPU offload** (`topology.cpu_offload_gb`) | Weights deliberately held in system RAM by a flag (vLLM `--cpu-offload-gb N`), in GB per card; null when the size is unknown. |
