@@ -191,9 +191,11 @@ badge its text (`oracle`, `judge`, `pre-pin`, `TP2`, `layer split`).
   and the version label. The numbers are the model page's: the same headline
   rule, the same formatting, and nothing from the uncensored lab. The default
   card is the repository's social preview (Figma "Social preview v2 · A")
-  fitted to 1200 × 630: the title, the lead, the counts of models, runs and
-  benches (the site's counters), the pair with `NVLink` and its caption, the
-  data date and the version label.
+  fitted to 1200 × 630: the title, the lead, three features written in its
+  spec (quality per bench, speed per card, energy per token), the pair with
+  `NVLink` and its caption, and the site's address. Since 2026-10-05 it holds
+  no count, date or version label: the social preview is uploaded by hand in
+  the repository settings, so anything that changes would go stale there.
 - **Dark only.** A card is shown by another site, which does not know the
   reader's theme; the dark theme is the default identity.
 - **Small.** A card stays under 150 KB; above that it is re-encoded with a

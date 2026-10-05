@@ -27,7 +27,7 @@ import { fePair } from './fe-card';
 
 interface ConfigSpec { hardware: string; chip: string; schematic: '1x' | '2x' | '2x2'; count_suffix?: string }
 interface BannerSpec { size: [number, number]; title: string; lead: string; console_title: string; configs: ConfigSpec[] }
-interface SocialSpec { size: [number, number]; title_lines: string[]; lead: string; pair_hardware: string; bridge_label: string; caption: string }
+interface SocialSpec { size: [number, number]; title_lines: string[]; lead: string; features: [string, string][]; pair_hardware: string; bridge_label: string; caption: string; footer: string }
 
 export const SPEC_DIR = path.join(ROOT, 'figures', 'specs');
 function spec<T>(name: string): T {
@@ -133,13 +133,14 @@ export function bannerSvg(): { svg: string; alt: string } {
 
 /**
  * The social preview, after the Figma frame "Social preview v2 · A · the card"
- * (20:14, 1280 × 640): the title on two lines, the lead, the site's three
- * counters, the data date and the version label on the left; on the right the
- * pair of RTX 3090 Founders Edition cards (fe-card.ts, DESIGN.md Motifs) with
- * "NVLink" beside the bridge and a caption whose numbers come from the pair's
- * hardware record.
+ * (20:14, 1280 × 640): the title on two lines, the lead, three features of
+ * the spec and the site's address on the left; on the right the pair of RTX
+ * 3090 Founders Edition cards (fe-card.ts, DESIGN.md Motifs) with "NVLink"
+ * beside the bridge and a caption whose numbers come from the pair's hardware
+ * record. Static by design (2026-10-05): no count, date or version label, since
+ * the image is uploaded by hand in the repository settings and would go stale.
  */
-const COUNT_KEYS = ['models', 'runs', 'benches'] as const;
+const FEATURE_RIGHT = 572; // the features end before the pair, drawn from x = 596
 
 function pairCaption(sp: SocialSpec): string {
   const hw = hardwareById(sp.pair_hardware);
@@ -152,8 +153,6 @@ function pairCaption(sp: SocialSpec): string {
 
 /** The 1280 × 640 composition, without its background (so it can be scaled into the 1200 × 630 card). */
 function socialBody(sp: SocialSpec): { body: string; alt: string } {
-  const k = counts();
-  const date = dataAsOf() ?? 'undated';
   let s = '';
   // title: Inter ExtraBold 88, line height 1.02, tracking -2.5 %
   sp.title_lines.forEach((ln, i) => {
@@ -164,31 +163,32 @@ function socialBody(sp: SocialSpec): { body: string; alt: string } {
   lead.forEach((ln, i) => {
     s += textTop(66, 296 + i * 24 * 1.4, 1.4, ln, { face: 'sans400', size: 24, fill: 'muted' });
   });
-  // the three counters: JetBrains Mono Bold 64 over an Inter 22 --muted word, 44 apart
+  // the three features, where the counters were: JetBrains Mono Bold over an Inter 22 --muted word, 44 apart,
+  // the size the largest (at most 52) that ends them before the pair
+  const gap = 44;
+  const widthAt = (size: number) => sp.features.reduce((w, [head, word]) =>
+    w + Math.max(textWidth(head, 'mono700', size), spansWidth([{ s: word, face: 'sans400', size: 22, fill: 'muted' }])), 0) + gap * (sp.features.length - 1);
+  let fsz = 52;
+  while (fsz > 28 && 64 + widthAt(fsz) > FEATURE_RIGHT) fsz -= 2;
   let x = 64;
-  for (const key of COUNT_KEYS) {
-    const num = fmtNum(k[key]);
-    s += textTop(x, 408, 1.1, num, { face: 'mono700', size: 64, fill: 'text' });
-    const word: Span[] = [{ s: key, face: 'sans400', size: 22, fill: 'muted' }];
-    // Copies of earlier runs are shown apart, with the site's words (DESIGN.md: count distinct runs).
-    if (key === 'runs' && k.run_copies > 0) word.push({ s: `+${fmtNum(k.run_copies)} copies`, face: 'mono400', size: 17, fill: 'muted', dx: 8 });
-    s += spans(x, baseline(408 + 64 * 1.1 + 2, 22, autoLineHeight('sans400'), 'sans400'), word);
-    x += Math.max(textWidth(num, 'mono700', 64), spansWidth(word)) + 44;
+  for (const [head, word] of sp.features) {
+    s += textTop(x, 420, 1.1, head, { face: 'mono700', size: fsz, fill: 'text' });
+    const w: Span[] = [{ s: word, face: 'sans400', size: 22, fill: 'muted' }];
+    s += spans(x, baseline(420 + fsz * 1.1 + 2, 22, autoLineHeight('sans400'), 'sans400'), w);
+    x += Math.max(textWidth(head, 'mono700', fsz), spansWidth(w)) + gap;
   }
-  // footer: the data date and the version label
-  const footer = `data as of ${date} · ${VERSION_LABEL}`;
-  s += textTop(64, 574, autoLineHeight('mono400'), footer, { face: 'mono400', size: 17, fill: 'muted' });
+  // footer: the site's address (never a date or a version: the image is uploaded by hand)
+  s += textTop(64, 574, autoLineHeight('mono400'), sp.footer, { face: 'mono400', size: 17, fill: 'muted' });
   // the pair, the bridge's word and the caption
   const pair = fePair(sp.bridge_label);
   s += group(pair.svg, 596, 128);
   const caption = pairCaption(sp);
   s += textTop(910, 540, autoLineHeight('mono400'), caption, { face: 'mono400', size: 16, fill: 'muted', anchor: 'middle' });
-  const copies = k.run_copies > 0 ? ` (+${fmtNum(k.run_copies)} copies)` : '';
   const alt =
     `${sp.title_lines.join(' ')}: ${sp.lead} ` +
-    `${fmtNum(k.models)} models, ${fmtNum(k.runs)} runs${copies}, ${fmtNum(k.benches)} benches. ` +
+    `${sp.features.map(([head, word]) => `${head} ${word}`).join(', ')}. ` +
     `Drawing: two RTX 3090 Founders Edition cards joined by the ${sp.bridge_label} bridge, captioned ${caption.replace(/ · /g, ', ')}. ` +
-    `Data as of ${date}; ${VERSION_LABEL}.`;
+    `${sp.footer}.`;
   return { body: s, alt };
 }
 
