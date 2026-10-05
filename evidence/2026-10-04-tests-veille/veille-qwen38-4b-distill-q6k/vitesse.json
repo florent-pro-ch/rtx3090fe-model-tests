@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen38-4b-distill-q6k",
+ "debut": "2026-10-04T12:46:58Z",
+ "solo": {
+  "ttft_ms": 149,
+  "tok_s": 142.6,
+  "completion_tokens": 512,
+  "wall_s": 3.59
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 144.5,
+  "p50_latency_s": 15.94,
+  "wall_s": 28.35
+ },
+ "fin": "2026-10-04T12:47:33Z"
+}

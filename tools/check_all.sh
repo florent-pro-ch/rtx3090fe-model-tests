@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # check_all.sh — every public quality gate, in one go (what CI runs first).
 #
-#   G2 scan_public.py     generic leak patterns (addresses, home paths, GPU UUIDs, tokens, e-mails)
+#   G2 scan_public.py     generic leak patterns (addresses, home paths, GPU UUIDs, tokens, e-mails, CJK and Thai script)
 #   G3 check_size.py      file and repo size, no media/log/weights
 #      validate.py        data/**/*.json against schema/*.schema.json, --strict (0 warnings);
 #                         also the en_/fr2_ speed keys, the energy keys and never-measured lists

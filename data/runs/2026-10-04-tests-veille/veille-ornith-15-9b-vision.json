@@ -1,0 +1,134 @@
+{
+  "build_id": "ornith-ai/ornith-1.5-9b@bf16",
+  "campaign": "2026-10-04-tests-veille",
+  "duplicate_of": null,
+  "ended_at": "2026-10-04T14:38:48Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 1,
+    "passes": [
+      "fr",
+      "en"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "vllm/vllm-openai:v0.29.0",
+    "name": "vllm",
+    "pre_pin": false,
+    "version": "0.29.0"
+  },
+  "engine_args": {
+    "gpu_memory_utilization": 0.95,
+    "kv_cache_dtype": "bfloat16",
+    "max_model_len": 8192,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 4
+  },
+  "evidence": [
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/energy-en.json",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/energy.json",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/gpu-snapshots.json",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/launch.json",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/mecanique-vision.json",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/pret-en-secondes.txt",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/vitesse-en.json",
+    "evidence/2026-10-04-tests-veille/veille-ornith-15-9b-vision/vitesse.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "speed+quality",
+  "metrics": {
+    "agg_completion_tokens": 4096,
+    "agg_concurrency": 8,
+    "agg_energy_j": 7684.79,
+    "agg_ok": 8,
+    "agg_power_mean_w": 345.1,
+    "agg_power_peak_w": 349.3,
+    "agg_tok_per_j": 0.533,
+    "agg_tok_s": 184.0,
+    "agg_wall_s": 22.26,
+    "en_agg_completion_tokens": 4096,
+    "en_agg_concurrency": 8,
+    "en_agg_energy_j": 7690.568,
+    "en_agg_ok": 8,
+    "en_agg_power_mean_w": 345.4,
+    "en_agg_power_peak_w": 349.8,
+    "en_agg_tok_per_j": 0.5326,
+    "en_agg_tok_s": 184.0,
+    "en_agg_wall_s": 22.26,
+    "en_p50_latency_s": 16.7,
+    "en_solo_completion_tokens": 512,
+    "en_solo_energy_j": 3681.459,
+    "en_solo_power_mean_w": 342.5,
+    "en_solo_power_peak_w": 349.5,
+    "en_solo_tok_per_j": 0.1391,
+    "en_solo_tok_s": 47.7,
+    "en_solo_ttft_ms": 71,
+    "en_solo_wall_s": 10.741,
+    "p50_latency_s": 16.7,
+    "ready_s": 192,
+    "solo_completion_tokens": 512,
+    "solo_energy_j": 3685.228,
+    "solo_power_mean_w": 343.0,
+    "solo_power_peak_w": 349.5,
+    "solo_tok_per_j": 0.1389,
+    "solo_tok_s": 47.7,
+    "solo_ttft_ms": 110,
+    "solo_wall_s": 10.74
+  },
+  "model_id": "ornith-ai/ornith-1.5-9b",
+  "parse_notes": [
+    "energy (nvml-energy/v1): NVIDIA's cumulative energy counter of the model's 1 card, read at the start and end of each timed part, power read once a second; GPU boards only, summed, not the host CPU, RAM or power supplies; the streamed single request is in energy*.json only",
+    "energy metrics per pass (no prefix, en_, fr2_): solo_* and agg_* energy_j, power_mean_w, power_peak_w (the highest 1-s power reading, summed over the cards) and tok_per_j; agg_completion_tokens is the eight answers' tokens",
+    "two speed passes in one session on the same server: French (headline keys, vitesse.json), the English twin (en_* keys, protocol speed-house/v1-en, vitesse-en.json)"
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-10-04-tests-veille/veille-ornith-15-9b-vision",
+  "scrubbed_fields": [
+    "energy-en.json:candidate",
+    "energy-en.json:driver_version",
+    "energy-en.json:gpu_choice",
+    "energy-en.json:gpus[].uuid",
+    "energy-en.json:power_and_memory_of_every_card_seen",
+    "energy.json:candidate",
+    "energy.json:driver_version",
+    "energy.json:gpu_choice",
+    "energy.json:gpus[].uuid",
+    "energy.json:power_and_memory_of_every_card_seen",
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes",
+    "vitesse-en.json:prompt_sha256"
+  ],
+  "source": {
+    "source_id": "src-33735a2329cf89bf"
+  },
+  "started_at": "2026-10-04T14:38:04Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "reserved",
+    "mib_per_gpu": [
+      21277
+    ],
+    "snapshot": "load"
+  }
+}

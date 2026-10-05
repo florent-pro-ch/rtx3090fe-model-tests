@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 184.0,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 16.7,
+    "wall_s": 22.26
+  },
+  "candidat": "veille-ornith-15-9b-vision",
+  "debut": "2026-10-04T14:38:48Z",
+  "fin": "2026-10-04T14:39:31Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 47.7,
+    "ttft_ms": 71,
+    "wall_s": 10.741
+  }
+}

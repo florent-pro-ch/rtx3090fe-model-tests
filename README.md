@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 95 models, 239 runs (+40 copies), 14 benches, data as of 2026-10-03. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 90 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 132 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 100 models, 251 runs (+40 copies), 14 benches, data as of 2026-10-04. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 101 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 132 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -30,17 +30,17 @@ here.
 
 | What | Count |
 |---|---:|
-| Models (upstream, public) | **95** |
+| Models (upstream, public) | **100** |
 | Private fine-tune checkpoints, counted apart | 30 |
-| Builds (quantisations, GGUFs, adapters) | 115 |
-| Runs (distinct run records) | **239** (+40 copies) |
-| &nbsp;&nbsp;· on one card (`1x3090fe`) | 90 (+15 copies) |
+| Builds (quantisations, GGUFs, adapters) | 122 |
+| Runs (distinct run records) | **251** (+40 copies) |
+| &nbsp;&nbsp;· on one card (`1x3090fe`) | 101 (+15 copies) |
 | &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 132 (+3 copies) |
 | &nbsp;&nbsp;· on both pairs as one configuration (`2x2x3090fe-nvlink`) | 0 |
-| &nbsp;&nbsp;· topology unknown | 17 (+22 copies) |
+| &nbsp;&nbsp;· topology unknown | 18 (+22 copies) |
 | Frozen benches | 14 |
-| Campaigns | 40 |
-| Watchlist entries: open-weight models or builds spotted for the rig, not run here when listed | 35 (3 measured later) |
+| Campaigns | 42 |
+| Watchlist entries: open-weight models or builds spotted for the rig, not run here when listed | 34 (3 measured later) |
 | &nbsp;&nbsp;· listed apart, not counted above: cloud or API-only models | 8 |
 | &nbsp;&nbsp;· listed apart, not counted above: tools that are not models | 2 |
 
@@ -49,7 +49,7 @@ an identical copy of an earlier run's record and evidence, carried into a later
 campaign; its `duplicate_of` names the original. Copies are shown apart, as
 "+N copies", and never counted as runs.
 
-Data as of **2026-10-03**, the latest date found in [data/](data/).
+Data as of **2026-10-04**, the latest date found in [data/](data/).
 <!-- /gen:counts -->
 
 ## What is inside
@@ -84,9 +84,11 @@ charts from [data/](data/).
 **Not measured on any configuration:** power-limit sweeps and power at the
 wall. Energy per token is read on the GPU boards only, for the speed passes
 run since 2026-10-03; English-prompt speed under the house protocol only for
-the 18 rows re-measured that day (the earlier English figures come from
-speculative-decoding tests, the A/B of `spec-ab/v1` and one DSpark probe,
-each under its own protocol). Each configuration page lists what is missing rather than
+the 18 rows re-measured that day and, since 2026-10-04, for model-watch runs,
+which add the English pass after the French one with no second French pass
+(the earlier English figures come from speculative-decoding tests, the A/B
+of `spec-ab/v1` and one DSpark probe, each under its own protocol). Each
+configuration page lists what is missing rather than
 estimating it. The rig and the topology fields are described in
 [methodology/TOPOLOGY.md](methodology/TOPOLOGY.md).
 
@@ -98,7 +100,9 @@ estimating it. The rig and the topology fields are described in
   ([SPEED-PROTOCOL](methodology/SPEED-PROTOCOL.md)). Since 2026-10-03 it has
   an English twin (`speed-house/v1-en`), measured on 18 rows beside a French
   pass on the same server and shown beside the French figure, never in its
-  place. Solo tokens per second is what one user feels; aggregate at eight is
+  place; since 2026-10-04, model-watch runs add it after their French pass,
+  with no second French pass, so no language difference is called or ruled
+  out for them. Solo tokens per second is what one user feels; aggregate at eight is
   what a busy server delivers. A figure from another protocol (an earlier
   version of the house pass, repeated A/B passes, speculative decoding) names
   that protocol beside it.
@@ -171,10 +175,11 @@ forge bench) are graded by a model judge, **one judge per table, never two**:
   2026-10-02). Outside the uncensored lab, which is published as refusal rates
   only, that is 5,112 of 5,115 calls graded (124 of them had been graded
   locally by the backup judge, not the local judge; 3 were refused by the
-  provider's safety filter); the one
-  candidate tested after lot B was drawn (2026-09-25), on 2026-10-01, was
-  graded the same way on 2026-10-03 and is ranked in its tutoring and
-  agentic-code tables. No candidate belongs to
+  provider's safety filter). Of the candidates tested after lot B was drawn
+  (2026-09-25), the one tested on 2026-10-01 was graded the same way on
+  2026-10-03 and is ranked in its tutoring and agentic-code tables; the runs
+  tested on 2026-10-04 are shown as not graded by their table's judge yet,
+  with no score and no rank. No candidate belongs to
   its family, and it never saw candidate names.
 - **The refusal probe and the forge bench: the local judge,
   Qwen3.8-Flash-Next** (local, GGUF UD-Q3_K_XL), with reasoning off, of the

@@ -140,9 +140,12 @@ French keys.
   at eight requests, on one card and on the pair; Spark-X2.5-4B, single
   stream and at eight) English answers stopped before the 512-token cap that
   every French answer reached (at eight requests, some or all of the eight),
-  so language and answer length are not separated there. The other headline
-  rows, and every run measured before 2026-10-03, have French figures only
-  under this protocol.
+  so language and answer length are not separated there. Since 2026-10-04,
+  model-watch runs take the English twin after their French pass, on the same
+  server, with no second French pass, so no language
+  difference is called or ruled out for them. The other headline rows, and
+  every run measured before 2026-10-03, have French figures only under this
+  protocol.
 - **One pass.** The house protocol runs once per run, with no repetition and
   no interval. Run-to-run noise was measured where a campaign repeated the pass
   (see below): within an arm the three repeated passes of the
@@ -161,16 +164,19 @@ French keys.
   prefill included, and the GPU boards only, not the CPU, the RAM or the
   power supplies, so a run that keeps part of the model in system RAM
   (`ram_spill: true`) looks more efficient than the machine is. The
-  counter's resolution is not a limit here: it rose between almost every pair
-  of readings, by as little as about 12 J over the shortest interval, about
+  counter's resolution is not a limit here: in the 2026-10-03 campaign it
+  rose between almost every pair of readings, by as little as about 12 J over the shortest interval, about
   1.6 % of the energy one card drew during the shortest single request
   (`counter_step_min_j`, per card and part in `energy*.json`, is the smallest
-  rise between two successive readings). In the solo and eight-request parts
-  most cards averaged about 280 to 350 W against their 350 W limit
-  (Qwen3.8-Flash-Next about 150 W, part of it in system RAM). Eight requests
-  at once gave about 4 to 8 times the tokens per joule of one request
-  under vLLM, about twice on the two-slot llama.cpp server, and about the
-  same on one-slot servers. There is no power-limit sweep, no reading at
+  rise between two successive readings). In that campaign's solo and
+  eight-request parts most cards averaged about 280 to 350 W against their
+  350 W limit (Qwen3.8-Flash-Next about 150 W, part of it in system RAM), and
+  eight requests at once gave about 4 to 8 times the tokens per joule of one
+  request under vLLM, about twice on the two-slot llama.cpp server, and about
+  the same on one-slot servers. The six model-watch runs of 2026-10-04, on
+  one card each, averaged about 330 to 350 W in those parts; eight requests
+  gave about 4 to 8 times the tokens per joule of one request under vLLM and
+  about the same on their one-slot llama.cpp servers. There is no power-limit sweep, no reading at
   the wall, and no energy figure for runs measured before 2026-10-03.
 
 ## Other speed protocols

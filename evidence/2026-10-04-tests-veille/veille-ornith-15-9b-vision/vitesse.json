@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-ornith-15-9b-vision",
+ "debut": "2026-10-04T14:38:04Z",
+ "solo": {
+  "ttft_ms": 110,
+  "tok_s": 47.7,
+  "completion_tokens": 512,
+  "wall_s": 10.74
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 184.0,
+  "p50_latency_s": 16.7,
+  "wall_s": 22.26
+ },
+ "fin": "2026-10-04T14:38:48Z"
+}

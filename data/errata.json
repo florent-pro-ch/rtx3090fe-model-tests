@@ -51,5 +51,16 @@
       "data/hardware/2x3090fe-nvlink.json",
       "data/campaigns/2026-10-03-vitesse-en.json"
     ]
+  },
+  {
+    "date": "2026-10-04",
+    "what": "In the agent-loop (mode 8) table, FrogNano-4B-2609 entered 11th and Ornith-1.5-9B 21st, last, so the rows from Ternary-Bonsai-2-27B (11th) to Ling-3.0-flash (19th) each moved down one place, to 12th to 20th; Ling-3.0-flash's summary now says it is near the bottom of the agent-loop test, no longer last. The two-pairs comparison now finds 1 of 19 logged judge runs overlapping a candidate bench on the other pair, where it found 0 of 15 and said the pairs never served as judge and candidate at the same time.",
+    "why": "An addition, not a correction: the agent-loop passes, the six bench runs and the four judge runs of the 2026-10-04 model-watch campaign join the earlier ones, which are unchanged.",
+    "affects": [
+      "data/rankings/code-loop-v1--rank.json",
+      "data/models/inclusionai__ling-3.0-flash.json",
+      "data/campaigns/2026-10-04-tests-veille.json",
+      "data/comparisons/two-pairs-parallel.json"
+    ]
   }
 ]

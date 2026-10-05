@@ -1260,5 +1260,6 @@
       "tie_group": 20
     }
   ],
+  "superseded_by": "code-v1--2026-10-04-tests-veille",
   "title": "Mode 2 - Agentic code workbench"
 }

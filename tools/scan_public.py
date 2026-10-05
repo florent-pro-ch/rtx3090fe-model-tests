@@ -11,8 +11,13 @@ only (no private literal lives in this file):
   NVML and nvidia-smi report and which name one physical card),
   API tokens (OpenAI/Anthropic-style sk-, Hugging Face hf_, GitHub ghp_/github_pat_,
   AWS AKIA/ASIA, Slack xox*-, Google AIza, JWTs, long Bearer tokens), private key
-  blocks, secret-bearing file names (.env, id_rsa, *.pem, *.key...), and e-mail
-  addresses outside the domains listed in tools/email-allowlist.txt.
+  blocks, secret-bearing file names (.env, id_rsa, *.pem, *.key...), e-mail
+  addresses outside the domains listed in tools/email-allowlist.txt, CJK script
+  (Han ideographs, kana, hangul, CJK punctuation) and Thai script: the repository
+  holds no text in those scripts, and lyrics or transcriptions that do must never
+  be published.
+  Fullwidth forms (U+FF00-U+FFEF, such as the fullwidth colon some answer parsers
+  accept) are not CJK script here.
 
 Findings are printed masked (CI logs of a public repo are public). Reviewed false
 positives go in tools/exceptions.json ({"tool": "scan_public", "file": <glob>,
@@ -66,6 +71,14 @@ RX = {
     "token-bearer": re.compile(r"(?i)\bbearer\s+(?!<)[A-Za-z0-9._~+/=-]{24,}"),
     "private-key": re.compile(r"-{5}BEGIN (?:[A-Z0-9]+ )*PRIVATE KEY(?: BLOCK)?-{5}"),
     "email": re.compile(r"(?<![\w.+%-])[A-Za-z0-9._%+-]+@((?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,})\b"),
+    # one finding per run of CJK script: radicals, CJK symbols and punctuation, kana, bopomofo, hangul jamo,
+    # extension A, unified ideographs, hangul syllables, compatibility ideographs, the supplementary planes'
+    # ideographs; written as escapes so this file holds no such character
+    "cjk-script": re.compile("[\u2e80-\u2fdf\u3000-\u303f\u3040-\u30ff\u3100-\u312f\u3130-\u318f\u31a0-\u31ff"
+                             "\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\uf900-\ufaff"
+                             "\U00020000-\U0003134f]+"),
+    # one finding per run of Thai script (U+0E00-U+0E7F), for the same reason; escaped like the rule above
+    "thai-script": re.compile("[\u0e00-\u0e7f]+"),
 }
 RULES = sorted(list(RX) + ["secret-file"])
 
@@ -160,7 +173,9 @@ def main(argv=None) -> int:
     for e in exc_errors:
         print(f"EXCEPTION ERROR  {e}")
     for r, n, rule, text in found:
-        print(f"LEAK  {r}:{n if n else '-'}  {rule}  {mask(text)}")
+        # a CJK or Thai finding shows no character of it: lyrics or a transcription must not reach a public CI log either
+        shown = f"({len(text)} characters)" if rule in ("cjk-script", "thai-script") else mask(text)
+        print(f"LEAK  {r}:{n if n else '-'}  {rule}  {shown}")
     by_rule = Counter(rule for _, _, rule, _ in found)
     print(f"scan_public: {nfiles} files, {len(found)} finding(s)"
           + (f" {dict(sorted(by_rule.items()))}" if found else "")

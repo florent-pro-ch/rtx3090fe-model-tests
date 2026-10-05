@@ -203,10 +203,13 @@ exists and lists what is missing.
   earlier has an energy figure, and none is estimated.
 - **Sustained thermals**: no long-run temperature series under load.
 - **PCIe link width or generation effects** (x8 versus x16, Gen3 versus Gen4).
-- **English speed under the house protocol outside the 2026-10-03
-  campaign**: that campaign measured the house pass's English twin beside a
-  French pass on 18 headline rows ([SPEED-PROTOCOL.md](SPEED-PROTOCOL.md));
-  every other house-protocol run has French figures only. The earlier English
+- **English speed under the house protocol for runs measured before
+  2026-10-03**: the 2026-10-03 campaign measured the house pass's English twin
+  beside a French pass on 18 headline rows, and since 2026-10-04 model-watch
+  runs take it after their French pass, with no second French pass, so no
+  language difference is called or ruled out for them
+  ([SPEED-PROTOCOL.md](SPEED-PROTOCOL.md)); every house-protocol run measured
+  before 2026-10-03 has French figures only. The earlier English
   figures come from speculative-decoding tests, each under its own protocol:
   the speculative-decoding A/B (`spec-ab/v1`), which reports French and
   English apart, and one DSpark probe (`dspark-probe/v1`).

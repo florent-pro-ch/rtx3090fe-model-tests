@@ -1,0 +1,46 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/ornith-15-9b",
+    "--tensor-parallel-size",
+    "1",
+    "--max-model-len",
+    "8192",
+    "--max-num-seqs",
+    "4",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.95",
+    "--kv-cache-dtype",
+    "bfloat16",
+    "--limit-mm-per-prompt",
+    "{\"image\":1}",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "qwen3_coder",
+    "--reasoning-parser",
+    "qwen3",
+    "--served-model-name",
+    "ornith-15-9b-vision"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

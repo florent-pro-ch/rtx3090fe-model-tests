@@ -27,12 +27,12 @@
     "sustained thermal series",
     "PCIe x8 or Gen3 link",
     "energy per token for runs measured before 2026-10-03",
-    "English-prompt speed under the house protocol outside the 2026-10-03 speed campaign (the speculative-decoding A/B arms, spec-ab/v1 and one DSpark probe, report English apart)",
+    "English-prompt speed under the house protocol for runs measured before 2026-10-03 (the speculative-decoding A/B arms, spec-ab/v1 and one DSpark probe, report English apart)",
     "power at the wall (host CPU, RAM, power supplies)"
   ],
   "nvlink": false,
   "runs_counting_rule": "single_model_runs counts distinct run records of one model on this configuration, whatever their status; single_model_run_copies counts the byte-identical copies of earlier runs, shown apart as '+N copies'.",
   "single_model_run_copies": 15,
-  "single_model_runs": 90,
+  "single_model_runs": 101,
   "vram_gb_total": 24
 }

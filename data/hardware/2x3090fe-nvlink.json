@@ -40,7 +40,7 @@
     "llama.cpp NVLink A/B",
     "a KV-pool and maximum-context table across models, one card against two (measured for Gemma 4 26B only)",
     "energy per token for runs measured before 2026-10-03",
-    "English-prompt speed under the house protocol outside the 2026-10-03 speed campaign (the speculative-decoding A/B arms, spec-ab/v1, report English apart)",
+    "English-prompt speed under the house protocol for runs measured before 2026-10-03 (the speculative-decoding A/B arms, spec-ab/v1, report English apart)",
     "power-limit sweep",
     "power at the wall (host CPU, RAM, power supplies)"
   ],

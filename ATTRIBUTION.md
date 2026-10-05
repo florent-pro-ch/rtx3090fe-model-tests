@@ -192,7 +192,7 @@ One judge per table, never two ([methodology/JUDGE.md](methodology/JUDGE.md)).
 
 Every model tested here belongs to its publisher and keeps its own licence:
 open weights, gated weights, research-only, non-commercial, territorial
-clauses and custom licences all occur. This repository redistributes no
+clauses, revenue thresholds and custom licences all occur. This repository redistributes no
 weights and, in v0 (2026-10-02), no model outputs.
 
 - Each model record in [data/models/](data/models/) carries a `licence` field

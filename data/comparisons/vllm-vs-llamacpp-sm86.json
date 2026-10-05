@@ -1,8 +1,8 @@
 {
   "caveats": [
     "The ranges in (b) mix models, sizes, quantisations, one-card and two-card runs and, for llama.cpp, CPU offload: they describe what each engine did here, not a controlled comparison.",
-    "12 of the 33 vLLM runs in (b) predate the engine pin and ran on 0.26.0, the other 21 on the pinned 0.29.0; the llama.cpp floating-tag runs predate the pin too, and the two pairs had drifted to different builds under that tag.",
-    "llama.cpp ran with one slot in 13 of its 16 runs in (b), so its eight-request figure is close to serialised single-stream speed there.",
+    "12 of the 35 vLLM runs in (b) predate the engine pin and ran on 0.26.0, the other 23 on the pinned 0.29.0; the llama.cpp floating-tag runs predate the pin too, and the two pairs had drifted to different builds under that tag.",
+    "llama.cpp ran with one slot in 16 of its 19 runs in (b), so its eight-request figure is close to serialised single-stream speed there.",
     "The paired rows in (a) compare two quantisations of the same weights (Q4_K_M GGUF against W4A16), not only two engines.",
     "VRAM is what vLLM reserved (gpu-memory-utilization) and what llama.cpp held after load, read by nvidia-smi 3 s after the server was ready and before any request; neither is what the model needs."
   ],
@@ -10,17 +10,17 @@
   "excluded_counts": {
     "ab-campaign": 3,
     "house-image": 2,
-    "lab-refusal-rates-only": 5,
+    "lab-refusal-rates-only": 6,
     "no-speed": 1,
     "older-layout-2026-09-04": 7,
     "unknown-engine": 5,
-    "vision-reserve": 9
+    "vision-reserve": 10
   },
   "hardware": [
     "1x3090fe",
     "2x3090fe-nvlink"
   ],
-  "method": "Two readings, both from the lab's speed protocol (one French prompt, thinking off, temperature 0; a single stream, then eight concurrent requests). (a) The same model on both engines: Nex-N2.5 Mini as a Q4_K_M GGUF under llama.cpp with its layers split over a pair, and as W4A16 under vLLM in tensor parallel 2 on a pair. (b) For each engine version, the minimum and maximum over every original text run that has a speed file, each extreme tied to its run. Excluded from (b): the A/B campaigns' arms (3 runs), vision re-serves (9), runs on locally built engine images (2), runs whose engine is not in their launch line (5) and runs without a usable eight-request figure (1); the uncensored lab (5, refusal rates only); the 2026-09-04 campaigns' speed runs, kept in an older folder layout that this reading does not parse (7); identical copies of a run are counted once. Every row of (b) for llama.cpp states the slots of its run. (c) Every llama.cpp run launched with more than one slot (parallel requests served at once), with its single-stream and eight-request speed and their ratio; A/B treatment arms and copies are left out.",
+  "method": "Two readings, both from the lab's speed protocol (one French prompt, thinking off, temperature 0; a single stream, then eight concurrent requests). (a) The same model on both engines: Nex-N2.5 Mini as a Q4_K_M GGUF under llama.cpp with its layers split over a pair, and as W4A16 under vLLM in tensor parallel 2 on a pair. (b) For each engine version, the minimum and maximum over every original text run that has a speed file, each extreme tied to its run. Excluded from (b): the A/B campaigns' arms (3 runs), vision re-serves (10), runs on locally built engine images (2), runs whose engine is not in their launch line (5) and runs without a usable eight-request figure (1); the uncensored lab (6, refusal rates only); the 2026-09-04 campaigns' speed runs, kept in an older folder layout that this reading does not parse (7); identical copies of a run are counted once. Every row of (b) for llama.cpp states the slots of its run. (c) Every llama.cpp run launched with more than one slot (parallel requests served at once), with its single-stream and eight-request speed and their ratio; A/B treatment arms and copies are left out.",
   "model_id": null,
   "question": "What does each engine deliver on these cards: cold start, time to first token, single stream and eight concurrent requests?",
   "rows": [
@@ -205,10 +205,13 @@
         "2026-10-03-vitesse-en/neohorse-1-4b-gguf",
         "2026-10-03-vitesse-en/oxcoder-9b-gguf",
         "2026-10-03-vitesse-en/qwen38-flash-next-gguf",
-        "2026-10-03-vitesse-en/spark-x25-4b-gguf"
+        "2026-10-03-vitesse-en/spark-x25-4b-gguf",
+        "2026-10-04-tests-veille/veille-qwen38-4b-distill-q4km",
+        "2026-10-04-tests-veille/veille-qwen38-4b-distill-q6k",
+        "2026-10-04-tests-veille/veille-qwen38-4b-distill-q8"
       ],
       "unit": "runs",
-      "value": 12
+      "value": 15
     },
     {
       "evidence": [
@@ -349,10 +352,13 @@
         "2026-10-03-vitesse-en/neohorse-1-4b-gguf",
         "2026-10-03-vitesse-en/oxcoder-9b-gguf",
         "2026-10-03-vitesse-en/qwen38-flash-next-gguf",
-        "2026-10-03-vitesse-en/spark-x25-4b-gguf"
+        "2026-10-03-vitesse-en/spark-x25-4b-gguf",
+        "2026-10-04-tests-veille/veille-qwen38-4b-distill-q4km",
+        "2026-10-04-tests-veille/veille-qwen38-4b-distill-q6k",
+        "2026-10-04-tests-veille/veille-qwen38-4b-distill-q8"
       ],
       "unit": "runs",
-      "value": 11
+      "value": 14
     },
     {
       "evidence": [
@@ -668,10 +674,12 @@
         "2026-10-03-vitesse-en/neohorse-1-9b",
         "2026-10-03-vitesse-en/qwen38-9b-distill",
         "2026-10-03-vitesse-en/qwen38-base-w4a16-paire",
-        "2026-10-03-vitesse-en/thomson-1-awq"
+        "2026-10-03-vitesse-en/thomson-1-awq",
+        "2026-10-04-tests-veille/veille-frognano-4b-2609",
+        "2026-10-04-tests-veille/veille-ornith-15-9b"
       ],
       "unit": "runs",
-      "value": 21
+      "value": 23
     },
     {
       "evidence": [
@@ -1058,7 +1066,13 @@
       "source_id": "src-108acee8edb3953d"
     },
     {
+      "source_id": "src-138dbb81a779aa1a"
+    },
+    {
       "source_id": "src-13cb13447ff49669"
+    },
+    {
+      "source_id": "src-1635d34429d418ef"
     },
     {
       "source_id": "src-163b99914ea8de82"
@@ -1092,6 +1106,9 @@
     },
     {
       "source_id": "src-21be68f6e41b9606"
+    },
+    {
+      "source_id": "src-223d5ab357ea34c5"
     },
     {
       "source_id": "src-23a10b3313fa2599"
@@ -1160,13 +1177,22 @@
       "source_id": "src-519c5c9cd3d13adc"
     },
     {
+      "source_id": "src-51d085ac80154ffc"
+    },
+    {
       "source_id": "src-520e2d691b9cf031"
+    },
+    {
+      "source_id": "src-543dae2e5bf0a578"
     },
     {
       "source_id": "src-54fffbb7edeb7475"
     },
     {
       "source_id": "src-55873cc0161bdbed"
+    },
+    {
+      "source_id": "src-5634f291c5f9573f"
     },
     {
       "source_id": "src-58ee9480f9c233f1"
@@ -1223,6 +1249,9 @@
       "source_id": "src-6f885e49618410aa"
     },
     {
+      "source_id": "src-70edc82d0cab7bad"
+    },
+    {
       "source_id": "src-76d9497777854e6a"
     },
     {
@@ -1277,6 +1306,9 @@
       "source_id": "src-94c01ace2f9f7a35"
     },
     {
+      "source_id": "src-94fcb3c633f33319"
+    },
+    {
       "source_id": "src-97423a167df21101"
     },
     {
@@ -1293,6 +1325,9 @@
     },
     {
       "source_id": "src-99102baad4d87b85"
+    },
+    {
+      "source_id": "src-9b91151a9d78891e"
     },
     {
       "source_id": "src-9c79cc3cb106f2d7"
@@ -1331,6 +1366,9 @@
       "source_id": "src-af31148dce98358b"
     },
     {
+      "source_id": "src-af7190af1cf8de14"
+    },
+    {
       "source_id": "src-b1242e91d6052bc5"
     },
     {
@@ -1349,6 +1387,9 @@
       "source_id": "src-b53417cf3d955319"
     },
     {
+      "source_id": "src-b80b8e82fea9b33d"
+    },
+    {
       "source_id": "src-b9822ddedf28e09c"
     },
     {
@@ -1365,6 +1406,9 @@
     },
     {
       "source_id": "src-bff738087e392147"
+    },
+    {
+      "source_id": "src-c22754cc740c7013"
     },
     {
       "source_id": "src-c249c1900a765bfd"
@@ -1418,6 +1462,9 @@
       "source_id": "src-d850e48937745fc8"
     },
     {
+      "source_id": "src-dcd2372171a046be"
+    },
+    {
       "source_id": "src-de46a2a8e0c4e22e"
     },
     {
@@ -1454,6 +1501,9 @@
       "source_id": "src-ed2738bbf0249e42"
     },
     {
+      "source_id": "src-edda6f9ae5b9c038"
+    },
+    {
       "source_id": "src-ef00aa9b13687d96"
     },
     {
@@ -1472,6 +1522,9 @@
       "source_id": "src-f8f940ddad84cf04"
     },
     {
+      "source_id": "src-fb16c5eae5e9ee32"
+    },
+    {
       "source_id": "src-fc69be82a9c5a3e5"
     },
     {
@@ -1479,5 +1532,5 @@
     }
   ],
   "title": "vLLM or llama.cpp on RTX 3090 FE (sm86)",
-  "verdict": "On the same weights, vLLM in tensor parallel 2 served 1151.7 tok/s at eight requests against 166.5 for llama.cpp with one slot, and 199.3 against 163.8 tok/s on a single stream, while llama.cpp was ready in 6 s against 298 s. llama.cpp was mostly run here with one slot (13 of 16 runs in (b)), which serialises the eight requests, so its eight-request figures are not its batching capacity. Across all llama.cpp runs (any campaign, (c)), 5 were launched with more than one slot (3 of them in (b)); there eight requests gave PhoneLLM alpha-1 (2026-09-04, 4 slots): 2.0x the single stream; Muse Glimmer 30B (2026-09-05, 2 slots): 1.8x the single stream; PhoneLLM alpha-1 (2026-09-05, 4 slots): 2.0x the single stream; Qwen3.8-27B (2026-09-25, 8 slots): 2.5x the single stream; Muse Glimmer 30B (2026-10-03, 2 slots): 1.9x the single stream. No run compared the two engines at equal slots on the same weights: llama.cpp is the fast way to a working server and the way to run models larger than the cards; vLLM batches concurrent requests up to its max-num-seqs limit, which the lab set on these runs (33 vLLM runs in (b): 27 with 8, 3 with 4, 2 with 16, 1 without the setting (engine default)), with no per-slot split of the context."
+  "verdict": "On the same weights, vLLM in tensor parallel 2 served 1151.7 tok/s at eight requests against 166.5 for llama.cpp with one slot, and 199.3 against 163.8 tok/s on a single stream, while llama.cpp was ready in 6 s against 298 s. llama.cpp was mostly run here with one slot (16 of 19 runs in (b)), which serialises the eight requests, so its eight-request figures are not its batching capacity. Across all llama.cpp runs (any campaign, (c)), 5 were launched with more than one slot (3 of them in (b)); there eight requests gave PhoneLLM alpha-1 (2026-09-04, 4 slots): 2.0x the single stream; Muse Glimmer 30B (2026-09-05, 2 slots): 1.8x the single stream; PhoneLLM alpha-1 (2026-09-05, 4 slots): 2.0x the single stream; Qwen3.8-27B (2026-09-25, 8 slots): 2.5x the single stream; Muse Glimmer 30B (2026-10-03, 2 slots): 1.9x the single stream. No run compared the two engines at equal slots on the same weights: llama.cpp is the fast way to a working server and the way to run models larger than the cards; vLLM batches concurrent requests up to its max-num-seqs limit, which the lab set on these runs (35 vLLM runs in (b): 29 with 8, 3 with 4, 2 with 16, 1 without the setting (engine default)), with no per-slot split of the context."
 }

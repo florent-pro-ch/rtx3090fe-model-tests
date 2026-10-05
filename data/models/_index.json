@@ -191,6 +191,19 @@
   },
   {
     "builds": [
+      "empero-ai/qwen3.8-4b-distill@gguf-q4_k_m",
+      "empero-ai/qwen3.8-4b-distill@gguf-q6_k",
+      "empero-ai/qwen3.8-4b-distill@gguf-q8_0"
+    ],
+    "category": "llm",
+    "model_id": "empero-ai/qwen3.8-4b-distill",
+    "name": "Qwen3.8-4B-Distill",
+    "slug": "empero-ai__qwen3.8-4b-distill",
+    "vendor": "Empero AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "empero-ai/qwen3.8-9b-distill@bf16"
     ],
     "category": "llm",
@@ -434,6 +447,17 @@
   },
   {
     "builds": [
+      "microsoft/frognano-4b-2609@bf16"
+    ],
+    "category": "coder",
+    "model_id": "microsoft/frognano-4b-2609",
+    "name": "FrogNano-4B-2609",
+    "slug": "microsoft__frognano-4b-2609",
+    "vendor": "Microsoft",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "microsoft/trellis.2-4b@int8-convrot"
     ],
     "category": "3d-gen",
@@ -441,6 +465,17 @@
     "name": "TRELLIS.2-4B",
     "slug": "microsoft__trellis.2-4b",
     "vendor": "Microsoft",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "minimaxai/minimax-music3@comfy-bf16-te-fp16-dit"
+    ],
+    "category": "music",
+    "model_id": "minimaxai/minimax-music3",
+    "name": "MiniMax-Music3",
+    "slug": "minimaxai__minimax-music3",
+    "vendor": "MiniMax",
     "verdict_status": "rated-no-role"
   },
   {
@@ -477,6 +512,17 @@
     "slug": "mistralai__mistral-small-3.2-24b-instruct-2506",
     "vendor": "Mistral AI",
     "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "murtazanasir/qwen3.8-27b-obliterated@awq-w4a16"
+    ],
+    "category": "vlm",
+    "model_id": "murtazanasir/qwen3.8-27b-obliterated",
+    "name": "Qwen3.8-27B-OBLITERATED",
+    "slug": "murtazanasir__qwen3.8-27b-obliterated",
+    "vendor": "MurtazaNasir",
+    "verdict_status": "rejected"
   },
   {
     "builds": [
@@ -587,6 +633,17 @@
     "model_id": "ornith-ai/ornith-1.5-35b-a3b",
     "name": "Ornith-1.5-35B-A3B",
     "slug": "ornith-ai__ornith-1.5-35b-a3b",
+    "vendor": "ornith-ai",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "ornith-ai/ornith-1.5-9b@bf16"
+    ],
+    "category": "vlm",
+    "model_id": "ornith-ai/ornith-1.5-9b",
+    "name": "Ornith-1.5-9B",
+    "slug": "ornith-ai__ornith-1.5-9b",
     "vendor": "ornith-ai",
     "verdict_status": "rated-no-role"
   },

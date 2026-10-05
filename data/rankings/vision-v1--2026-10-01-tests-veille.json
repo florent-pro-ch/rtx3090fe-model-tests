@@ -514,5 +514,6 @@
       "tie_group": null
     }
   ],
+  "superseded_by": "vision-v1--2026-10-04-tests-veille",
   "title": "Mode 7 - Vision / document reading"
 }

@@ -911,13 +911,23 @@ export function vramKind(r: Run): string | null {
   return strOrNull(r.vram?.kind) ?? strOrNull(r.metrics.vram_kind);
 }
 
-/** The run's date (YYYY-MM-DD) from started_at, else ended_at, else the campaign folder's date prefix. */
+/**
+ * The run's date (YYYY-MM-DD) from started_at, else ended_at, else the campaign folder's date prefix. A run of the
+ * uncensored lab publishes no timestamp: when its model's first_tested is later than the campaign's date, that is the
+ * run's date (a run added to the lab's campaign afterwards, such as Qwen3.8-27B-OBLITERATED's on 2026-10-04, is not
+ * dated by the campaign's name).
+ */
 export function runDate(r: Run): string | null {
   for (const v of [r.started_at, r.ended_at]) {
     if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}/.test(v)) return v.slice(0, 10);
   }
   const m = r.campaign.match(/^(\d{4}-\d{2}-\d{2})/);
-  return m ? m[1] : null;
+  const camp = m ? m[1] : null;
+  if (isRefusalOnly(r)) {
+    const first = modelById().get(r.model_id)?.first_tested;
+    if (typeof first === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(first) && (!camp || first > camp)) return first;
+  }
+  return camp;
 }
 
 /** A sortable timestamp: started_at, else ended_at, else the date prefix of the campaign. */
@@ -1588,8 +1598,28 @@ function cloudGateOf(lot: Dict | undefined, lotB: LotB | null): CloudGate | null
     afterGate(lotB, pending);
   return { status, label, title, date: strOrNull(inter.date) };
 }
-/** The lot-B badge, read from cross_checks[id=cloud-lot-b]; null when the block is absent or incomplete. */
-function lotBOf(b: Dict | undefined, sup?: Dict): LotB | null {
+/**
+ * The run dates of the published rows the table's judge has not graded yet (extra.not_rated_reason
+ * no-table-judge-verdict), distinct and sorted; empty when no published row waits.
+ */
+function notYetGradedDates(): string[] {
+  const byId = runById();
+  const dates = new Set<string>();
+  for (const r of rankings()) {
+    for (const row of r.rows) {
+      if (strOrNull(row.extra?.not_rated_reason) !== 'no-table-judge-verdict') continue;
+      const run = row.run_id ? byId.get(row.run_id) : undefined;
+      const d = run ? runDate(run) : null;
+      if (d) dates.add(d);
+    }
+  }
+  return [...dates].sort();
+}
+/**
+ * The lot-B badge, read from cross_checks[id=cloud-lot-b]; null when the block is absent or incomplete. `sup` is
+ * cross_checks[id=cloud-lot-b-supplement]; `waiting` the run dates of the rows still not graded by the table's judge.
+ */
+function lotBOf(b: Dict | undefined, sup?: Dict, waiting: string[] = []): LotB | null {
   if (!b) return null;
   const judgeObj = isObj(b.judge) ? b.judge : {};
   const judge = strOrNull(b.cloud_judge) ?? strOrNull(judgeObj.name);
@@ -1615,7 +1645,8 @@ function lotBOf(b: Dict | undefined, sup?: Dict): LotB | null {
     `; ${fmtCount(nGraded)} graded, ${fmtCount(nRefused)} refused by the provider's safety filter and left ungraded` +
     (nBackup !== null ? `; ${fmtCount(nBackup)} of the calls had been graded locally by the backup judge, not the local judge` : '') +
     (sup && strOrNull(sup.date)
-      ? `. Every published tutoring, vision and judged-code score comes from these verdicts and, for a run tested after lot B was drawn, from a supplement graded the same way on ${strOrNull(sup.date)} (cloud-lot-b-supplement)`
+      ? `. Every published tutoring, vision and judged-code score comes from these verdicts and, for a run tested after lot B was drawn, from a supplement graded the same way on ${strOrNull(sup.date)} (cloud-lot-b-supplement)` +
+        (waiting.length ? `; runs tested later, on ${waiting.join(' and ')}, are not graded by their table's judge yet` : '')
       : `. Every published tutoring, vision and judged-code score comes from these verdicts; a candidate tested after lot B was drawn${drawn ? ` (${drawn})` : ''} is not graded yet`) +
     (lotsNotSent.length ? `; ${lotsText(lotsNotSent)} (the refusal probe and the forge bench) not sent` : '');
   return { judge, label, title, date: strOrNull(b.date), campaign: strOrNull(b.campaign), nCalls, nGraded, nRefused, nBackup, upTo, lotsNotSent };
@@ -1644,7 +1675,7 @@ export const judgeAudit = memo((): JudgeAuditSummary | null => {
     .filter((x): x is string => !!x)
     .sort();
   const human = isObj(d.human_calibration) ? d.human_calibration : {};
-  const lotB = lotBOf(checks.find((c) => c.id === 'cloud-lot-b'), checks.find((c) => c.id === 'cloud-lot-b-supplement'));
+  const lotB = lotBOf(checks.find((c) => c.id === 'cloud-lot-b'), checks.find((c) => c.id === 'cloud-lot-b-supplement'), notYetGradedDates());
   return {
     secondJudgeDate: dates.at(-1) ?? strOrNull(d.as_of),
     humanItems: isNum(human.items_graded) ? human.items_graded : 0,
@@ -2073,10 +2104,27 @@ function rankingDate(k: Ranking): string {
   return m ? m[0] : '';
 }
 
-/** The latest current ranking of each bench (ties: ranking_id). */
+/**
+ * Whether a current ranking may stand for its bench in latestRankingPerBench. A
+ * per-run list ("every run", ranking_id with "-runs--") never does while its
+ * bench has a current ranking that is not one, and neither does a later campaign's
+ * supplement: a table holding fewer rows than an older current table of the
+ * same bench and mode (the 2026-10-04 thinking-off rows of raison/v1 beside
+ * the 2026-09-25 thinking-off table). Without this, a per-run list dated by
+ * its campaign could tie with the ranking it lists and win on ranking_id.
+ */
+function standsForBench(k: Ranking, current: Ranking[]): boolean {
+  const others = current.filter((o) => o !== k && o.bench_id === k.bench_id);
+  if (k.ranking_id.includes('-runs--') && others.some((o) => !o.ranking_id.includes('-runs--'))) return false;
+  return !others.some((o) => !o.ranking_id.includes('-runs--') && (o.mode ?? null) === (k.mode ?? null)
+    && o.rows.length > k.rows.length && rankingDate(o) < rankingDate(k));
+}
+
+/** The latest current ranking of each bench that may stand for it (ties: ranking_id). */
 export const latestRankingPerBench = memo((): Ranking[] => {
   const by = new Map<string, Ranking>();
-  for (const k of rankings().filter(isCurrentRanking)) {
+  const current = rankings().filter(isCurrentRanking);
+  for (const k of current.filter((k) => standsForBench(k, current))) {
     const prev = by.get(k.bench_id);
     if (!prev || rankingDate(k) > rankingDate(prev) || (rankingDate(k) === rankingDate(prev) && k.ranking_id > prev.ranking_id)) by.set(k.bench_id, k);
   }

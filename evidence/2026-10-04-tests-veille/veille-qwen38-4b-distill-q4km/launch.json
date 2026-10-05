@@ -1,0 +1,37 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/Qwen3.8-4B-Q4_K_M.gguf",
+    "--alias",
+    "qwen38-4b-distill-q4km",
+    "-c",
+    "16384",
+    "-np",
+    "1",
+    "-ngl",
+    "999",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b10830",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

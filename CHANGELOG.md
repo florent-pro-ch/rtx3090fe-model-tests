@@ -4,6 +4,105 @@ Every release says what changed in the published data, never only in the
 prose. A figure removed or corrected after publication is also logged in
 [data/errata.json](data/errata.json).
 
+## 2026-10-04, after v0: a model watch, one more row in the uncensored-model study, and MiniMax-Music3
+
+Not a new release: an addition after v0, logged here as such.
+
+- **A model-watch campaign, `2026-10-04-tests-veille` (10 runs).** Six
+  bench runs, each on one card on the pinned engines: FrogNano-4B-2609 (BF16,
+  vLLM 0.29.0), Qwen3.8-4B-Distill in three first-party GGUF quantisations
+  (Q4_K_M, Q6_K and Q8_0, llama.cpp b10830) and Ornith-1.5-9B (BF16, vLLM
+  0.29.0), served for text and then for vision. They answered the frozen
+  tutoring, agentic-code and refusal benches, and Ornith-1.5-9B the vision
+  bench; four agent-loop passes make up the ten runs. Three new model records
+  and five builds.
+- **Not graded by the tables' judge yet.** Tested on 2026-10-04, after lot B
+  was drawn (2026-09-25), the five tutoring rows, the five agentic-code rows
+  and the one vision row of these runs are shown as not graded by their
+  table's judge yet: no score, no rank and no tie group, with their speed and
+  mechanical counters beside them, listed after the ranked rows by name.
+  Their item files carry only the scores
+  given without a judge (oracle tests, an empty or failed answer). The rows
+  sit in new 2026-10-04 snapshots of the three tables, which hold the same
+  Claude Fable 5.1 rows, scores and ranks as the 2026-10-01 tables (22, 22
+  and 9 rows): no published rank moved, and every earlier lab-pool snapshot
+  of these benches (2026-09-09 to 2026-10-01) now names the 2026-10-04 one in
+  `superseded_by`; the 2026-09-05 quality-ranking tables, a separate pool,
+  are unchanged. The robustness badges of the three snapshots compare the
+  same rows as the 2026-10-01 tables, with the same figures: the local
+  judge's order is computed without the rows not graded yet, so they move
+  nothing in it. The refusal-probe item files of these runs are
+  graded by the local judge, like every refusal-probe score.
+- **Exact reasoning on llama.cpp.** The three Qwen3.8-4B-Distill builds
+  answered `raison/v1` with thinking off, the first rows of that bench served
+  by llama.cpp, graded against answers computed in advance, with no judge. A
+  new table, `raison-v1-off--2026-10-04-tests-veille`, ranks them: Q6_K 46,
+  Q8_0 45 and Q4_K_M 42 of the 60 items.
+- **Agent loop (mode 8).** FrogNano-4B-2609 cleared 6, 4 and 5 of the six
+  tasks in three passes and enters the table eleventh, by its weakest pass;
+  Ornith-1.5-9B cleared one in its single pass and enters 21st, last. The
+  rows from Ternary-Bonsai-2-27B (11th) to Ling-3.0-flash (19th) each move
+  down one place. The table, re-ordered on 2026-10-04, now has 21 rows, and
+  Ling-3.0-flash's summary says "near the bottom" of the test instead of
+  "last". The four passes have run records, with their launch files and GPU
+  snapshots, under `data/runs/2026-10-04-tests-veille/runs/`. These moves are
+  also logged in [data/errata.json](data/errata.json), as an addition, not a
+  correction.
+- **English pass and energy per token.** Each bench run took the house speed
+  pass in French and then its English twin (`speed-house/v1-en`) on the same
+  server, with no second French pass, and recorded energy
+  per token (`nvml-energy/v1`). Without a second French pass the reading rule
+  of 2026-10-03 cannot be applied, so no language difference is called or
+  ruled out for these runs. They are the only speed figures of the three new
+  models; no existing headline figure changed. The vLLM-or-llama.cpp
+  comparison counts the five new text runs in its ranges, and none of its
+  minimums or maximums moved.
+- **One more row in the uncensored-model study, refusal rates only.**
+  Qwen3.8-27B-OBLITERATED (AWQ W4A16), another abliteration of Qwen3.8-27B,
+  was measured on the refusal probe on 2026-10-04. It joins the study's
+  campaign (now 12 runs) and its refusal table: none of its 30 answers was a
+  refusal or carried a warning (undue refusal rate 0 %, warning rate 0 %). As
+  for the study's other runs, nothing else of it is published. It leaves the
+  watchlist, which now lists 44 entries.
+- **An audio campaign, `2026-10-04-tests-audio`.** MiniMax-Music3 generated
+  the four songs of `audio/v1` (two in French, an English control and
+  YuE2-3B's official Chinese example) on one card, through ComfyUI's native
+  nodes, and speech recognition measured how much of each song's requested
+  lyrics was sung, in order. A human listening accepted the tracks. It is
+  rated with no role; its licence (flagged `revenue-threshold`) needs the
+  vendor's written authorisation above a yearly revenue threshold. Its run
+  record and evidence are published as YuE2-3B's are, plus its launch line
+  and a lyrics-coverage file (`mesures-asr-couverture.json`). No audio is
+  published, and neither are the Chinese example's lyrics nor any
+  transcription.
+- **Pages and wording.**
+  - The configuration pages' never-measured lists now name
+    "English-prompt speed under the house protocol for runs measured before
+    2026-10-03".
+  - The two-pairs comparison counts judge runs one by one: 1 of the 19
+    logged judge runs, from 2026-10-04, ran while another candidate's bench
+    ran on the other pair, so its note no longer says the pairs never served
+    as judge and candidate at the same time. Logged in
+    [data/errata.json](data/errata.json) with the mode 8 moves.
+  - The tutoring, code and vision bench cards, the README, JUDGE.md, the
+    judge banner, the glossary and the lot-B badge say that runs tested on
+    2026-10-04 are shown as not graded by their table's judge yet.
+  - A run of the uncensored-model study publishes no timestamp, so the site
+    dated it by its campaign's name; it now takes its model's first test date
+    when that is later: Qwen3.8-27B-OBLITERATED's run reads 2026-10-04, not
+    2026-09-05.
+  - The README, SPEED-PROTOCOL, TOPOLOGY, the glossary and the headline
+    tables' caption say that model-watch runs since 2026-10-04 carry the
+    English pass with no second French pass. SPEED-PROTOCOL's energy ranges
+    name the 2026-10-03 campaign they come from, beside one line for the
+    watch runs.
+  - The glossary explains `mesures-asr-couverture.json` and the keys of the
+    ComfyUI audio measurements.
+- **Gates.** `tools/check_size.py` also refuses `.opus`, `.aac`, `.webm`,
+  `.mp4`, `.weba`, `.wma` and `.aiff` files, and `tools/scan_public.py`
+  flags CJK script (rule `cjk-script`) and Thai script (rule `thai-script`);
+  the repository holds none.
+
 ## 2026-10-03, after v0: English speed beside French, and energy per token; 17 headline figures from new runs
 
 Not a new release: an addition after v0, logged here as such.

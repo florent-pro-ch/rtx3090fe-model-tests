@@ -4,8 +4,9 @@
   * every file is at most 5 MiB (built site included);
     (files are what git would commit — ignored caches are left out — plus site/dist)
   * the repository, without node_modules, dist and .git, stays under 50 MiB;
-  * no audio, array, log or model-weight file anywhere (.flac .wav .mp3 .ogg .m4a
-    .npy .npz .log .safetensors .gguf .pt .pth .ckpt .onnx).
+  * no audio, video, array, log or model-weight file anywhere (.flac .wav .mp3 .ogg
+    .m4a .opus .aac .weba .wma .aiff .webm .mp4 .npy .npz .log .safetensors .gguf .pt
+    .pth .ckpt .onnx).
 
 usage:
   tools/check_size.py [--max-file-mib 5] [--max-total-mib 50] [ROOT]
@@ -20,7 +21,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _gatelib import REPO, excepted, load_exceptions, repo_files  # noqa: E402
 
-FORBIDDEN_EXT = {".flac", ".wav", ".mp3", ".ogg", ".m4a", ".npy", ".npz", ".log",
+FORBIDDEN_EXT = {".flac", ".wav", ".mp3", ".ogg", ".m4a", ".opus", ".aac", ".weba", ".wma", ".aiff",
+                 ".webm", ".mp4", ".npy", ".npz", ".log",
                  ".safetensors", ".gguf", ".pt", ".pth", ".ckpt", ".onnx"}
 NOT_COUNTED = {"node_modules", "dist", ".git", ".astro"}
 MIB = 1024 * 1024
