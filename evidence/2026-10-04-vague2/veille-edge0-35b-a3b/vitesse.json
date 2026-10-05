@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-edge0-35b-a3b",
+ "debut": "2026-10-05T07:23:22Z",
+ "solo": {
+  "ttft_ms": 217,
+  "tok_s": 131.4,
+  "completion_tokens": 512,
+  "wall_s": 3.897
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 133.0,
+  "p50_latency_s": 17.32,
+  "wall_s": 30.81
+ },
+ "fin": "2026-10-05T07:24:01Z"
+}

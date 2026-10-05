@@ -123,7 +123,9 @@ const enCaveatTwo = enCaveatParts.length > 1;
   {lab && (
     <Banner kind="info"><p><strong>Uncensored-model lab: only refusal rates are published.</strong> This run's speed, memory, launch line and other scores are not shown; its refusal rates are in the <a href={href('rankings/')}>refusal ranking</a>.</p></Banner>
   )}
-  {!topologyKnown(r) && (
+  {r.hardware === 'cpu-only' ? (
+    <Banner kind="info"><p>Served on the CPU alone, no card used: this run has no configuration page and no VRAM or energy figure.</p></Banner>
+  ) : !topologyKnown(r) && (
     <Banner kind="warn"><p>The topology of this run is not known from its launch record: it is left out of the configuration pages.</p></Banner>
   )}
 
@@ -131,7 +133,7 @@ const enCaveatTwo = enCaveatParts.length > 1;
     <dl class="kv">
       <dt>Model</dt><dd>{m ? <a href={modelHref(m.slug)}>{m.name}</a> : <span class="mono">{r.model_id}</span>}</dd>
       <dt>Build</dt><dd class="mono">{r.build_id ?? '—'}{b && <span class="muted"> · {b.quant.label}</span>}</dd>
-      <dt>Hardware</dt><dd>{hardwareById(r.hardware) ? <a href={configHref(r.hardware)}>{hardwareById(r.hardware)!.label}</a> : r.hardware}</dd>
+      <dt>Hardware</dt><dd>{hardwareById(r.hardware) ? <a href={configHref(r.hardware)}>{hardwareById(r.hardware)!.label}</a> : hwShort(r.hardware)}</dd>
       <dt>Topology</dt><dd>{topoLabel(r.topology)}{r.topology.p2p && <span class="muted small"> · P2P {r.topology.p2p}</span>}{r.topology.nvlink_used !== undefined && r.topology.nvlink_used !== null && <span class="muted small"> · NVLink {r.topology.nvlink_used ? 'used' : 'not used'}</span>}</dd>
       <dt>Engine</dt><dd class="mono">{engineLabel(r.engine)}{r.engine.image && <span class="muted"> · {r.engine.image}</span>}</dd>
       <dt>Protocol</dt><dd class="mono">{r.protocol ?? '—'}</dd>

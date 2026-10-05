@@ -47,6 +47,6 @@
   "nvlink": true,
   "runs_counting_rule": "single_model_runs counts distinct run records of one model on this configuration, whatever their status; single_model_run_copies counts the byte-identical copies of earlier runs, shown apart as '+N copies'.",
   "single_model_run_copies": 3,
-  "single_model_runs": 132,
+  "single_model_runs": 135,
   "vram_gb_total": 48
 }

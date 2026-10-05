@@ -144,12 +144,12 @@
       "evidence": [
         "data/comparisons/two-pairs-parallel.json"
       ],
-      "label": "Logged judge runs (19) overlapping a logged candidate bench (58), all campaigns",
+      "label": "Logged judge runs (23) overlapping a logged candidate bench (74), all campaigns",
       "metric": "overlaps",
-      "note": "every judge run waited for the benches it judged; 1 judge run ran while another candidate's bench ran on the other pair: the pairs then served as judge and candidate at the same time, on different jobs",
+      "note": "every judge run waited for the benches it judged; 2 judge runs ran while another candidate's bench ran on the other pair: the pairs then served as judge and candidate at the same time, on different jobs",
       "run_ids": [],
       "unit": "windows",
-      "value": 1
+      "value": 2
     },
     {
       "evidence": [
@@ -171,7 +171,7 @@
         "data/comparisons/two-pairs-parallel.json"
       ],
       "label": "Every recorded launch line: most GPUs requested by one model server",
-      "launch_lines_scanned": 196,
+      "launch_lines_scanned": 213,
       "metric": "max_gpus_per_server",
       "run_ids": [],
       "unit": "GPUs",
@@ -344,6 +344,9 @@
       "source_id": "src-1110e6cd1ad74cf9"
     },
     {
+      "source_id": "src-1112b8138459a2f1"
+    },
+    {
       "source_id": "src-11386dd19baba5db"
     },
     {
@@ -357,6 +360,9 @@
     },
     {
       "source_id": "src-14161f4d5fa70475"
+    },
+    {
+      "source_id": "src-14b26954abe1f4c8"
     },
     {
       "source_id": "src-14b4cffad0449760"
@@ -509,6 +515,12 @@
       "source_id": "src-28777aa45e6219ed"
     },
     {
+      "source_id": "src-290e46b5fb5018ee"
+    },
+    {
+      "source_id": "src-2a2300e068ded118"
+    },
+    {
       "source_id": "src-2a2e9b7011ea3e19"
     },
     {
@@ -522,6 +534,9 @@
     },
     {
       "source_id": "src-2bd2d6d8f45a1795"
+    },
+    {
+      "source_id": "src-2c208e17676a26b3"
     },
     {
       "source_id": "src-2d155344b601ee10"
@@ -597,6 +612,9 @@
     },
     {
       "source_id": "src-35800a2f24abae23"
+    },
+    {
+      "source_id": "src-37690489f3499338"
     },
     {
       "source_id": "src-3788429a31d32225"
@@ -1091,6 +1109,9 @@
       "source_id": "src-73341e3a296c61bc"
     },
     {
+      "source_id": "src-734d9c7ef794c077"
+    },
+    {
       "source_id": "src-73588f17db945441"
     },
     {
@@ -1104,6 +1125,9 @@
     },
     {
       "source_id": "src-7581e7e408415509"
+    },
+    {
+      "source_id": "src-7677e4992accd1a6"
     },
     {
       "source_id": "src-767ecb6f4cdf55b0"
@@ -1265,6 +1289,9 @@
       "source_id": "src-8b7e86e74d4bfe25"
     },
     {
+      "source_id": "src-8b8a3321f5942ff5"
+    },
+    {
       "source_id": "src-8be54418f59ec979"
     },
     {
@@ -1418,6 +1445,9 @@
       "source_id": "src-9e9c6b5a4d80a90a"
     },
     {
+      "source_id": "src-9ea311e62f3c00e1"
+    },
+    {
       "source_id": "src-9eba0b5ce9d93657"
     },
     {
@@ -1470,6 +1500,9 @@
     },
     {
       "source_id": "src-a4266d8a77ddf317"
+    },
+    {
+      "source_id": "src-a436ef4252814037"
     },
     {
       "source_id": "src-a441f46eff4551a8"
@@ -1610,6 +1643,9 @@
       "source_id": "src-b912713c1c5eb2ed"
     },
     {
+      "source_id": "src-b978e5ebb59f0f84"
+    },
+    {
       "source_id": "src-b979434a989f9c04"
     },
     {
@@ -1650,6 +1686,9 @@
     },
     {
       "source_id": "src-bd1312d92c896c42"
+    },
+    {
+      "source_id": "src-be0ccfdb2c75fd56"
     },
     {
       "source_id": "src-be5ec6483919d699"
@@ -1716,6 +1755,9 @@
     },
     {
       "source_id": "src-c75a034e5e9eb2eb"
+    },
+    {
+      "source_id": "src-c81c63a5bbd4b89c"
     },
     {
       "source_id": "src-c87d4131e2b4d6c5"
@@ -1901,10 +1943,16 @@
       "source_id": "src-dabb71d5407e2bb1"
     },
     {
+      "source_id": "src-db2c47e0b0c701d4"
+    },
+    {
       "source_id": "src-db3429376ac6bf4d"
     },
     {
       "source_id": "src-db5b70cc0e88dee1"
+    },
+    {
+      "source_id": "src-dba9251effe74426"
     },
     {
       "source_id": "src-dbc0631e85090371"
@@ -1920,6 +1968,9 @@
     },
     {
       "source_id": "src-dcb01fbb5f0b4e21"
+    },
+    {
+      "source_id": "src-dd1f3776a6cd2ba2"
     },
     {
       "source_id": "src-dd33ae857afe7d79"
@@ -2189,6 +2240,9 @@
       "source_id": "src-fd683e112ca75942"
     },
     {
+      "source_id": "src-fdc92fe8b1c58cdd"
+    },
+    {
       "source_id": "src-fe8f356cd783519b"
     },
     {
@@ -2202,5 +2256,5 @@
     }
   ],
   "title": "Two NVLink pairs used in parallel, never as one machine",
-  "verdict": "Both pairs have worked at the same time, each on its own job: up to 4 cards generating 3D at once with one engine per card, a medical VLM on pair A while a 27B was benchmarked on pair B (22.0 min of overlap). No model has run on four cards: no launch line requests more than 2 GPUs. The local judge and its candidate also sit on different pairs, one after the other: OrcaSAQ-2-27B was benched on pair B, then judged on pair A 13.6 min later; 1 of the 19 logged judge runs overlaps a candidate bench."
+  "verdict": "Both pairs have worked at the same time, each on its own job: up to 4 cards generating 3D at once with one engine per card, a medical VLM on pair A while a 27B was benchmarked on pair B (22.0 min of overlap). No model has run on four cards: no launch line requests more than 2 GPUs. The local judge and its candidate also sit on different pairs, one after the other: OrcaSAQ-2-27B was benched on pair B, then judged on pair A 13.6 min later; 2 of the 23 logged judge runs overlap a candidate bench."
 }

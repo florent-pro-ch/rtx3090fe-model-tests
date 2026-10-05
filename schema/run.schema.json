@@ -58,6 +58,7 @@
         "1x3090fe",
         "2x3090fe-nvlink",
         "2x2x3090fe-nvlink",
+        "cpu-only",
         "unknown"
       ]
     },

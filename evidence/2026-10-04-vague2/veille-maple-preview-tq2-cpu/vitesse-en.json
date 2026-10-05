@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 80.5,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 28.57,
+    "wall_s": 50.88
+  },
+  "candidat": "veille-maple-preview-tq2-cpu",
+  "debut": "2026-10-04T22:55:46Z",
+  "fin": "2026-10-04T22:56:50Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 82.1,
+    "ttft_ms": 201,
+    "wall_s": 6.24
+  }
+}

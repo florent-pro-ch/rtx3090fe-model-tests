@@ -4,7 +4,8 @@
 #   G2 scan_public.py     generic leak patterns (addresses, home paths, GPU UUIDs, tokens, e-mails, CJK and Thai script)
 #   G3 check_size.py      file and repo size, no media/log/weights
 #      validate.py        data/**/*.json against schema/*.schema.json, --strict (0 warnings);
-#                         also the en_/fr2_ speed keys, the energy keys and never-measured lists
+#                         also the en_/fr2_ speed keys, the energy keys, never-measured lists and
+#                         no VRAM or energy on a cpu-only run
 #   G4 verify_benches.py  frozen benches: SHA-256 recomputed, withheld files listed
 #   G5 verify_numbers.py  every <Num> of site/dist traced to data/; README block fresh
 #   G6 check_links.py     relative Markdown links and anchors resolve to files git ships

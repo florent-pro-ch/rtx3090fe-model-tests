@@ -63,6 +63,7 @@ HARDWARE_ROWS = (
     ("1x3090fe", "on one card"),
     ("2x3090fe-nvlink", "on one NVLink pair"),
     ("2x2x3090fe-nvlink", "on both pairs as one configuration"),
+    ("cpu-only", "on the CPU alone, no card"),
     ("unknown", "topology unknown"),
 )
 

@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-neutrino-8b-fv5",
+ "debut": "2026-10-05T08:13:13Z",
+ "solo": {
+  "ttft_ms": 146,
+  "tok_s": 76.6,
+  "completion_tokens": 512,
+  "wall_s": 6.68
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 77.1,
+  "p50_latency_s": 29.89,
+  "wall_s": 53.15
+ },
+ "fin": "2026-10-05T08:14:20Z"
+}

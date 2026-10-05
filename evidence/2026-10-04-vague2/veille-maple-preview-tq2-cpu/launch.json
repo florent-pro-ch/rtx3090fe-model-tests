@@ -1,0 +1,43 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/maple-preview-TQ2_0-head-Q4_K.gguf",
+    "--alias",
+    "maple-preview-tq2-cpu",
+    "-c",
+    "16384",
+    "-np",
+    "1",
+    "-ngl",
+    "0",
+    "-dev",
+    "none",
+    "-t",
+    "8",
+    "-tb",
+    "8",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    1
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11176",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

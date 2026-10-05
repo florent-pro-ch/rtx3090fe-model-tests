@@ -120,7 +120,7 @@ const examRow = withheldEntirely
     <p class="empty">No ranking on this bench in the data.</p>
   ) : (
     <ul>
-      {rks.map((r) => <li><a href={rankingHref(r.ranking_id)}>{rankingTitle(r)}</a> · <GraderBadge grader={r.grader} /> · <Num value={r.rows.length} href={rankingHref(r.ranking_id)} /> rows{r.generated_at && <> · <time class="mono small">{r.generated_at.slice(0, 10)}</time></>}{rankingRegradedAt(r) && <> · <span class="small muted">re-graded <time class="mono">{rankingRegradedAt(r)}</time></span></>}</li>)}
+      {rks.map((r) => <li><a href={rankingHref(r.ranking_id)}>{rankingTitle(r)}</a> · <GraderBadge grader={r.grader} /> · <Num value={r.rows.length} href={rankingHref(r.ranking_id)} /> row{r.rows.length === 1 ? '' : 's'}{r.generated_at && <> · <time class="mono small">{r.generated_at.slice(0, 10)}</time></>}{rankingRegradedAt(r) && <> · <span class="small muted">re-graded <time class="mono">{rankingRegradedAt(r)}</time></span></>}</li>)}
     </ul>
   )}
   {usedBy.length > 0 && (

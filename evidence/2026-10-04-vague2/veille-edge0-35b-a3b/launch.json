@@ -1,0 +1,40 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/edge0-35b.gguf",
+    "--lora",
+    "$MODELS/lora_edge0_35b-gguf.gguf",
+    "--alias",
+    "edge0-35b-a3b",
+    "-c",
+    "16384",
+    "-np",
+    "1",
+    "-ngl",
+    "999",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b10830",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 1172.5,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 2.02,
+    "wall_s": 2.09
+  },
+  "candidat": "veille-north-micro-vision-instruct",
+  "debut": "2026-10-04T22:53:27Z",
+  "fin": "2026-10-04T22:53:35Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 438,
+    "tok_s": 174.2,
+    "ttft_ms": 42,
+    "wall_s": 2.515
+  }
+}

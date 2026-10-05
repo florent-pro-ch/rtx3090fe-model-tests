@@ -19,7 +19,7 @@ import ComparisonList from '../../components/ComparisonList.astro';
 import { rankingTitle,
   HARDWARE_IDS, hardwareById, headlinesBySplit, runsOnConfig, runsOnConfigUnknownTopology,
   modelById, modelName, soloTokS, runDate, isNum, dataAsOf, comparisons, comparisonById, comparisonRows, runById,
-  runCount, buildLabel, isHouseProtocol, topScoresOnConfig, isJudged, rowOtherJudge,
+  runCount, buildLabel, isHouseProtocol, topScoresOnConfig, isJudged, rowOtherJudge, runs,
 } from '../../lib/data';
 import { configHref, compareHref, evidenceLink, glossaryHref, href, modelHref, runHref, rankingHref, benchHref } from '../../lib/site';
 import GraderBadge from '../../components/GraderBadge.astro';
@@ -145,7 +145,7 @@ const topJudged = top.some(({ ranking }) => isJudged(ranking.grader));
           <RunsTable runs={all} showHardware={false} label="runs on this configuration" headline={headSet} />
         </>
       )}
-      <p class="small muted">For models, see <a href={configHref('1x3090fe')}>one card</a> and <a href={configHref('2x3090fe-nvlink')}>one NVLink pair</a>: every model ran on one of those. Data as of <time class="mono">{dataAsOf() ?? 'n/a'}</time>.</p>
+      <p class="small muted">For models, see <a href={configHref('1x3090fe')}>one card</a> and <a href={configHref('2x3090fe-nvlink')}>one NVLink pair</a>: every model that ran on a card ran on one of those{runs().some((x) => x.hardware === 'cpu-only') ? ' (a run on the CPU alone, no card used, has no configuration page)' : ''}. Data as of <time class="mono">{dataAsOf() ?? 'n/a'}</time>.</p>
     </>
   )}
 

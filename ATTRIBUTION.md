@@ -192,8 +192,10 @@ One judge per table, never two ([methodology/JUDGE.md](methodology/JUDGE.md)).
 
 Every model tested here belongs to its publisher and keeps its own licence:
 open weights, gated weights, research-only, non-commercial, territorial
-clauses, revenue thresholds and custom licences all occur. This repository redistributes no
-weights and, in v0 (2026-10-02), no model outputs.
+clauses, revenue thresholds, vendor licences such as the NVIDIA Open Model
+License (ZDTaichu5.0-9B, measured since 2026-10-05) and custom licences all
+occur. This repository redistributes no weights and, in v0 (2026-10-02), no
+model outputs.
 
 - Each model record in [data/models/](data/models/) carries a `licence` field
   (`name`, `flags`, `source`) and an `access` field (`open`, `gated`,
@@ -238,6 +240,8 @@ The measurements were taken with open-source engines and tools (vLLM,
 llama.cpp, ComfyUI, a headless coding agent for the agent-loop bench, Blender
 for the 3D renders, faster-whisper for speech recognition, among others).
 They are not redistributed here; each keeps its own licence. The engine and
-image tag of every run are recorded in its `data/runs/` record. The energy
-figures read NVIDIA's management library (NVML), part of the installed
-driver; nothing of it is redistributed.
+image tag of every run are recorded in its `data/runs/` record, including,
+since 2026-10-05, two house builds of a model publisher's fork of vLLM or
+llama.cpp, built here at an exact commit and not redistributed either. The
+energy figures read NVIDIA's management library (NVML), part of the
+installed driver; nothing of it is redistributed.

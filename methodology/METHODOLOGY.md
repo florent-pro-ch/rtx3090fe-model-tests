@@ -289,6 +289,17 @@ A house image built for one model on top of a pinned engine (a publisher's
 plugin, or a fork's own release for a weight format no stock build reads) is
 pinned to an exact tag too, and the run record names it.
 
+Since **2026-10-04**, a model the pinned engines cannot serve may run on an
+engine added beside them: a newer official release (vLLM v0.30.0; llama.cpp
+b11176, added for two models of the same campaign) or a **house build of
+its publisher's fork**, built here at an exact commit and pinned by it
+(ZDTaichu5.0-9B's vLLM fork, on vLLM 0.26.0; Neutrino-8B's llama.cpp fork,
+built for sm86). Each was smoke-tested before any measured request and
+served only the models it was added for; the run record names the engine,
+its version and, for a fork build, its commit. A house fork build pinned by
+commit is **not pre-pin**, even on an older base: what it runs is fixed by
+its commit, not by a floating tag.
+
 A run is labelled **pre-pin** (`engine.pre_pin: true`) when its engine is
 older than the pin: vLLM before 0.29.0 (in practice **vLLM 0.26**), a
 **floating llama.cpp tag** (`server-cuda` without a build number) or a build
@@ -320,7 +331,11 @@ activations) is not in it. The run record's `vram.kind` says how to read it:
 - **`after-load`** (the other engines, such as llama.cpp): the same snapshot,
   holding the weights and what the engine allocates at start for its
   configured context, before any request.
-- **`unknown`**: no snapshot was taken, or it could not be read.
+- **`unknown`**: no snapshot was taken, or it could not be read. A run
+  served on the CPU alone, with no card used (hardware **`cpu-only`**,
+  `topology.gpus: 0`, since 2026-10-04), shows `unknown` with no figure, and
+  no energy figure either: the card its container could see sat idle, so
+  nothing read from it describes the run.
 
 Figures are per GPU, never summed across cards unless the record says so.
 Peak figures exist only where a bench measures them itself (the forge's

@@ -65,6 +65,9 @@ const benchIds = [...new Set([...allRankRows.map((x) => x.ranking.bench_id), ...
 const prePinRuns = runs.filter((r) => r.engine.pre_pin);
 const indexable = modelHasNumbers(m.model_id);
 const measuredOn = heads.filter((x) => x.run).map((x) => `${soloTokS(x.run!)} tok/s on ${hwShort(x.hw)}`);
+// A run served on the CPU alone (hardware cpu-only) has no configuration page, so it is never a headline: its speed is
+// listed under "Every run" only. The newest such run with a single-stream figure, for the empty states below.
+const cpuSpeedRun = runs.find((r) => r.hardware === 'cpu-only' && soloTokS(r) !== null) ?? null;
 // Listed in the lab's records with no run, no drafter run and no score: nothing was measured here.
 const withheld = scoresWithheld(m);
 const noRecord = runs.length === 0 && drafterRuns.length === 0 && allRankRows.length === 0 && runQuality.length === 0;
@@ -75,7 +78,7 @@ const description = withheldRecord
   ? `${m.name} (${m.model_id}): run on this rig; its record and scores are withheld at present.`
   : noRecord
   ? `${m.name} (${m.model_id}): listed in the lab's records; no run record published for RTX 3090 FE cards.`
-  : `${m.name} (${m.model_id}) on RTX 3090 FE: ${measuredOn.length ? `single stream ${measuredOn.join(', ')}` : 'no single-stream speed figure'}; verdict: ${STATUS_LABEL[m.verdict.status] ?? m.verdict.status}; ${rc.distinct} distinct run${rc.distinct === 1 ? '' : 's'}${rc.copies ? ` (+${rc.copies} copies)` : ''}, ${rankRows.length} entr${rankRows.length === 1 ? 'y' : 'ies'} in the latest rankings.`;
+  : `${m.name} (${m.model_id}) ${measuredOn.length || !cpuSpeedRun ? 'on RTX 3090 FE' : 'on this rig'}: ${measuredOn.length ? `single stream ${measuredOn.join(', ')}` : cpuSpeedRun ? `single stream ${soloTokS(cpuSpeedRun)} tok/s on the CPU alone, no card used` : 'no single-stream speed figure'}; verdict: ${STATUS_LABEL[m.verdict.status] ?? m.verdict.status}; ${rc.distinct} distinct run${rc.distinct === 1 ? '' : 's'}${rc.copies ? ` (+${rc.copies} copies)` : ''}, ${rankRows.length} entr${rankRows.length === 1 ? 'y' : 'ies'} in the latest rankings.`;
 // One table per judge, never two judges' scores in one table: the tables' judge, the local judge, any other
 // judge, then the scores no model judge gave (oracles, tests, metrics).
 type GroupKey = 'table' | 'local' | 'other-judge' | 'oracle';
@@ -144,7 +147,11 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
   <>
   <h2 id="speed">Speed per configuration</h2>
   {headSet.size === 0 ? (
-    <p class="empty">No single-stream speed in the data for this model.</p>
+    cpuSpeedRun ? (
+      <p class="empty">No configuration page has a speed figure for this model: its single-stream speed was measured on the CPU alone, no card used, at <Num value={soloTokS(cpuSpeedRun)} unit="tok/s" run={cpuSpeedRun.run_id} /> for one request, listed under <a href="#runs">every run</a>.</p>
+    ) : (
+      <p class="empty">No single-stream speed in the data for this model.</p>
+    )
   ) : (
     <BarChart
       title={`${m.name}: headline single-stream speed per configuration`}
@@ -300,7 +307,7 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
     {m.access === 'gated' && <li>Gated on its upstream hub: accept the licence there before downloading.</li>}
     {m.notes && <li>{m.notes}</li>}
     {(m.parse_notes ?? []).map((n) => <li class="small muted">{n}</li>)}
-    {heads.every((x) => !x.run) && !noRecord && <li>No configuration has a single-stream speed figure for this model.</li>}
+    {heads.every((x) => !x.run) && !noRecord && <li>{cpuSpeedRun ? 'No configuration page has a single-stream speed figure for this model: its speed was measured on the CPU alone, no card used, which gives a speed figure but no VRAM or energy figure.' : 'No configuration has a single-stream speed figure for this model.'}</li>}
     {!noRecord && <li>Every figure is one measured run on this rig; other drivers, engines or prompts give other numbers.</li>}
   </ul>
 

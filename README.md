@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 100 models, 251 runs (+40 copies), 14 benches, data as of 2026-10-05. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 101 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 132 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 108 models, 268 runs (+40 copies), 14 benches, data as of 2026-10-05. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 112 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 135 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -30,17 +30,18 @@ here.
 
 | What | Count |
 |---|---:|
-| Models (upstream, public) | **100** |
+| Models (upstream, public) | **108** |
 | Private fine-tune checkpoints, counted apart | 30 |
-| Builds (quantisations, GGUFs, adapters) | 122 |
-| Runs (distinct run records) | **251** (+40 copies) |
-| &nbsp;&nbsp;· on one card (`1x3090fe`) | 101 (+15 copies) |
-| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 132 (+3 copies) |
+| Builds (quantisations, GGUFs, adapters) | 131 |
+| Runs (distinct run records) | **268** (+40 copies) |
+| &nbsp;&nbsp;· on one card (`1x3090fe`) | 112 (+15 copies) |
+| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 135 (+3 copies) |
 | &nbsp;&nbsp;· on both pairs as one configuration (`2x2x3090fe-nvlink`) | 0 |
-| &nbsp;&nbsp;· topology unknown | 18 (+22 copies) |
+| &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 1 |
+| &nbsp;&nbsp;· topology unknown | 20 (+22 copies) |
 | Frozen benches | 14 |
-| Campaigns | 42 |
-| Watchlist entries: open-weight models or builds spotted for the rig, not run here when listed | 34 (3 measured later) |
+| Campaigns | 44 |
+| Watchlist entries: open-weight models or builds spotted for the rig, not run here when listed | 35 (3 measured later) |
 | &nbsp;&nbsp;· listed apart, not counted above: cloud or API-only models | 8 |
 | &nbsp;&nbsp;· listed apart, not counted above: tools that are not models | 2 |
 
@@ -80,6 +81,10 @@ charts from [data/](data/).
 | **One card**, 24 GB | `1x3090fe` | Well measured: speed, ready time, memory and quality across the benches, for models that fit one card. |
 | **One NVLink pair**, 48 GB | `2x3090fe-nvlink` | Well measured: tensor parallel 2, llama.cpp layer split, spilling into system RAM, and an NVLink A/B (a software proxy; the bridge was never removed). |
 | **Two pairs**, 2 × 48 GB | `2x2x3090fe-nvlink` | Thin by design. The two pairs have only ever worked **in parallel**, as two independent machines. **No model has run on four cards here.** |
+
+A run served on the CPU alone, with no card used (one so far, since
+2026-10-04), reads `cpu-only`: it has speed figures but no VRAM and no
+energy figure, and no configuration page.
 
 **Not measured on any configuration:** power-limit sweeps and power at the
 wall. Energy per token is read on the GPU boards only, for the speed passes
@@ -129,6 +134,12 @@ estimating it. The rig and the topology fields are described in
   **pre-pin**; a run whose engine is unknown or not published is labelled
   **pin unknown**, never pinned
   ([METHODOLOGY](methodology/METHODOLOGY.md#engine-pins-and-the-pre-pin-label)).
+  Since 2026-10-04 a model the pinned engines cannot serve may run on a newer
+  official release (vLLM v0.30.0, llama.cpp b11176) or on a house build of
+  its publisher's fork, pinned by its commit, smoke-tested before any
+  measured request, used only for the models it was added for, and named in
+  the run record. A house fork build pinned by commit is not pre-pin, even
+  on an older base (ZDTaichu5.0-9B's vLLM fork is on vLLM 0.26.0).
 - **VRAM is an after-load snapshot** (nvidia-smi a few seconds after the
   server is ready, before the first request: 3 s in the house harness, 5 s in
   the two 2026-09-04 campaigns and the 2026-10-03 speed campaign); **for vLLM
@@ -176,10 +187,10 @@ forge bench) are graded by a model judge, **one judge per table, never two**:
   only, that is 5,112 of 5,115 calls graded (124 of them had been graded
   locally by the backup judge, not the local judge; 3 were refused by the
   provider's safety filter). The candidates tested after lot B was drawn
-  (2026-09-25), on 2026-10-01 and 2026-10-04, were graded the same way on
-  2026-10-03 and 2026-10-05 and are ranked in their tutoring, agentic-code
-  and vision tables. No candidate belongs to its family, and it never saw
-  candidate names.
+  (2026-09-25), on 2026-10-01, 2026-10-04 and 2026-10-05, were graded the
+  same way on 2026-10-03 and 2026-10-05 and are ranked in their tutoring,
+  agentic-code and vision tables. No candidate belongs to its family, and it
+  never saw candidate names.
 - **The refusal probe and the forge bench: the local judge,
   Qwen3.8-Flash-Next** (local, GGUF UD-Q3_K_XL), with reasoning off, of the
   same lineage as about half of the candidates it graded. No cloud judge has

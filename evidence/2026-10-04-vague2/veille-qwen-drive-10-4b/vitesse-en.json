@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 574.8,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 6.98,
+    "wall_s": 6.99
+  },
+  "candidat": "veille-qwen-drive-10-4b",
+  "debut": "2026-10-05T08:02:59Z",
+  "fin": "2026-10-05T08:03:18Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 81.4,
+    "ttft_ms": 70,
+    "wall_s": 6.288
+  }
+}

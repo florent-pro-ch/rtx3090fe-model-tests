@@ -1,0 +1,38 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/neutrino-8b-fv5.gguf",
+    "--alias",
+    "neutrino-8b-fv5",
+    "-c",
+    "16384",
+    "-np",
+    "1",
+    "-ngl",
+    "999",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "house/llama-fermion:fv5-0e61bac-sm86",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "image",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

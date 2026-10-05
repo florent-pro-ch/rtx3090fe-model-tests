@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-qwen-drive-10-4b",
+ "debut": "2026-10-05T08:02:39Z",
+ "solo": {
+  "ttft_ms": 112,
+  "tok_s": 81.4,
+  "completion_tokens": 512,
+  "wall_s": 6.287
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 584.5,
+  "p50_latency_s": 7.0,
+  "wall_s": 7.01
+ },
+ "fin": "2026-10-05T08:02:59Z"
+}

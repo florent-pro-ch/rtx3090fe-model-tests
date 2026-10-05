@@ -101,6 +101,17 @@
   },
   {
     "builds": [
+      "coherelabs/north-micro-vision-instruct@bf16"
+    ],
+    "category": "vlm",
+    "model_id": "coherelabs/north-micro-vision-instruct",
+    "name": "North Micro Vision Instruct 2.4B",
+    "slug": "coherelabs__north-micro-vision-instruct",
+    "vendor": "Cohere Labs",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
       "cross-encoder/ms-marco-minilm-l-6-v2@unknown"
     ],
     "category": "reranker",
@@ -157,6 +168,17 @@
   },
   {
     "builds": [
+      "deepgrove/maple-preview@gguf-tq2_0-q4_k-head"
+    ],
+    "category": "moe-llm",
+    "model_id": "deepgrove/maple-preview",
+    "name": "Maple-Preview",
+    "slug": "deepgrove__maple-preview",
+    "vendor": "DeepGrove",
+    "verdict_status": "rejected"
+  },
+  {
+    "builds": [
       "deepseek-ai/deepseek-ocr-2@bf16"
     ],
     "category": "ocr",
@@ -191,6 +213,17 @@
   },
   {
     "builds": [
+      "edge0/edge0-35b-a3b-preview@gguf-q4_1-lora"
+    ],
+    "category": "moe-llm",
+    "model_id": "edge0/edge0-35b-a3b-preview",
+    "name": "Edge0-35B-A3B-preview",
+    "slug": "edge0__edge0-35b-a3b-preview",
+    "vendor": "Edge0",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "empero-ai/qwen3.8-4b-distill@gguf-q4_k_m",
       "empero-ai/qwen3.8-4b-distill@gguf-q6_k",
       "empero-ai/qwen3.8-4b-distill@gguf-q8_0"
@@ -212,6 +245,28 @@
     "slug": "empero-ai__qwen3.8-9b-distill",
     "vendor": "Empero AI",
     "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "fdtn-ai/antares-1b@bf16"
+    ],
+    "category": "llm",
+    "model_id": "fdtn-ai/antares-1b",
+    "name": "Antares-1B",
+    "slug": "fdtn-ai__antares-1b",
+    "vendor": "Cisco Foundation AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "fermionresearch/neutrino-8b@gguf-fv5"
+    ],
+    "category": "llm",
+    "model_id": "fermionresearch/neutrino-8b",
+    "name": "Neutrino-8B",
+    "slug": "fermionresearch__neutrino-8b",
+    "vendor": "Fermion Research",
+    "verdict_status": "rejected"
   },
   {
     "builds": [
@@ -365,6 +420,17 @@
     "model_id": "inclusionai/ling-3.0-flash",
     "name": "Ling-3.0-flash",
     "slug": "inclusionai__ling-3.0-flash",
+    "vendor": "inclusionAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "inclusionai/ling-3.0-flash-vl@gguf-q4_k_m"
+    ],
+    "category": "vlm",
+    "model_id": "inclusionai/ling-3.0-flash-vl",
+    "name": "Ling-3.0-flash-VL",
+    "slug": "inclusionai__ling-3.0-flash-vl",
     "vendor": "inclusionAI",
     "verdict_status": "rated-no-role"
   },
@@ -682,6 +748,17 @@
   },
   {
     "builds": [
+      "qwen/qwen-drive-1.0-4b@bf16-vlm"
+    ],
+    "category": "vlm",
+    "model_id": "qwen/qwen-drive-1.0-4b",
+    "name": "Qwen-Drive-1.0-4B",
+    "slug": "qwen__qwen-drive-1.0-4b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "qwen/qwen-image-20b@gguf-q4_k_m"
     ],
     "category": "image-gen",
@@ -716,6 +793,7 @@
   {
     "builds": [
       "qwen/qwen3-8b@bf16",
+      "qwen/qwen3-8b@bf16-vllm",
       "qwen/qwen3-8b@bnb-4bit-unsloth"
     ],
     "category": "llm",
@@ -896,6 +974,17 @@
     "name": "Apertus-8B-Instruct-2509",
     "slug": "swiss-ai__apertus-8b-instruct-2509",
     "vendor": "Swiss AI (EPFL / ETH Zurich)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "taichuai/zdtaichu5.0-9b@bf16"
+    ],
+    "category": "vlm",
+    "model_id": "taichuai/zdtaichu5.0-9b",
+    "name": "ZDTaichu5.0-9B",
+    "slug": "taichuai__zdtaichu5.0-9b",
+    "vendor": "TaichuAI",
     "verdict_status": "rated-no-role"
   },
   {

@@ -1,0 +1,54 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/zdtaichu5-9b",
+    "--trust-remote-code",
+    "--tensor-parallel-size",
+    "1",
+    "--max-model-len",
+    "8192",
+    "--max-num-seqs",
+    "8",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.95",
+    "--kv-cache-dtype",
+    "bfloat16",
+    "--mamba-ssm-cache-dtype",
+    "float32",
+    "--gdn-prefill-backend",
+    "triton",
+    "--limit-mm-per-prompt",
+    "{\"image\":1,\"video\":0}",
+    "--generation-config",
+    "vllm",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "qwen3_coder",
+    "--reasoning-parser",
+    "qwen3",
+    "--served-model-name",
+    "zdtaichu50-9b"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "house/zdtaichu-vllm:0.26.0-0db66c9",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "image",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

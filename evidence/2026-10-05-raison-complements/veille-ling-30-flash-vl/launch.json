@@ -1,0 +1,40 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/Ling-3.0-flash-VL.Q4_K_M.gguf",
+    "--mmproj",
+    "$MODELS/Ling-3.0-flash-VL.mmproj-Q8_0.gguf",
+    "--alias",
+    "ling-30-flash-vl",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0",
+    "--cache-ram",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0,
+    1
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11176",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

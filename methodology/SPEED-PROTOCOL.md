@@ -177,7 +177,11 @@ French keys.
   one card each, averaged about 330 to 350 W in those parts; eight requests
   gave about 4 to 8 times the tokens per joule of one request under vLLM and
   about the same on their one-slot llama.cpp servers. There is no power-limit sweep, no reading at
-  the wall, and no energy figure for runs measured before 2026-10-03.
+  the wall, and no energy figure for runs measured before 2026-10-03. A run
+  served on the CPU alone (hardware `cpu-only`, since 2026-10-04) has the
+  house pass in French and its English twin, but no energy figure and no
+  VRAM figure: the card its container could see sat idle, so nothing read
+  from it describes the run.
 
 ## Other speed protocols
 

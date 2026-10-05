@@ -14,7 +14,7 @@
     "format": "gguf",
     "label": "GGUF Q8_0 (first-party)"
   },
-  "runs_count": 3,
+  "runs_count": 4,
   "size_gb": 4.4,
   "source": {
     "source_id": "src-22c474888f1d7390"

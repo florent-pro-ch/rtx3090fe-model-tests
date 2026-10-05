@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 375.1,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 10.3,
+    "wall_s": 10.53
+  },
+  "candidat": "veille-qwen3-8b-bf16",
+  "debut": "2026-10-05T07:23:04Z",
+  "fin": "2026-10-05T07:23:34Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 470,
+    "tok_s": 49.4,
+    "ttft_ms": 54,
+    "wall_s": 9.516
+  }
+}

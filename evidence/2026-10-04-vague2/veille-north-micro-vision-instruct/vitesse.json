@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-north-micro-vision-instruct",
+ "debut": "2026-10-04T22:53:19Z",
+ "solo": {
+  "ttft_ms": 84,
+  "tok_s": 174.4,
+  "completion_tokens": 400,
+  "wall_s": 2.293
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 1154.0,
+  "p50_latency_s": 3.22,
+  "wall_s": 3.23
+ },
+ "fin": "2026-10-04T22:53:27Z"
+}

@@ -56,7 +56,10 @@ these keys are typed here, fail-closed):
           not the wall) or English, limited by "before YYYY-MM-DD" or not, fails when a run on that configuration,
           started before that date if one is given, carries such a figure; an item naming English is exempt when it
           restricts itself to the house protocol or to speculative decoding (it says "house", "speculative" or
-          "spec-ab"), the protocols that report English apart.
+          "spec-ab"), the protocols that report English apart. A run on hardware cpu-only (served on the CPU alone,
+          no card used) never carries a VRAM figure (vram.mib_per_gpu empty, no metrics key starting vram_), an energy
+          key, the energy object, or energy or GPU-snapshot evidence (an evidence file named energy*.json or
+          gpu-snapshots*.json): a card the container saw sat idle, so nothing read from it describes the run.
 
 Integrity checks (warnings): duplicate ids, file names that do not match their id,
 and references between records (run -> model/build, build -> model, model ->
@@ -322,6 +325,8 @@ NEVER_NAMES_ENGLISH = re.compile(r"(?i)\benglish\b")
 NEVER_ENGLISH_QUALIFIED = re.compile(r"(?i)\bhouse\b|speculative|spec-ab")
 NEVER_BEFORE = re.compile(r"\bbefore (\d{4}-\d{2}-\d{2})\b")
 ENGLISH_FIGURE_KEY = re.compile(r"(^|_)en_")  # en_* (house twin), *_en_* (spec-ab/v1), probe_en_* (dspark-probe/v1)
+CPU_ONLY = "cpu-only"
+CPU_ONLY_EVIDENCE = re.compile(r"(?i)^(energy|gpu-snapshots)[^/]*\.json$")
 
 
 def _num(v) -> bool:
@@ -403,6 +408,22 @@ def twin_energy_never(objs: dict) -> list[str]:
             on_hw[o.get("hardware")]["en"].append(o.get("run_id"))
         if any(ENGLISH_FIGURE_KEY.search(k) and _num(v) for k, v in m.items()):
             on_hw[o.get("hardware")]["en_any_dated"].append((started, o.get("run_id")))
+        # NEVER (cpu-only): no VRAM, no energy, no energy or GPU-snapshot evidence on a run that used no card
+        if o.get("hardware") == CPU_ONLY:
+            vram = o.get("vram") if isinstance(o.get("vram"), dict) else {}
+            if vram.get("mib_per_gpu"):
+                errs.append(f"NEVER   {rel}: a cpu-only run carries vram.mib_per_gpu {vram.get('mib_per_gpu')!r}")
+            vk = sorted(k for k in m if k.startswith("vram_"))
+            if vk:
+                errs.append(f"NEVER   {rel}: a cpu-only run carries {vk[0]} (and {len(vk) - 1} more vram_ key(s))")
+            if ekeys:
+                errs.append(f"NEVER   {rel}: a cpu-only run carries {ekeys[0]} (and {len(ekeys) - 1} more energy key(s))")
+            if en is not None:
+                errs.append(f"NEVER   {rel}: a cpu-only run carries the energy object")
+            bad_ev = sorted(p for p in o.get("evidence") or [] if isinstance(p, str)
+                            and CPU_ONLY_EVIDENCE.match(p.rsplit("/", 1)[-1]))
+            if bad_ev:
+                errs.append(f"NEVER   {rel}: a cpu-only run carries energy or GPU-snapshot evidence ({bad_ev[0]}...)")
     # NEVER
     for rel, h in objs["hardware"]:
         items = [x.strip() for x in h.get("never_measured") or [] if isinstance(x, str)]

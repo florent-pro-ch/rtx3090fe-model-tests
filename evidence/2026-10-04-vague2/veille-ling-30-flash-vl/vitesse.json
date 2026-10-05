@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-ling-30-flash-vl",
+ "debut": "2026-10-04T23:15:51Z",
+ "solo": {
+  "ttft_ms": 848,
+  "tok_s": 49.1,
+  "completion_tokens": 512,
+  "wall_s": 10.431
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 49.0,
+  "p50_latency_s": 47.15,
+  "wall_s": 83.52
+ },
+ "fin": "2026-10-04T23:17:36Z"
+}

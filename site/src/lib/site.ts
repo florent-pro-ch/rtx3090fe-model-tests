@@ -127,6 +127,7 @@ export const HW_SHORT: Record<string, string> = {
   '1x3090fe': '1× 3090 FE',
   '2x3090fe-nvlink': '2× 3090 FE NVLink',
   '2x2x3090fe-nvlink': '2 × (2× 3090 FE NVLink)',
+  'cpu-only': 'CPU only (no card)',
   unknown: 'unknown',
 };
 

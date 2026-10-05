@@ -1,8 +1,8 @@
 {
-  "count": 44,
+  "count": 45,
   "counts": {
     "cloud-api": 8,
-    "local-weights": 34,
+    "local-weights": 35,
     "measured_later": 3,
     "tool": 2
   },
@@ -148,6 +148,13 @@
       "name": "LettuceDetect-610M (French faithfulness judge)",
       "reason": "Recommended to replace HHEM, never pulled.",
       "reason_code": "not-relevant",
+      "route": "local-weights"
+    },
+    {
+      "model_id": "deepgrove/maple-preview",
+      "name": "Maple-Preview Q4_0-Exact repack for the GPU (Arx12, community)",
+      "reason": "Downloaded for a GPU row and never run: a check against the official file before any measurement found that the repack scrambles the ternary blocks; deleted without being measured.",
+      "reason_code": "other",
       "route": "local-weights"
     },
     {

@@ -14,7 +14,7 @@
     "format": "awq",
     "label": "AWQ INT4 (awq_marlin)"
   },
-  "runs_count": 15,
+  "runs_count": 17,
   "size_gb": null,
   "source": {
     "source_id": "src-22c474888f1d7390"

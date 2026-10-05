@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 49.2,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 46.18,
+    "wall_s": 81.69
+  },
+  "candidat": "veille-ling-30-flash-vl",
+  "debut": "2026-10-04T23:17:37Z",
+  "fin": "2026-10-04T23:19:20Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 502,
+    "tok_s": 49.4,
+    "ttft_ms": 804,
+    "wall_s": 10.167
+  }
+}
