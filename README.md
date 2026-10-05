@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 100 models, 251 runs (+40 copies), 14 benches, data as of 2026-10-04. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 101 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 132 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 100 models, 251 runs (+40 copies), 14 benches, data as of 2026-10-05. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 101 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 132 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -49,7 +49,7 @@ an identical copy of an earlier run's record and evidence, carried into a later
 campaign; its `duplicate_of` names the original. Copies are shown apart, as
 "+N copies", and never counted as runs.
 
-Data as of **2026-10-04**, the latest date found in [data/](data/).
+Data as of **2026-10-05**, the latest date found in [data/](data/).
 <!-- /gen:counts -->
 
 ## What is inside
@@ -175,12 +175,11 @@ forge bench) are graded by a model judge, **one judge per table, never two**:
   2026-10-02). Outside the uncensored lab, which is published as refusal rates
   only, that is 5,112 of 5,115 calls graded (124 of them had been graded
   locally by the backup judge, not the local judge; 3 were refused by the
-  provider's safety filter). Of the candidates tested after lot B was drawn
-  (2026-09-25), the one tested on 2026-10-01 was graded the same way on
-  2026-10-03 and is ranked in its tutoring and agentic-code tables; the runs
-  tested on 2026-10-04 are shown as not graded by their table's judge yet,
-  with no score and no rank. No candidate belongs to
-  its family, and it never saw candidate names.
+  provider's safety filter). The candidates tested after lot B was drawn
+  (2026-09-25), on 2026-10-01 and 2026-10-04, were graded the same way on
+  2026-10-03 and 2026-10-05 and are ranked in their tutoring, agentic-code
+  and vision tables. No candidate belongs to its family, and it never saw
+  candidate names.
 - **The refusal probe and the forge bench: the local judge,
   Qwen3.8-Flash-Next** (local, GGUF UD-Q3_K_XL), with reasoning off, of the
   same lineage as about half of the candidates it graded. No cloud judge has
