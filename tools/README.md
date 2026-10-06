@@ -10,6 +10,7 @@ off until the repository variable `PAGES_ENABLED` is set to `true`
 
 | Gate | Script | What fails it |
 |---|---|---|
+| export / G1 linkage | [`verify_export.py`](verify_export.py) | missing, malformed or partial export receipt, missing successful G1 or blocking findings, invalid source commit, any source-file change after G1 (site and workflows included), file-count disagreement or included symlink |
 | G2 | [`scan_public.py`](scan_public.py) | private IPv4/IPv6 addresses, MAC addresses, home directories, ssh targets, NVIDIA card identifiers (`GPU-`/`MIG-` UUIDs), API tokens, private keys, secret-bearing file names, e-mail addresses outside [`email-allowlist.txt`](email-allowlist.txt), CJK script (Han ideographs, kana, hangul, CJK punctuation), Thai script |
 | G3 | [`check_size.py`](check_size.py) | a file over 5 MiB, a tree over 50 MiB (without `node_modules`, `dist`, `.git`), any audio, video, array, log or model-weight file |
 | schema | [`validate.py`](validate.py) | a `data/**/*.json` that does not parse, or a record that does not match its `schema/<type>.schema.json`, the type chosen by path: models, builds, runs, benches, hardware, campaigns, rankings, comparisons, item scores, the forge summary and checkpoints, the runs index, the rig, the watchlist, the errata and the judge audit (`validate.py --help` lists the paths); with `--strict`, which `check_all.sh` runs, any warning: a `data/` JSON file whose path matches no type, broken references between records (a comparison row naming a missing run or evidence path included), misnamed files, duplicate ids, a runs index or a count that disagrees with the records. Errors even without `--strict`: one judge per table, judged numbers in prose, and the speed keys the run schema leaves open — `en_*` (the English twin) and `fr2_*` (the French pass repeated) only beside a French `speed-house/v1` run and complete, the energy keys only with the closed `energy` object, tokens per joule equal to tokens ÷ energy, no configuration listing as never measured what its runs measured (an item about English speed names the protocol it means), and no VRAM figure, energy key or object, or energy or GPU-snapshot evidence on a `cpu-only` run (served on the CPU alone, no card used) |
@@ -35,6 +36,32 @@ skips them (and says so) but still checks the README block. `--build` installs t
 site's dependencies with `npm ci` when `site/node_modules` is missing (Node 22.12 or
 later), then builds. CI runs G2, G3, G5, G7 and the two site checks again after
 `npm run build`.
+
+## The export receipt and Pages
+
+The private exporter writes `export-receipt.json` only after its successful full
+export and final private check. Version 1 records `full_export: true`, an exact
+`source_commit`, `g1` (`passed`, `block_hits`, `review_hits`, `files_scanned`) and
+`source_tree` (`sha256`, `files`). A partial export never qualifies for publication.
+
+The digest covers the sorted list of `[POSIX relative path, SHA-256 of file bytes]`
+for tracked and non-ignored untracked files, serialized as compact ASCII JSON.
+It excludes the receipt itself, paths with `.git`, `node_modules` or `__pycache__`
+components, and `site/dist/` and `site/.astro/`. Included symlinks fail. This lets CI
+rebuild the output while detecting source, documentation and workflow changes.
+The private check also scans built output, which is checked again by public CI.
+
+The receipt is a trusted-exporter attestation, not a digital signature. The public
+verifier cannot independently rerun the private denylist or prove that the source
+commit exists. Repository review and main-branch protection complement this gate.
+After changing any public source file, ask the private exporter to check the final
+tree and refresh the receipt; never manufacture a receipt in this repository.
+
+Pages accepts a completed successful `critical` push on `main` for the exact
+checked-out SHA. Manual dispatch is also limited to `main` and checks that same
+success through the GitHub API before building. `critical` has the unique required
+job name `critical gates and site build`; Pages runs all repository gates again,
+including the receipt, before uploading its artifact.
 
 **G9 runs before any publication** — before the first push, before a repository is
 made public, and before every release — on the full history, not only the tree:

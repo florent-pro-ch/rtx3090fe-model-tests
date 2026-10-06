@@ -1,0 +1,56 @@
+---
+import { latestRankingPerBench } from '../lib/data';
+import { benchHref, configHref, href, rankingHref } from '../lib/site';
+
+const ranking = new Map(latestRankingPerBench().map((r) => [r.bench_id, r]));
+const taskLink = (task: string) => `${href('models/')}?task=${encodeURIComponent(task)}`;
+const tasks = [
+  { task: 'tuteur/v1', title: 'Ask questions and explain', text: 'Compare French tutoring answers. Quality depends on the model judge; check ties and uncertainty.', label: 'Tutoring results' },
+  { task: 'code/v1', title: 'Write and repair code', text: 'Separate one-shot code answers from an agent that edits files and runs tests.', label: 'Code results' },
+  { task: 'document/v1', title: 'Read scanned documents', text: 'Compare OCR and document extraction on the frozen document set. This does not measure an archive assistant.', label: 'Document results' },
+  { task: 'vision/v1', title: 'Understand images', text: 'Compare image-question answers. A vision score does not demonstrate reliable document OCR.', label: 'Vision results' },
+];
+---
+<section aria-labelledby="start-here" class="start-here">
+  <h2 id="start-here">What can I do with my 3090 FE?</h2>
+  <p>Start with your cards, then your task. A recorded success is evidence for that exact model build, engine and setting; open its model page before trying it on your machine.</p>
+  <div class="grid hardware-start">
+    <article class="tile">
+      <h3><a href={`${href('models/')}?hardware=1x3090fe`}>I have one card</a></h3>
+      <p>See models with a successful single-card run, then check speed, memory and task scores.</p>
+      <a class="small" href={configHref('1x3090fe')}>Single-card measurements and limits</a>
+    </article>
+    <article class="tile">
+      <h3><a href={`${href('models/')}?hardware=2x3090fe-nvlink`}>I have two cards</a></h3>
+      <p>These tests use an NVLink pair. Check the split mode and any system-RAM offload; two cards do not automatically double speed.</p>
+      <a class="small" href={configHref('2x3090fe-nvlink')}>Pair measurements and launch settings</a>
+    </article>
+    <article class="tile">
+      <h3><a href={configHref('2x2x3090fe-nvlink')}>I have more cards</a></h3>
+      <p>The lab ran two independent pairs side by side. It has no result for one model across four cards, or for three cards.</p>
+      <a class="small" href={configHref('2x2x3090fe-nvlink')}>What both pairs actually did</a>
+    </article>
+  </div>
+  <h3 id="choose-task">Choose a task</h3>
+  <div class="grid task-start">
+    {tasks.map((t) => (
+      <article class="tile">
+        <h3>{t.title}</h3>
+        <p>{t.text}</p>
+        <p class="small"><a href={ranking.has(t.task) ? rankingHref(ranking.get(t.task)!.ranking_id) : benchHref(t.task)}>{t.label}</a> · <a href={taskLink(t.task)}>Models with task measurements</a></p>
+        {t.task === 'code/v1' && <p class="small"><a href={ranking.has('code-loop/v1') ? rankingHref(ranking.get('code-loop/v1')!.ranking_id) : benchHref('code-loop/v1')}>Agent-loop results with tools and tests</a></p>}
+      </article>
+    ))}
+    <article class="tile">
+      <h3>Create images, audio or 3D</h3>
+      <p>Read the bench cards and run records: the outputs and quality evidence vary by task, so there is no common creative leaderboard.</p>
+      <p class="small"><a href={benchHref('volume/v1')}>3D generation</a> · <a href={benchHref('audio/v1')}>Audio</a> · <a href={`${href('models/')}?category=image-gen`}>Image models</a></p>
+    </article>
+    <article class="tile">
+      <h3>Forecast time series</h3>
+      <p>TimesFM has measured capacity and speed on this rig. Forecast accuracy was not tested; it is a candidate to evaluate on your own series.</p>
+      <p class="small"><a href={`${href('models/')}?q=TimesFM`}>TimesFM model and runs</a></p>
+    </article>
+  </div>
+  <p class="small muted">Bench scores describe these fixed sets, mostly in French. They do not certify a complete application. On every model page, read <strong>measured fit</strong>, licence, exact launch settings and failures as well as the score. <a href={href('methodology/#from-discovery-to-site')}>How a model reaches this site</a>.</p>
+</section>

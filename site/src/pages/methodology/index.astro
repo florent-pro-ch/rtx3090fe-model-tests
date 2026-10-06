@@ -15,7 +15,27 @@ const html = main ? renderMarkdown(main.markdown, main.file) : null;
 ---
 <Layout title="Methodology" description="How speed and quality are measured on the RTX 3090 FE rig, how a run's topology is read, and the rule that picks the one headline figure per model and configuration." nav="methodology" crumbs={[{ label: 'methodology' }]}>
   <h1>Methodology</h1>
+  <section aria-labelledby="from-discovery-to-site">
+    <h2 id="from-discovery-to-site">From a newly spotted model to this site</h2>
+    <p>A video, model card or release announcement starts a candidate review. Being listed on the watchlist means it was spotted, not that it was selected, installed or tested.</p>
+    <ol>
+      <li><strong>Check the candidate.</strong> Read its original model card, licence, exact weights or quantisation, required runtime and Ampere support. Compare it with already tested candidates and record the reason to try it or leave it waiting.</li>
+      <li><strong>Choose the question and settings.</strong> Record the task, card count, engine version, build, context and token limits before measurement. A two-card result applies to its recorded split and bridge setting.</li>
+      <li><strong>Prove it starts.</strong> Check loading, a small request and memory on the actual cards. A failed start stays a result. Starting successfully does not establish task quality.</li>
+      <li><strong>Measure the relevant task and speed.</strong> Use a frozen bench with recorded prompts and limits. Mechanical checks verify what they can; a model judge scores the judged items and is named. The house speed pass measures one request and several concurrent requests; a different protocol is labelled explicitly.</li>
+      <li><strong>Retest a specific uncertainty.</strong> A new engine, quantisation, context setting or repeated speed pass has its own record. Earlier runs remain visible. An old candidate carried into a cumulative ranking was not automatically retested; the row names its original campaign.</li>
+      <li><strong>Record the decision.</strong> Keep failures, missing measurements and reservations with the model. A lab verdict describes its role here; it is not a universal recommendation for every owner.</li>
+      <li><strong>Export and publish.</strong> Export records and evidence from the private lab, remove private information, verify the exported files and build the site. Publication uses the checked public commit; it does not run the model again.</li>
+    </ol>
+    <p>The public trail is <a href={href('watchlist/')}>candidate / watchlist</a> → <a href={href('campaigns/')}>campaign</a> → model and run pages → <a href={href('rankings/')}>task results</a>. On a model page, follow a speed or quality number to the run and its evidence. Launch lines let you inspect the tested configuration; they do not guarantee the same result on another machine.</p>
+  </section>
   <Banner kind="judge" />
+
+  <section aria-labelledby="publication-checks">
+    <h2 id="publication-checks">Publication checks and provenance</h2>
+    <p>The export receipt records the private source commit, a successful complete export, the private privacy check (G1), and a SHA-256 digest of the exported public source tree. The public gate recalculates that digest, including site code, documents and workflows. An edit after the check invalidates the receipt and blocks CI and Pages until the exporter checks the final tree again.</p>
+    <p>The receipt is an attestation produced by the trusted exporter, not a digital signature or proof of the model's correctness. The public schema, frozen-bench hashes, number links, privacy scans and site build are checked separately. Pages also requires a successful <code>critical</code> workflow on the exact public commit, including for a manual deployment. The footer identifies that public commit and the lab source commit; the date labelled “data as of” remains the latest measurement-record date.</p>
+  </section>
 
   <Frame title="rules this site applies">
     <h3 id="headline-run-rule">Headline-run rule</h3>

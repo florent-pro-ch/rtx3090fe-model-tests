@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # check_all.sh — every public quality gate, in one go (what CI runs first).
 #
+#      verify_export.py  complete-export and passing-G1 receipt, exact final source digest
 #   G2 scan_public.py     generic leak patterns (addresses, home paths, GPU UUIDs, tokens, e-mails, CJK and Thai script)
 #   G3 check_size.py      file and repo size, no media/log/weights
 #      validate.py        data/**/*.json against schema/*.schema.json, --strict (0 warnings);
@@ -22,7 +23,8 @@
 #   G7 check_media.py     no GPS/camera/author/path metadata in images and PDFs
 #   G8 check_language.py  no French in English prose and data fields
 #      harness tests      python3 -m pytest harness/tests (the vendored bench harness; needs
-#                         pytest, skipped and said so when it is not installed)
+#                         pytest, missing pytest fails under CI=true)
+#      publication tests python3 -m pytest tools/tests (receipt failure/tamper cases)
 #   G9 gitleaks           the git history, GPU UUIDs included (only when gitleaks is installed; required
 #                         before any publication, see tools/README.md). Under CI=true
 #                         (GitHub Actions) a skipped G9 is a failure: CI installs a
@@ -64,6 +66,7 @@ run() {
 }
 
 run "scan_public (G2)"    "$PY" tools/scan_public.py
+run "export receipt (G1 linkage)" "$PY" tools/verify_export.py
 run "check_size (G3)"     "$PY" tools/check_size.py
 run "validate (schema)"   "$PY" tools/validate.py --strict --quiet
 if [ -f tools/verify_benches.py ]; then
@@ -127,9 +130,15 @@ run "check_language (G8)" "$PY" tools/check_language.py
 # the vendored bench harness (harness/): its own tests, against the published benches
 if "$PY" -c "import pytest" >/dev/null 2>&1; then
   run "harness tests (pytest)" "$PY" -m pytest -q -p no:cacheprovider harness/tests
+  run "publication regression tests (pytest)" "$PY" -m pytest -q -p no:cacheprovider tools/tests
 else
-  echo "== harness tests (pytest)"; echo "-- harness tests (pytest): SKIPPED — pytest is not installed (python3 -m pip install pytest)"
-  skipped+=("harness tests (pytest)")
+  if [ "${CI:-}" = "true" ]; then
+    echo "== harness and publication tests (pytest)"; echo "-- tests: FAILED — pytest is required under CI=true"
+    failed+=("harness and publication tests (pytest)")
+  else
+    echo "== harness and publication tests (pytest)"; echo "-- tests: SKIPPED — pytest is not installed (python3 -m pip install pytest)"
+    skipped+=("harness and publication tests (pytest)")
+  fi
 fi
 
 # G9 — secrets and leak shapes in every commit (gitleaks is not a Python gate)

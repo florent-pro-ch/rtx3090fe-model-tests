@@ -1,0 +1,15 @@
+{
+  "full_export": true,
+  "g1": {
+    "block_hits": 0,
+    "files_scanned": 3452,
+    "passed": true,
+    "review_hits": 4
+  },
+  "source_commit": "8e24178ce02357311c261beb6c7a525d7f24aec4",
+  "source_tree": {
+    "files": 2766,
+    "sha256": "9165c761b705f0500d82c2cf2edd5b3fdf74a6569f956c48681deec454a9a37b"
+  },
+  "version": 1
+}

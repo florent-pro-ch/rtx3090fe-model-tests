@@ -1,5 +1,5 @@
 # pages — deploy the static site to GitHub Pages, only after `critical` passed on a
-# push to main (or by hand). The site is built again here from the exact commit that
+# push to main (or by hand on main, with the same successful critical check). The site is built again here from the exact commit that
 # critical checked, every gate runs once more, then the site is uploaded and deployed.
 #
 # Off until Pages is switched on for the repository: every job is skipped unless the
@@ -28,14 +28,18 @@ jobs:
     name: gates and site build
     if: >-
       vars.PAGES_ENABLED == 'true' &&
-      (github.event_name == 'workflow_dispatch' ||
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
        (github.event.workflow_run.conclusion == 'success' &&
         github.event.workflow_run.event == 'push' &&
-        github.event.workflow_run.head_branch == 'main'))
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == github.repository))
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     permissions:
       contents: read
+      actions: read
+    outputs:
+      source_sha: ${{ steps.source.outputs.sha }}
     steps:
       - name: Check out the commit critical checked
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5, resolved 2026-10-02
@@ -45,13 +49,42 @@ jobs:
           # the whole history: G9 (gitleaks) scans every commit, not only the last one
           fetch-depth: 0
 
+      # A manual dispatch cannot skip critical or deploy a different SHA. The API
+      # response is checked, rather than accepting the caller's claim of success.
+      - name: Require successful critical on this exact main commit
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECKED_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$CHECKED_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$CHECKED_SHA"
+          echo "sha=$CHECKED_SHA" >> "$GITHUB_OUTPUT"
+          gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/critical.yml/runs" \
+            -f branch=main -f event=push -f status=success -f head_sha="$CHECKED_SHA" -f per_page=100 \
+            > "$RUNNER_TEMP/critical-runs.json"
+          python - "$RUNNER_TEMP/critical-runs.json" <<'PY'
+          import json, os, sys
+          runs = json.load(open(sys.argv[1]))["workflow_runs"]
+          sha = os.environ["CHECKED_SHA"]
+          repo = os.environ["GITHUB_REPOSITORY"]
+          valid = any(r["head_sha"] == sha and r["head_branch"] == "main"
+                      and r["event"] == "push" and r["status"] == "completed"
+                      and r["conclusion"] == "success"
+                      and r.get("head_repository", {}).get("full_name") == repo for r in runs)
+          if not valid:
+              sys.exit("Pages blocked: critical has not passed on this exact main commit")
+          print("Pages: critical passed on the checked-out main commit")
+          PY
+
       - name: Set up Python 3.12
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6, resolved 2026-10-02
         with:
           python-version: "3.12"
 
-      - name: Install jsonschema
-        run: python -m pip install --disable-pip-version-check "jsonschema>=4.23,<5"
+      - name: Install jsonschema and pytest
+        run: python -m pip install --disable-pip-version-check "jsonschema>=4.23,<5" "pytest>=8,<9"
 
       - name: Set up Node 24
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5, resolved 2026-10-02
@@ -85,6 +118,14 @@ jobs:
       - name: Leak scan of the built site (G2 on site/dist)
         run: python tools/scan_public.py site/dist
 
+      - name: Main still matches the built artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECKED_SHA: ${{ steps.source.outputs.sha }}
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$CHECKED_SHA"
+
       - name: Upload the Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4, resolved 2026-10-02
         with:
@@ -95,6 +136,7 @@ jobs:
     needs: build
     runs-on: ubuntu-24.04
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -104,6 +146,16 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5, resolved 2026-10-02
 
+      - name: Main still matches the deployment source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECKED_SHA: ${{ needs.build.outputs.source_sha }}
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$CHECKED_SHA"
+
       - name: Deploy
         id: deployment
+        # A previous build may have waited behind a newer one in the Pages queue.
+        # Check main in the preceding step, before granting the deploy action work.
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4, resolved 2026-10-02
