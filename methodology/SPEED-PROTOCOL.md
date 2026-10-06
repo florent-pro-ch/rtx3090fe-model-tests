@@ -178,9 +178,10 @@ French keys.
   gave about 4 to 8 times the tokens per joule of one request under vLLM and
   about the same on their one-slot llama.cpp servers. There is no power-limit sweep, no reading at
   the wall, and no energy figure for runs measured before 2026-10-03. A run
-  served on the CPU alone (hardware `cpu-only`, since 2026-10-04) has the
-  house pass in French and its English twin, but no energy figure and no
-  VRAM figure: the card its container could see sat idle, so nothing read
+  served on the CPU alone (hardware `cpu-only`, since 2026-10-04; TimesFM-3's
+  CPU part, on its own protocol, is the second) has its speed figures, the
+  house pass in French and its English twin for a language model, but no
+  energy figure and no VRAM figure: the card its container could see sat idle, so nothing read
   from it describes the run.
 
 ## Other speed protocols
@@ -204,6 +205,12 @@ saying so:
   English (above), always run beside a French pass on the same server.
 - **Energy** (`nvml-energy/v1`): a record beside a speed pass, not a speed
   protocol (above).
+- **Fit and speed of a forecaster** (`timesfm-fit-speed/v1`, TimesFM-3,
+  2026-10-05): the model's own bench script times one forecasting call per
+  grid cell (series per call, context and horizon points; the median of the
+  timed calls), on one card and then on the CPU alone, and searches the
+  largest batch that fits at its full context. Milliseconds and series per
+  second, not tokens; no energy figure. Two run records, one per part.
 
 ## Reproducing a figure
 

@@ -1,0 +1,284 @@
+{
+  "cells": [
+    {
+      "batch": 1,
+      "cell": "B1-C512-H64",
+      "context": 512,
+      "groups": [
+        "readme-reference"
+      ],
+      "horizon": 64,
+      "ms": {
+        "max": 205.887,
+        "mean": 187.203,
+        "min": 180.92,
+        "p10": 180.976,
+        "p50": 182.347,
+        "p90": 200.895
+      },
+      "out_of_memory": false,
+      "outputs_ok": true,
+      "per_core_batch_size": 1,
+      "points_per_s": 351.0,
+      "reps": 10,
+      "series_per_s": 5.48,
+      "settings": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "symmetric": false
+    },
+    {
+      "batch": 8,
+      "cell": "B8-C512-H64",
+      "context": 512,
+      "groups": [
+        "readme-reference"
+      ],
+      "horizon": 64,
+      "ms": {
+        "max": 380.342,
+        "mean": 359.262,
+        "min": 348.306,
+        "p10": 348.485,
+        "p50": 354.057,
+        "p90": 370.742
+      },
+      "out_of_memory": false,
+      "outputs_ok": true,
+      "per_core_batch_size": 8,
+      "points_per_s": 1446.1,
+      "reps": 9,
+      "series_per_s": 22.6,
+      "settings": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "symmetric": false
+    },
+    {
+      "batch": 32,
+      "cell": "B32-C512-H64",
+      "context": 512,
+      "groups": [
+        "readme-reference"
+      ],
+      "horizon": 64,
+      "ms": {
+        "max": 943.304,
+        "mean": 906.617,
+        "min": 887.224,
+        "p10": 888.993,
+        "p50": 897.969,
+        "p90": 931.158
+      },
+      "out_of_memory": false,
+      "outputs_ok": true,
+      "per_core_batch_size": 32,
+      "points_per_s": 2280.7,
+      "reps": 4,
+      "series_per_s": 35.64,
+      "settings": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "symmetric": false
+    },
+    {
+      "batch": 1,
+      "cell": "B1-C2048-H128",
+      "context": 2048,
+      "groups": [
+        "cpu"
+      ],
+      "horizon": 128,
+      "ms": {
+        "max": 338.859,
+        "mean": 290.183,
+        "min": 259.335,
+        "p10": 260.437,
+        "p50": 279.697,
+        "p90": 335.143
+      },
+      "out_of_memory": false,
+      "outputs_ok": true,
+      "per_core_batch_size": 1,
+      "points_per_s": 457.6,
+      "reps": 10,
+      "series_per_s": 3.58,
+      "settings": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "symmetric": false
+    },
+    {
+      "batch": 32,
+      "cell": "B32-C2048-H128",
+      "context": 2048,
+      "groups": [
+        "cpu"
+      ],
+      "horizon": 128,
+      "ms": {
+        "max": 3042.907,
+        "mean": 3004.14,
+        "min": 2974.174,
+        "p10": 2978.407,
+        "p50": 2995.338,
+        "p90": 3033.393
+      },
+      "out_of_memory": false,
+      "outputs_ok": true,
+      "per_core_batch_size": 32,
+      "points_per_s": 1367.5,
+      "reps": 3,
+      "series_per_s": 10.68,
+      "settings": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "symmetric": false
+    },
+    {
+      "batch": 1,
+      "cell": "B1-C15360-H128",
+      "context": 15360,
+      "groups": [
+        "cpu"
+      ],
+      "horizon": 128,
+      "ms": {
+        "max": 1022.363,
+        "mean": 1016.046,
+        "min": 1006.893,
+        "p10": 1009.291,
+        "p50": 1018.882,
+        "p90": 1021.666
+      },
+      "out_of_memory": false,
+      "outputs_ok": true,
+      "per_core_batch_size": 1,
+      "points_per_s": 125.6,
+      "reps": 3,
+      "series_per_s": 0.98,
+      "settings": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "symmetric": false
+    }
+  ],
+  "ended_at": "2026-10-05T07:04:41Z",
+  "engine": {
+    "image": "vllm/vllm-openai:v0.29.0",
+    "note": "torch of the pinned vLLM image; vLLM itself is not imported"
+  },
+  "environment": {
+    "cpu_affinity": 8,
+    "cpu_count": 8,
+    "cpu_model": "AMD EPYC 7F52 16-Core Processor",
+    "cuda_available": false,
+    "cudnn": 92000,
+    "cudnn_allow_tf32": true,
+    "float32_matmul_precision": "highest",
+    "huggingface_hub": "1.30.0",
+    "interop_threads": 8,
+    "matmul_allow_tf32": false,
+    "numpy": "2.2.6",
+    "python": "3.12.3",
+    "safetensors": "0.8.0",
+    "threads": 8,
+    "timesfm": "3.0.2",
+    "torch": "2.13.0+cu130",
+    "torch_cuda": "13.0"
+  },
+  "load": {
+    "device": "cpu",
+    "seconds": 1.842
+  },
+  "method": {
+    "options": {
+      "make_positive": false,
+      "padding_mode": "none",
+      "return_quantiles": true,
+      "sort_quantiles": true,
+      "use_symmetric_averaging": "false, except the symmetric-evaluator cell",
+      "use_znorm": false
+    },
+    "seed": 20261005,
+    "series": "synthetic, seed 20261005: level + trend + seasonalities 7/24/168 + white noise, float32, univariate",
+    "settings": {
+      "capacity": {
+        "max_reps": 2,
+        "max_s": 120.0,
+        "min_reps": 2,
+        "min_s": 0.0,
+        "warmup": 1
+      },
+      "cpu": {
+        "max_reps": 10,
+        "max_s": 60.0,
+        "min_reps": 3,
+        "min_s": 3.0,
+        "warmup": 1
+      },
+      "gpu": {
+        "max_reps": 50,
+        "max_s": 60.0,
+        "min_reps": 10,
+        "min_s": 2.0,
+        "warmup": 2
+      }
+    },
+    "timing": "perf_counter around one list(predict_batch(...)) call, one forward (per_core_batch_size = batch)"
+  },
+  "mode": "cpu",
+  "model": {
+    "dtypes": [
+      "torch.float32"
+    ],
+    "input_patch": 32,
+    "layers": 20,
+    "max_context": 15360,
+    "median_index": 4,
+    "output_patch": 64,
+    "parameters": 330710976,
+    "quantiles": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "use_rope_var": false,
+    "use_sdpa": true,
+    "use_variate_attention": true
+  },
+  "ok": true,
+  "peak_rss_mib": 3054,
+  "protocol": "timesfm-fit-speed/v1",
+  "started_at": "2026-10-05T07:04:06Z"
+}

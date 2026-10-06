@@ -1,0 +1,20 @@
+{
+  "agrege": {
+    "agg_tok_s": 259.7,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 15.77,
+    "wall_s": 15.77
+  },
+  "candidat": "veille-qwen38-27b-escha-w2",
+  "debut": "2026-10-05T10:13:13Z",
+  "fin": "2026-10-05T10:13:53Z",
+  "langue": "en",
+  "protocole": "speed-house/v1-en",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 41.5,
+    "ttft_ms": 121,
+    "wall_s": 12.344
+  }
+}

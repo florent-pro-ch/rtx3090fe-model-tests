@@ -46,9 +46,9 @@ records in [data/hardware/](../data/hardware/).
 
 A run whose topology cannot be read from its evidence says `unknown` and is
 left out of the configuration pages. A run served on the CPU alone, with no
-card used (hardware `cpu-only`, `gpus: 0`; one so far, since 2026-10-04), is
-left out of them too: it has speed figures, in French and English, but no
-VRAM and no energy figure, since the card its container could see sat idle.
+card used (hardware `cpu-only`, `gpus: 0`; two so far, since 2026-10-04), is
+left out of them too: it has speed figures but no VRAM and no energy
+figure, since the card its container could see sat idle.
 
 ## One card (`1x3090fe`)
 

@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 108 models, 268 runs (+40 copies), 14 benches, data as of 2026-10-05. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 112 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 135 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 111 models, 273 runs (+40 copies), 14 benches, data as of 2026-10-06. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 116 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 135 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -30,17 +30,17 @@ here.
 
 | What | Count |
 |---|---:|
-| Models (upstream, public) | **108** |
+| Models (upstream, public) | **111** |
 | Private fine-tune checkpoints, counted apart | 30 |
-| Builds (quantisations, GGUFs, adapters) | 131 |
-| Runs (distinct run records) | **268** (+40 copies) |
-| &nbsp;&nbsp;· on one card (`1x3090fe`) | 112 (+15 copies) |
+| Builds (quantisations, GGUFs, adapters) | 134 |
+| Runs (distinct run records) | **273** (+40 copies) |
+| &nbsp;&nbsp;· on one card (`1x3090fe`) | 116 (+15 copies) |
 | &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 135 (+3 copies) |
 | &nbsp;&nbsp;· on both pairs as one configuration (`2x2x3090fe-nvlink`) | 0 |
-| &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 1 |
+| &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 2 |
 | &nbsp;&nbsp;· topology unknown | 20 (+22 copies) |
 | Frozen benches | 14 |
-| Campaigns | 44 |
+| Campaigns | 46 |
 | Watchlist entries: open-weight models or builds spotted for the rig, not run here when listed | 35 (3 measured later) |
 | &nbsp;&nbsp;· listed apart, not counted above: cloud or API-only models | 8 |
 | &nbsp;&nbsp;· listed apart, not counted above: tools that are not models | 2 |
@@ -50,7 +50,7 @@ an identical copy of an earlier run's record and evidence, carried into a later
 campaign; its `duplicate_of` names the original. Copies are shown apart, as
 "+N copies", and never counted as runs.
 
-Data as of **2026-10-05**, the latest date found in [data/](data/).
+Data as of **2026-10-06**, the latest date found in [data/](data/).
 <!-- /gen:counts -->
 
 ## What is inside
@@ -82,7 +82,7 @@ charts from [data/](data/).
 | **One NVLink pair**, 48 GB | `2x3090fe-nvlink` | Well measured: tensor parallel 2, llama.cpp layer split, spilling into system RAM, and an NVLink A/B (a software proxy; the bridge was never removed). |
 | **Two pairs**, 2 × 48 GB | `2x2x3090fe-nvlink` | Thin by design. The two pairs have only ever worked **in parallel**, as two independent machines. **No model has run on four cards here.** |
 
-A run served on the CPU alone, with no card used (one so far, since
+A run served on the CPU alone, with no card used (two so far, since
 2026-10-04), reads `cpu-only`: it has speed figures but no VRAM and no
 energy figure, and no configuration page.
 
@@ -139,7 +139,13 @@ estimating it. The rig and the topology fields are described in
   its publisher's fork, pinned by its commit, smoke-tested before any
   measured request, used only for the models it was added for, and named in
   the run record. A house fork build pinned by commit is not pre-pin, even
-  on an older base (ZDTaichu5.0-9B's vLLM fork is on vLLM 0.26.0).
+  on an older base (ZDTaichu5.0-9B's vLLM fork is on vLLM 0.26.0). Since
+  2026-10-05 two more such engines serve one model each: a maker's llama.cpp
+  branch not merged upstream (Xing4.0-29B-A4B), pinned by its commit, and a
+  publisher's SGLang runtime whose quantisation kernels are closed binaries
+  (Qwen3.8-27B Escha-W2), pinned by its wheel. TimesFM-3, a forecaster, ran
+  its own Python package on the PyTorch of the pinned vLLM image (engine
+  `pytorch`), for fit and speed only.
 - **VRAM is an after-load snapshot** (nvidia-smi a few seconds after the
   server is ready, before the first request: 3 s in the house harness, 5 s in
   the two 2026-09-04 campaigns and the 2026-10-03 speed campaign); **for vLLM

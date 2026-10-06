@@ -248,6 +248,17 @@
   },
   {
     "builds": [
+      "eschalabs/qwen3.8-27b-escha-w2@escha-w2"
+    ],
+    "category": "llm",
+    "model_id": "eschalabs/qwen3.8-27b-escha-w2",
+    "name": "Qwen3.8-27B Escha-W2",
+    "slug": "eschalabs__qwen3.8-27b-escha-w2",
+    "vendor": "Escha Labs",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "fdtn-ai/antares-1b@bf16"
     ],
     "category": "llm",
@@ -344,6 +355,17 @@
     "name": "MedGemma 1.5 4B IT",
     "slug": "google__medgemma-1.5-4b-it",
     "vendor": "Google (Health AI Developer Foundations)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "google/timesfm-3.0-pytorch@f32"
+    ],
+    "category": "other",
+    "model_id": "google/timesfm-3.0-pytorch",
+    "name": "TimesFM-3",
+    "slug": "google__timesfm-3.0-pytorch",
+    "vendor": "Google Research",
     "verdict_status": "rated-no-role"
   },
   {
@@ -1153,6 +1175,17 @@
     "slug": "xhtoken__spark-x2.5-4b",
     "vendor": "XHToken",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "xingchen-agi/xing4.0-29b-a4b@gguf-iq4_nl"
+    ],
+    "category": "moe-llm",
+    "model_id": "xingchen-agi/xing4.0-29b-a4b",
+    "name": "Xing4.0-29B-A4B",
+    "slug": "xingchen-agi__xing4.0-29b-a4b",
+    "vendor": "XingChen-AGI (China Telecom)",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

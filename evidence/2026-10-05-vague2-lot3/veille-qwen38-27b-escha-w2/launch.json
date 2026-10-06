@@ -1,0 +1,56 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "--model-path",
+    "$MODELS/qwen38-27b-escha-w2",
+    "--served-model-name",
+    "escha-qwen38-27b-w2",
+    "--dtype",
+    "float16",
+    "--mem-fraction-static",
+    "0.72",
+    "--context-length",
+    "65536",
+    "--chunked-prefill-size",
+    "2048",
+    "--mamba-full-memory-ratio",
+    "0.3",
+    "--sampling-backend",
+    "pytorch",
+    "--trust-remote-code",
+    "--tool-call-parser",
+    "qwen3_coder",
+    "--reasoning-parser",
+    "qwen3",
+    "--disable-radix-cache",
+    "--disable-piecewise-cuda-graph",
+    "--cuda-graph-bs",
+    "1",
+    "2",
+    "4",
+    "8",
+    "12",
+    "16",
+    "--constrained-json-disable-any-whitespace",
+    "--log-level",
+    "info"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "house/escha-sglang:1.2.2-9f095a1",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "image",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

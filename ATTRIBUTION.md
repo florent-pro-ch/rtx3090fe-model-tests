@@ -194,8 +194,11 @@ Every model tested here belongs to its publisher and keeps its own licence:
 open weights, gated weights, research-only, non-commercial, territorial
 clauses, revenue thresholds, vendor licences such as the NVIDIA Open Model
 License (ZDTaichu5.0-9B, measured since 2026-10-05) and custom licences all
-occur. This repository redistributes no weights and, in v0 (2026-10-02), no
-model outputs.
+occur. TimesFM-3's weights are under the TimesFM Non-Commercial License v1.0,
+which allows non-commercial use and internal benchmarking and forbids
+distributing the model: its fit and speed figures are published here, no
+copy of it. This repository redistributes no weights and, in v0 (2026-10-02),
+no model outputs.
 
 - Each model record in [data/models/](data/models/) carries a `licence` field
   (`name`, `flags`, `source`) and an `access` field (`open`, `gated`,
@@ -241,7 +244,12 @@ llama.cpp, ComfyUI, a headless coding agent for the agent-loop bench, Blender
 for the 3D renders, faster-whisper for speech recognition, among others).
 They are not redistributed here; each keeps its own licence. The engine and
 image tag of every run are recorded in its `data/runs/` record, including,
-since 2026-10-05, two house builds of a model publisher's fork of vLLM or
-llama.cpp, built here at an exact commit and not redistributed either. The
+since 2026-10-05, four engines built here for one model each, none
+redistributed: two house builds of a model publisher's fork of vLLM or
+llama.cpp at an exact commit, a maker's llama.cpp branch not merged upstream
+(MIT, like llama.cpp), and a publisher's SGLang runtime (Apache-2.0) whose
+quantisation kernels are closed binaries, used as published. TimesFM-3 ran
+its own Python package (timesfm, Apache-2.0) on the PyTorch of the pinned
+vLLM image. The
 energy figures read NVIDIA's management library (NVML), part of the
 installed driver; nothing of it is redistributed.

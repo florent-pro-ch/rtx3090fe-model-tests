@@ -143,6 +143,8 @@ const ENGINE_NAME: Record<string, string> = {
   'llama-cpp': 'llama.cpp',
   comfyui: 'ComfyUI',
   transformers: 'Transformers',
+  sglang: 'SGLang',
+  pytorch: 'PyTorch',
 };
 
 /**

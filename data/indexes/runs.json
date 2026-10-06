@@ -1,6 +1,6 @@
 {
   "generated_by": "runs",
-  "n": 308,
+  "n": 313,
   "runs": [
     {
       "agg_concurrency": 8,
@@ -6588,6 +6588,28 @@
     {
       "agg_concurrency": null,
       "agg_tok_s": null,
+      "build_id": "openbmb/minicpm5-2b@bf16",
+      "duplicate_of": null,
+      "engine": "vllm",
+      "engine_version": "0.29.0",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "quality",
+      "model_id": "openbmb/minicpm5-2b",
+      "pre_pin": false,
+      "protocol": "quality-house/v1",
+      "run_id": "2026-10-05-raison-complements/veille-minicpm5-2b--on-8192",
+      "solo_tok_s": null,
+      "split": "none",
+      "started_at": null,
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        22015
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
       "build_id": "tokenrhythm/neohorse-1-9b@bf16",
       "duplicate_of": null,
       "engine": "vllm",
@@ -6671,6 +6693,90 @@
       "status": "ok",
       "vram_mib_per_gpu": [
         5245
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "google/timesfm-3.0-pytorch@f32",
+      "duplicate_of": null,
+      "engine": "pytorch",
+      "engine_version": "2.13.0",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "speed",
+      "model_id": "google/timesfm-3.0-pytorch",
+      "pre_pin": false,
+      "protocol": "timesfm-fit-speed/v1",
+      "run_id": "2026-10-05-timesfm-3/veille-timesfm-3",
+      "solo_tok_s": null,
+      "split": "none",
+      "started_at": "2026-10-05T07:00:14Z",
+      "status": "ok",
+      "vram_mib_per_gpu": []
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "google/timesfm-3.0-pytorch@f32",
+      "duplicate_of": null,
+      "engine": "pytorch",
+      "engine_version": "2.13.0",
+      "gpus": 0,
+      "hardware": "cpu-only",
+      "kind": "speed",
+      "model_id": "google/timesfm-3.0-pytorch",
+      "pre_pin": false,
+      "protocol": "timesfm-fit-speed/v1",
+      "run_id": "2026-10-05-timesfm-3/veille-timesfm-3--cpu",
+      "solo_tok_s": null,
+      "split": "none",
+      "started_at": "2026-10-05T07:04:06Z",
+      "status": "ok",
+      "vram_mib_per_gpu": []
+    },
+    {
+      "agg_concurrency": 8,
+      "agg_tok_s": 259.2,
+      "build_id": "eschalabs/qwen3.8-27b-escha-w2@escha-w2",
+      "duplicate_of": null,
+      "engine": "sglang",
+      "engine_version": "1.2.2",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "speed+quality",
+      "model_id": "eschalabs/qwen3.8-27b-escha-w2",
+      "pre_pin": false,
+      "protocol": "speed-house/v1",
+      "run_id": "2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2",
+      "solo_tok_s": 41.5,
+      "split": "none",
+      "started_at": "2026-10-05T10:12:32Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        18298
+      ]
+    },
+    {
+      "agg_concurrency": 8,
+      "agg_tok_s": 88.8,
+      "build_id": "xingchen-agi/xing4.0-29b-a4b@gguf-iq4_nl",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "x40-63c16fb-sm86",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "speed+quality",
+      "model_id": "xingchen-agi/xing4.0-29b-a4b",
+      "pre_pin": false,
+      "protocol": "speed-house/v1",
+      "run_id": "2026-10-05-vague2-lot3/veille-xing40-29b-a4b",
+      "solo_tok_s": 88.4,
+      "split": "none",
+      "started_at": "2026-10-05T10:45:51Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        18507
       ]
     }
   ]

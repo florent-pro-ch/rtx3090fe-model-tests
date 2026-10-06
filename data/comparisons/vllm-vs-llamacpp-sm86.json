@@ -10,7 +10,7 @@
   "excluded_counts": {
     "ab-campaign": 3,
     "cpu-only": 1,
-    "house-image": 4,
+    "house-image": 6,
     "lab-refusal-rates-only": 6,
     "no-speed": 1,
     "older-layout-2026-09-04": 7,
@@ -21,7 +21,7 @@
     "1x3090fe",
     "2x3090fe-nvlink"
   ],
-  "method": "Two readings, both from the lab's speed protocol (one French prompt, thinking off, temperature 0; a single stream, then eight concurrent requests). (a) The same model on both engines: Nex-N2.5 Mini as a Q4_K_M GGUF under llama.cpp with its layers split over a pair, and as W4A16 under vLLM in tensor parallel 2 on a pair. (b) For each engine version, the minimum and maximum over every original text run that has a speed file, each extreme tied to its run. Excluded from (b): the A/B campaigns' arms (3 runs), vision re-serves (10), runs on locally built engine images (4), runs whose engine is not in their launch line (5) and runs without a usable eight-request figure (1); runs served on the CPU alone, no card used (1); the uncensored lab (6, refusal rates only); the 2026-09-04 campaigns' speed runs, kept in an older folder layout that this reading does not parse (7); identical copies of a run are counted once. Every row of (b) for llama.cpp states the slots of its run. (c) Every llama.cpp run launched with more than one slot (parallel requests served at once), with its single-stream and eight-request speed and their ratio; A/B treatment arms and copies are left out.",
+  "method": "Two readings, both from the lab's speed protocol (one French prompt, thinking off, temperature 0; a single stream, then eight concurrent requests). (a) The same model on both engines: Nex-N2.5 Mini as a Q4_K_M GGUF under llama.cpp with its layers split over a pair, and as W4A16 under vLLM in tensor parallel 2 on a pair. (b) For each engine version, the minimum and maximum over every original text run that has a speed file, each extreme tied to its run. Excluded from (b): the A/B campaigns' arms (3 runs), vision re-serves (10), runs on locally built engine images (6), runs whose engine is not in their launch line (5) and runs without a usable eight-request figure (1); runs served on the CPU alone, no card used (1); the uncensored lab (6, refusal rates only); the 2026-09-04 campaigns' speed runs, kept in an older folder layout that this reading does not parse (7); identical copies of a run are counted once. Every row of (b) for llama.cpp states the slots of its run. (c) Every llama.cpp run launched with more than one slot (parallel requests served at once), with its single-stream and eight-request speed and their ratio; A/B treatment arms and copies are left out.",
   "model_id": null,
   "question": "What does each engine deliver on these cards: cold start, time to first token, single stream and eight concurrent requests?",
   "rows": [
@@ -1497,6 +1497,9 @@
       "source_id": "src-570ce779ae12d30b"
     },
     {
+      "source_id": "src-57e664ec4a819042"
+    },
+    {
       "source_id": "src-58ee9480f9c233f1"
     },
     {
@@ -1696,6 +1699,9 @@
     },
     {
       "source_id": "src-b2b9e094cf852975"
+    },
+    {
+      "source_id": "src-b2c1af3939765da1"
     },
     {
       "source_id": "src-b3eeff919dc3b0c9"

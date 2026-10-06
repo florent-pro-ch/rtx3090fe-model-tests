@@ -1,0 +1,34 @@
+{
+  "docker_options": [
+    "-d",
+    "--network=none",
+    "--memory=16g"
+  ],
+  "engine_args": [
+    "$WORK/timesfm_banc.py",
+    "--grille",
+    "gpu",
+    "--modele",
+    "$MODELS/timesfm-3",
+    "--out",
+    "$PATH/mesures-timesfm-gpu.json"
+  ],
+  "entrypoint": "python3",
+  "env": {
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "HF_HUB_OFFLINE": "1"
+  },
+  "gpus_device_list": [
+    0
+  ],
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "env",
+    "model_path",
+    "user",
+    "volumes"
+  ]
+}

@@ -300,6 +300,19 @@ its version and, for a fork build, its commit. A house fork build pinned by
 commit is **not pre-pin**, even on an older base: what it runs is fixed by
 its commit, not by a floating tag.
 
+Since **2026-10-05** two more engines of that kind each serve one model,
+built here, smoke-tested first and named in the run record: a maker's
+**llama.cpp branch not merged upstream** (Xing4.0-29B-A4B, an open pull
+request, pinned by its commit) and a publisher's **SGLang runtime with closed
+kernels** (Qwen3.8-27B Escha-W2: a wheel bundling the publisher's SGLang fork
+with quantisation kernels shipped as binaries only, pinned by that wheel;
+engine `sglang`). Neither is pre-pin. SGLang reserves a share of the card
+at start (`mem_fraction_static`), so its VRAM figure is a reservation, as
+vLLM's; its `--context-length` is recorded as `max_model_len`. TimesFM-3, a
+time-series forecaster no bench rates, ran its own Python package on the
+PyTorch of the pinned vLLM image (engine `pytorch`, vLLM not imported), for
+fit and speed only.
+
 A run is labelled **pre-pin** (`engine.pre_pin: true`) when its engine is
 older than the pin: vLLM before 0.29.0 (in practice **vLLM 0.26**), a
 **floating llama.cpp tag** (`server-cuda` without a build number) or a build
@@ -335,7 +348,11 @@ activations) is not in it. The run record's `vram.kind` says how to read it:
   served on the CPU alone, with no card used (hardware **`cpu-only`**,
   `topology.gpus: 0`, since 2026-10-04), shows `unknown` with no figure, and
   no energy figure either: the card its container could see sat idle, so
-  nothing read from it describes the run.
+  nothing read from it describes the run. TimesFM-3's run on the card
+  (protocol `timesfm-fit-speed/v1`) shows `unknown` too: torch's own
+  allocations are in its metrics (`weights_alloc_mib`, `peak_alloc_mib_…`),
+  and the card's nvidia-smi trace, which includes a capacity search that
+  fills the card on purpose, is not read as a VRAM figure.
 
 Figures are per GPU, never summed across cards unless the record says so.
 Peak figures exist only where a bench measures them itself (the forge's

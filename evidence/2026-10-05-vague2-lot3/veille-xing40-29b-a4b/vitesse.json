@@ -1,0 +1,18 @@
+{
+ "candidat": "veille-xing40-29b-a4b",
+ "debut": "2026-10-05T10:45:51Z",
+ "solo": {
+  "ttft_ms": 94,
+  "tok_s": 88.4,
+  "completion_tokens": 512,
+  "wall_s": 5.793
+ },
+ "agrege": {
+  "conc": 8,
+  "ok": 8,
+  "agg_tok_s": 88.8,
+  "p50_latency_s": 25.96,
+  "wall_s": 46.14
+ },
+ "fin": "2026-10-05T10:46:48Z"
+}
