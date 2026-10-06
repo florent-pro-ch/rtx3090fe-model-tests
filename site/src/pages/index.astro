@@ -14,6 +14,7 @@ import ConfigTiles from '../components/ConfigTiles.astro';
 import NvlinkFigure from '../components/NvlinkFigure.astro';
 import Schematic from '../components/schematic/Schematic.astro';
 import Schematic2x2Compact from '../components/schematic/Schematic2x2Compact.astro';
+import StartHere from '../components/StartHere.astro';
 import { SITE_NAME, VERSION_LABEL, counts, dataAsOf, REPO_URL } from '../lib/data';
 import { compareHref, configHref, href } from '../lib/site';
 import { CONFIG_SHORT, configSummaries } from '../lib/configs';
@@ -31,9 +32,10 @@ const SCHEMATIC_WIDTH: Record<string, number> = { '1x3090fe': 149, '2x3090fe-nvl
       <p class="version-pill">{VERSION_LABEL}<span class="pill-date"> · data as of <time datetime={asOf ?? undefined}>{asOf ?? 'no data yet'}</time></span></p>
       <h1 id="hero-title">{SITE_NAME}</h1>
       <p class="hero-lede">
-        What open models actually do on an RTX 3090 Founders Edition — one card, an NVLink pair, two pairs — measured on
-        the cards, every number dated and linked to its evidence.
+        Find what you can run on your RTX 3090 Founders Edition cards, how fast it runs and how it performed on a task.
+        Every number is measured on the cards, dated and linked to its evidence.
       </p>
+      <p><a href="#start-here"><strong>Choose your cards and your task</strong></a> · <a href={href('methodology/#from-discovery-to-site')}>See how a model is tested</a></p>
       <div class="hero-counts">
         <span class="stat"><span class="label">models</span><span class="value"><Num value={c.models} href={href('models/')} /></span></span>
         <span class="stat"><span class="label">runs</span><span class="value"><Num value={c.runs} href={href('campaigns/')} />{c.run_copies > 0 && <span class="copies">+<Num value={c.run_copies} href={href('campaigns/')} /> copies</span>}</span></span>
@@ -68,12 +70,14 @@ const SCHEMATIC_WIDTH: Record<string, number> = { '1x3090fe': 149, '2x3090fe-nvl
     </Frame>
   </section>
 
-  <NvlinkFigure />
+  <StartHere />
+
+  <Banner kind="judge" robustness />
 
   <h2 id="configurations">Three configurations</h2>
   <ConfigTiles />
 
-  <Banner kind="judge" robustness />
+  <NvlinkFigure />
 
   <h2 id="next">Where to go next</h2>
   <ul>

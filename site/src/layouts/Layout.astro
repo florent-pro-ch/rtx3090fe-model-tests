@@ -13,6 +13,7 @@
 import '../styles/global.css';
 import { SITE_NAME, REPO_URL, VERSION_LABEL, dataAsOf, canary, assertSiteRules } from '../lib/data';
 import { href, metaDescription, PREVIEW_LOCAL } from '../lib/site';
+import { provenance } from '../lib/provenance';
 
 interface Crumb { label: string; href?: string }
 interface Props {
@@ -33,6 +34,7 @@ const desc = metaDescription(description);
 const canonical = new URL(canonicalPath ?? Astro.url.pathname, Astro.site).href;
 const asOf = dataAsOf();
 const canaryText = canary();
+const source = provenance();
 const ogImageUrl = new URL(href(ogImage), Astro.site).href;
 // Self-hosted fonts, served from public/fonts under the base path.
 const FONT_BASE = `${import.meta.env.BASE_URL.replace(/\/+$/, '')}/fonts/`;
@@ -168,6 +170,12 @@ const NAV = [
           <span class="canary">{canaryText}</span>
         </p>
         <p>Numbers link to the run or the evidence they come from. Measured on the rig, never copied from a vendor.</p>
+        <p class="small break">
+          Site source: {source.siteCommit ? <a class="mono" href={`${REPO_URL}/commit/${source.siteCommit}`}>{source.siteCommit.slice(0, 12)}</a> : 'Git identity unavailable'}.
+          {source.receipt && <>{' '}Export source (private lab commit): <span class="mono">{source.receipt.source_commit.slice(0, 12)}</span>.
+            {' '}Checked source-tree digest: <a class="mono" href={`${REPO_URL}/blob/${source.siteCommit ?? 'main'}/export-receipt.json`}>{source.receipt.source_tree.sha256.slice(0, 12)}</a>.
+            {' '}<a href={href('methodology/#publication-checks')}>Publication checks and provenance</a>.</>}
+        </p>
       </div>
     </footer>
     <script is:inline>
@@ -231,7 +239,20 @@ const NAV = [
           var rows = Array.prototype.slice.call(body.rows);
           var input = box.querySelector('input[data-filter]');
           var selects = box.querySelectorAll('select[data-filter-col]');
+          var rowSelects = box.querySelectorAll('select[data-filter-row]');
           var count = box.querySelector('[data-count]');
+          // Shared entry links carry only values that exist in a filter's options.
+          var params = new URLSearchParams(location.search);
+          if (input && params.has('q')) input.value = params.get('q');
+          Array.prototype.forEach.call(selects, function (s) {
+            var key = (s.getAttribute('aria-label') || '').replace(/ filter$/, '');
+            var value = params.get(key);
+            if (value && Array.prototype.some.call(s.options, function (o) { return o.value === value; })) s.value = value;
+          });
+          Array.prototype.forEach.call(rowSelects, function (s) {
+            var value = params.get(s.getAttribute('data-filter-row'));
+            if (value && Array.prototype.some.call(s.options, function (o) { return o.value === value; })) s.value = value;
+          });
           function apply() {
             var q = input ? input.value.trim().toLowerCase() : '';
             var shown = 0;
@@ -243,6 +264,11 @@ const NAV = [
                 var v = cell ? (cell.getAttribute('data-f') || cell.textContent.trim()) : '';
                 if (v !== s.value) ok = false;
               });
+              Array.prototype.forEach.call(rowSelects, function (s) {
+                if (!ok || !s.value) return;
+                var values = (tr.getAttribute('data-' + s.getAttribute('data-filter-row')) || '').split(/\s+/);
+                if (values.indexOf(s.value) === -1) ok = false;
+              });
               tr.hidden = !ok;
               if (ok) shown++;
             });
@@ -250,6 +276,7 @@ const NAV = [
           }
           if (input) input.addEventListener('input', apply);
           Array.prototype.forEach.call(selects, function (s) { s.addEventListener('change', apply); });
+          Array.prototype.forEach.call(rowSelects, function (s) { s.addEventListener('change', apply); });
           var ths = table.tHead ? table.tHead.rows[0].cells : [];
           Array.prototype.forEach.call(ths, function (th, i) {
             if (!th.hasAttribute('data-sort')) return;

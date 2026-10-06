@@ -3,15 +3,30 @@ import Layout from '../../layouts/Layout.astro';
 import Num from '../../components/Num.astro';
 import Table from '../../components/Table.astro';
 import StatusBadge from '../../components/StatusBadge.astro';
-import { HARDWARE_IDS, models, isForge, headlineRun, runsOfModel, soloTokS, counts, distinctRuns, splitGroup } from '../../lib/data';
+import { HARDWARE_IDS, models, isForge, headlineRun, runsOfModel, soloTokS, counts, distinctRuns, splitGroup, rankings } from '../../lib/data';
 import { href, hwShort, modelHref, STATUS_LABEL } from '../../lib/site';
 
 const list = models().filter((m) => !isForge(m));
+// Some judged scores are published in rankings only, not in run.quality.
+// Include those measured rows, while excluding missing/unrated scores.
+const rankedTasks = new Map<string, Set<string>>();
+for (const ranking of rankings()) {
+  for (const row of ranking.rows) {
+    if (typeof row.score !== 'number' || !Number.isFinite(row.score)) continue;
+    if (!rankedTasks.has(row.model_id)) rankedTasks.set(row.model_id, new Set());
+    rankedTasks.get(row.model_id)!.add(ranking.bench_id);
+  }
+}
 const rows = list.map((m) => ({
   m,
   runs: distinctRuns(runsOfModel(m.model_id)).length,
   heads: HARDWARE_IDS.map((hw) => headlineRun(m.model_id, hw)),
   ran: HARDWARE_IDS.map((hw) => distinctRuns(runsOfModel(m.model_id)).some((r) => r.hardware === hw && r.status === 'ok')),
+  hardware: [...new Set(distinctRuns(runsOfModel(m.model_id)).filter((r) => r.status === 'ok' && r.topology.split !== 'unknown').map((r) => r.hardware))],
+  tasks: [...new Set([
+    ...distinctRuns(runsOfModel(m.model_id)).filter((r) => r.status === 'ok').flatMap((r) => r.quality.map((q) => q.bench_id)),
+    ...(rankedTasks.get(m.model_id) ?? []),
+  ])],
 }));
 const uniq = (xs: string[]) => [...new Set(xs)].sort();
 const neverRun = rows.filter((x) => x.runs === 0).length;
@@ -27,8 +42,9 @@ const c = counts();
   <p class="lead">
     Every upstream model in the lab's records, with its verdict, licence and access, and its headline single-stream speed on
     each configuration. <Num value={neverRun} href={href('models/')} /> of the <Num value={list.length} href={href('models/')} /> were listed but have no
-    run record published (run count 0). Click a column to sort; filter by name, category, verdict or access.
+    run record published (run count 0). Start with the configuration and task filters; click a column to sort.
   </p>
+  <p class="small">A <strong>successful run</strong> filter shows recorded runs, including runs that use system RAM. It is not a guarantee of fitting wholly in VRAM. A task filter means a task measurement was recorded, not that the model passed or is recommended; that measurement may use another build or configuration, so check its run. <strong>Rated, no role</strong> means the lab measured the model but assigned it no ongoing job; read its page and task scores to decide whether it suits yours.</p>
   <p class="small muted">Models spotted but never run, with the reason they wait: the <a href={href('watchlist/')}>watchlist</a>.</p>
   {c.forge_models > 0 && (
     <p class="small muted">Private fine-tune checkpoints are counted apart: <Num value={c.forge_models} href={href('forge/')} /> on the <a href={href('forge/')}>forge page</a>.</p>
@@ -38,34 +54,42 @@ const c = counts();
   ) : (
     <Table
       label="models"
+      rowFilters={[
+        { key: 'hardware', label: 'successful run on', values: HARDWARE_IDS.map((hw) => ({ value: hw, label: hwShort(hw) })) },
+        { key: 'task', label: 'task measured', values: [
+          { value: 'tuteur/v1', label: 'Tutoring / explanations' },
+          { value: 'code/v1', label: 'One-shot code' },
+          { value: 'code-loop/v1', label: 'Agent code loop' },
+          { value: 'document/v1', label: 'Documents / OCR' },
+          { value: 'vision/v1', label: 'Image understanding' },
+          { value: 'raison/v1', label: 'Reasoning' },
+          { value: 'volume/v1', label: '3D generation' },
+          { value: 'audio/v1', label: 'Audio' },
+        ] },
+      ]}
       filters={[
-        { col: 2, label: 'category', values: uniq(list.map((m) => m.category)) },
-        { col: 3, label: 'verdict', values: uniq(list.map((m) => STATUS_LABEL[m.verdict.status] ?? m.verdict.status)) },
-        { col: 5, label: 'access', values: uniq(list.map((m) => m.access)) },
+        { col: 7, label: 'category', values: uniq(list.map((m) => m.category)) },
+        { col: 4, label: 'verdict', values: uniq(list.map((m) => STATUS_LABEL[m.verdict.status] ?? m.verdict.status)) },
+        { col: 9, label: 'access', values: uniq(list.map((m) => m.access)) },
       ]}
     >
       <table>
         <thead>
           <tr>
             <th scope="col" data-sort>Model</th>
+            {HARDWARE_IDS.map((hw) => <th scope="col" class="num" data-sort="num">{hwShort(hw)}</th>)}
+            <th scope="col" data-sort>Verdict</th>
+            <th scope="col" class="num" data-sort="num" title="distinct runs (copies of earlier runs not counted)">Runs</th>
             <th scope="col" data-sort>Vendor</th>
             <th scope="col" data-sort>Category</th>
-            <th scope="col" data-sort>Verdict</th>
             <th scope="col" data-sort>Licence</th>
             <th scope="col" data-sort>Access</th>
-            {HARDWARE_IDS.map((hw) => <th scope="col" class="num" data-sort="num">{hwShort(hw)}</th>)}
-            <th scope="col" class="num" data-sort="num" title="distinct runs (copies of earlier runs not counted)">Runs</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map(({ m, runs, heads, ran }) => (
-            <tr>
+          {rows.map(({ m, runs, heads, ran, hardware, tasks }) => (
+            <tr data-hardware={hardware.join(' ')} data-task={tasks.join(' ')}>
               <td><div class="cell-min"><a href={modelHref(m.slug)}>{m.name}</a><br /><span class="mono small muted break">{m.model_id}</span></div></td>
-              <td class="small">{m.vendor}</td>
-              <td class="small" data-f={m.category}>{m.category}</td>
-              <td data-f={STATUS_LABEL[m.verdict.status] ?? m.verdict.status} data-v={m.verdict.status}><StatusBadge status={m.verdict.status} /></td>
-              <td class="small mono lic">{m.licence.name}</td>
-              <td class="small" data-f={m.access}>{m.access}</td>
               {heads.map((r, i) => (
                 <td class="num" data-v={r ? String(soloTokS(r)) : ''}>
                   {r ? <><Num value={soloTokS(r)} unit="tok/s" run={r.run_id} />{splitGroup(r) === 'cpu-offload' && <span class="muted small" title="part of the model was held in system RAM"><br />+ system RAM</span>}</>
@@ -73,7 +97,12 @@ const c = counts();
                     : <span class="num-null" title="not run on this configuration">—</span>}
                 </td>
               ))}
+              <td data-f={STATUS_LABEL[m.verdict.status] ?? m.verdict.status} data-v={m.verdict.status}><StatusBadge status={m.verdict.status} /></td>
               <td class="num" data-v={String(runs)}><Num value={runs} href={`${modelHref(m.slug)}#runs`} /></td>
+              <td class="small">{m.vendor}</td>
+              <td class="small" data-f={m.category}>{m.category}</td>
+              <td class="small mono lic">{m.licence.name}</td>
+              <td class="small" data-f={m.access}>{m.access}</td>
             </tr>
           ))}
         </tbody>

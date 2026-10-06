@@ -15,6 +15,18 @@ to its evidence.**
 
 **Version: v0 (2026-10-02).** The first public version.
 
+**Start with your cards and task:** [the site](https://florent-pro-ch.github.io/rtx3090fe-model-tests/)
+links successful runs on one card or an NVLink pair to tutoring, code, document,
+vision and other task measurements. Open a model's page for measured fit, exact
+build and launch settings, speed, task scores and limitations. A lab verdict such
+as “rated, no role” describes its place in the lab; it does not decide its value
+for your application. Three cards and one model across four cards are not measured
+here. A successful run can include system-RAM offload, which is labelled.
+
+The version names the initial release; **data as of** below describes the current
+measurement snapshot. The site footer identifies its public source commit and the
+private lab commit recorded in [export-receipt.json](export-receipt.json).
+
 This repository holds every model test run on a small lab rig of RTX 3090
 Founders Edition cards wired as two NVLink pairs: the frozen benches, a typed
 record of every model, build and run, the evidence behind each run, the
@@ -98,6 +110,12 @@ estimating it. The rig and the topology fields are described in
 [methodology/TOPOLOGY.md](methodology/TOPOLOGY.md).
 
 ## How to read a result
+
+For the observable path from discovery to selection, startup, measurement,
+retest, verdict and publication, read the site's
+[model lifecycle](https://florent-pro-ch.github.io/rtx3090fe-model-tests/methodology/#from-discovery-to-site).
+An announcement or watchlist entry is not a measurement. A candidate carried into
+a cumulative ranking is not automatically retested.
 
 - **Speed** is measured with one fixed protocol wherever it can be, the house
   speed protocol (`speed-house/v1`): a French prompt, one solo request, then

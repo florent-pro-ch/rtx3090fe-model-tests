@@ -9,14 +9,24 @@
  * is simply static.
  */
 interface Filter { col: number; label: string; values: (string | { value: string; label: string })[] }
-interface Props { label?: string; search?: boolean; filters?: Filter[] }
-const { label = 'table', search = true, filters = [] } = Astro.props;
-const showTools = search || filters.length > 0;
+interface RowFilter { key: string; label: string; values: { value: string; label: string }[] }
+interface Props { label?: string; search?: boolean; filters?: Filter[]; rowFilters?: RowFilter[] }
+const { label = 'table', search = true, filters = [], rowFilters = [] } = Astro.props;
+const showTools = search || filters.length > 0 || rowFilters.length > 0;
 ---
 <div data-table>
   {showTools && (
     <div class="table-tools">
       {search && <input type="search" data-filter placeholder="Filter rows…" aria-label={`Filter ${label}`} />}
+      {rowFilters.map((f) => (
+        <label class="small muted">
+          {f.label}{' '}
+          <select data-filter-row={f.key} aria-label={`${f.label} filter`}>
+            <option value="">all</option>
+            {f.values.map((v) => <option value={v.value}>{v.label}</option>)}
+          </select>
+        </label>
+      ))}
       {filters.map((f) => (
         <label class="small muted">
           {f.label}{' '}

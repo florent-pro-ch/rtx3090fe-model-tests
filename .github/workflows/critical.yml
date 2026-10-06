@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   gates:
-    name: gates and site build
+    name: critical gates and site build
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:

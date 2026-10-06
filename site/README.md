@@ -37,7 +37,16 @@ staging export), set `RTX_REPO_ROOT=/path/to/tree`.
 
 The build works with empty or partial data: a missing folder reads as an empty
 list, an unreadable JSON file is skipped with a `[data]` warning, and missing
-fields get neutral defaults.
+fields get neutral defaults. This tolerance is for local inspection: publication
+requires strict schema validation and the full-export/G1 receipt gate, which fail
+on an incomplete or changed exported source tree.
+
+The home page starts with recorded hardware fit and intended task. Model filters
+can be combined, and incoming `?hardware=…&task=…` links select only known options.
+“Successful run” includes labelled system-RAM offload; “task measured” means a
+measurement exists, not that the model passed. The judge banner displays the
+leading candidates' cross-judge disagreement in visible text, not only tooltips.
+Every footer identifies the public source commit and the export source/digest.
 
 ## How it is put together
 

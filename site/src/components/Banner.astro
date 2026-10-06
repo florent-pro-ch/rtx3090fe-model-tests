@@ -20,6 +20,7 @@
  * by default.
  */
 import { href } from '../lib/site';
+import Num from './Num.astro';
 import {
   CLOUD_GATE_ANCHOR, JUDGES, LOT_B_ANCHOR, judgeAudit, judgeBannerMarkdown, judgeKeysOf, judgeRobustness, isJudged, isTwoOrders,
   latestRankingPerBench, robustnessFigures, ROBUSTNESS_ANCHOR, ROBUSTNESS_INFO,
@@ -46,6 +47,7 @@ const robust = robustness && kind === 'judge'
       .filter((x) => x.jr && x.jr.status !== 'untested')
   : [];
 const twoOrders = robust.length > 0 && robust.every((x) => isTwoOrders(x.jr));
+const leaders = robust.map(({ k, jr }) => ({ k, jr: jr!, top: jr!.top.find((t) => t.k === 10) })).filter((x) => x.top);
 const audit = robustness ? judgeAudit() : null;
 const md = kind === 'judge' && one ? judgeBannerMarkdown(one) : null;
 const html = md ? renderMarkdown(md.markdown, md.file) : null;
@@ -60,6 +62,7 @@ const L = JUDGES.local;
         <strong>This model is also the local judge</strong>, which grades {L.scope}. It never grades its own answers:
         in the tutoring and code tables they are graded by {T.name}, like every other row.
       </p>
+
     )}
     {html ? (
       <div class="banner-md" set:html={html} />
@@ -84,6 +87,16 @@ const L = JUDGES.local;
       </p>
     )}
     {!html && !selfPage && <p class="small"><a href={href('methodology/judge/')}>How the judges work and what they get wrong</a>.</p>}
+      {leaders.length > 0 && <p class="small">
+        <strong>The leading candidates can disagree even when the whole table is stable.</strong>{' '}
+        {leaders.map(({ k, top }, i) => <>
+          {i > 0 && '; '}
+          <a href={rankingHref(k.ranking_id)}>{k.bench_id.split('/')[0]}</a>, first <Num value={top!.rows} href={rankingHref(k.ranking_id)} /> rows both judges ranked:
+          {' '}τ <Num value={top!.kendall_tau} digits={2} href={rankingHref(k.ranking_id)} />
+          {top!.places_changed !== null && <>, <Num value={top!.places_changed} href={rankingHref(k.ranking_id)} /> changed places</>}
+          {top!.kendall_tau < 0.6 && <strong class="tone-amber"> · order is judge-sensitive</strong>}
+        </>)}. A whole-table badge is not proof that the top candidates keep their order.
+      </p>}
     {robustness ? (
       <p class="banner-row small">
         {robust.length > 0 && (
