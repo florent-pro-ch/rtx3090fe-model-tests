@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 116 models, 279 runs (+40 copies), 14 benches, data as of 2026-10-14. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 119 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 136 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 123 models, 287 runs (+40 copies), 14 benches, data as of 2026-10-14. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 123 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 137 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -42,14 +42,14 @@ here.
 
 | What | Count |
 |---|---:|
-| Models (upstream, public) | **116** |
+| Models (upstream, public) | **123** |
 | Private fine-tune checkpoints, counted apart | 30 |
-| Builds (quantisations, GGUFs, adapters) | 139 |
-| Runs (distinct run records) | **279** (+40 copies) |
-| &nbsp;&nbsp;· on one card (`1x3090fe`) | 119 (+15 copies) |
-| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 136 (+3 copies) |
+| Builds (quantisations, GGUFs, adapters) | 147 |
+| Runs (distinct run records) | **287** (+40 copies) |
+| &nbsp;&nbsp;· on one card (`1x3090fe`) | 123 (+15 copies) |
+| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 137 (+3 copies) |
 | &nbsp;&nbsp;· on both pairs as one configuration (`2x2x3090fe-nvlink`) | 0 |
-| &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 4 |
+| &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 7 |
 | &nbsp;&nbsp;· topology unknown | 20 (+22 copies) |
 | Frozen benches | 14 |
 | Campaigns | 48 |

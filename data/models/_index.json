@@ -101,6 +101,17 @@
   },
   {
     "builds": [
+      "cloudflare/clef@gguf-q4_k_m"
+    ],
+    "category": "other",
+    "model_id": "cloudflare/clef",
+    "name": "Clef 27B",
+    "slug": "cloudflare__clef",
+    "vendor": "Cloudflare",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "coherelabs/north-micro-vision-instruct@bf16"
     ],
     "category": "vlm",
@@ -109,6 +120,29 @@
     "slug": "coherelabs__north-micro-vision-instruct",
     "vendor": "Cohere Labs",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "contrastive-lm/clm-v0.1-8b@bf16-encoder-f32-heads"
+    ],
+    "category": "other",
+    "model_id": "contrastive-lm/clm-v0.1-8b",
+    "name": "CLM v0.1 8B",
+    "slug": "contrastive-lm__clm-v0.1-8b",
+    "vendor": "Contrastive-LM",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "convaiinnovations/laya@f32-cpu-en",
+      "convaiinnovations/laya@f32-cpu-multilingual"
+    ],
+    "category": "other",
+    "model_id": "convaiinnovations/laya",
+    "name": "Laya",
+    "slug": "convaiinnovations__laya",
+    "vendor": "ConvAI Innovations",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
@@ -131,6 +165,17 @@
     "slug": "cross-encoder__ms-marco-minilm-l-6-v2",
     "vendor": "sentence-transformers",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "cua-ai/cua-s1-forms@native-tinyx"
+    ],
+    "category": "interface",
+    "model_id": "cua-ai/cua-s1-forms",
+    "name": "CUA S1 Forms",
+    "slug": "cua-ai__cua-s1-forms",
+    "vendor": "CUA",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
@@ -670,6 +715,17 @@
   },
   {
     "builds": [
+      "nvidia/nemotron-3-diarization@native-nemo-coupled"
+    ],
+    "category": "asr",
+    "model_id": "nvidia/nemotron-3-diarization",
+    "name": "Nemotron 3 Diarization + multitalker Parakeet",
+    "slug": "nvidia__nemotron-3-diarization",
+    "vendor": "NVIDIA",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b@gguf-q4_k_m-ollama",
       "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b@w4a16"
     ],
@@ -701,6 +757,17 @@
     "slug": "openai__whisper-large-v3-turbo",
     "vendor": "OpenAI (CTranslate2 conversion)",
     "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "openbmb/minicpm-v-4.7-1b@gguf-f16"
+    ],
+    "category": "vlm",
+    "model_id": "openbmb/minicpm-v-4.7-1b",
+    "name": "MiniCPM-V 4.7 1B",
+    "slug": "openbmb__minicpm-v-4.7-1b",
+    "vendor": "OpenBMB",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
@@ -788,6 +855,17 @@
     "name": "PaddleOCR-VL-1.5",
     "slug": "paddlepaddle__paddleocr-vl-1.5",
     "vendor": "Baidu (PaddlePaddle)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "paradigma-inc/limite-1b-violetto@bf16-native"
+    ],
+    "category": "llm",
+    "model_id": "paradigma-inc/limite-1b-violetto",
+    "name": "Limite 1B Violetto",
+    "slug": "paradigma-inc__limite-1b-violetto",
+    "vendor": "Paradigma",
     "verdict_status": "rated-no-role"
   },
   {
