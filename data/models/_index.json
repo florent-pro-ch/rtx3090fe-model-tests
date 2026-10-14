@@ -112,6 +112,17 @@
   },
   {
     "builds": [
+      "conwayresearch/underdog-saluki-27b-1.0@gguf-iq2-mix"
+    ],
+    "category": "llm",
+    "model_id": "conwayresearch/underdog-saluki-27b-1.0",
+    "name": "Underdog Saluki 27B 1.0",
+    "slug": "conwayresearch__underdog-saluki-27b-1.0",
+    "vendor": "ConwayResearch",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "cross-encoder/ms-marco-minilm-l-6-v2@unknown"
     ],
     "category": "reranker",
@@ -469,6 +480,17 @@
   },
   {
     "builds": [
+      "jialinyyzz/humanizer@gguf-q8_0"
+    ],
+    "category": "llm",
+    "model_id": "jialinyyzz/humanizer",
+    "name": "Humanizer 12B",
+    "slug": "jialinyyzz__humanizer",
+    "vendor": "jialinyyzz",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "jinaai/jina-ocr-v1@bf16"
     ],
     "category": "ocr",
@@ -487,6 +509,17 @@
     "name": "LightOnOCR-2-1B",
     "slug": "lightonai__lightonocr-2-1b",
     "vendor": "LightOn",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "liquidai/d1-omni-600m@f32-cpu-f16-gpu"
+    ],
+    "category": "other",
+    "model_id": "liquidai/d1-omni-600m",
+    "name": "d1-omni-600M",
+    "slug": "liquidai__d1-omni-600m",
+    "vendor": "LiquidAI",
     "verdict_status": "rated-no-role"
   },
   {
@@ -668,6 +701,17 @@
     "slug": "openai__whisper-large-v3-turbo",
     "vendor": "OpenAI (CTranslate2 conversion)",
     "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "openbmb/minicpm-v-4.7-35b-a3b@gguf-q4_k_m"
+    ],
+    "category": "vlm",
+    "model_id": "openbmb/minicpm-v-4.7-35b-a3b",
+    "name": "MiniCPM-V 4.7 35B-A3B",
+    "slug": "openbmb__minicpm-v-4.7-35b-a3b",
+    "vendor": "OpenBMB",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
@@ -974,6 +1018,17 @@
     "slug": "stardoc-ai__teleocr",
     "vendor": "StarDoc-AI / TeleAI",
     "verdict_status": "not-rated"
+  },
+  {
+    "builds": [
+      "supersoniclabs/julia-1@f32-cpu"
+    ],
+    "category": "other",
+    "model_id": "supersoniclabs/julia-1",
+    "name": "Julia-1",
+    "slug": "supersoniclabs__julia-1",
+    "vendor": "SupersonicLabs",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

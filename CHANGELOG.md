@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-10-14 — model watch: five measured models and next-lot preparation
+
+Five public models now have reviewed aggregate records: MiniCPM-V4.7
+35B-A3B, Underdog Saluki27B, Humanizer12B, d1-omni600M and Julia-1.
+Document/exact-reasoning results retain their frozen oracle protocols; the
+objective-only code subset is not a complete judged code grade. The native
+choice and rewrite pilots remain synthetic, their repeated requests are
+correlated, and human style review is pending. Saluki's single agent pass is
+not a stable agent ranking. French speed concurrency queues on one slot;
+no energy measurement or English speed comparison is invented.
+
+Six aggregate records describe the actual placements, including d1's CPU
+and GPU paths. Raw model responses, prompts, keys, logs and private machine
+facts are withheld. The next seven-candidate dossier is explicitly not-run;
+archive verification, storage rotation and model execution are pending.
+The complete export receipt, CI and Pages must match the published revision.
+Existing rankings are not recalculated from these heterogeneous pilots.
+
+
 Every release says what changed in the published data, never only in the
 prose. A figure removed or corrected after publication is also logged in
 [data/errata.json](data/errata.json).

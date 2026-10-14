@@ -1,0 +1,19 @@
+{
+  "build_id": "conwayresearch/underdog-saluki-27b-1.0@gguf-iq2-mix",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "inventory_id": "watch14-saluki",
+  "model_id": "conwayresearch/underdog-saluki-27b-1.0",
+  "parse_notes": [],
+  "quant": {
+    "bits": 2,
+    "format": "gguf",
+    "label": "IQ2-mix (only this text quantization tested)"
+  },
+  "runs_count": 1,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "ConwayResearch/Underdog-Saluki-27B-1.0"
+}
