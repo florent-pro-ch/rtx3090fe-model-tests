@@ -257,6 +257,17 @@
   },
   {
     "builds": [
+      "dmis-lab/ultrabert-embed-150m@f32-cpu-cls"
+    ],
+    "category": "embedding",
+    "model_id": "dmis-lab/ultrabert-embed-150m",
+    "name": "UltraBERT-Embed-150M",
+    "slug": "dmis-lab__ultrabert-embed-150m",
+    "vendor": "DMIS Lab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "dots-studio/dots.ocr@bf16",
       "dots-studio/dots.ocr@unknown-2026-07"
     ],
@@ -558,12 +569,34 @@
   },
   {
     "builds": [
+      "lightonai/lightonocr-3-1b@bf16-native"
+    ],
+    "category": "ocr",
+    "model_id": "lightonai/lightonocr-3-1b",
+    "name": "LightOnOCR-3-1B",
+    "slug": "lightonai__lightonocr-3-1b",
+    "vendor": "LightOn",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "liquidai/d1-omni-600m@f32-cpu-f16-gpu"
     ],
     "category": "other",
     "model_id": "liquidai/d1-omni-600m",
     "name": "d1-omni-600M",
     "slug": "liquidai__d1-omni-600m",
+    "vendor": "LiquidAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "liquidai/lfm2.5-24b-a2b@gguf-q4_k_m"
+    ],
+    "category": "moe-llm",
+    "model_id": "liquidai/lfm2.5-24b-a2b",
+    "name": "LFM2.5-24B-A2B",
+    "slug": "liquidai__lfm2.5-24b-a2b",
     "vendor": "LiquidAI",
     "verdict_status": "rated-no-role"
   },
