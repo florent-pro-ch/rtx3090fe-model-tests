@@ -1,0 +1,19 @@
+{
+  "build_id": "cua-ai/cua-s1-forms@native-tinyx",
+  "engine_family": "other",
+  "harness_ids": [],
+  "inventory_id": "watch14-lot2-cua-s1-forms",
+  "model_id": "cua-ai/cua-s1-forms",
+  "parse_notes": [],
+  "quant": {
+    "bits": 32,
+    "format": "other",
+    "label": "Native tinyx safetensors; 706048 trainable parameters"
+  },
+  "runs_count": 1,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "cua-ai/cua-s1-forms"
+}
