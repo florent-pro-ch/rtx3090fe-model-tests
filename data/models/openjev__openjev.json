@@ -14,7 +14,9 @@
   "first_tested": "2026-10-15",
   "last_tested": "2026-10-15",
   "licence": {
-    "flags": [],
+    "flags": [
+      "non-commercial"
+    ],
     "name": "CC-BY-NC-4.0",
     "source": "Publisher pinned metadata reviewed, 2026-10-15"
   },
