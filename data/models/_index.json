@@ -525,6 +525,17 @@
   },
   {
     "builds": [
+      "jaredpalmer/kev-4b@bf16-native-pointer"
+    ],
+    "category": "other",
+    "model_id": "jaredpalmer/kev-4b",
+    "name": "Kev-4B",
+    "slug": "jaredpalmer__kev-4b",
+    "vendor": "Jared Palmer",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "jetspec/jetspec-qwen3-8b@bf16"
     ],
     "category": "draft-head",
@@ -834,6 +845,17 @@
     "slug": "openbmb__minicpm5-2b-dspark",
     "vendor": "OpenBMB",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "openjev/openjev@q4_k_m"
+    ],
+    "category": "other",
+    "model_id": "openjev/openjev",
+    "name": "OpenJev 27B",
+    "slug": "openjev__openjev",
+    "vendor": "OpenJev",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
