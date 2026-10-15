@@ -958,6 +958,17 @@
   },
   {
     "builds": [
+      "qwen/qwen-image-2.1-turbo@q4_k_m-turbo"
+    ],
+    "category": "image-gen",
+    "model_id": "qwen/qwen-image-2.1-turbo",
+    "name": "Qwen-Image-2.1 Turbo",
+    "slug": "qwen__qwen-image-2.1-turbo",
+    "vendor": "Qwen",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "qwen/qwen-image-20b@gguf-q4_k_m"
     ],
     "category": "image-gen",
@@ -1140,6 +1151,28 @@
     "slug": "sahilchachra__qwen3.6-35b-a3b-uncensored-heretic",
     "vendor": "sahilchachra",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "speridlabs/iris-3b-depth@f32-native-depth"
+    ],
+    "category": "other",
+    "model_id": "speridlabs/iris-3b-depth",
+    "name": "Iris-3B Depth",
+    "slug": "speridlabs__iris-3b-depth",
+    "vendor": "Sperid Labs",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "speridlabs/iris-3b-turbo@f32-native-turbo"
+    ],
+    "category": "image-gen",
+    "model_id": "speridlabs/iris-3b-turbo",
+    "name": "Iris-3B Turbo",
+    "slug": "speridlabs__iris-3b-turbo",
+    "vendor": "Sperid Labs",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

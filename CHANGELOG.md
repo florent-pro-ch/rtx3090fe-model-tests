@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-15 — native image feasibility: Iris and Qwen Turbo
+
+Three newly measured checkpoints add closed scalar run records: Iris-3B Turbo
+with 24 fixed text-to-image outputs, Iris-3B Depth with 8 synthetic depth maps,
+and Qwen-Image-2.1 Turbo Q4_K_M with 24 text-to-image outputs plus 4 fictional
+edits. All 60 fixed outputs are technically valid at 1024x1024. Human semantic
+quality remains unreviewed; no generated image or prompt is published.
+
+Depth region ordering uses frozen visible-region truth medians, with 24/24
+pairwise comparisons correct on 8 simple scenes. Affine-aligned log-depth error
+and its constant baseline are in the run; this is no metric-distance or
+real-image benchmark. Native runtime corrections, timing scope differences,
+allocator versus sampled device memory and noncommercial Qwen Research terms
+remain explicit. No role or new quality/speed ranking is adopted. Existing
+OpenJev noncommercial flag now matches its already recorded licence name.
+
 ## 2026-10-15 — OpenJev and Kev native decision pilots
 
 Two previously unmeasured local candidates now have model, build and closed
