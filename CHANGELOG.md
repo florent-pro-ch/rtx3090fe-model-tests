@@ -2,6 +2,11 @@
 
 ## 2026-10-15 — native image feasibility: Iris and Qwen Turbo
 
+Correction: Qwen device-memory sampling is now limited to its own continuation
+window. Earlier supervision also covered another engine and overstated Qwen
+memory. The corrected run and evidence supersede that single field; generated
+outputs, request timings and depth measurements are unchanged.
+
 Three newly measured checkpoints add closed scalar run records: Iris-3B Turbo
 with 24 fixed text-to-image outputs, Iris-3B Depth with 8 synthetic depth maps,
 and Qwen-Image-2.1 Turbo Q4_K_M with 24 text-to-image outputs plus 4 fictional
