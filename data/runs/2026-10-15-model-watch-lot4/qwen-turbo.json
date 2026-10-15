@@ -28,7 +28,7 @@
     "planned_outputs": 28,
     "request_errors": 0,
     "runtime_preflight_failures": 1,
-    "sampled_peak_gpu_memory_mib": 13355.0,
+    "sampled_peak_gpu_memory_mib": 11361,
     "sampled_peak_temperature_c": 68.0,
     "startup_canary_forward_requests": 1,
     "t2i_outputs": 24,
