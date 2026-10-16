@@ -16,7 +16,7 @@
   ],
   "category": "moe-llm",
   "first_tested": "2026-08-12",
-  "last_tested": "2026-09-21",
+  "last_tested": "2026-10-16",
   "licence": {
     "flags": [],
     "name": "OpenMDW-1.1",
@@ -31,7 +31,7 @@
   ],
   "model_id": "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b",
   "name": "NVIDIA Nemotron 3.5 Lightning 30B-A3B",
-  "notes": null,
+  "notes": "Review dated 2026-10-16: exact GotoAI quantizer OpenMDW-1.1 text matches current NVIDIA base text; the consumed base revision is unknown. No NVIDIA endorsement or generated-text rights guarantee is inferred.",
   "params_b_active": 3.8,
   "params_b_total": 31.8,
   "parse_notes": [

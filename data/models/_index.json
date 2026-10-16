@@ -371,7 +371,8 @@
   },
   {
     "builds": [
-      "google/gemma-4-26b-a4b-it@awq-w4a16"
+      "google/gemma-4-26b-a4b-it@awq-w4a16",
+      "google/gemma-4-26b-a4b-it@gguf-q4_k_m"
     ],
     "category": "vlm",
     "model_id": "google/gemma-4-26b-a4b-it",
@@ -690,7 +691,8 @@
   },
   {
     "builds": [
-      "mistralai/ministral-3-14b-instruct-2512@bnb-4bit-unsloth"
+      "mistralai/ministral-3-14b-instruct-2512@bnb-4bit-unsloth",
+      "mistralai/ministral-3-14b-instruct-2512@gguf-q3_k_s"
     ],
     "category": "llm",
     "model_id": "mistralai/ministral-3-14b-instruct-2512",
@@ -714,7 +716,8 @@
     "builds": [
       "mistralai/mistral-small-3.2-24b-instruct-2506@awq-sym-int4",
       "mistralai/mistral-small-3.2-24b-instruct-2506@bnb-4bit",
-      "mistralai/mistral-small-3.2-24b-instruct-2506@fp8"
+      "mistralai/mistral-small-3.2-24b-instruct-2506@fp8",
+      "mistralai/mistral-small-3.2-24b-instruct-2506@gguf-q4_k_m"
     ],
     "category": "vlm",
     "model_id": "mistralai/mistral-small-3.2-24b-instruct-2506",
@@ -782,6 +785,7 @@
   },
   {
     "builds": [
+      "openai/gpt-oss-20b@gguf-mxfp4",
       "openai/gpt-oss-20b@mxfp4"
     ],
     "category": "moe-llm",
@@ -1210,7 +1214,8 @@
   {
     "builds": [
       "swiss-ai/apertus-8b-instruct-2509@bf16",
-      "swiss-ai/apertus-8b-instruct-2509@bnb-4bit-on-load"
+      "swiss-ai/apertus-8b-instruct-2509@bnb-4bit-on-load",
+      "swiss-ai/apertus-8b-instruct-2509@gguf-q4_k_m"
     ],
     "category": "llm",
     "model_id": "swiss-ai/apertus-8b-instruct-2509",

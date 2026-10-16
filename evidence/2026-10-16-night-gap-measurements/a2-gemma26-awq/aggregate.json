@@ -1,0 +1,21 @@
+{
+  "limitations": [
+    "Closed local public/synthetic observations. No generated answer, prompt, answer key, weight or machine log is included; no role is adopted and no global judge ranking is updated.",
+    "Strict campaign queue order was not fully respected. The first A2 clock was 165.97 minutes against 165; B3 retained 67.04 minutes but spanned 103.38 minutes including initial wait against a 90-minute budget. Numerical measurements and procedural compliance remain distinct.",
+    "Quality not observed or awaiting the established judge remains unknown, never a zero. Independent numerical facts do not establish rights in model weights or generated text.",
+    "Same six frozen tasks repeated, not independent new problems. Oracle verdict and agent process return code are separate.",
+    "Historical figures are context only, not new night observations. A2 strict-order and clock deviations remain in the campaign report.",
+    "Historical pass counts are not added to these new night observations."
+  ],
+  "metrics": {
+    "fresh_pass1_tasks_passed": 2,
+    "fresh_pass2_tasks_passed": 1,
+    "fresh_passes": 2,
+    "tasks_per_pass": 6
+  },
+  "protocol": "selected-night-observations/v1",
+  "quality": [],
+  "source": {
+    "source_id": "src-00e6099b15f3188f"
+  }
+}

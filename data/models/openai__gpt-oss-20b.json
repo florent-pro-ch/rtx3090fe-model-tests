@@ -5,16 +5,18 @@
       "gpt-oss-20b"
     ],
     "inventory_ids": [
-      "gpt-oss-20b-mxfp4"
+      "gpt-oss-20b-mxfp4",
+      "night16-gpt-oss20-gguf-mxfp4"
     ]
   },
   "arch": "moe",
   "builds": [
+    "openai/gpt-oss-20b@gguf-mxfp4",
     "openai/gpt-oss-20b@mxfp4"
   ],
   "category": "moe-llm",
   "first_tested": "2026-08-07",
-  "last_tested": "2026-09-05",
+  "last_tested": "2026-10-16",
   "licence": {
     "flags": [],
     "name": "Apache-2.0",
@@ -51,8 +53,8 @@
   "upstream_url": "https://huggingface.co/openai/gpt-oss-20b",
   "vendor": "OpenAI",
   "verdict": {
-    "as_of": "2026-09-23",
+    "as_of": "2026-10-16",
     "status": "parked",
-    "summary": "OpenAI's open-weight 21B MoE in its native MXFP4. Its only published run is a failed start; no speed or quality number of it is published here."
+    "summary": "OpenAI's open-weight 21B MoE. The historical vLLM MXFP4 failed start is retained. A separate native MXFP4 GGUF build served on one Ampere card on 16 October with llama.cpp b11176. Its speed, reasoning oracle and error-qualified agent-loop outcomes are separate from pending judged code items; no general coding verdict or role adopted."
   }
 }

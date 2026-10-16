@@ -1,5 +1,5 @@
 {
-  "access": "unknown",
+  "access": "open",
   "aliases": {
     "harness_ids": [],
     "inventory_ids": [
@@ -11,8 +11,8 @@
     "qwen/qwen3-coder-30b-a3b@awq-int4"
   ],
   "category": "coder",
-  "first_tested": null,
-  "last_tested": null,
+  "first_tested": "2026-10-16",
+  "last_tested": "2026-10-16",
   "licence": {
     "flags": [],
     "name": "not recorded",
@@ -31,9 +31,9 @@
   "params_b_active": 3.0,
   "params_b_total": 30.0,
   "parse_notes": [
-    "test dates not recorded (before the lab kept dated records)",
-    "upstream repository: no Hugging Face repository found for this id (API answered 401/not found on 2026-10-01) and the lab files name none",
-    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
+    "access: no gating recorded when the lab downloaded it",
+    "first_tested is the first dated record; earlier undated runs (spring-summer 2026) exist",
+    "upstream repository: no Hugging Face repository found for this id (API answered 401/not found on 2026-10-01) and the lab files name none"
   ],
   "slug": "qwen__qwen3-coder-30b-a3b",
   "source": {
@@ -55,6 +55,6 @@
   "verdict": {
     "as_of": "2026-08-05",
     "status": "rejected",
-    "summary": "Listed; no run record published."
+    "summary": "A spring 2026 coding model, run before measurements were kept in a structured form; no measurement of it is published."
   }
 }

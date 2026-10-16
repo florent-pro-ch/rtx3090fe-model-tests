@@ -1,0 +1,32 @@
+{
+  "limitations": [
+    "Closed local public/synthetic observations. No generated answer, prompt, answer key, weight or machine log is included; no role is adopted and no global judge ranking is updated.",
+    "Strict campaign queue order was not fully respected. The first A2 clock was 165.97 minutes against 165; B3 retained 67.04 minutes but spanned 103.38 minutes including initial wait against a 90-minute budget. Numerical measurements and procedural compliance remain distinct.",
+    "Quality not observed or awaiting the established judge remains unknown, never a zero. Independent numerical facts do not establish rights in model weights or generated text.",
+    "Single speed pass, not a triplicate.",
+    "Single llama.cpp slot; c8 is serialized demand.",
+    "Tutor 40 responses/2 truncations, unjudged. Document engine exit139, OOMKilled=false; cause not established. Original procedural COMPLETE is overridden for document by retained FAILED correction.",
+    "Throughput means use the retained passes; dispersion is (maximum minus minimum) divided by mean. GPU aggregate joules per output token is summed aggregate energy divided by summed output tokens, excluding solo and the rest of the machine.",
+    "Tutor quality score: unknown, pending the established judge; mechanical counts are not a quality grade.",
+    "Document quality score: unknown after engine crash; OOMKilled=false is not a cause diagnosis."
+  ],
+  "metrics": {
+    "agg_concurrency": 8,
+    "agg_gpu_joules_per_output_token": 2.562455,
+    "agg_ok": 8,
+    "agg_rep1_tok_s": 131.0,
+    "agg_tok_s": 131.0,
+    "document_engine_exit_code": 139,
+    "repetitions": 1,
+    "solo_rep1_tok_s": 129.8,
+    "solo_tok_s": 129.8,
+    "tutor_request_errors": 0,
+    "tutor_responses": 40,
+    "tutor_truncated": 2
+  },
+  "protocol": "selected-night-observations/v1",
+  "quality": [],
+  "source": {
+    "source_id": "src-00e6099b15f3188f"
+  }
+}

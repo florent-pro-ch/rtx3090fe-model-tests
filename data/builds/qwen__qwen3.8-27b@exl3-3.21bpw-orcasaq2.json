@@ -7,14 +7,19 @@
   "inventory_id": "orcasaq2-27b-exl3-321bpw",
   "model_id": "qwen/qwen3.8-27b",
   "parse_notes": [
+    "Exact revision; first weight SHA matches public pinned LFS metadata.",
+    "Licence/provenance review dated 2026-10-16: Frozen Apache declaration plus current direct-base full Apache text reviewed.",
+    "Measured quantizer revision: 15d20d7e9ae4fd89d1a47878f69381760169445b.",
+    "Primary source: https://huggingface.co/orcarouter/OrcaSAQ-2-27B/blob/15d20d7e9ae4fd89d1a47878f69381760169445b/README.md",
+    "Quantization of vanilla Qwen3.8, not an Orca fine-tune; one-file hash match is not a full public payload recheck.",
     "size_gb read from the inventory's quantisation text"
   ],
   "quant": {
     "bits": 3.21,
-    "format": "other",
+    "format": "exl3",
     "label": "EXL3 3.21 bpw trellis quantisation (OrcaSAQ-2)"
   },
-  "runs_count": 1,
+  "runs_count": 2,
   "size_gb": 12.3,
   "source": {
     "source_id": "src-22c474888f1d7390"

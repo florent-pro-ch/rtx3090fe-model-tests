@@ -16,7 +16,7 @@
   ],
   "category": "vlm",
   "first_tested": "2026-09-04",
-  "last_tested": "2026-10-03",
+  "last_tested": "2026-10-16",
   "licence": {
     "flags": [],
     "name": "Apache-2.0",
@@ -32,12 +32,10 @@
   ],
   "model_id": "google/gemma-4-31b-it",
   "name": "Gemma 4 31B IT",
-  "notes": "The lab registry records this licence both as Apache 2.0 and as 'Gemma 4' terms; the QAT checkpoint that ran is gated on the Hub.",
+  "notes": "Current official Google Gemma4 source evidence checked on 2026-10-16 declares Apache-2.0 and API access not gated. Older registry wording about Gemma terms/gating is historical, not a current acceptance record. The measured CT revision remains unknown. https://ai.google.dev/gemma/apache_2",
   "params_b_active": null,
   "params_b_total": 30.7,
-  "parse_notes": [
-    "access: the lab recorded 'gated', the Hugging Face API says not gated; the card is preferred"
-  ],
+  "parse_notes": [],
   "slug": "google__gemma-4-31b-it",
   "source": {
     "source_id": "src-22c474888f1d7390"

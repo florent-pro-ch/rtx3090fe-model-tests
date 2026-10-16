@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 131 models, 295 runs (+40 copies), 14 benches, data as of 2026-10-15. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 130 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 137 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 131 models, 323 runs (+40 copies), 14 benches, data as of 2026-10-16. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 148 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 147 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -44,15 +44,15 @@ here.
 |---|---:|
 | Models (upstream, public) | **131** |
 | Private fine-tune checkpoints, counted apart | 30 |
-| Builds (quantisations, GGUFs, adapters) | 155 |
-| Runs (distinct run records) | **295** (+40 copies) |
-| &nbsp;&nbsp;· on one card (`1x3090fe`) | 130 (+15 copies) |
-| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 137 (+3 copies) |
+| Builds (quantisations, GGUFs, adapters) | 160 |
+| Runs (distinct run records) | **323** (+40 copies) |
+| &nbsp;&nbsp;· on one card (`1x3090fe`) | 148 (+15 copies) |
+| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 147 (+3 copies) |
 | &nbsp;&nbsp;· on both pairs as one configuration (`2x2x3090fe-nvlink`) | 0 |
 | &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 8 |
 | &nbsp;&nbsp;· topology unknown | 20 (+22 copies) |
 | Frozen benches | 14 |
-| Campaigns | 51 |
+| Campaigns | 52 |
 | Watchlist entries: open-weight models or builds spotted for the rig, not run here when listed | 35 (3 measured later) |
 | &nbsp;&nbsp;· listed apart, not counted above: cloud or API-only models | 8 |
 | &nbsp;&nbsp;· listed apart, not counted above: tools that are not models | 2 |
@@ -62,7 +62,7 @@ an identical copy of an earlier run's record and evidence, carried into a later
 campaign; its `duplicate_of` names the original. Copies are shown apart, as
 "+N copies", and never counted as runs.
 
-Data as of **2026-10-15**, the latest date found in [data/](data/).
+Data as of **2026-10-16**, the latest date found in [data/](data/).
 <!-- /gen:counts -->
 
 ## What is inside
