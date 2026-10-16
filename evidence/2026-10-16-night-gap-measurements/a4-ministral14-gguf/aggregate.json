@@ -1,0 +1,20 @@
+{
+  "limitations": [
+    "Closed local public/synthetic observations. No generated answer, prompt, answer key, weight or machine log is included; no role is adopted and no global judge ranking is updated.",
+    "Strict campaign queue order was not fully respected. The first A2 clock was 165.97 minutes against 165; B3 retained 67.04 minutes but spanned 103.38 minutes including initial wait against a 90-minute budget. Numerical measurements and procedural compliance remain distinct.",
+    "Quality not observed or awaiting the established judge remains unknown, never a zero. Independent numerical facts do not establish rights in model weights or generated text.",
+    "Mechanical response/truncation counts may be reported; no tutor quality score or ranking until established same-judge review.",
+    "Actual Ministral quant is Q3_K_S.",
+    "Tutor quality score: unknown, pending the established judge; mechanical counts are not a quality grade."
+  ],
+  "metrics": {
+    "tutor_request_errors": 0,
+    "tutor_responses": 40,
+    "tutor_truncated": 7
+  },
+  "protocol": "selected-night-observations/v1",
+  "quality": [],
+  "source": {
+    "source_id": "src-00e6099b15f3188f"
+  }
+}

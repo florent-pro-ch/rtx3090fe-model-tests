@@ -18,7 +18,7 @@
   ],
   "category": "moe-llm",
   "first_tested": "2026-09-11",
-  "last_tested": "2026-09-13",
+  "last_tested": "2026-10-16",
   "licence": {
     "flags": [],
     "name": "Apache-2.0",
@@ -34,7 +34,7 @@
   ],
   "model_id": "nex-agi/nex-n2.5-mini",
   "name": "Nex-N2.5-mini",
-  "notes": null,
+  "notes": "Review dated 2026-10-16: Apache-2.0 declared by upstream and both tested quantizer cards; no attached LICENSE text found in examined trees. This is a documentation gap, not a declaration that the model is unlicensed. Exact upstream consumed revisions are not established.",
   "params_b_active": 3.0,
   "params_b_total": 35.0,
   "parse_notes": [

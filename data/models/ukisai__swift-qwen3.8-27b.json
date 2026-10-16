@@ -14,7 +14,7 @@
   ],
   "category": "llm",
   "first_tested": "2026-09-21",
-  "last_tested": "2026-09-22",
+  "last_tested": "2026-10-16",
   "licence": {
     "flags": [
       "revenue-threshold"
@@ -31,7 +31,7 @@
   ],
   "model_id": "ukisai/swift-qwen3.8-27b",
   "name": "Swift-Qwen3.8-27B",
-  "notes": null,
+  "notes": "Swift Open License v1.0 is custom, alongside the Apache Qwen base. Current text reviewed on 2026-10-16 has a commercial threshold around USD 1 million last-completed-fiscal-year gross revenue including affiliates and an Enterprise clause; boundary wording is ambiguous. No entity revenue or licence acceptance is established. Preserve Swift terms/NOTICE for model redistribution. https://huggingface.co/ukisai/Swift-Qwen3.8-27b/blob/6bc57e4eca31ee61d4e92a631978655a78bfa465/LICENSE",
   "params_b_active": null,
   "params_b_total": 27.8,
   "parse_notes": [],
