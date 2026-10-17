@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-17 — NVLink correction, night 2 and Bolt measurements
+
+Correction: the dense NVLink verdict now separates the equal-load single-stream cost (−10.1 %) from the batched −22.1 %, which compares unequal loads (about 2,867 against 3,014 tokens). A separate fixed-load experiment on another dense build and pair (Qwen3.8-27B W4A16 AutoRound, medians of ten passes per arm) measures −0.5 % single stream and −3.2 % at eight requests with only the NCCL peer-to-peer path off, and −13.0 % and −31.4 % with both paths off.
+
+Claude Fable 5.1 graded, through the provider's batch API on 17 October, the tutor/v1 answers of three night builds and the judged code/v1 items of two; these are run-level scores, not ranked, and the grades of Apertus (ChatML artifacts) are withheld. The second night adds one-card three-pass speed means and an independent document/v1 run at 95.9 across 118 synthetic cases. NVIDIA Nemotron 3.5 Bolt 74B-A9B (24GB GGUF) loads a 262,144-token context on one card; its numerical speed, energy, context and reasoning measurements are published, with no pair speed measured.
+
+Withdrawn: 44 run records with their evidence, eleven item-score files, two campaign records, one refusal table, and the rows these runs had in other tables and comparisons. Their sources were reclassified as private lab material on 17 October 2026; the withdrawn figures are not replaced. Tables that ranked these rows beside public ones are recomputed without them; judge-audit blocks whose inputs are no longer exported are kept as last published (data/errata.json).
+
 ## 2026-10-16 — selected night measurements and licence provenance
 
 Twenty-eight result groups across seventeen builds add per-configuration speed

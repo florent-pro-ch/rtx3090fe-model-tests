@@ -39,7 +39,8 @@
     "Quality not observed or awaiting the established judge remains unknown, never a zero. Independent numerical facts do not establish rights in model weights or generated text.",
     "Single speed pass, not a triplicate.",
     "Agent loop 0/6 includes five client max-output-token errors; do not attribute all failures to intrinsic model capability. Conditional GGUF fallback was skipped, not measured.",
-    "Throughput means use the retained passes; dispersion is (maximum minus minimum) divided by mean. GPU aggregate joules per output token is summed aggregate energy divided by summed output tokens, excluding solo and the rest of the machine."
+    "Throughput means use the retained passes; dispersion is (maximum minus minimum) divided by mean. GPU aggregate joules per output token is summed aggregate energy divided by summed output tokens, excluding solo and the rest of the machine.",
+    "Thinking was active on 16 October (no enable_thinking: false at launch). These settings differ from the historical TP2 expert-parallel result; no causal quality comparison is established."
   ],
   "prompt_lang": "fr",
   "protocol": "selected-night-observations/v1",

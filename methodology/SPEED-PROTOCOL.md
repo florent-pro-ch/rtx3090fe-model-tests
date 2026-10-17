@@ -182,7 +182,7 @@ French keys.
   CPU part, on its own protocol, is the second) has its speed figures, the
   house pass in French and its English twin for a language model, but no
   energy figure and no VRAM figure: the card its container could see sat idle, so nothing read
-  from it describes the run.
+  from it describes the run. Since 17 October some one-card headline runs are three-pass arithmetic means, with spread recorded.
 
 ## Other speed protocols
 
@@ -223,3 +223,9 @@ weights with the same command, then send the prompt above (or its English
 twin) with the same options, for example `harness/evalue.py --mode vitesse
 [--prompt-lang en]`; the 2026-10-03 runs sent one short warm-up request
 first.
+
+## Fixed output length
+
+`speed-house/v1-fixedlen` is the house speed pass with thinking off and `ignore_eos`: exactly 512 tokens per answer, 4,096 at eight. Loads are equal across arms. These measurements are never pooled with `speed-house/v1` and never become headline speed.
+
+Three-pass summaries use arithmetic means, population standard deviation and (max−min)/mean spread. Energy efficiency uses total tokens divided by total energy; counter/one-second peak disagreements stay explicit.

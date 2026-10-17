@@ -22,10 +22,7 @@
   },
   "model_id": "qwen/qwen3.6-35b-a3b",
   "parse_notes": [
-    "Closed local public/synthetic observations. No generated answer, prompt, answer key, weight or machine log is included; no role is adopted and no global judge ranking is updated.",
-    "Strict campaign queue order was not fully respected. The first A2 clock was 165.97 minutes against 165; B3 retained 67.04 minutes but spanned 103.38 minutes including initial wait against a 90-minute budget. Numerical measurements and procedural compliance remain distinct.",
-    "Quality not observed or awaiting the established judge remains unknown, never a zero. Independent numerical facts do not establish rights in model weights or generated text.",
-    "Image profiling CUDA allocation failure; do not generalize to all single-GPU recipes."
+    "On 17 October, a separate text-only 262,144-context attempt with batched tokens 2,048 and GPU utilization 0.95 loaded 21.38 GiB of weights but had −0.28 GiB available KV cache: No available memory for the cache blocks. This failed start proves neither a fit nor a maximum context."
   ],
   "prompt_lang": "fr",
   "protocol": "selected-night-observations/v1",

@@ -19,7 +19,7 @@
     "format": "exl3",
     "label": "EXL3 3.21 bpw trellis quantisation (OrcaSAQ-2)"
   },
-  "runs_count": 2,
+  "runs_count": 1,
   "size_gb": 12.3,
   "source": {
     "source_id": "src-22c474888f1d7390"

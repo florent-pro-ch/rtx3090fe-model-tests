@@ -8,11 +8,9 @@
   "modes": [
     "exact-reasoning"
   ],
-  "n_run_records": 9,
-  "n_runs": 9,
+  "n_run_records": 7,
+  "n_runs": 7,
   "run_ids": [
-    "2026-10-05-raison-complements/labo-qwen36-base",
-    "2026-10-05-raison-complements/labo-qwen36-base--on-8192",
     "2026-10-05-raison-complements/veille-ling-30-flash-vl",
     "2026-10-05-raison-complements/veille-minicpm5-2b",
     "2026-10-05-raison-complements/veille-minicpm5-2b--on-8192",

@@ -249,3 +249,6 @@ signs are given for readers of older material:
 | **A/B arm** (`engine_args.ab_arm`) | The role of a run in an A/B experiment: `reference` (the setup as built) or `treatment` (the change under test, such as NVLink switched off in software). A treatment arm is never a headline. |
 | **drafter** | A small model or head that proposes tokens for a larger one in speculative decoding (`engine_args.speculative`). A drafter's model record lists the runs it drafted for in `drafter_runs`; a run with a drafter is never a headline. |
 | **pair A, pair B** | The two NVLink pairs of the rig. See [methodology/TOPOLOGY.md](methodology/TOPOLOGY.md). |
+
+| **fixed-length speed pass** | `speed-house/v1-fixedlen` is the house speed pass with thinking off and `ignore_eos`: exactly 512 tokens per answer, 4,096 at eight. Loads are equal across arms. These measurements are never pooled with `speed-house/v1` and never become headline speed. |
+| **context probe v1.1** | `context-probe/v1.1` keeps one llama.cpp slot, full GPU offload, flash attention and the recorded KV types; doubles context from 16,384 through 262,144; then asks for one fictional French fact at depth 0.5 at each of five lengths, temperature 0, one attempt per point and 256 output tokens. Passing those five needles does not establish general long-context quality. |

@@ -14,7 +14,7 @@
     "format": "awq",
     "label": "AWQ W4A16 asymmetric, group 128, compressed-tensors"
   },
-  "runs_count": 1,
+  "runs_count": 0,
   "size_gb": 19.6,
   "source": {
     "source_id": "src-22c474888f1d7390"

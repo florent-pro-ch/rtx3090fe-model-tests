@@ -1,4 +1,7 @@
 {
+  "caveats": [
+    "Historical dense −10.1 % solo compares equal load; −22.1 % at eight compares unequal loads (2,867 versus 3,014 tokens). Independent AutoRound fixed-load run: −31.4 %, not a correction of the same build."
+  ],
   "description": "One NVLink pair, passed whole to one VM: vLLM splits a model by tensor parallelism over both cards; llama.cpp splits it by layers and can spill the rest to system RAM.",
   "facts": [
     {
@@ -15,7 +18,7 @@
     },
     {
       "evidence": "data/comparisons/nvlink-ab-dense.json",
-      "fact": "NVLink on or off, dense 27B in tensor parallel 2 (software proxy, bridge never removed, one pass per arm): -10.1 % single stream, -22.1 % at eight requests without the bridge's paths."
+      "fact": "NVLink on or off, dense 27B in tensor parallel 2 (software proxy, bridge never removed, one pass per arm): -10.1 % single stream at equal load; -22.1 % at eight requests compares unequal loads (about 2,867 against 3,014 tokens). At fixed load, another dense build on pair A lost 31.4 % (data/comparisons/nvlink-fixed-load-2026-10-16.json)."
     },
     {
       "evidence": "data/comparisons/nvlink-ab-moe.json",

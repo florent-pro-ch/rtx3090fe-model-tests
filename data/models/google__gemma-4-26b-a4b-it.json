@@ -58,7 +58,7 @@
   "upstream_url": "https://huggingface.co/google/gemma-4-26B-A4B-it",
   "vendor": "Google",
   "verdict": {
-    "as_of": "2026-10-16",
+    "as_of": "2026-09-12",
     "status": "rated-no-role",
     "summary": "A 26B MoE in 4-bit on a single card: strong French tutoring a few points under the 31B on two cards at about twice the speed, and the anchor of the vision bench. Also the lab's one-card versus NVLink-pair comparison on the same model. Rated, no role assigned."
   }

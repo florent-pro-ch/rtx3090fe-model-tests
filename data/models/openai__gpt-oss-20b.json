@@ -53,8 +53,8 @@
   "upstream_url": "https://huggingface.co/openai/gpt-oss-20b",
   "vendor": "OpenAI",
   "verdict": {
-    "as_of": "2026-10-16",
+    "as_of": "2026-10-17",
     "status": "parked",
-    "summary": "OpenAI's open-weight 21B MoE. The historical vLLM MXFP4 failed start is retained. A separate native MXFP4 GGUF build served on one Ampere card on 16 October with llama.cpp b11176. Its speed, reasoning oracle and error-qualified agent-loop outcomes are separate from pending judged code items; no general coding verdict or role adopted."
+    "summary": "A local 20B build measured on one card on 16 October. Its code/v1 score covers all 31 items: four judged by Claude Fable 5.1 through the provider's batch API on 17 October, 27 scored mechanically (see its run record). Its speed, reasoning oracle, agent-loop outcome (2/6) and code/v1 score are single-run observations; no general coding verdict or role adopted."
   }
 }

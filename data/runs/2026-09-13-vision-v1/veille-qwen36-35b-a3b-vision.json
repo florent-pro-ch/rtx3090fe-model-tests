@@ -20,7 +20,6 @@
   "evidence": [
     "evidence/2026-09-13-vision-v1/veille-qwen36-35b-a3b-vision/gpu-snapshots.json",
     "evidence/2026-09-13-vision-v1/veille-qwen36-35b-a3b-vision/launch.json",
-    "evidence/2026-09-13-vision-v1/veille-qwen36-35b-a3b-vision/mecanique-refus.json",
     "evidence/2026-09-13-vision-v1/veille-qwen36-35b-a3b-vision/mecanique-vision.json",
     "evidence/2026-09-13-vision-v1/veille-qwen36-35b-a3b-vision/pret-en-secondes.txt",
     "evidence/2026-09-13-vision-v1/veille-qwen36-35b-a3b-vision/vitesse.json"

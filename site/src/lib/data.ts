@@ -1043,6 +1043,8 @@ export function compareHeadline(a: Run, b: Run): number {
 
 /** A run that may carry the headline figure of its model and configuration. */
 function headlineEligible(r: Run): boolean {
+  if (r.protocol === 'speed-house/v1-fixedlen' || (r.engine_args?.parallel_slots === 1 && r.metrics?.agg_concurrency === 8)) return false;
+
   return (
     r.status === 'ok' &&
     !r.duplicate_of &&

@@ -13,7 +13,7 @@
     "sahilchachra/qwen3.6-35b-a3b-uncensored-heretic@awq-int4"
   ],
   "category": "moe-llm",
-  "first_tested": "2026-09-05",
+  "first_tested": "2026-09-06",
   "last_tested": "2026-09-06",
   "licence": {
     "flags": [],
@@ -34,7 +34,8 @@
   "params_b_total": 35.0,
   "parse_notes": [
     "params approximate in the source",
-    "upstream repository identified from the base_model of the quantised build sahilchachra/Qwen3.6-35B-A3B-uncensored-heretic-AWQ (model card)"
+    "upstream repository identified from the base_model of the quantised build sahilchachra/Qwen3.6-35B-A3B-uncensored-heretic-AWQ (model card)",
+    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
   ],
   "slug": "sahilchachra__qwen3.6-35b-a3b-uncensored-heretic",
   "source": {
@@ -56,6 +57,6 @@
   "verdict": {
     "as_of": "2026-09-06",
     "status": "rejected",
-    "summary": "A refusal-ablated Qwen3.6-35B-A3B from the lab's uncensored-model study: on the refusal probe its refusals tied with its base, and it was rejected. Only refusal rates are published for this study."
+    "summary": "Listed; no run record published."
   }
 }

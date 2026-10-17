@@ -18,6 +18,6 @@
     "source_id": "src-35afb1f0fab182c3"
   },
   "status": "closed",
-  "summary": "A dense Qwen3.8-27B (GPTQ INT4) served by vLLM 0.29.0 in tensor parallel 2 on one pair, under three arms: as built, with NCCL peer-to-peer disabled, and with both NCCL peer-to-peer and vLLM's custom all-reduce disabled, the software proxy for a pair without a bridge. Closing both paths cost about a tenth of single-stream speed and about a fifth of eight-request throughput; disabling NCCL peer-to-peer alone measured nothing, a false negative. The bridge was never physically removed, and each arm ran once.",
+  "summary": "Software proxy on Cold-Fusion dense 27B, vLLM TP2: −10.1 % solo at equal load; −22.1 % batched compares 2,867 versus 3,014 tokens, unequal loads. NCCL-only: −0.3 % solo and −1.3 % batched; custom all-reduce still uses the bridge. The separate 16 October fixed-load AutoRound experiment is not pooled with it.",
   "title": "Does the NVLink bridge matter? A dense 27B in tensor parallel 2"
 }

@@ -53,7 +53,7 @@
   "upstream_url": "https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512",
   "vendor": "Mistral AI",
   "verdict": {
-    "as_of": "2026-10-16",
+    "as_of": "2026-09-01",
     "status": "rated-no-role",
     "summary": "Evaluated as a candidate fine-tuning base in 4-bit; as shipped it answers questions about withdrawn documents instead of abstaining. Rated, no role assigned."
   }

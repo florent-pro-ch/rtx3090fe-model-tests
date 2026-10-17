@@ -412,5 +412,5 @@
     }
   ],
   "title": "NVLink bridge on or off (software proxy): a 3B-active mixture-of-experts in tensor parallel 2",
-  "verdict": "Closing both peer-to-peer paths cost 11.5 % of single-stream speed and 24.5 % of eight-request throughput, about what the dense 27B lost (10.1 % and 22.1 %): a sparse model does not let a pair skip the bridge. Unlike the dense model, disabling NCCL peer-to-peer alone already cost 7.2 % of batched throughput."
+  "verdict": "Closing both peer-to-peer paths cost 11.5 % single-stream speed and 24.5 % eight-request throughput at equal load (about 4,096 tokens in every arm): a sparse model does not let a pair skip the bridge. Dense 27B lost 10.1 % single stream; its batched −22.1 % compares unequal loads. NCCL alone cost 7.2 % batched on the MoE, versus dense −1.3 % unequal-load and −3.2 % separate fixed-load."
 }
