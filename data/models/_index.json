@@ -780,7 +780,7 @@
     "name": "NVIDIA Nemotron 3.5 Bolt 74B-A9B 24GB GGUF",
     "slug": "nvidia__nvidia-nemotron-3.5-bolt-74b-a9b-24gb-gguf",
     "vendor": "NVIDIA",
-    "verdict_status": "not-rated"
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
@@ -792,6 +792,17 @@
     "name": "NVIDIA Nemotron 3.5 Lightning 30B-A3B",
     "slug": "nvidia__nvidia-nemotron-3.5-lightning-30b-a3b",
     "vendor": "NVIDIA",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "openai/gpt-oss-120b@gguf-mxfp4"
+    ],
+    "category": "moe-llm",
+    "model_id": "openai/gpt-oss-120b",
+    "name": "gpt-oss-120b",
+    "slug": "openai__gpt-oss-120b",
+    "vendor": "OpenAI",
     "verdict_status": "rated-no-role"
   },
   {
@@ -962,6 +973,17 @@
   },
   {
     "builds": [
+      "prism-ml/ternary-bonsai-2-9b@gguf-pq2_0"
+    ],
+    "category": "llm",
+    "model_id": "prism-ml/ternary-bonsai-2-9b",
+    "name": "Ternary Bonsai 2 9B",
+    "slug": "prism-ml__ternary-bonsai-2-9b",
+    "vendor": "PrismML",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "qwen/qwen-drive-1.0-4b@bf16-vlm"
     ],
     "category": "vlm",
@@ -1041,6 +1063,17 @@
   },
   {
     "builds": [
+      "qwen/qwen3-coder-next@gguf-q4_k_m"
+    ],
+    "category": "coder",
+    "model_id": "qwen/qwen3-coder-next",
+    "name": "Qwen3-Coder-Next",
+    "slug": "qwen__qwen3-coder-next",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "qwen/qwen3-tts-12hz-1.7b-customvoice@bf16"
     ],
     "category": "tts",
@@ -1049,6 +1082,17 @@
     "slug": "qwen__qwen3-tts-12hz-1.7b-customvoice",
     "vendor": "Qwen (Alibaba)",
     "verdict_status": "kept"
+  },
+  {
+    "builds": [
+      "qwen/qwen3.5-9b@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "qwen/qwen3.5-9b",
+    "name": "Qwen3.5-9B",
+    "slug": "qwen__qwen3.5-9b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

@@ -1,0 +1,12 @@
+{
+  "limitations": [
+    "Chat-template parser initialisation failure at start; no model-quality zero."
+  ],
+  "metrics": {
+    "startup_attempts": 1
+  },
+  "protocol": null,
+  "source": {
+    "source_id": "src-5e1f28023a1221a2"
+  }
+}

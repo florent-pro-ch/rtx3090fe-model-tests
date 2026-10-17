@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-18 — Night 3: two big MoE models, each on one NVLink pair; a Qwen3-Coder tool-call adapter; agent loops
+
+gpt-oss-120b (native MXFP4) and Qwen3-Coder-Next 80B-A3B (Qwen's Q4_K_M) each run on its own NVLink pair of RTX 3090 FE, the same night, with the MoE experts of their first 11 and 4 layers kept in system RAM; a predeclared fit search found the split (llama.cpp's -ts must balance the cards, or the first card stays nearly empty). Single stream: 50.4 and 101.7 tok/s.
+
+With a vLLM tool-parser plugin that turns most of Qwen3-Coder's stringified lists into JSON arrays (methodology/ADAPTERS.md), served at a 60,416-token context, its agent loop passed 3/6 (v1) and 4/6 and 5/6 (v2, two loops), against 1/6 in one earlier loop with the stock parser at 16,384; the context changed with the parser, so no size of effect is claimed. Qwen3-Coder-Next: 4/6 and 5/6. Nemotron 3.5 Lightning: 3/6 in each of three one-card loops, 5/6 in a single loop with tensor parallel 2 and expert parallelism (no topology effect is claimed). gpt-oss-120b: 0/6 twice, with the cause recorded.
+
+Bolt on the pair: 86.8 tok/s single stream with layer split (84.5 on one card). Ternary Bonsai 2 9B passes 3/6 like its Qwen3.5-9B Q4_K_M control in one loop each (not the same tasks; two Bonsai tasks were stopped by the harness after 800 s) and grades far lower in French tutoring. Apertus 8B is refused again, by llama.cpp b11176, with its official template. Tutoring and code of 6 runs graded by Claude Fable 5.1 through the batch API (run-level scores, not ranked). Each loop configuration has one to three runs (three only for Nemotron on one card); no role is adopted.
+
+Corrections to the four Nemotron loop records published earlier the same night: prompt_lang en (the six Cline tasks are English), engine-argument keys aligned with the site's (prefix_caching, tool_call_parser, client_context_window, thinking) and the count of tasks stopped by the wall-clock cap (none).
+
 ## 2026-10-17 — NVLink correction, night 2 and Bolt measurements
 
 Correction: the dense NVLink verdict now separates the equal-load single-stream cost (−10.1 %) from the batched −22.1 %, which compares unequal loads (about 2,867 against 3,014 tokens). A separate fixed-load experiment on another dense build and pair (Qwen3.8-27B W4A16 AutoRound, medians of ten passes per arm) measures −0.5 % single stream and −3.2 % at eight requests with only the NCCL peer-to-peer path off, and −13.0 % and −31.4 % with both paths off.
