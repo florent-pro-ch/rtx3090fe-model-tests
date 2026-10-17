@@ -16,7 +16,7 @@
     "format": "gguf",
     "label": "GGUF Q4_K_M (bartowski)"
   },
-  "runs_count": 1,
+  "runs_count": 2,
   "size_gb": null,
   "source": {
     "source_id": "src-22c474888f1d7390"

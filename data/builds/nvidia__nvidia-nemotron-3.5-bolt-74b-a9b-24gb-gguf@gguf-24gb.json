@@ -16,7 +16,7 @@
     "format": "gguf",
     "label": "GGUF 24GB, mixed IQ2_XXS / NVFP4 / Q8_0 tensors (2.38 bpw, NVIDIA's file)"
   },
-  "runs_count": 2,
+  "runs_count": 4,
   "size_gb": 22.02,
   "source_repo": "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF",
   "source_revision": "e0fecb69cb3e5e4c5e8a056fa2aec98c78e91246"

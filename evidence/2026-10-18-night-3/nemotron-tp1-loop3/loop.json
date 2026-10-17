@@ -1,4 +1,5 @@
 {
+  "legend": "rc = exit code of the agent process (124/137 = stopped by the wall-clock cap)",
   "protocol": "code-loop/v1",
   "source": {
     "source_id": "src-7cb5d09dce571bf8"
