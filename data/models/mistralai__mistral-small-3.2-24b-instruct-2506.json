@@ -58,7 +58,7 @@
   "upstream_url": "https://huggingface.co/mistralai/Mistral-Small-3.2-24B-Instruct-2506",
   "vendor": "Mistral AI",
   "verdict": {
-    "as_of": "2026-10-16",
+    "as_of": "2026-09-01",
     "status": "kept",
     "summary": "Dense 24B with good French. The FP8 build was rated without a role (served text-only); an AWQ build from a third party had corrupted weights and was rejected; the full-precision base was kept as the base of the lab's 24B fine-tunes."
   }

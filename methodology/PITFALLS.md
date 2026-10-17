@@ -114,7 +114,7 @@ with the build cache you wanted to keep.
 **14. `NCCL_P2P_DISABLE=1` alone is a false negative** when you try to measure
 what the bridge is worth under vLLM: its custom all-reduce still uses the
 bridge. Add `--disable-custom-all-reduce`. Measured here: with NCCL
-peer-to-peer off alone the dense model barely moved, and the cost only
+peer-to-peer off alone the dense model lost little (−1.3 % at eight requests at unequal load; −3.2 % on another dense build at fixed load), and the cost only
 appeared with both switches
 ([TOPOLOGY.md](TOPOLOGY.md#does-the-nvlink-bridge-matter)).
 

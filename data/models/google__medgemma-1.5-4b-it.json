@@ -1,9 +1,7 @@
 {
   "access": "gated",
   "aliases": {
-    "harness_ids": [
-      "medgemma-15-4b"
-    ],
+    "harness_ids": [],
     "inventory_ids": [
       "medgemma-15-4b-bf16"
     ]
@@ -13,7 +11,7 @@
     "google/medgemma-1.5-4b-it@bf16"
   ],
   "category": "medical-imaging",
-  "first_tested": "2026-09-25",
+  "first_tested": "2026-09-30",
   "last_tested": "2026-09-30",
   "licence": {
     "flags": [

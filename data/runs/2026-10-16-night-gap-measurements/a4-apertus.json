@@ -24,11 +24,7 @@
   },
   "model_id": "swiss-ai/apertus-8b-instruct-2509",
   "parse_notes": [
-    "Chat-template parser initialization failure; no model-quality zero.",
-    "Closed local public/synthetic observations. No generated answer, prompt, answer key, weight or machine log is included; no role is adopted and no global judge ranking is updated.",
-    "Quality not observed or awaiting the established judge remains unknown, never a zero. Independent numerical facts do not establish rights in model weights or generated text.",
-    "Strict campaign queue order was not fully respected. The first A2 clock was 165.97 minutes against 165; B3 retained 67.04 minutes but spanned 103.38 minutes including initial wait against a 90-minute budget. Numerical measurements and procedural compliance remain distinct.",
-    "llama.cpp context: ctx_size 16,384 is split across 1 slots; one request can use 16,384 tokens (engine_args.ctx_per_slot)"
+    "The 15–16 October b10830 attempt failed to start. A separate 17 October attempt with the same GGUF on b10830, without --jinja, rendered ChatML incorrectly: 38/40 literal <|im_end|> artifacts and three invented dialogue turns among five truncations. Those grades are withheld. This is not an Apertus quality verdict."
   ],
   "prompt_lang": "fr",
   "protocol": "selected-night-observations/v1",

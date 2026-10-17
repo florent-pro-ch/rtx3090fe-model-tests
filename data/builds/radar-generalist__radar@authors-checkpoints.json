@@ -1,9 +1,7 @@
 {
   "build_id": "radar-generalist/radar@authors-checkpoints",
   "engine_family": "other",
-  "harness_ids": [
-    "radar"
-  ],
+  "harness_ids": [],
   "inventory_id": "radar-ct-generalist",
   "model_id": "radar-generalist/radar",
   "parse_notes": [],

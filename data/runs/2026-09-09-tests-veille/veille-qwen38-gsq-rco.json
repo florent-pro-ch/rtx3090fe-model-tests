@@ -18,8 +18,6 @@
   "evidence": [
     "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/gpu-snapshots.json",
     "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/launch.json",
-    "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/mecanique-code.json",
-    "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/mecanique-refus.json",
     "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/mecanique-tuteur.json",
     "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/pret-en-secondes.txt",
     "evidence/2026-09-09-tests-veille/veille-qwen38-gsq-rco/vitesse.json"

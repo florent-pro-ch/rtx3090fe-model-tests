@@ -126,8 +126,10 @@ const passes = (r: ComparisonRow) => (isNum(r.n_passes) ? r.n_passes : 1);
           const link = ev ? evidenceLink(ev) : null;
           return <>{i > 0 && ' and '}{link ? <a class="mono" href={link}>{ev}</a> : <span class="mono">{ev ?? 'not recorded'}</span>}</>;
         })}
-        {' '}· <a href={compareHref('nvlink-ab-dense')}>dense A/B</a> · <a href={compareHref('nvlink-ab-moe')}>MoE A/B</a>
+        {' '}Dense batched figure: unequal load. <a href={compareHref('nvlink-fixed-load-2026-10-16')}>Separate fixed-load experiment</a>.{' '}· <a href={compareHref('nvlink-ab-dense')}>dense A/B</a> · <a href={compareHref('nvlink-ab-moe')}>MoE A/B</a>
       </figcaption>
     </figure>
   </Frame>
 )}
+
+<!-- Separate fixed-load observation: data/comparisons/nvlink-fixed-load-2026-10-16.json -->

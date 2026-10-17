@@ -55,7 +55,7 @@
   "upstream_url": "https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509",
   "vendor": "Swiss AI (EPFL / ETH Zurich)",
   "verdict": {
-    "as_of": "2026-10-16",
+    "as_of": "2026-09-06",
     "status": "rated-no-role",
     "summary": "Open dense 8B. As a fine-tuning base it looped and lost knowledge after training and was rejected; in BF16 it was a natively low-refusal control in the lab's uncensored-model study, for which only refusal rates are published."
   }

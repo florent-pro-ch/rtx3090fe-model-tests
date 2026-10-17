@@ -69,8 +69,8 @@ const tiles = configSummaries();
           <div class="finding">
             <p class="finding-k">Finding</p>
             <p>
-              Closing the bridge's peer-to-peer paths cost a dense 27B <Num value={nv.dSolo.value} unit="%" {...rowSrc(nv.dSolo)} /> single stream
-              {nv.dAgg && <> and <Num value={nv.dAgg.value} unit="%" {...rowSrc(nv.dAgg)} /> at eight requests</>}.
+              Closing the bridge's peer-to-peer paths cost a dense 27B <Num value={nv.dSolo.value} unit="%" {...rowSrc(nv.dSolo)} /> single stream at equal load
+              {nv.dAgg && <>;  <Num value={nv.dAgg.value} unit="%" {...rowSrc(nv.dAgg)} /> at eight requests compares unequal loads</>}.
               {' '}<strong class="tone-amber">Software proxy, the bridge never removed</strong>{nvDate && <>, <time class="mono">{nvDate}</time></>}.
               {' '}<a href={compareHref('nvlink-ab-dense')}>dense A/B</a> · <a href={compareHref('nvlink-ab-moe')}>MoE A/B</a>
             </p>

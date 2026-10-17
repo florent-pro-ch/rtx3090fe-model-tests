@@ -15,10 +15,6 @@
     },
     {
       "evidence": "data/comparisons/two-pairs-parallel.json",
-      "fact": "Pair A served a medical vision-language model as 2 engines, one per card, while pair B benchmarked a 27B on one card (22.0 min of overlap)."
-    },
-    {
-      "evidence": "data/comparisons/two-pairs-parallel.json",
       "fact": "Two model-watch candidates were benchmarked at the same time, one per pair (9.4 min of overlap)."
     }
   ],

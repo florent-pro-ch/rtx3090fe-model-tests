@@ -13,7 +13,7 @@
     "nousresearch/hermes-4.3-36b@gguf-q4_k_m"
   ],
   "category": "llm",
-  "first_tested": "2026-09-05",
+  "first_tested": "2026-09-06",
   "last_tested": "2026-09-06",
   "licence": {
     "flags": [],
@@ -32,7 +32,9 @@
   "notes": null,
   "params_b_active": null,
   "params_b_total": 36.0,
-  "parse_notes": [],
+  "parse_notes": [
+    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
+  ],
   "slug": "nousresearch__hermes-4.3-36b",
   "source": {
     "source_id": "src-22c474888f1d7390"
@@ -53,6 +55,6 @@
   "verdict": {
     "as_of": "2026-09-06",
     "status": "rated-no-role",
-    "summary": "A post-train of Seed-OSS-36B used as a natively low-refusal control in the lab's uncensored-model study: on the refusal probe it refused none of the items. Rated, no role assigned; only refusal rates are published for this study."
+    "summary": "Listed; no run record published."
   }
 }

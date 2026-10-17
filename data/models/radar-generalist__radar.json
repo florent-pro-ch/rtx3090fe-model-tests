@@ -1,9 +1,7 @@
 {
   "access": "open",
   "aliases": {
-    "harness_ids": [
-      "radar"
-    ],
+    "harness_ids": [],
     "inventory_ids": [
       "radar-ct-generalist"
     ]

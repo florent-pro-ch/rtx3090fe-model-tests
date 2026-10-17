@@ -13,7 +13,7 @@
     "alonsoko/gemma-4-31b-it-abliterated-heretic@awq-w4a16"
   ],
   "category": "vlm",
-  "first_tested": "2026-09-05",
+  "first_tested": "2026-09-06",
   "last_tested": "2026-09-06",
   "licence": {
     "flags": [],
@@ -34,7 +34,8 @@
   "params_b_active": null,
   "params_b_total": 30.7,
   "parse_notes": [
-    "upstream repository identified from the base_model of the quantised build alonsoko/gemma-4-31b-it-abliterated-heretic-AWQ-W4A16 (model card)"
+    "upstream repository identified from the base_model of the quantised build alonsoko/gemma-4-31b-it-abliterated-heretic-AWQ-W4A16 (model card)",
+    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
   ],
   "slug": "alonsoko__gemma-4-31b-it-abliterated-heretic",
   "source": {
@@ -56,6 +57,6 @@
   "verdict": {
     "as_of": "2026-09-06",
     "status": "rejected",
-    "summary": "A refusal-ablated Gemma 4 31B from the lab's uncensored-model study: on the refusal probe it did not refuse less than its base, and it was rejected. Only refusal rates are published for this study."
+    "summary": "Listed; no run record published."
   }
 }

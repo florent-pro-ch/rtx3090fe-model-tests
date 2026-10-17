@@ -128,7 +128,7 @@ software on bridged cards forces exactly that fallback.
 Both paths were closed in software. A physical A/B could still differ.
 
 **The false negative to avoid.** Setting `NCCL_P2P_DISABLE=1` alone looks like
-a clean experiment and measures almost nothing on a dense model, even though
+a clean experiment and measures a small part of the cost (−3.2 % against −31.4 % at eight requests, fixed load, on another dense build, 2026-10-16, below) on a dense model, even though
 NCCL visibly reconfigures itself. vLLM has its own custom all-reduce over CUDA
 IPC, on by default, and CUDA IPC uses the bridge whatever NCCL was told. The
 cost only appears with `--disable-custom-all-reduce` as well.
@@ -154,17 +154,24 @@ All three arms of both campaigns ran with NCCL's debug logging on
 (`NCCL_DEBUG=INFO`). The dense model's reference arm,
 `2026-09-13-nvlink-ab/with-nvlink`, gave 78.6 tok/s single stream and 396.6
 at eight requests; its launch line without the logging, measured again on
-2026-10-03, gave 79.1 and 528.7. That later run, not the reference arm, is
+2026-10-03, gave 79.1 and 528.7; the two runs also differ in load (about 2,867 against 4,096 tokens at eight, 330 against 512 single stream), so the logging's share cannot be isolated. That later run, not the reference arm, is
 now the model's headline. The percentages above compare arms that all had the
 logging on; whether the logging alone explains the gap was not tested.
 
 **Reading.** Without the bridge, a tensor-parallel pair loses roughly a tenth
-of its single-stream speed and roughly a quarter of its batched throughput,
-for a dense model and for a sparse one alike. The bridge changes **no memory
+of its single-stream speed. Batched throughput: dense: −31.4 % at fixed load (AutoRound, pair A), −22.1 % at unequal load (Cold-Fusion, pair B); MoE: −24.5 % at equal load. The bridge changes **no memory
 figure** (the loaded snapshots of the three arms are within a few hundred MiB
 of each other) and makes no model fit that did not fit before. On the MoE model, cutting NCCL peer-to-peer alone already
 costs some batched throughput, so part of its traffic goes through NCCL even
 with the custom all-reduce on; which part is not established.
+
+**Load correction (dense, 13 September).** Unequal batched load: with no fixed output length, the eight answers totalled about 2,867 tokens (with-nvlink), 3,011 (no-p2p) and 3,014 (no-p2p-no-car), read as agg_tok_s × wall_s. The batched deltas (−1.3 %, −22.1 %) compare different loads; the single-stream deltas (−0.3 %, −10.1 %) compare equal loads (330 tokens in every arm).
+
+**Dense verdict (Cold-Fusion, 13 September).** Closing both peer-to-peer paths cost 10.1 % of single-stream speed at equal load (one pass per arm, NCCL logging on). The batched −22.1 % compares about 2,867 against 3,014 tokens and is not a fixed-load figure. vLLM's custom all-reduce keeps using the bridge, so disabling NCCL peer-to-peer alone is a false negative.
+
+**Fixed-load observation (16 October).** Fixed load, another model: Qwen3.8-27B W4A16 AutoRound (qwen/qwen3.8-27b@w4a16-autoround), pair A, vLLM 0.29.0 TP2, 2026-10-16, 512 tokens per answer (4,096 at eight), arms 1-2-3-3-2-1, medians of 10 passes per arm in two blocks of five, each after a discarded warm-up, no NCCL logging when timed, other pair idle. NCCL peer-to-peer off: −0.5 % single stream (76.2 → 75.8), −3.2 % at eight (479.8 → 464.6). Both paths off: −13.0 % (66.3) and −31.4 % (329.2). Spread ≤ 0.56 % within a block; between blocks ≤ 0.31 % at eight and ≤ 0.52 % single stream, so the −0.5 % single-stream step is within drift. Time to first token unchanged. Different model, quantization, settings and pair: it does not replace the Cold-Fusion figures.
+
+Fixed-load data: [comparison](../data/comparisons/nvlink-fixed-load-2026-10-16.json), [three arm records](../data/runs/2026-10-16-nvlink-fixed-load/), [thirty timed passes](../evidence/2026-10-16-nvlink-fixed-load/).
 
 **What these campaigns do not cover:** a physical unplug of the bridge;
 `nccl-tests` or `nvbandwidth` measurements of the link; any llama.cpp run

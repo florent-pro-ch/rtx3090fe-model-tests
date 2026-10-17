@@ -13,7 +13,7 @@
     "orcarouter/qwen3.8-27b-uncensored@w4a16-autoround"
   ],
   "category": "vlm",
-  "first_tested": "2026-09-05",
+  "first_tested": "2026-09-06",
   "last_tested": "2026-09-06",
   "licence": {
     "flags": [],
@@ -34,7 +34,8 @@
   "params_b_active": null,
   "params_b_total": 27.8,
   "parse_notes": [
-    "access: the lab recorded 'open', the Hugging Face API says gated (auto); the card is preferred"
+    "access: the lab recorded 'open', the Hugging Face API says gated (auto); the card is preferred",
+    "verdict reduced to 'listed' (catalog step): no run record, ranking row, drafter run or forge checkpoint of this model is published, so the verdict states no result"
   ],
   "slug": "orcarouter__qwen3.8-27b-uncensored",
   "source": {
@@ -56,6 +57,6 @@
   "verdict": {
     "as_of": "2026-09-06",
     "status": "rated-no-role",
-    "summary": "A refusal-ablated Qwen3.8-27B from the lab's uncensored-model study: its base already refused almost nothing, so ablation had nothing to gain. Rated, no role assigned; only refusal rates are published for this study."
+    "summary": "Listed; no run record published."
   }
 }

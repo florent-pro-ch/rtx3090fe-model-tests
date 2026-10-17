@@ -19,7 +19,6 @@
   "evidence": [
     "evidence/2026-09-13-vision-v1/veille-nex-n25-mini-w4a16-vision/gpu-snapshots.json",
     "evidence/2026-09-13-vision-v1/veille-nex-n25-mini-w4a16-vision/launch.json",
-    "evidence/2026-09-13-vision-v1/veille-nex-n25-mini-w4a16-vision/mecanique-refus.json",
     "evidence/2026-09-13-vision-v1/veille-nex-n25-mini-w4a16-vision/mecanique-vision.json",
     "evidence/2026-09-13-vision-v1/veille-nex-n25-mini-w4a16-vision/pret-en-secondes.txt",
     "evidence/2026-09-13-vision-v1/veille-nex-n25-mini-w4a16-vision/vitesse.json"

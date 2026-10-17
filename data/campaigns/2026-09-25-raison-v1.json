@@ -8,19 +8,13 @@
   "modes": [
     "exact-reasoning"
   ],
-  "n_run_records": 16,
-  "n_runs": 16,
+  "n_run_records": 10,
+  "n_runs": 10,
   "related_run_ids": [
     "2026-10-05-raison-complements/labo-qwen36-base",
     "2026-10-05-raison-complements/labo-qwen36-base--on-8192"
   ],
   "run_ids": [
-    "2026-09-25-raison-v1/labo-gemma4-base",
-    "2026-09-25-raison-v1/labo-gemma4-base--on-2048",
-    "2026-09-25-raison-v1/labo-gemma4-base--on-8192",
-    "2026-09-25-raison-v1/labo-qwen36-base",
-    "2026-09-25-raison-v1/labo-qwen38-coldfusion",
-    "2026-09-25-raison-v1/labo-qwen38-coldfusion--on-8192",
     "2026-09-25-raison-v1/veille-fable-711-vision",
     "2026-09-25-raison-v1/veille-fable-711-vision--on-2048",
     "2026-09-25-raison-v1/veille-fable-711-vision--on-8192",
