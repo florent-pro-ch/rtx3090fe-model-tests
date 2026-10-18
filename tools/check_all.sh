@@ -9,6 +9,8 @@
 #                         no VRAM or energy on a cpu-only run
 #   G4 verify_benches.py  frozen benches: SHA-256 recomputed, withheld files listed
 #   G5 verify_numbers.py  every <Num> of site/dist traced to data/; README block fresh
+#      verify_best_results.py  the best-results page: every figure recomputed from data/ by the page's
+#                         own rules, written again in Python (needs the built site)
 #   G6 check_links.py     relative Markdown links and anchors resolve to files git ships
 #      check_version.py   every copy of the release label in the prose equals VERSION_LABEL
 #      site links         every internal link of site/dist resolves (site/scripts/check-links.mjs;
@@ -90,6 +92,7 @@ if [ "$build" = 1 ]; then
 fi
 if [ -f site/dist/index.html ]; then
   run "verify_numbers (G5)" "$PY" tools/verify_numbers.py
+  run "best-results page (rules)" "$PY" tools/verify_best_results.py --quiet
 else
   echo "== verify_numbers (G5)"
   echo "-- verify_numbers (G5): SKIPPED — site/dist is missing; build the site first"
