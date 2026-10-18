@@ -1,0 +1,42 @@
+{
+  "base_model_id": "mistralai/ministral-3-8b-instruct-2512",
+  "checkpoint_id": "biology-09",
+  "eval_loss": null,
+  "gpu": "1x3090fe",
+  "hyperparameters": {
+    "epochs": 1,
+    "learning_rate": null,
+    "lora_alpha": null,
+    "lora_rank": null,
+    "max_seq_len": null
+  },
+  "label": "Biology tutor, Ministral 3 8B, DPO, run 4",
+  "loss": [],
+  "method": "DPO preference tuning on top of a QLoRA fine-tune (TRL)",
+  "outcome": "rejected",
+  "scores": {
+    "abstention": {
+      "base": null,
+      "of": 40,
+      "value": 28
+    },
+    "knowledge": {
+      "base": null,
+      "of": 80,
+      "value": 70
+    }
+  },
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "steps": [],
+  "subject": "biology",
+  "trained_on": "2026-08-29",
+  "training": {
+    "peak_vram": null,
+    "peak_vram_mib": null,
+    "reported_loss": null,
+    "steps_total": null,
+    "wall_s": 1620
+  }
+}

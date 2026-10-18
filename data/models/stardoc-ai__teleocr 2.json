@@ -1,0 +1,61 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-teleocr"
+    ],
+    "inventory_ids": [
+      "teleocr-1-4b-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "stardoc-ai/teleocr@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-26",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "finetune"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "stardoc-ai/teleocr",
+  "name": "TeleOCR",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 1.42,
+  "parse_notes": [
+    "the Hugging Face repository now resolves to XingChen-AGI/TeleOCR"
+  ],
+  "slug": "stardoc-ai__teleocr",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/StarDoc-AI/TeleOCR",
+  "vendor": "StarDoc-AI / TeleAI",
+  "verdict": {
+    "as_of": "2026-09-29",
+    "status": "not-rated",
+    "summary": "Refused to start under the pinned vLLM (an engine assertion). Not rated."
+  }
+}

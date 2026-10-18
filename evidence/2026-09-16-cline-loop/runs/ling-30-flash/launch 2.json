@@ -1,0 +1,33 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/Ling-3.0-flash-Q4_K_M-00001-of-00002.gguf",
+    "--alias",
+    "ling-30-flash",
+    "-c",
+    "16384",
+    "-np",
+    "1",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": null,
+  "gpus_spec": "all",
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b10830",
+  "kind": "docker",
+  "note": "serving line of the night's driver script (docker options and paths scrubbed); the harness started this container, then ran the agent bench against it",
+  "parse_notes": [],
+  "scrubbed": [
+    "host",
+    "model_path",
+    "port",
+    "volumes"
+  ]
+}

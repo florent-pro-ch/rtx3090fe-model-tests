@@ -1,0 +1,10 @@
+{
+  "channel_counts": [
+    4
+  ],
+  "note": "summary of NCCL_DEBUG=INFO lines; raw lines not exported",
+  "nvls_multicast_available": false,
+  "transports": [
+    "SHM/direct"
+  ]
+}

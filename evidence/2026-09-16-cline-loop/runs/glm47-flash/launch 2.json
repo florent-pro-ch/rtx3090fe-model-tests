@@ -1,0 +1,36 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/zai-org_GLM-4.7-Flash-IQ4_XS.gguf",
+    "--alias",
+    "glm47-flash",
+    "-c",
+    "32768",
+    "-np",
+    "1",
+    "-ngl",
+    "999",
+    "-fa",
+    "off",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b10830",
+  "kind": "docker",
+  "note": "serving line of the night's driver script (docker options and paths scrubbed); the harness started this container, then ran the agent bench against it",
+  "parse_notes": [],
+  "scrubbed": [
+    "host",
+    "model_path",
+    "port",
+    "volumes"
+  ]
+}

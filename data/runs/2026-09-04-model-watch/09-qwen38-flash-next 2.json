@@ -1,0 +1,81 @@
+{
+  "build_id": "qwen/qwen3.8-flash-next@gguf-ud-q3_k_xl",
+  "campaign": "2026-09-04-model-watch",
+  "duplicate_of": null,
+  "ended_at": "2026-09-04T16:20:05Z",
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda",
+    "name": "llamacpp",
+    "pre_pin": true,
+    "version": null
+  },
+  "engine_args": {
+    "ctx_size": 8192,
+    "flash_attn": "on",
+    "parallel_slots": 1
+  },
+  "evidence": [
+    "evidence/2026-09-04-model-watch/09-qwen38-flash-next/gpu-snapshots.json",
+    "evidence/2026-09-04-model-watch/09-qwen38-flash-next/launch.json",
+    "evidence/2026-09-04-model-watch/09-qwen38-flash-next/pret-en-secondes.txt",
+    "evidence/2026-09-04-model-watch/09-qwen38-flash-next/speed-passes.json"
+  ],
+  "hardware": "2x3090fe-nvlink",
+  "kind": "speed",
+  "metrics": {
+    "agg_concurrency": 8,
+    "agg_ok": 8,
+    "agg_tok_s": 36.3,
+    "p50_latency_s": 63.54,
+    "ready_s": 51,
+    "solo_completion_tokens": 512,
+    "solo_tok_s": 35.9,
+    "solo_ttft_ms": 681,
+    "solo_wall_s": 14.26
+  },
+  "model_id": "qwen/qwen3.8-flash-next",
+  "parse_notes": [
+    "layers spilled to system RAM: the campaign README lists this 90 GB GGUF (UD-Q3_K_XL) as served by llama.cpp with CPU offload on a two-card pair (48 GB); offloaded size not measured, so cpu_offload_gb is null",
+    "llama.cpp without -sm: its default split mode (layer) is assumed; this is not tensor parallelism",
+    "several passes measured speed; headline metrics from pass 'defaut', all in speed-passes.json",
+    "solo_ttft_ms converted from the pass's ttft_s (x1000, rounded)"
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v0",
+  "quality": [],
+  "run_id": "2026-09-04-model-watch/09-qwen38-flash-next",
+  "scrubbed_fields": [
+    "defaut/results.json:text,content,tool_calls,base_url,model",
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes",
+    "no-thinking/results.json:text,content,tool_calls,base_url,model"
+  ],
+  "source": {
+    "source_id": "src-1855c29d1b3407cc"
+  },
+  "started_at": "2026-09-04T16:16:05Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": null,
+    "expert_parallel": false,
+    "gpus": 2,
+    "nvlink_used": null,
+    "p2p": "unknown",
+    "pp": null,
+    "ram_spill": true,
+    "split": "layer",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      22825,
+      22965
+    ],
+    "snapshot": "load"
+  }
+}

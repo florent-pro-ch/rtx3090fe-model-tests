@@ -1,0 +1,47 @@
+{
+  "docker_options": [
+    "-d",
+    "--ipc=host"
+  ],
+  "engine_args": [
+    "--model",
+    "$MODELS/ornith-15-9b",
+    "--served-model-name",
+    "ornith-15-9b",
+    "--tensor-parallel-size",
+    "1",
+    "--max-model-len",
+    "32768",
+    "--max-num-seqs",
+    "2",
+    "--max-num-batched-tokens",
+    "8192",
+    "--gpu-memory-utilization",
+    "0.95",
+    "--kv-cache-dtype",
+    "fp8",
+    "--limit-mm-per-prompt",
+    "{\"image\":0,\"video\":0}",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "qwen3_coder",
+    "--reasoning-parser",
+    "qwen3",
+    "--default-chat-template-kwargs",
+    "{\"enable_thinking\":false}"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "vllm/vllm-openai:v0.29.0",
+  "kind": "docker",
+  "note": "serving line of the night's driver script (docker options and paths scrubbed); the harness started this container, then ran the agent bench against it",
+  "parse_notes": [],
+  "scrubbed": [
+    "host",
+    "model_path",
+    "port",
+    "volumes"
+  ]
+}

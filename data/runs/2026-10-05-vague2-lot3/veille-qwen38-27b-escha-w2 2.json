@@ -1,0 +1,140 @@
+{
+  "build_id": "eschalabs/qwen3.8-27b-escha-w2@escha-w2",
+  "campaign": "2026-10-05-vague2-lot3",
+  "duplicate_of": null,
+  "ended_at": "2026-10-05T10:13:13Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 1,
+    "passes": [
+      "fr",
+      "en"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "house/escha-sglang:1.2.2-9f095a1",
+    "name": "sglang",
+    "pre_pin": false,
+    "version": "1.2.2"
+  },
+  "engine_args": {
+    "chunked_prefill_size": 2048,
+    "dtype": "float16",
+    "max_model_len": 65536,
+    "mem_fraction_static": 0.72,
+    "radix_cache": false
+  },
+  "evidence": [
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/energy-en.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/energy.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/gpu-snapshots.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/launch.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/mecanique-code.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/mecanique-refus.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/mecanique-tuteur.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/pret-en-secondes.txt",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/vitesse-en.json",
+    "evidence/2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2/vitesse.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "speed+quality",
+  "metrics": {
+    "agg_completion_tokens": 4096,
+    "agg_concurrency": 8,
+    "agg_energy_j": 5419.019,
+    "agg_ok": 8,
+    "agg_power_mean_w": 342.9,
+    "agg_power_peak_w": 349.2,
+    "agg_tok_per_j": 0.7559,
+    "agg_tok_s": 259.2,
+    "agg_wall_s": 15.8,
+    "en_agg_completion_tokens": 4096,
+    "en_agg_concurrency": 8,
+    "en_agg_energy_j": 5427.014,
+    "en_agg_ok": 8,
+    "en_agg_power_mean_w": 344.0,
+    "en_agg_power_peak_w": 349.3,
+    "en_agg_tok_per_j": 0.7547,
+    "en_agg_tok_s": 259.7,
+    "en_agg_wall_s": 15.77,
+    "en_p50_latency_s": 15.77,
+    "en_solo_completion_tokens": 512,
+    "en_solo_energy_j": 4270.664,
+    "en_solo_power_mean_w": 345.9,
+    "en_solo_power_peak_w": 349.2,
+    "en_solo_tok_per_j": 0.1199,
+    "en_solo_tok_s": 41.5,
+    "en_solo_ttft_ms": 121,
+    "en_solo_wall_s": 12.344,
+    "p50_latency_s": 15.8,
+    "ready_s": 31,
+    "solo_completion_tokens": 512,
+    "solo_energy_j": 4264.946,
+    "solo_power_mean_w": 345.5,
+    "solo_power_peak_w": 349.4,
+    "solo_tok_per_j": 0.12,
+    "solo_tok_s": 41.5,
+    "solo_ttft_ms": 207,
+    "solo_wall_s": 12.342
+  },
+  "model_id": "eschalabs/qwen3.8-27b-escha-w2",
+  "parse_notes": [
+    "Escha Labs' SGLang runtime with its closed escha kernels, built here for this model only and pinned by its wheel",
+    "SGLang's --context-length is recorded as max_model_len, the context one request can use; mem_fraction_static is the share of the card SGLang reserves at start",
+    "energy (nvml-energy/v1): NVIDIA's cumulative energy counter of the model's 1 card, read at the start and end of each timed part, power read once a second; GPU boards only, summed, not the host CPU, RAM or power supplies; the streamed single request is in energy*.json only",
+    "energy metrics per pass (no prefix, en_, fr2_): solo_* and agg_* energy_j, power_mean_w, power_peak_w (the highest 1-s power reading, summed over the cards) and tok_per_j; agg_completion_tokens is the eight answers' tokens",
+    "house image pinned by commit (an exact fork build tag); not a floating or pre-pin engine",
+    "two speed passes in one session on the same server: French (headline keys, vitesse.json), the English twin (en_* keys, protocol speed-house/v1-en, vitesse-en.json)"
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-10-05-vague2-lot3/veille-qwen38-27b-escha-w2",
+  "scrubbed_fields": [
+    "energy-en.json:candidate",
+    "energy-en.json:driver_version",
+    "energy-en.json:gpu_choice",
+    "energy-en.json:gpus[].uuid",
+    "energy-en.json:power_and_memory_of_every_card_seen",
+    "energy.json:candidate",
+    "energy.json:driver_version",
+    "energy.json:gpu_choice",
+    "energy.json:gpus[].uuid",
+    "energy.json:power_and_memory_of_every_card_seen",
+    "launch.container_name",
+    "launch.host",
+    "launch.image",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes",
+    "vitesse-en.json:prompt_sha256"
+  ],
+  "source": {
+    "source_id": "src-704d8ebe61819883"
+  },
+  "started_at": "2026-10-05T10:12:32Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "reserved",
+    "mib_per_gpu": [
+      18298
+    ],
+    "snapshot": "load"
+  }
+}

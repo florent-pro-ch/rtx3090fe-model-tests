@@ -1,0 +1,37 @@
+{
+  "benches": [],
+  "campaign_id": "2026-10-03-vitesse-en",
+  "date": "2026-10-03",
+  "has_frozen_bench": false,
+  "modes": [
+    "speed"
+  ],
+  "n_run_records": 18,
+  "n_runs": 18,
+  "run_ids": [
+    "2026-10-03-vitesse-en/cold-fusion-gptq-paire",
+    "2026-10-03-vitesse-en/deepseek-r1-distill-32b-awq",
+    "2026-10-03-vitesse-en/fable-711-gptq-paire",
+    "2026-10-03-vitesse-en/gemma-3-27b-qat-awq",
+    "2026-10-03-vitesse-en/gemma-4-31b-qat-paire",
+    "2026-10-03-vitesse-en/gemma4-26b-a4b-1carte",
+    "2026-10-03-vitesse-en/gemma4-26b-a4b-paire",
+    "2026-10-03-vitesse-en/granite-4.2-3b",
+    "2026-10-03-vitesse-en/minicpm5-2b",
+    "2026-10-03-vitesse-en/muse-glimmer-gguf",
+    "2026-10-03-vitesse-en/neohorse-1-4b-gguf",
+    "2026-10-03-vitesse-en/neohorse-1-9b",
+    "2026-10-03-vitesse-en/oxcoder-9b-gguf",
+    "2026-10-03-vitesse-en/qwen38-9b-distill",
+    "2026-10-03-vitesse-en/qwen38-base-w4a16-paire",
+    "2026-10-03-vitesse-en/qwen38-flash-next-gguf",
+    "2026-10-03-vitesse-en/spark-x25-4b-gguf",
+    "2026-10-03-vitesse-en/thomson-1-awq"
+  ],
+  "source": {
+    "source_id": "src-4fd67aaf94b0c4a7"
+  },
+  "status": "closed",
+  "summary": "Seventeen models of the one-card and NVLink-pair pages, Gemma 4 26B-A4B on both, served again on 2026-10-03 from the launch lines of their headline runs (Thomson-1.0-Small's recorded none: its line was rebuilt from the resident container that replaced, on vLLM 0.29.0, the one that served its headline run) on the pinned engines (vLLM 0.29.0 and llama.cpp b10830; the pinned image replaced the recorded one where that was pre-pin) and measured in one session per model on the same server: one discarded warm-up request, then the house speed pass in French, its English twin (speed-house/v1-en: the same prompt in English, everything else unchanged) and the French pass again. A language difference was called only where the English figure differed from the French one by more than twice the gap between the two French passes and by more than 3 %, a rule fixed before the first pass. There was none on 15 rows. On Gemma 4 26B-A4B at eight requests, on one card and on the pair, and on Spark-X2.5-4B GGUF, some English answers stopped before the 512-token cap that every French answer reached, so language and answer length are not separated there. The two French passes stayed within 0.7 % of each other in single-stream speed and 0.9 % at eight requests. Every pass also recorded the energy of the model's cards from NVIDIA's own energy counter (nvml-energy/v1; GPU boards only, not the host): in the first French pass, 0.07 to 0.49 tokens per joule for one request, several times more at eight requests under vLLM, about twice on the one two-slot llama.cpp server and about the same on the one-slot ones. The new French passes are the headline figures of 17 of these rows; MiniCPM5-2B keeps its 2026-09-13 run, repeated three times. Speed only; no bench.",
+  "title": "Speed in English beside French, with energy per token, on 18 headline rows"
+}

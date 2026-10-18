@@ -1,0 +1,59 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-glm-ocr"
+    ],
+    "inventory_ids": [
+      "glm-ocr-1-3b-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "zai-org/glm-ocr@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-09-25",
+  "last_tested": "2026-09-25",
+  "licence": {
+    "flags": [],
+    "name": "MIT",
+    "source": "Hugging Face model card, read 2026-10-01"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "zai-org/glm-ocr",
+  "name": "GLM-OCR",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 1.33,
+  "parse_notes": [],
+  "slug": "zai-org__glm-ocr",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/zai-org/GLM-OCR",
+  "vendor": "Z.ai",
+  "verdict": {
+    "as_of": "2026-09-30",
+    "status": "rated-no-role",
+    "summary": "Small OCR model on one card: the best plain transcription of the document-reading bench, near zero on the structured tasks under the bench's fixed reader. Rated, no role assigned."
+  }
+}

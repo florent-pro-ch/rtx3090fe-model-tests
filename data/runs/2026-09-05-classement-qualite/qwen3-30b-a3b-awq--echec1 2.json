@@ -1,0 +1,61 @@
+{
+  "build_id": "qwen/qwen3-30b-a3b-instruct-2507@int4-compressed-tensors",
+  "campaign": "2026-09-05-classement-qualite",
+  "duplicate_of": null,
+  "ended_at": null,
+  "engine": {
+    "image": "vllm/vllm-openai:v0.26.0",
+    "name": "vllm",
+    "pre_pin": true,
+    "version": "0.26.0"
+  },
+  "engine_args": {
+    "gpu_memory_utilization": 0.92,
+    "kv_cache_dtype": "fp8",
+    "max_model_len": 32768,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 8,
+    "quantization": "awq_marlin"
+  },
+  "evidence": [
+    "evidence/2026-09-05-classement-qualite/qwen3-30b-a3b-awq--echec1/gpu-snapshots.json",
+    "evidence/2026-09-05-classement-qualite/qwen3-30b-a3b-awq--echec1/launch.json"
+  ],
+  "hardware": "2x3090fe-nvlink",
+  "kind": "failed",
+  "metrics": {},
+  "model_id": "qwen/qwen3-30b-a3b-instruct-2507",
+  "parse_notes": [],
+  "prompt_lang": "n/a",
+  "protocol": null,
+  "quality": [],
+  "run_id": "2026-09-05-classement-qualite/qwen3-30b-a3b-awq--echec1",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-c0ac4575148975e6"
+  },
+  "started_at": null,
+  "status": "failed-start",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 2,
+    "nvlink_used": true,
+    "p2p": "nvlink",
+    "pp": null,
+    "ram_spill": false,
+    "split": "tensor",
+    "tp": 2
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

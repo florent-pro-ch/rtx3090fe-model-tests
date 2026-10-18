@@ -1,0 +1,60 @@
+{
+  "build_id": "ibm-granite/granite-4.2-8b@bf16",
+  "campaign": "2026-09-04-model-watch",
+  "duplicate_of": null,
+  "ended_at": null,
+  "engine": {
+    "image": "vllm/vllm-openai:v0.26.0",
+    "name": "vllm",
+    "pre_pin": true,
+    "version": "0.26.0"
+  },
+  "engine_args": {
+    "dtype": "bfloat16",
+    "max_model_len": 32768,
+    "max_num_seqs": 16
+  },
+  "evidence": [
+    "evidence/2026-09-04-model-watch/05-granite-4.2-8b-echec1/gpu-snapshots.json",
+    "evidence/2026-09-04-model-watch/05-granite-4.2-8b-echec1/launch.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "failed",
+  "metrics": {},
+  "model_id": "ibm-granite/granite-4.2-8b",
+  "parse_notes": [
+    "no machine-readable measurement exported for this folder"
+  ],
+  "prompt_lang": "n/a",
+  "protocol": null,
+  "quality": [],
+  "run_id": "2026-09-04-model-watch/05-granite-4.2-8b-echec1",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-649c9089f121350a"
+  },
+  "started_at": null,
+  "status": "failed-start",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

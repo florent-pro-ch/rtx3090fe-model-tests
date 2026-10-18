@@ -1,0 +1,19 @@
+{
+  "build_id": "mistralai/mistral-small-3.2-24b-instruct-2506@awq-sym-int4",
+  "engine_family": "vllm",
+  "harness_ids": [],
+  "inventory_id": "mistral-small-32-24b-awq-sym-techxgenus",
+  "model_id": "mistralai/mistral-small-3.2-24b-instruct-2506",
+  "parse_notes": [],
+  "quant": {
+    "bits": 4,
+    "format": "awq",
+    "label": "AWQ symmetric INT4 (weights found corrupted)"
+  },
+  "runs_count": 0,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "TechxGenus/Mistral-Small-3.2-24B-Instruct-2506-awq-sym"
+}

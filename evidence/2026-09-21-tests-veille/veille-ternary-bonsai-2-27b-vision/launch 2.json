@@ -1,0 +1,40 @@
+{
+  "docker_options": [
+    "-d"
+  ],
+  "engine_args": [
+    "-m",
+    "$MODELS/Ternary-Bonsai-2-27B-PQ2_0.gguf",
+    "--mmproj",
+    "$MODELS/Ternary-Bonsai-2-27B-mmproj-Q8_0.gguf",
+    "--alias",
+    "ternary-bonsai-2-27b-vision",
+    "-c",
+    "16384",
+    "-np",
+    "1",
+    "-ngl",
+    "999",
+    "-fa",
+    "on",
+    "--jinja",
+    "--reasoning-budget",
+    "0"
+  ],
+  "env": {},
+  "gpus_device_list": [
+    0
+  ],
+  "image": "house/llama-prism:b10709-9a9394a",
+  "kind": "docker",
+  "parse_notes": [],
+  "scrubbed": [
+    "container_name",
+    "host",
+    "image",
+    "model_path",
+    "port",
+    "ports",
+    "volumes"
+  ]
+}

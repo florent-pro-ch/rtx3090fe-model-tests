@@ -1,0 +1,71 @@
+{
+  "build_id": "google/gemma-4-26b-a4b-it@awq-w4a16",
+  "campaign": "2026-09-25-spec-ab",
+  "duplicate_of": null,
+  "ended_at": "2026-09-25T18:11:35Z",
+  "engine": {
+    "image": "vllm/vllm-openai:v0.29.0",
+    "name": "vllm",
+    "pre_pin": false,
+    "version": "0.29.0"
+  },
+  "engine_args": {
+    "gpu_memory_utilization": 0.92,
+    "kv_cache_dtype": "bfloat16",
+    "max_model_len": 16384,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 8,
+    "prefix_caching": false,
+    "speculative": {
+      "method": "draft_model",
+      "model": "$MODELS/gemma-4-26b-a4b-it-assistant",
+      "num_speculative_tokens": 3
+    }
+  },
+  "evidence": [
+    "evidence/2026-09-25-spec-ab/g26-assistant/gpu-snapshots.json",
+    "evidence/2026-09-25-spec-ab/g26-assistant/launch.json",
+    "evidence/2026-09-25-spec-ab/g26-assistant/spec-metrics.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "failed",
+  "metrics": {},
+  "model_id": "google/gemma-4-26b-a4b-it",
+  "parse_notes": [],
+  "prompt_lang": "mixed",
+  "protocol": "spec-ab/v1",
+  "quality": [],
+  "run_id": "2026-09-25-spec-ab/g26-assistant",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.labels",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes",
+    "metrics.json:conteneur",
+    "metrics.json:port",
+    "metrics.json:spec.model"
+  ],
+  "source": {
+    "source_id": "src-fd1f9c994770a018"
+  },
+  "started_at": "2026-09-25T18:08:23Z",
+  "status": "failed-start",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

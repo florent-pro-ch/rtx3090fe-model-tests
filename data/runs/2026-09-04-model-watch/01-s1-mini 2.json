@@ -1,0 +1,61 @@
+{
+  "build_id": "superwhisper/s1-mini@bf16",
+  "campaign": "2026-09-04-model-watch",
+  "duplicate_of": null,
+  "ended_at": null,
+  "engine": {
+    "image": null,
+    "name": "other",
+    "pre_pin": null,
+    "version": null
+  },
+  "engine_args": {},
+  "evidence": [
+    "evidence/2026-09-04-model-watch/01-s1-mini/cases-cpu.json",
+    "evidence/2026-09-04-model-watch/01-s1-mini/cases-gpu.json",
+    "evidence/2026-09-04-model-watch/01-s1-mini/gpu-snapshots.json",
+    "evidence/2026-09-04-model-watch/01-s1-mini/speed-passes.json"
+  ],
+  "hardware": "unknown",
+  "kind": "speed",
+  "metrics": {
+    "cpu_load_s": 0.59,
+    "gpu_load_s": 1.48,
+    "gpu_vram_peak_mib": 1165
+  },
+  "model_id": "superwhisper/s1-mini",
+  "parse_notes": [
+    "GPU snapshots exist but the run's GPUs are unknown; no per-GPU VRAM figure is derived",
+    "no status file: status 'ok' inferred from the presence of measurements"
+  ],
+  "prompt_lang": "n/a",
+  "protocol": null,
+  "quality": [],
+  "run_id": "2026-09-04-model-watch/01-s1-mini",
+  "scrubbed_fields": [
+    "results-cpu.json:cases.in,cases.out,cases.control",
+    "results-cpu.json:text,content,tool_calls,base_url,model",
+    "results-gpu.json:cases.in,cases.out,cases.control",
+    "results-gpu.json:text,content,tool_calls,base_url,model"
+  ],
+  "source": {
+    "source_id": "src-9e50831dafc4c330"
+  },
+  "started_at": null,
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": null,
+    "expert_parallel": null,
+    "gpus": null,
+    "nvlink_used": null,
+    "p2p": "unknown",
+    "pp": null,
+    "ram_spill": null,
+    "split": "unknown",
+    "tp": null
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

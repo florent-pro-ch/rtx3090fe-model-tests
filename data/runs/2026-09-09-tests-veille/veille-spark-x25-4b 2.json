@@ -1,0 +1,60 @@
+{
+  "build_id": "xhtoken/spark-x2.5-4b@bf16",
+  "campaign": "2026-09-09-tests-veille",
+  "duplicate_of": null,
+  "ended_at": null,
+  "engine": {
+    "image": "vllm/vllm-openai:v0.26.0",
+    "name": "vllm",
+    "pre_pin": true,
+    "version": "0.26.0"
+  },
+  "engine_args": {
+    "gpu_memory_utilization": 0.9,
+    "kv_cache_dtype": "fp8",
+    "max_model_len": 32768,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 8
+  },
+  "evidence": [
+    "evidence/2026-09-09-tests-veille/veille-spark-x25-4b/gpu-snapshots.json",
+    "evidence/2026-09-09-tests-veille/veille-spark-x25-4b/launch.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "failed",
+  "metrics": {},
+  "model_id": "xhtoken/spark-x2.5-4b",
+  "parse_notes": [],
+  "prompt_lang": "n/a",
+  "protocol": null,
+  "quality": [],
+  "run_id": "2026-09-09-tests-veille/veille-spark-x25-4b",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-c2d9fcd2a6b207d3"
+  },
+  "started_at": null,
+  "status": "failed-start",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "base_model_id": "qwen/qwen3-8b",
+  "checkpoint_id": "exam-tutor-01",
+  "eval_loss": null,
+  "gpu": "1x3090fe",
+  "hyperparameters": {
+    "epochs": 3,
+    "learning_rate": 0.0002,
+    "lora_alpha": null,
+    "lora_rank": 16,
+    "max_seq_len": null
+  },
+  "label": "Exam-question tutor, Qwen3 8B, QLoRA r16, run 1",
+  "loss": [],
+  "method": "QLoRA, 4-bit base (Unsloth)",
+  "outcome": "kept-as-checkpoint",
+  "scores": {
+    "abstention": {
+      "base": 1,
+      "of": 6,
+      "value": 3
+    },
+    "median_answer_chars": {
+      "value": 636
+    }
+  },
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "steps": [],
+  "subject": "exam-tutor",
+  "trained_on": "2026-08-27",
+  "training": {
+    "peak_vram": {
+      "kind": "peak",
+      "unit": "GiB",
+      "value": 10.4
+    },
+    "peak_vram_mib": null,
+    "reported_loss": 0.848,
+    "steps_total": 375,
+    "wall_s": 1444
+  }
+}

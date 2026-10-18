@@ -1,0 +1,62 @@
+{
+  "access": "gated",
+  "aliases": {
+    "harness_ids": [
+      "veille-antares-1b"
+    ],
+    "inventory_ids": [
+      "antares-1b-bf16"
+    ]
+  },
+  "arch": "dense",
+  "builds": [
+    "fdtn-ai/antares-1b@bf16"
+  ],
+  "category": "llm",
+  "first_tested": "2026-10-04",
+  "last_tested": "2026-10-04",
+  "licence": {
+    "flags": [
+      "unconfirmed"
+    ],
+    "name": "Apache-2.0",
+    "source": "lab registry"
+  },
+  "lineage": {
+    "base_model_id": "ibm-granite/granite-4.0-1b",
+    "kind": "finetune"
+  },
+  "modalities": [
+    "text"
+  ],
+  "model_id": "fdtn-ai/antares-1b",
+  "name": "Antares-1B",
+  "notes": "Apache-2.0 is declared in the model card's metadata; the repository, gated by its publisher, holds no LICENSE file. The engine most likely served the base's tied output head rather than the repository's own untied head (it loaded about the base's tied size); a speed figure does not depend on it, a quality pass would.",
+  "params_b_active": null,
+  "params_b_total": 1.84,
+  "parse_notes": [
+    "upstream repository and gating read on the Hugging Face Hub on 2026-10-04; licence as recorded by the lab (no model-card snapshot)"
+  ],
+  "slug": "fdtn-ai__antares-1b",
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "sources": [
+    {
+      "source_id": "src-22c474888f1d7390"
+    },
+    {
+      "source_id": "src-61a7f2be0ae56cb8"
+    },
+    {
+      "source_id": "src-69051f675a107f29"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/fdtn-ai/antares-1b",
+  "vendor": "Cisco Foundation AI",
+  "verdict": {
+    "as_of": "2026-10-05",
+    "status": "rated-no-role",
+    "summary": "A vulnerability-localisation terminal agent from Cisco Foundation AI, fine-tuned from IBM Granite 4.0 1B, in BF16 on one card under vLLM 0.29.0, measured for fit and speed only since no bench here measures its task: 3.07 GiB of weights, ready in 91 s, and in French 175.0 tokens per second for one request and 1,196.0 at eight, its single-request answers stopping before the 512-token cap. Rated, no role assigned."
+  }
+}

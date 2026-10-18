@@ -1,0 +1,60 @@
+{
+  "build_id": "tencent/hunyuanocr@bf16",
+  "campaign": "2026-09-25-document-v1",
+  "duplicate_of": null,
+  "ended_at": null,
+  "engine": {
+    "image": "vllm/vllm-openai:v0.29.0",
+    "name": "vllm",
+    "pre_pin": false,
+    "version": "0.29.0"
+  },
+  "engine_args": {
+    "gpu_memory_utilization": 0.9,
+    "max_model_len": 32768,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 4,
+    "prefix_caching": false
+  },
+  "evidence": [
+    "evidence/2026-09-25-document-v1/doc-hunyuanocr/gpu-snapshots.json",
+    "evidence/2026-09-25-document-v1/doc-hunyuanocr/launch.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "failed",
+  "metrics": {},
+  "model_id": "tencent/hunyuanocr",
+  "parse_notes": [],
+  "prompt_lang": "n/a",
+  "protocol": null,
+  "quality": [],
+  "run_id": "2026-09-25-document-v1/doc-hunyuanocr",
+  "scrubbed_fields": [
+    "launch.container_name",
+    "launch.host",
+    "launch.model_path",
+    "launch.port",
+    "launch.ports",
+    "launch.volumes"
+  ],
+  "source": {
+    "source_id": "src-3a4e12213be09e32"
+  },
+  "started_at": null,
+  "status": "failed-start",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": false,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": false,
+    "split": "none",
+    "tp": 1
+  },
+  "vram": {
+    "kind": "unknown",
+    "mib_per_gpu": []
+  }
+}

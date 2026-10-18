@@ -1,0 +1,19 @@
+{
+  "benches": [],
+  "campaign_id": "2026-08-27-forge-tutor",
+  "date": "2026-08-27",
+  "framing": "aggregates-only",
+  "has_frozen_bench": false,
+  "modes": [
+    "fine-tuning"
+  ],
+  "n_run_records": 0,
+  "n_runs": 0,
+  "run_ids": [],
+  "source": {
+    "source_id": "src-90fa1042b3e1ee84"
+  },
+  "status": "exploratory",
+  "summary": "A QLoRA fine-tune (Unsloth, 4-bit) of Qwen3-8B on about a thousand private exam-style question and answer pairs, run on one card in three rounds and evaluated on held-out questions, with a GGUF export served by llama.cpp as a demo. Round one taught the answer-key style but also taught the model to invent answers where a document was missing; oversampling abstention examples did not fix it; relabelling the contradictory training items so that they state what is missing did, raising abstention with almost no over-refusal. Recipe, training figures and aggregate scores per checkpoint only (data/forge/); the lab kept no full loss curve; the corpus, the adapters and the answers stay private.",
+  "title": "Fine-tuning rounds: an exam-style tutor on Qwen3-8B"
+}

@@ -1,0 +1,21 @@
+{
+  "build_id": "tencentarc/pixal3d@int8-convrot-one-view",
+  "engine_family": "comfyui",
+  "harness_ids": [],
+  "inventory_id": "pixal3d-comfy",
+  "model_id": "tencentarc/pixal3d",
+  "parse_notes": [
+    "size_gb read from the inventory's quantisation text"
+  ],
+  "quant": {
+    "bits": 8,
+    "format": "other",
+    "label": "int8_convrot, one-view file (Comfy-Org repackaging)"
+  },
+  "runs_count": 2,
+  "size_gb": 5.58,
+  "source": {
+    "source_id": "src-22c474888f1d7390"
+  },
+  "source_repo": "Comfy-Org/Pixal3D"
+}
