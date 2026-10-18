@@ -12,7 +12,7 @@
     "format": "mxfp4",
     "label": "Native MXFP4 GGUF (ggml-org)"
   },
-  "runs_count": 2,
+  "runs_count": 5,
   "size_gb": 63.39,
   "source": {
     "source_id": "src-557e91906933ec12"

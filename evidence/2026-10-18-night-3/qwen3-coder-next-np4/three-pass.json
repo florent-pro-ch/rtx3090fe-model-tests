@@ -1,0 +1,32 @@
+{
+  "passes": [
+    {
+      "aggregate_energy_j": 7332.247,
+      "aggregate_tok_s": 171.4,
+      "repetition": 1,
+      "solo_energy_j": 1572.355,
+      "solo_tok_s": 102.6,
+      "solo_ttft_ms": 455
+    },
+    {
+      "aggregate_energy_j": 6965.779,
+      "aggregate_tok_s": 181.1,
+      "repetition": 2,
+      "solo_energy_j": 1609.145,
+      "solo_tok_s": 99.3,
+      "solo_ttft_ms": 254
+    },
+    {
+      "aggregate_energy_j": 7385.275,
+      "aggregate_tok_s": 174.6,
+      "repetition": 3,
+      "solo_energy_j": 1613.325,
+      "solo_tok_s": 103.7,
+      "solo_ttft_ms": 95
+    }
+  ],
+  "protocol": "speed-house/v1",
+  "source": {
+    "source_id": "src-9cc0b4218832109c"
+  }
+}

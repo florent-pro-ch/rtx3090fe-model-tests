@@ -1,0 +1,47 @@
+{
+  "fit_search": [
+    {
+      "load_seconds": 12.1,
+      "n_cpu_moe": 24,
+      "status": "FIT",
+      "tensor_split": null
+    }
+  ],
+  "fit_search_order": [
+    24,
+    25,
+    26,
+    28,
+    30
+  ],
+  "passes": [
+    {
+      "aggregate_energy_j": 17827.286,
+      "aggregate_tok_s": 31.7,
+      "repetition": 1,
+      "solo_energy_j": 2227.743,
+      "solo_tok_s": 31.8,
+      "solo_ttft_ms": 944
+    },
+    {
+      "aggregate_energy_j": 17746.551,
+      "aggregate_tok_s": 31.9,
+      "repetition": 2,
+      "solo_energy_j": 2232.042,
+      "solo_tok_s": 31.9,
+      "solo_ttft_ms": 498
+    },
+    {
+      "aggregate_energy_j": 17638.781,
+      "aggregate_tok_s": 32.3,
+      "repetition": 3,
+      "solo_energy_j": 2214.142,
+      "solo_tok_s": 32.0,
+      "solo_ttft_ms": 478
+    }
+  ],
+  "protocol": "speed-house/v1",
+  "source": {
+    "source_id": "src-848ce2fbba5a8ec2"
+  }
+}

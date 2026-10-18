@@ -19,7 +19,7 @@
     "format": "w4a16",
     "label": "compressed-tensors INT4 group 64 (W4A16)"
   },
-  "runs_count": 10,
+  "runs_count": 12,
   "size_gb": 20.52,
   "source": {
     "source_id": "src-22c474888f1d7390"
