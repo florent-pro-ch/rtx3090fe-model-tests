@@ -18,7 +18,7 @@
     "speed",
     "tutoring"
   ],
-  "n_runs": 27,
+  "n_runs": 30,
   "run_ids": [
     "2026-10-18-night-3/apertus-8b-b11176-start",
     "2026-10-18-night-3/bolt-pair-quality",
@@ -28,8 +28,10 @@
     "2026-10-18-night-3/gpt-oss-120b-loop-effort-low",
     "2026-10-18-night-3/gpt-oss-120b-np4",
     "2026-10-18-night-3/gpt-oss-120b-one-card",
+    "2026-10-18-night-3/gpt-oss-120b-one-card-loop",
     "2026-10-18-night-3/gpt-oss-120b-pair",
     "2026-10-18-night-3/gpt-oss-120b-reasoning-on",
+    "2026-10-18-night-3/gpt-oss-120b-reasoning-on2048",
     "2026-10-18-night-3/nemotron-tp1-loop1",
     "2026-10-18-night-3/nemotron-tp1-loop2",
     "2026-10-18-night-3/nemotron-tp1-loop3",
@@ -42,6 +44,7 @@
     "2026-10-18-night-3/qwen3-coder-next-128k",
     "2026-10-18-night-3/qwen3-coder-next-loop32-r2",
     "2026-10-18-night-3/qwen3-coder-next-loop32-r3",
+    "2026-10-18-night-3/qwen3-coder-next-loop64",
     "2026-10-18-night-3/qwen3-coder-next-np4",
     "2026-10-18-night-3/qwen3-coder-next-np8",
     "2026-10-18-night-3/qwen3-coder-next-pair",
