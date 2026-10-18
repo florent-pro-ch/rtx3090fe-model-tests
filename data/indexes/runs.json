@@ -1,6 +1,6 @@
 {
   "generated_by": "runs",
-  "n": 360,
+  "n": 363,
   "runs": [
     {
       "agg_concurrency": 8,
@@ -7340,6 +7340,28 @@
       ]
     },
     {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "code-loop/v1",
+      "run_id": "2026-10-18-night-3/gpt-oss-120b-one-card-loop",
+      "solo_tok_s": null,
+      "split": "none",
+      "started_at": "2026-10-18T00:12:20Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        22555
+      ]
+    },
+    {
       "agg_concurrency": 8,
       "agg_tok_s": 50.6,
       "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
@@ -7379,6 +7401,29 @@
       "solo_tok_s": null,
       "split": "layer",
       "started_at": "2026-10-17T22:59:42Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-18-night-3/gpt-oss-120b-reasoning-on2048",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-18T00:59:47Z",
       "status": "ok",
       "vram_mib_per_gpu": [
         23039,
@@ -7633,6 +7678,29 @@
       "started_at": "2026-10-17T23:54:34Z",
       "status": "ok",
       "vram_mib_per_gpu": []
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "qwen/qwen3-coder-next@gguf-q4_k_m",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "qwen/qwen3-coder-next",
+      "pre_pin": false,
+      "protocol": "code-loop/v1",
+      "run_id": "2026-10-18-night-3/qwen3-coder-next-loop64",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-18T00:12:01Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23781,
+        21635
+      ]
     },
     {
       "agg_concurrency": 8,
