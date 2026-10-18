@@ -36,23 +36,24 @@ expression (untouched, never evaluated) and a mixed list. v1: 12/12 cases pass; 
 | `qwen3_typed_array` v1 (night of 17 to 18 October) | 60,416 | 3/6 |
 | `qwen3_typed_array` v2 (night of 17 to 18 October) | 60,416 | 4/6 |
 | `qwen3_typed_array` v2, repeated (night of 17 to 18 October) | 60,416 | 5/6 |
+| `qwen3_typed_array` v2, third (18 October, day window) | 60,416 | 3/6 |
 
 Plugin logs: one line per tool call whose array-typed parameter arrived as a string starting with `[`, and per call whose arguments
 were not JSON.
 
-| Outcome | v1 | v2 | v2, repeated |
-|---|---|---|---|
-| `run_commands` · `commands`: stringified list converted to an array | 75 | 68 | 64 |
-| `read_files` · `files`: stringified list converted to an array | 0 | 26 | 21 |
-| `search_codebase` · `queries`: stringified list converted to an array | 0 | 2 | 0 |
-| `run_commands` · `commands`: not a literal, left unchanged | 7 | 26 | 7 |
-| `read_files` · `files`: list of non-strings, left unchanged | 21 | 0 | 0 |
-| `run_commands`: arguments not JSON, left unchanged | 1 | 0 | 0 |
+| Outcome | v1 | v2 | v2, repeated | v2, third |
+|---|---|---|---|---|
+| `run_commands` · `commands`: stringified list converted to an array | 75 | 68 | 64 | 50 |
+| `read_files` · `files`: stringified list converted to an array | 0 | 26 | 21 | 26 |
+| `search_codebase` · `queries`: stringified list converted to an array | 0 | 2 | 0 | 1 |
+| `run_commands` · `commands`: not a literal, left unchanged | 7 | 26 | 7 | 11 |
+| `read_files` · `files`: list of non-strings, left unchanged | 21 | 0 | 0 | 0 |
+| `run_commands`: arguments not JSON, left unchanged | 1 | 0 | 0 | 0 |
 
-v1 is n = 1 and v2 is n = 2. The plugin converted 75 of 104 logged calls in the v1 loop; 96 of 122 logged calls in the v2 loop; 85 of 92 logged calls in the v2, repeated loop.
+v1 is n = 1 and v2 is n = 3. The plugin converted 75 of 104 logged calls in the v1 loop; 96 of 122 logged calls in the v2 loop; 85 of 92 logged calls in the v2, repeated loop; 77 of 88 logged calls in the v2, third loop.
 The others reached the client unchanged, as strings where its schema asks for an array: in v1 mostly `read_files` lists of
-objects (v2 converts them), in v2 `run_commands` values that start with `[` but are not Python literals. The integration defect is
-reduced, not removed, and these loops are not a general coding grade.
+objects (v2 converts them), in v2 `run_commands` values that start with `[` but are not Python literals. By the plugin's logs the
+integration defect is reduced, not removed; the pass counts (3/6 with v1; 4/6, 5/6 and 3/6 with v2) do not separate v1 from v2, and these loops are not a general coding grade.
 
 ### Source (v1)
 
