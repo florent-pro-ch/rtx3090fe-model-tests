@@ -3,7 +3,7 @@
 <p align="center"><picture>
   <source media="(prefers-color-scheme: dark)" srcset="figures/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="figures/banner-light.svg">
-  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 136 models, 333 runs (+18 copies), 14 benches, data as of 2026-10-18. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 167 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 152 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
+  <img src="figures/banner-light.svg" width="1280" alt="rtx3090fe-model-tests: What open models actually do on an RTX 3090 Founders Edition, one card, an NVLink pair, two pairs, measured on the cards. 136 models, 342 runs (+18 copies), 14 benches, data as of 2026-10-18. Schematics of the three configurations with the distinct runs on each: 1×, One RTX 3090 Founders Edition: 168 runs; 2×, Two RTX 3090 Founders Edition joined by NVLink: 160 runs; 2×2, Two NVLink pairs, never one machine: 0 on 4 cards. v0 (2026-10-02).">
 </picture></p>
 <!-- /gen:banner -->
 
@@ -45,9 +45,9 @@ here.
 | Models (upstream, public) | **136** |
 | Private fine-tune checkpoints, counted apart | 30 |
 | Builds (quantisations, GGUFs, adapters) | 165 |
-| Runs (distinct run records) | **333** (+18 copies) |
-| &nbsp;&nbsp;· on one card (`1x3090fe`) | 167 (+15 copies) |
-| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 152 (+3 copies) |
+| Runs (distinct run records) | **342** (+18 copies) |
+| &nbsp;&nbsp;· on one card (`1x3090fe`) | 168 (+15 copies) |
+| &nbsp;&nbsp;· on one NVLink pair (`2x3090fe-nvlink`) | 160 (+3 copies) |
 | &nbsp;&nbsp;· on both pairs as one configuration (`2x2x3090fe-nvlink`) | 0 |
 | &nbsp;&nbsp;· on the CPU alone, no card (`cpu-only`) | 8 |
 | &nbsp;&nbsp;· topology unknown | 6 |
