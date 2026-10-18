@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-18 — Highest measured values: one card, one pair, two pairs
+
+A new page, [Highest measured values](https://florent-pro-ch.github.io/rtx3090fe-model-tests/best-results/), gathers for one card and for one NVLink pair the highest values measured under rules it states: the largest models that ran, with every weight on the cards or with part of the model in system RAM; the highest single stream and the highest aggregate of the headline runs in three size classes; the agent loop, from its ranking and from the run records dated after it; and the top score per bench. It then gives what the two pairs did side by side, and reads four results of the night of 17 to 18 October together, with their settings, their n and what they do not show. No new measurement and no new verdict: every figure is read from the published records, and `tools/verify_best_results.py` recomputes each one with the page's rules (a gate of `tools/check_all.sh`). The home page and the configurations page link to it.
+
 ## 2026-10-18 — Night 3: two big MoE models, each on one NVLink pair; a Qwen3-Coder tool-call adapter; agent loops
 
 gpt-oss-120b (native MXFP4) and Qwen3-Coder-Next 80B-A3B (Qwen's Q4_K_M) each run on its own NVLink pair of RTX 3090 FE, the same night, with the MoE experts of their first 11 and 4 layers kept in system RAM; a predeclared fit search found the split (llama.cpp's -ts must balance the cards, or the first card stays nearly empty). Single stream: 50.4 and 101.7 tok/s.

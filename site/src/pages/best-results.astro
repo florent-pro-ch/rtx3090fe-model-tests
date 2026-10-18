@@ -1,0 +1,354 @@
+---
+/**
+ * Highest measured values: for one card and one NVLink pair, the highest
+ * values under the rules of lib/best.ts (their text is shown first), each
+ * linked to its run record or ranking row; for the two pairs, the hardware
+ * record and the two-pairs comparison; then the four results of the night of
+ * 17 to 18 October read together, each with its n, its settings and what it
+ * does not show. No figure is typed here: every number comes from data/
+ * through <Num>, and tools/verify_best_results.py recomputes each one.
+ */
+import Layout from '../layouts/Layout.astro';
+import Num from '../components/Num.astro';
+import Banner from '../components/Banner.astro';
+import Frame from '../components/Frame.astro';
+import GraderBadge from '../components/GraderBadge.astro';
+import PrePinBadge from '../components/PrePinBadge.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import {
+  benchById, buildById, buildLabel, dataAsOf, hardwareById, isHouseProtocol, isJudged, isNum, modelById, modelName, rankingTitle,
+  repetitions, rowOtherJudge, runDate, soloTokS, topScoresOnConfig,
+} from '../lib/data';
+import type { Run } from '../lib/data';
+import {
+  benchHref, campaignHref, compareHref, configHref, engineLabel, evidenceHref, glossaryHref, href, modelHref, rankingHref, runHref,
+} from '../lib/site';
+import { twoPairs } from '../lib/configs';
+import {
+  BEST_HW, BEST_RULES, NIGHT, SIZE_CLASSES, activeOf, addedTag, alsoOnOneCard, arg, fastestSolo, highestAggregate, largestModel,
+  loopContext, loopRankingDate, loopRankingTop, loopRecordsBest, loopTasks, metric, nightRun, oneDecimal, paramsOf, slotsOf,
+  stockLoop, topoText, unclassified,
+} from '../lib/best';
+
+const name = (id: string) => modelById().get(id)?.name ?? modelName(id);
+const mHref = (id: string) => (modelById().get(id) ? modelHref(modelById().get(id)!.slug) : null);
+const asOf = dataAsOf();
+const pairs = twoPairs();
+const quad = hardwareById('2x2x3090fe-nvlink');
+const sections = BEST_HW.map((hw) => ({
+  hw,
+  h: hardwareById(hw)!,
+  full: largestModel(hw, false),
+  ram: largestModel(hw, true),
+  solo: fastestSolo(hw),
+  agg: highestAggregate(hw),
+  noParams: unclassified(hw),
+  loopTop: loopRankingTop(hw),
+  loopNew: loopRecordsBest(hw),
+  top: topScoresOnConfig(hw, 1).filter(({ ranking }) => ranking.bench_id !== 'code-loop/v1'),
+}));
+const loopDate = loopRankingDate();
+const stock = stockLoop();
+const tasks = loopTasks();
+const adaptersDoc = evidenceHref(NIGHT.adaptersDoc);
+const runLine = (r: Run) => `${engineLabel(r.engine)} · ${buildLabel(r)} · ${topoText(r)}`;
+const protoNote = (r: Run) => (isHouseProtocol(r.protocol) ? null : r.protocol ?? 'no protocol');
+const v2 = NIGHT.adapterV2.map((id) => nightRun(id)).filter((r): r is Run => !!r);
+const nightRuns = (ids: readonly string[]) => ids.map((id) => nightRun(id)).filter((r): r is Run => !!r);
+const description = 'The highest values measured on one RTX 3090 FE and on one NVLink pair, under stated rules, each linked to its record; what the two pairs did side by side; and four results of the night of 17 to 18 October with their n and caveats.';
+---
+<Layout title="Highest measured values" description={description} nav="configs" crumbs={[{ label: 'configurations', href: href('configs/') }, { label: 'highest measured values' }]}>
+  <h1>One card, one pair, two pairs: the highest measured values</h1>
+  <p class="lead">
+    For each configuration, the highest values the lab measured under the rules below, each from one run record or one ranking
+    row, and linked to it. A value holds for its model build, engine, launch line and date on these cards; it is not a
+    recommendation, and no role is adopted for any model on this page.
+  </p>
+
+  <Frame title="rules this page applies">
+    <ol class="small">{BEST_RULES.map((t) => <li>{t}</li>)}</ol>
+    <p class="small muted">The <a href={href('methodology/#headline-run-rule')}>headline-run rule</a> is the one of the configuration pages. Each section links to its full configuration page, where every run is listed.</p>
+  </Frame>
+
+  <p class="small">
+    <a href="#hw-1x3090fe">One card</a> · <a href="#hw-2x3090fe-nvlink">One NVLink pair</a> · <a href="#two-pairs">Two pairs</a> ·
+    <a href="#night-17-18-october">The night of 17 to 18 October</a>
+  </p>
+
+  {sections.map(({ hw, h, full, ram, solo, agg, noParams, loopTop, loopNew, top }) => (
+    <section aria-labelledby={`hw-${hw}`}>
+      <h2 id={`hw-${hw}`}>{h.label}</h2>
+      <p class="small muted"><a href={configHref(hw)}>Configuration page</a>: every run, the headline table and what was never measured.</p>
+
+      <h3 id={`largest-${hw}`}>Largest models that ran</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Weights</th><th scope="col">Model</th><th scope="col" class="num">Parameters (B), total · active</th><th scope="col">Engine · build · topology</th><th scope="col" class="num">Single stream</th><th scope="col" class="num">Passes</th><th scope="col">Run</th></tr></thead>
+          <tbody>
+            {[{ label: 'all on the cards', x: full }, { label: 'part in system RAM', x: ram }].map(({ label, x }) => x ? (
+              <tr>
+                <td class="small">{label}{x.speed && isNum(x.speed.topology.cpu_offload_gb) && x.speed.topology.cpu_offload_gb > 0 && <> (<Num value={x.speed.topology.cpu_offload_gb} unit="GB" run={x.speed.run_id} /> in RAM)</>}</td>
+                <td>{mHref(x.model_id) ? <a href={mHref(x.model_id)!}>{name(x.model_id)}</a> : name(x.model_id)}{hw !== '1x3090fe' && alsoOnOneCard(x.model_id) && <span class="small muted"> · also ran on <a href={runHref(alsoOnOneCard(x.model_id)!.run_id)}>one card</a></span>}</td>
+                <td class="num"><Num value={x.params} href={mHref(x.model_id)} />{isNum(activeOf(x.model_id)) && <> · <Num value={activeOf(x.model_id)} href={mHref(x.model_id)} /></>}</td>
+                <td class="small">{runLine(x.speed ?? x.runs[0])}{x.speed && protoNote(x.speed) && <> · <span class="mono">{protoNote(x.speed)}</span></>}</td>
+                <td class="num">{x.speed ? <><Num value={soloTokS(x.speed)} digits={oneDecimal(soloTokS(x.speed))} unit="tok/s" run={x.speed.run_id} />{slotsOf(x.speed) === 1 && <span class="small muted"> · one slot, serialised</span>}</> : <span class="muted small">not measured here</span>}</td>
+                <td class="num">{x.speed ? <Num value={repetitions(x.speed)} run={x.speed.run_id} /> : ''}</td>
+                <td class="mono small nowrap"><a href={runHref((x.speed ?? x.runs[0]).run_id)}>{runDate(x.speed ?? x.runs[0]) ?? 'undated'}</a> <PrePinBadge prePin={(x.speed ?? x.runs[0]).engine.pre_pin} unknown={false} /></td>
+              </tr>
+            ) : (
+              <tr><td class="small">{label}</td><td colspan="6" class="muted small">not measured on this configuration</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">One slot, serialised: the house protocol's eight requests were served one after another, so the run's eight-request figure is not an aggregate and the run is not a headline run. Single stream is completion tokens divided by wall time, prefill included.</p>
+
+      <h3 id={`solo-${hw}`}>Single stream of the headline runs, highest per size class</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Size class</th><th scope="col">Model</th><th scope="col">Engine · build · topology</th><th scope="col" class="num">Single stream</th><th scope="col" class="num">Passes</th><th scope="col">Run</th></tr></thead>
+          <tbody>
+            {SIZE_CLASSES.map((cls) => solo.find((x) => x.cls.id === cls.id) ?? cls).map((x) => 'run' in x ? (
+              <tr>
+                <td class="small">{x.cls.label}</td>
+                <td>{mHref(x.model_id) ? <a href={mHref(x.model_id)!}>{name(x.model_id)}</a> : name(x.model_id)}</td>
+                <td class="small">{runLine(x.run)}{protoNote(x.run) && <> · <span class="mono">{protoNote(x.run)}</span></>}</td>
+                <td class="num"><Num value={x.value} digits={oneDecimal(x.value)} unit="tok/s" run={x.run.run_id} /></td>
+                <td class="num"><Num value={repetitions(x.run)} run={x.run.run_id} /></td>
+                <td class="mono small nowrap"><a href={runHref(x.run.run_id)}>{runDate(x.run) ?? 'undated'}</a> <PrePinBadge prePin={x.run.engine.pre_pin} unknown={false} /></td>
+              </tr>
+            ) : (
+              <tr><td class="small">{x.label}</td><td colspan="5" class="muted small">no headline run in this class on this configuration (one-slot runs are not headline runs)</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id={`agg-${hw}`}>Aggregate at eight requests of the headline runs, highest per size class</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Size class</th><th scope="col">Model</th><th scope="col">Engine · build · topology</th><th scope="col" class="num">Aggregate</th><th scope="col" class="num">Slots</th><th scope="col" class="num">Passes</th><th scope="col">Run</th></tr></thead>
+          <tbody>
+            {SIZE_CLASSES.map((cls) => agg.find((x) => x.cls.id === cls.id) ?? cls).map((x) => 'run' in x ? (
+              <tr>
+                <td class="small">{x.cls.label}</td>
+                <td>{mHref(x.model_id) ? <a href={mHref(x.model_id)!}>{name(x.model_id)}</a> : name(x.model_id)}</td>
+                <td class="small">{runLine(x.run)}{protoNote(x.run) && <> · <span class="mono">{protoNote(x.run)}</span></>}</td>
+                <td class="num"><Num value={x.value} digits={oneDecimal(x.value)} unit="tok/s" run={x.run.run_id} /></td>
+                <td class="num">{slotsOf(x.run) !== null ? <Num value={slotsOf(x.run)} run={x.run.run_id} /> : <span class="muted small">not recorded</span>}</td>
+                <td class="num"><Num value={repetitions(x.run)} run={x.run.run_id} /></td>
+                <td class="mono small nowrap"><a href={runHref(x.run.run_id)}>{runDate(x.run) ?? 'undated'}</a> <PrePinBadge prePin={x.run.engine.pre_pin} unknown={false} /></td>
+              </tr>
+            ) : (
+              <tr><td class="small">{x.label}</td><td colspan="6" class="muted small">no headline run in this class on this configuration (one-slot runs are not headline runs)</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">
+        The house protocol is <a class="mono" href={glossaryHref('speed-house/v1')}>speed-house/v1</a> (one short French prompt, temperature 0); a row from another protocol names it.
+        A headline run is chosen by the order above, not by speed: another run of the same model may be faster or slower. A speed is not a quality result.
+        {noParams > 0 && <> <Num value={noParams} href={`${configHref(hw)}#headline`} /> model{noParams === 1 ? ' has' : 's have'} no parameter count in the data and {noParams === 1 ? 'is' : 'are'} left out of the size classes.</>}
+      </p>
+
+      <h3 id={`loop-${hw}`}>Agent loop (<a class="mono" href={benchHref('code-loop/v1')}>code-loop/v1</a>)</h3>
+      {loopTop ? (
+        <p>
+          In the <a href={rankingHref(loopTop.ranking.ranking_id)}>agent-loop ranking</a>{loopDate && <>, last re-ordered <time class="mono">{loopDate}</time></>}:{' '}
+          {loopTop.rows.map((row, i) => {
+            const ppr = Array.isArray(row.extra?.passes_per_run) ? (row.extra!.passes_per_run as unknown[]).filter(isNum) : [];
+            const b = row.build_id ? buildById().get(row.build_id) : undefined;
+            return (
+              <>
+                {i > 0 && '; '}
+                {mHref(row.model_id) ? <a href={mHref(row.model_id)!}>{name(row.model_id)}</a> : name(row.model_id)}{b && <> · {b.quant.label}</>}
+                {typeof row.extra?.engine === 'string' && <> · {engineLabel({ name: row.extra!.engine as string })}</>}
+                {isNum(row.extra?.context_k_tokens) && <> · <Num value={row.extra!.context_k_tokens} unit="K" href={rankingHref(loopTop.ranking.ranking_id)} /> context</>}: lowest count over its{' '}
+                <Num value={ppr.length} href={rankingHref(loopTop.ranking.ranking_id)} /> loop{ppr.length === 1 ? '' : 's'},{' '}
+                <Num value={row.score} href={rankingHref(loopTop.ranking.ranking_id)} />/<Num value={tasks} href={benchHref('code-loop/v1')} /> (loops: {ppr.map((p, j) => <>{j > 0 && ', '}<Num value={p} href={rankingHref(loopTop.ranking.ranking_id)} /></>)})
+                {typeof row.extra?.evidence === 'string' && <span class="small muted">; evidence: {row.extra!.evidence as string}</span>}
+              </>
+            );
+          })}.
+        </p>
+      ) : <p class="empty">No row of the agent-loop ranking on this number of cards.</p>}
+      {loopNew && (
+        <p>
+          Run records dated after it, not in that ranking: at most <Num value={loopNew.passed} run={loopNew.groups[0].loops.find((l) => l.passed === loopNew.passed)!.run.run_id} />/<Num value={loopNew.total} run={loopNew.groups[0].loops[0].run.run_id} /> in one loop, by{' '}
+          {loopNew.groups.map((g, i) => (
+            <>
+              {i > 0 && '; '}
+              {mHref(g.model_id) ? <a href={mHref(g.model_id)!}>{name(g.model_id)}</a> : name(g.model_id)} · {buildLabel(g.loops[0].run)} · {topoText(g.loops[0].run)}, its loops since then (context where recorded):{' '}
+              {g.loops.map((l, j) => {
+                const c = loopContext(l.run);
+                return <>{j > 0 && ', '}<Num value={l.passed} run={l.run.run_id} />/<Num value={l.total} run={l.run.run_id} />{c && <span class="small muted"> ({c.kind} <Num value={c.value} run={l.run.run_id} />)</span>}</>;
+              })}
+            </>
+          ))}.
+        </p>
+      )}
+      <p class="small muted">Six frozen tasks; a task passes when its hidden verifier exits 0. One run record may hold several loops of one launch line. Loops of one model may differ in context, engine settings and adapter: each run record gives its own. A loop count is not a general coding grade.</p>
+
+      {top.length > 0 && (
+        <>
+          <h3 id={`top-${hw}`}>Top score per bench</h3>
+          {top.some(({ ranking }) => isJudged(ranking.grader)) && <Banner kind="judge" graders={top.map(({ ranking }) => ranking.grader)} />}
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">Bench</th><th scope="col" class="num">Items</th><th scope="col">Model</th><th scope="col">Build</th><th scope="col" class="num">Score</th><th scope="col">Run</th></tr></thead>
+              <tbody>
+                {top.map(({ ranking, rows }) => rows.map(({ row, run }) => (
+                  <tr>
+                    <td class="small"><a class="mono" href={benchHref(ranking.bench_id)}>{ranking.bench_id}</a> <GraderBadge grader={ranking.grader} /><br /><a class="muted" href={rankingHref(ranking.ranking_id)}>{rankingTitle(ranking)}</a></td>
+                    <td class="num">{isNum(benchById().get(ranking.bench_id)?.n_items) ? <Num value={benchById().get(ranking.bench_id)!.n_items} href={benchHref(ranking.bench_id)} /> : <span class="muted small">n/a</span>}</td>
+                    <td>{mHref(row.model_id) ? <a href={mHref(row.model_id)!}>{name(row.model_id)}</a> : name(row.model_id)}</td>
+                    <td class="small">{buildLabel(run)}</td>
+                    <td class="num"><Num value={row.score} run={run.run_id} />{rowOtherJudge(ranking, row) && <span class="muted small" title={`graded by ${rowOtherJudge(ranking, row)}: not comparable with the other rows`}> †</span>}</td>
+                    <td class="mono small nowrap"><a href={runHref(run.run_id)}>{runDate(run) ?? 'undated'}</a> <PrePinBadge prePin={run.engine.pre_pin} unknown={false} /></td>
+                  </tr>
+                )))}
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted">Items: the bench's frozen set. Scores of different benches are not comparable; each links to its full ranking. The agent loop has its own section above; the configuration page lists the next rows.</p>
+        </>
+      )}
+    </section>
+  ))}
+
+  <section aria-labelledby="two-pairs">
+    <h2 id="two-pairs">{quad?.label ?? 'Two NVLink pairs'}</h2>
+    <Banner kind="two-pairs" />
+    <ul>
+      {pairs.single && <li>Runs of one model on all four cards: <Num value={pairs.single.value} href={compareHref('two-pairs-parallel')} />.</li>}
+      {pairs.maxGpus && <li>Most GPUs requested by one model server, over every recorded launch line: <Num value={pairs.maxGpus.value} unit="GPUs" href={compareHref('two-pairs-parallel')} />.</li>}
+      {pairs.busy && <li>Most cards busy at the same moment: <Num value={pairs.busy.value} unit="cards" run={pairs.busy.run_ids[0]} />, in the 3D generation bench, one engine per card{typeof pairs.busy.at === 'string' && <> (<time class="mono">{(pairs.busy.at as string).slice(0, 10)}</time>)</>}.</li>}
+    </ul>
+    <p>
+      What four cards give here is two pairs, each running its own job; every model figure on this page comes from one card or one pair.
+      {quad && quad.never_measured.length > 0 && <> Never measured: {quad.never_measured.join('; ')}.</>}
+      {' '}<a href={compareHref('two-pairs-parallel')}>What both pairs did at once</a> · <a href={configHref('2x2x3090fe-nvlink')}>configuration page</a>
+    </p>
+  </section>
+
+  <section aria-labelledby="night-17-18-october">
+    <h2 id="night-17-18-october">The night of 17 to 18 October, read together</h2>
+    <p class="small muted">
+      Four results of one campaign (<a href={campaignHref('2026-10-18-night-3')}>night 3</a>), chosen for this page, with the settings and limits their records give.
+      The runs of each result are listed under it, with the ones added after the night's predeclared list or run in the day window after it marked as such.
+    </p>
+
+    {nightRun(NIGHT.oneCard) && (
+      <article aria-labelledby="n-one-card">
+        <h3 id="n-one-card"><a href={mHref('openai/gpt-oss-120b') ?? '#'}>{name('openai/gpt-oss-120b')}</a> on one card</h3>
+        <p>
+          <Num value={paramsOf('openai/gpt-oss-120b')} unit="B" href={mHref('openai/gpt-oss-120b')} /> parameters in all,{' '}
+          <Num value={activeOf('openai/gpt-oss-120b')} unit="B" href={mHref('openai/gpt-oss-120b')} /> active, {buildLabel(nightRun(NIGHT.oneCard)!)} on {engineLabel(nightRun(NIGHT.oneCard)!.engine)}, server reasoning budget{' '}
+          <Num value={arg(NIGHT.oneCard, 'reasoning_budget')} run={NIGHT.oneCard} />: every layer on the card except the MoE experts of the first{' '}
+          <Num value={arg(NIGHT.oneCard, 'n_cpu_moe')} run={NIGHT.oneCard} /> layers, held in system RAM (<Num value={nightRun(NIGHT.oneCard)!.topology.cpu_offload_gb} unit="GB" run={NIGHT.oneCard} />).{' '}
+          <strong><Num value={metric(NIGHT.oneCard, 'solo_tok_s')} unit="tok/s" run={NIGHT.oneCard} /> single stream</strong>, over{' '}
+          <Num value={metric(NIGHT.oneCard, 'repetitions')} run={NIGHT.oneCard} /> passes, at a <Num value={arg(NIGHT.oneCard, 'ctx_size')} run={NIGHT.oneCard} />-token context with one server slot, serialised.
+          On one NVLink pair, with the experts of <Num value={arg(NIGHT.pairOneSlot, 'n_cpu_moe')} run={NIGHT.pairOneSlot} /> layers in RAM:{' '}
+          <Num value={metric(NIGHT.pairOneSlot, 'solo_tok_s')} unit="tok/s" run={NIGHT.pairOneSlot} /> with one slot of{' '}
+          <Num value={arg(NIGHT.pairOneSlot, 'ctx_per_slot')} run={NIGHT.pairOneSlot} /> tokens; with{' '}
+          <Num value={arg(NIGHT.pairFourSlots, 'parallel_slots')} run={NIGHT.pairFourSlots} /> slots of{' '}
+          <Num value={arg(NIGHT.pairFourSlots, 'ctx_per_slot')} run={NIGHT.pairFourSlots} /> tokens,{' '}
+          <Num value={metric(NIGHT.pairFourSlots, 'solo_tok_s')} unit="tok/s" run={NIGHT.pairFourSlots} /> single stream and{' '}
+          <Num value={metric(NIGHT.pairFourSlots, 'agg_tok_s')} unit="tok/s" run={NIGHT.pairFourSlots} /> at eight requests (<Num value={metric(NIGHT.pairFourSlots, 'repetitions')} run={NIGHT.pairFourSlots} /> passes each).
+        </p>
+        <p>
+          Agent loop on one card, on another launch line (thinking on, no server reasoning budget, Cline window{' '}
+          <Num value={arg(NIGHT.oneCardLoop, 'client_context_window')} run={NIGHT.oneCardLoop} />):{' '}
+          <Num value={metric(NIGHT.oneCardLoop, 'agent_tasks_passed')} run={NIGHT.oneCardLoop} />/<Num value={metric(NIGHT.oneCardLoop, 'agent_tasks_total')} run={NIGHT.oneCardLoop} />, one loop;{' '}
+          <Num value={metric(NIGHT.oneCardLoop, 'agent_killed_or_timed_out')} run={NIGHT.oneCardLoop} /> tasks were stopped at the wall-clock cap.
+          With the server reasoning budget at <Num value={arg(NIGHT.pairOneSlot, 'reasoning_budget')} run={NIGHT.pairOneSlot} />, on the pair:{' '}
+          <Num value={metric(NIGHT.pairOneSlot, 'agent_tasks_passed')} run={NIGHT.pairOneSlot} />/<Num value={metric(NIGHT.pairOneSlot, 'agent_tasks_total')} run={NIGHT.pairOneSlot} /> and{' '}
+          <Num value={metric(NIGHT.pairLoopLow, 'agent_tasks_passed')} run={NIGHT.pairLoopLow} />/<Num value={metric(NIGHT.pairLoopLow, 'agent_tasks_total')} run={NIGHT.pairLoopLow} /> (reasoning effort low added), one loop each.
+        </p>
+        <p class="small muted">Does not show: speed at long context, or with more than one slot on one card; the speed on another host, whose RAM and memory channels carry the experts (the <a href={href('rig/')}>rig page</a> describes this one). NVLink use on the pair is not recorded (layer split).</p>
+        <p class="small muted">Runs: {nightRuns([NIGHT.oneCard, NIGHT.oneCardLoop, NIGHT.pairOneSlot, NIGHT.pairFourSlots, NIGHT.pairLoopLow]).map((r, i) => <>{i > 0 && ' · '}<a class="mono" href={runHref(r.run_id)}>{r.run_id.split('/')[1]}</a>{addedTag(r) && <> ({addedTag(r)})</>}</>)}.</p>
+      </article>
+    )}
+
+    {nightRun(NIGHT.nextEight) && (
+      <article aria-labelledby="n-coder-next">
+        <h3 id="n-coder-next"><a href={mHref('qwen/qwen3-coder-next') ?? '#'}>{name('qwen/qwen3-coder-next')}</a>: one, four and eight llama.cpp slots on one pair</h3>
+        <p>
+          <Num value={paramsOf('qwen/qwen3-coder-next')} unit="B" href={mHref('qwen/qwen3-coder-next')} /> parameters,{' '}
+          <Num value={activeOf('qwen/qwen3-coder-next')} unit="B" href={mHref('qwen/qwen3-coder-next')} /> active, {buildLabel(nightRun(NIGHT.nextEight)!)} on {engineLabel(nightRun(NIGHT.nextEight)!.engine)}, {topoText(nightRun(NIGHT.nextEight)!)}: the experts of{' '}
+          <Num value={arg(NIGHT.nextEight, 'n_cpu_moe')} run={NIGHT.nextEight} /> layers in system RAM (<Num value={nightRun(NIGHT.nextEight)!.topology.cpu_offload_gb} unit="GB" run={NIGHT.nextEight} />). The same weights, split and offload in the three runs; the slots and the server context changed.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col" class="num">Slots</th><th scope="col" class="num">Server context (tokens)</th><th scope="col" class="num">Per slot</th><th scope="col" class="num">Single stream</th><th scope="col" class="num">Eight requests</th><th scope="col" class="num">Passes</th></tr></thead>
+            <tbody>
+              {[NIGHT.nextOne, NIGHT.nextFour, NIGHT.nextEight].map((id) => (
+                <tr>
+                  <td class="num"><Num value={arg(id, 'parallel_slots')} run={id} /></td>
+                  <td class="num"><Num value={arg(id, 'ctx_size')} run={id} /></td>
+                  <td class="num"><Num value={arg(id, 'ctx_per_slot')} run={id} /></td>
+                  <td class="num"><Num value={metric(id, 'solo_tok_s')} unit="tok/s" run={id} /></td>
+                  <td class="num"><Num value={metric(id, 'agg_tok_s')} unit="tok/s" run={id} />{arg(id, 'parallel_slots') === 1 && <span class="small muted"> (one slot, serialised)</span>}</td>
+                  <td class="num"><Num value={metric(id, 'repetitions')} run={id} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="small muted">Does not show: the speed of long prompts (the house prompt is short), nor what eight slots give at the four-slot context per slot: eight slots ran at half of it. A llama.cpp layer split, not tensor parallel; NVLink use is not recorded.</p>
+        <p class="small muted">Runs: {nightRuns([NIGHT.nextOne, NIGHT.nextFour, NIGHT.nextEight]).map((r, i) => <>{i > 0 && ' · '}<a class="mono" href={runHref(r.run_id)}>{r.run_id.split('/')[1]}</a>{addedTag(r) && <> ({addedTag(r)})</>}</>)}.</p>
+      </article>
+    )}
+
+    {nightRun(NIGHT.thinkOn1024) && (
+      <article aria-labelledby="n-thinking">
+        <h3 id="n-thinking"><a href={mHref('openai/gpt-oss-120b') ?? '#'}>{name('openai/gpt-oss-120b')}</a>: thinking on and off at the same temperature and output cap</h3>
+        <p>
+          <a class="mono" href={benchHref('raison/v1')}>raison/v1</a> (exact reasoning, checked by code), on one pair, one sample per item, one run each.
+          Thinking off (server reasoning budget <Num value={arg(NIGHT.thinkOff, 'reasoning_budget')} run={NIGHT.thinkOff} />), temperature 0:{' '}
+          <strong><Num value={metric(NIGHT.thinkOff, 'reason_OFF_exact')} run={NIGHT.thinkOff} />/<Num value={metric(NIGHT.thinkOff, 'reason_OFF_cases')} run={NIGHT.thinkOff} /></strong> exact, four answers cut at the output cap.
+          Thinking on, at the same temperature and output cap (<Num value={metric(NIGHT.thinkOn1024, 'reason_max_tokens')} run={NIGHT.thinkOn1024} /> tokens, reasoning included), with a server reasoning budget of{' '}
+          <Num value={arg(NIGHT.thinkOn1024, 'reasoning_budget')} run={NIGHT.thinkOn1024} /> tokens that the model re-opened on{' '}
+          <Num value={metric(NIGHT.thinkOn1024, 'reason_budget_reopened')} run={NIGHT.thinkOn1024} /> answers, so the output cap was the effective limit:{' '}
+          <strong><Num value={metric(NIGHT.thinkOn1024, 'reason_exact')} run={NIGHT.thinkOn1024} />/<Num value={metric(NIGHT.thinkOn1024, 'reason_cases')} run={NIGHT.thinkOn1024} /></strong> exact;{' '}
+          <Num value={metric(NIGHT.thinkOn1024, 'reason_truncated')} run={NIGHT.thinkOn1024} /> answers stopped at the cap,{' '}
+          <Num value={metric(NIGHT.thinkOn1024, 'reason_empty')} run={NIGHT.thinkOn1024} /> of them empty. At this cap the two settings reach the same count, and no thinking effect, gain or loss, is isolated.
+        </p>
+        <p class="small muted">
+          Two other thinking-on runs, at temperature 1.0 with a{' '}
+          <Num value={metric(NIGHT.thinkOn2048, 'reason_max_tokens')} run={NIGHT.thinkOn2048} />-token cap, are not compared with these:{' '}
+          <Num value={metric(NIGHT.thinkOn2048, 'reason_exact')} run={NIGHT.thinkOn2048} />/<Num value={metric(NIGHT.thinkOn2048, 'reason_cases')} run={NIGHT.thinkOn2048} /> with a server budget of{' '}
+          <Num value={arg(NIGHT.thinkOn2048, 'reasoning_budget')} run={NIGHT.thinkOn2048} /> tokens, and{' '}
+          <Num value={metric(NIGHT.thinkOnNoBudget, 'reason_ON_exact')} run={NIGHT.thinkOnNoBudget} />/<Num value={metric(NIGHT.thinkOnNoBudget, 'reason_ON_cases')} run={NIGHT.thinkOnNoBudget} /> at the same temperature and cap without a server budget.
+          The thinking-on run compared here ran in the day window after the night, with a protocol chosen once the night's results were known.
+        </p>
+        <p class="small muted">Runs: {nightRuns([NIGHT.thinkOff, NIGHT.thinkOn1024, NIGHT.thinkOn2048, NIGHT.thinkOnNoBudget]).map((r, i) => <>{i > 0 && ' · '}<a class="mono" href={runHref(r.run_id)}>{r.run_id.split('/')[1]}</a>{addedTag(r) && <> ({addedTag(r)})</>}</>)}.</p>
+      </article>
+    )}
+
+    {v2.length > 0 && (
+      <article aria-labelledby="n-adapter">
+        <h3 id="n-adapter"><a href={mHref(NIGHT.adapterModel) ?? '#'}>{name(NIGHT.adapterModel)}</a>: the agent loop with a tool-call adapter</h3>
+        <p>
+          On one card, {buildLabel(v2[0])} on {engineLabel(v2[0].engine)}, <a class="mono" href={benchHref('code-loop/v1')}>code-loop/v1</a>, thinking off, one loop per row.
+          With vLLM's stock tool parser, tool arguments reached the client as stringified lists:{' '}
+          {stock ? <><Num value={stock.passed} href={mHref(NIGHT.adapterModel)} />/<Num value={stock.total} href={mHref(NIGHT.adapterModel)} /> (one loop, a{' '}
+          <Num value={stock.context} href={mHref(NIGHT.adapterModel)} />-token server context; no run record, the count is in the model's verdict and the <a href={adaptersDoc}>adapters note</a>)</> : <span class="num-null">n/a</span>}.
+          With the <a href={href('methodology/adapters/')}>adapter</a>, a tool-parser plugin that reshapes those arguments, at a{' '}
+          <Num value={arg(v2[0].run_id, 'max_model_len')} run={v2[0].run_id} />-token server context (Cline window{' '}
+          <Num value={arg(v2[0].run_id, 'client_context_window')} run={v2[0].run_id} />): v1{' '}
+          {nightRun(NIGHT.adapterV1) && <><Num value={metric(NIGHT.adapterV1, 'agent_tasks_passed')} run={NIGHT.adapterV1} />/<Num value={metric(NIGHT.adapterV1, 'agent_tasks_total')} run={NIGHT.adapterV1} /></>}; v2{' '}
+          {v2.map((r, i) => <>{i > 0 && ', '}<Num value={r.metrics.agent_tasks_passed} run={r.run_id} />/<Num value={r.metrics.agent_tasks_total} run={r.run_id} /></>)}.
+        </p>
+        <p class="small muted">
+          The launch line changed together with the parser (context, sequences and memory share, as the adapters note lists), so the difference is credited to neither;
+          the v1 and v2 counts do not separate the two versions, and by the plugin's logs the defect is reduced, not removed. The model's verdict is unchanged:{' '}
+          <StatusBadge status={modelById().get(NIGHT.adapterModel)?.verdict.status} /> for the agent integration observed with the stock parser.
+        </p>
+        <p class="small muted">Runs: {nightRuns([NIGHT.adapterV1, ...NIGHT.adapterV2]).map((r, i) => <>{i > 0 && ' · '}<a class="mono" href={runHref(r.run_id)}>{r.run_id.split('/')[1]}</a>{addedTag(r) && <> ({addedTag(r)})</>}</>)}.</p>
+      </article>
+    )}
+  </section>
+
+  <p class="small muted">Data as of <time class="mono">{asOf ?? 'n/a'}</time>. Every figure links to the run record, ranking or file it comes from.</p>
+</Layout>
