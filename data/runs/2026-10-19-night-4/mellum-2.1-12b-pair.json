@@ -1,0 +1,99 @@
+{
+  "build_id": "jetbrains/mellum2.1-12b-a2.5b-thinking@gguf-q4_k_m",
+  "campaign": "2026-10-19-night-4",
+  "duplicate_of": null,
+  "ended_at": "2026-10-18T23:24:46Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 2,
+    "passes": [
+      "fr"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11176",
+    "name": "llamacpp",
+    "pre_pin": false,
+    "version": "b11176"
+  },
+  "engine_args": {
+    "ctx_per_slot": 16384,
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_cpu_moe": 0,
+    "n_gpu_layers": 999,
+    "parallel_slots": 1,
+    "reasoning_budget": 0,
+    "reasoning_format": "deepseek",
+    "tensor_split": "12,16",
+    "thinking": "off"
+  },
+  "evidence": [
+    "evidence/2026-10-19-night-4/mellum-2.1-12b-pair/three-pass.json"
+  ],
+  "hardware": "2x3090fe-nvlink",
+  "kind": "speed",
+  "metrics": {
+    "agg_completion_tokens": 4096.0,
+    "agg_concurrency": 8,
+    "agg_energy_j": 6818.5,
+    "agg_ok": 8,
+    "agg_power_mean_w": 448.1,
+    "agg_power_peak_w": 466.2,
+    "agg_rep1_tok_s": 269.1,
+    "agg_rep2_tok_s": 268.9,
+    "agg_rep3_tok_s": 269.8,
+    "agg_tok_per_j": 0.6007,
+    "agg_tok_s": 269.3,
+    "repetitions": 3,
+    "solo_completion_tokens": 512.0,
+    "solo_energy_j": 847.0,
+    "solo_power_mean_w": 440.4,
+    "solo_power_peak_w": 461.8,
+    "solo_rep1_tok_s": 264.2,
+    "solo_rep2_tok_s": 267.1,
+    "solo_rep3_tok_s": 268.9,
+    "solo_tok_per_j": 0.6045,
+    "solo_tok_s": 266.7,
+    "solo_ttft_ms": 125,
+    "solo_ttft_ms_mean": 72.0
+  },
+  "model_id": "jetbrains/mellum2.1-12b-a2.5b-thinking",
+  "parse_notes": [
+    "Closed local observations on frozen synthetic benches. No generated answer, prompt, answer key, weight or machine log is published; no role is adopted.",
+    "Same weights, image and launch line as mellum-2.1-12b-one-card, on the NVLink pair with llama.cpp's layer split (-ts 12,16, from the predeclared pair fit search; no layer offloaded). Single stream 266.7 tok/s against 271.3 on one card, aggregate 269.3 against 271.5 (three passes each, one slot, the house protocol's short prompt): about 1.7 % slower single stream on the pair, in all three passes. The model fits on one card, so this test did not use the second card's memory.",
+    "Not in the night's predeclared run plan: a model picked during the night, when the owner left the choice of new models to test free until 07:00 Swiss time; its weights were downloaded at a fixed revision and checked by SHA-256, and its arms were written and its fit searched before they ran."
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-10-19-night-4/mellum-2.1-12b-pair",
+  "scrubbed_fields": [],
+  "source": {
+    "source_id": "src-c1fd3482955c0138"
+  },
+  "started_at": "2026-10-18T23:23:33Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": null,
+    "gpus": 2,
+    "nvlink_used": null,
+    "p2p": "unknown",
+    "pp": null,
+    "ram_spill": false,
+    "split": "layer",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      4021,
+      4811
+    ]
+  }
+}

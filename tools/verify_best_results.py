@@ -53,6 +53,7 @@ NIGHT = dict(
     on2048=N3 + 'gpt-oss-120b-reasoning-on2048', onNoBudget=N3 + 'gpt-oss-120b-reasoning-on',
     v1=N3 + 'qwen3-coder-adapter-v1-loop',
     v2=[N3 + 'qwen3-coder-adapter-v2-loop', N3 + 'qwen3-coder-adapter-v2-loop-r2', N3 + 'qwen3-coder-adapter-v2-loop-r3'],
+    oneCardLoopRepeats=['2026-10-19-night-4/gpt-oss-120b-one-card-loop-r2', '2026-10-19-night-4/gpt-oss-120b-one-card-loop-r3'],   # night 4: the same launch line, named by the page
 )
 # Numbers written in the page's prose, outside a figure, that are not a date, an id or a name of the data:
 # each with the record it is quoted from and the text that must be in it.
@@ -61,6 +62,7 @@ PROSE = {
     '1.0': ('data/runs/2026-10-18-night-3/gpt-oss-120b-reasoning-on2048.json', 'temperature 1.0'),
     '17': ('data/campaigns/2026-10-18-night-3.json', '17 to 18 October'),
     '18': ('data/campaigns/2026-10-18-night-3.json', '17 to 18 October'),
+    '19': ('data/campaigns/2026-10-19-night-4.json', '18 to 19 October'),
     '3': ('data/campaigns/2026-10-18-night-3.json', 'Night 3'),
     '48': ('data/hardware/2x2x3090fe-nvlink.json', '48 GB'),
 }
@@ -376,6 +378,10 @@ def night(D: Data, E: Counter, notes: list[str]) -> list[tuple[str, str, str, ob
     f(a, 'agent loop on one card: passed', NIGHT['oneCardLoop'], 'metrics', 'agent_tasks_passed')
     f(a, 'agent loop on one card: tasks', NIGHT['oneCardLoop'], 'metrics', 'agent_tasks_total')
     f(a, 'agent loop on one card: stopped at the cap', NIGHT['oneCardLoop'], 'metrics', 'agent_killed_or_timed_out')
+    for rid in NIGHT['oneCardLoopRepeats']:
+        f(a, f'agent loop on one card, repeat {rid[-2:]}: passed', rid, 'metrics', 'agent_tasks_passed')
+        f(a, f'agent loop on one card, repeat {rid[-2:]}: tasks', rid, 'metrics', 'agent_tasks_total')
+        f(a, f'agent loop on one card, repeat {rid[-2:]}: stopped at the cap', rid, 'metrics', 'agent_killed_or_timed_out')
     f(a, 'pair: server reasoning budget', NIGHT['pair'], 'engine_args', 'reasoning_budget')
     f(a, 'pair loop, budget 0: passed', NIGHT['pair'], 'metrics', 'agent_tasks_passed')
     f(a, 'pair loop, budget 0: tasks', NIGHT['pair'], 'metrics', 'agent_tasks_total')

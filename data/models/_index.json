@@ -348,6 +348,17 @@
   },
   {
     "builds": [
+      "final-bench/darwin-27b-rsi@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "final-bench/darwin-27b-rsi",
+    "name": "Darwin-27B-RSI",
+    "slug": "final-bench__darwin-27b-rsi",
+    "vendor": "FINAL-Bench",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "funaudiollm/fun-cosyvoice3-0.5b-2512@fp16-fp32-official",
       "funaudiollm/fun-cosyvoice3-0.5b-2512@onnx-community-port"
     ],
@@ -537,6 +548,17 @@
   },
   {
     "builds": [
+      "jetbrains/mellum2.1-12b-a2.5b-thinking@gguf-q4_k_m"
+    ],
+    "category": "moe-llm",
+    "model_id": "jetbrains/mellum2.1-12b-a2.5b-thinking",
+    "name": "Mellum2.1-12B-A2.5B-Thinking",
+    "slug": "jetbrains__mellum2.1-12b-a2.5b-thinking",
+    "vendor": "JetBrains",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "jetspec/jetspec-qwen3-8b@bf16"
     ],
     "category": "draft-head",
@@ -643,6 +665,28 @@
     "name": "Muse Glimmer 30B DFlash drafter",
     "slug": "meta-models__muse-glimmer-30b-dflash-drafter",
     "vendor": "Meta",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "microsoft/aescode-32b@gguf-q4_k_m"
+    ],
+    "category": "vlm",
+    "model_id": "microsoft/aescode-32b",
+    "name": "AesCode-32B",
+    "slug": "microsoft__aescode-32b",
+    "vendor": "Microsoft",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "microsoft/aescode-8b@gguf-q4_k_m"
+    ],
+    "category": "vlm",
+    "model_id": "microsoft/aescode-8b",
+    "name": "AesCode-8B",
+    "slug": "microsoft__aescode-8b",
+    "vendor": "Microsoft",
     "verdict_status": "rated-no-role"
   },
   {
@@ -1370,6 +1414,17 @@
   },
   {
     "builds": [
+      "togethercomputer/hybridagent-14b-agentic@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "togethercomputer/hybridagent-14b-agentic",
+    "name": "HybridAgent-14B-Agentic",
+    "slug": "togethercomputer__hybridagent-14b-agentic",
+    "vendor": "Together AI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "tokenrhythm/neohorse-1-4b@gguf-q4_k_m"
     ],
     "category": "llm",
@@ -1456,6 +1511,17 @@
     "slug": "xhtoken__spark-x2.5-4b",
     "vendor": "XHToken",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "xiaomimimo/mimo-v2.6-distill-qwen-9b@gguf-q8_0"
+    ],
+    "category": "vlm",
+    "model_id": "xiaomimimo/mimo-v2.6-distill-qwen-9b",
+    "name": "MiMo-V2.6-Distill-Qwen-9B",
+    "slug": "xiaomimimo__mimo-v2.6-distill-qwen-9b",
+    "vendor": "Xiaomi",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

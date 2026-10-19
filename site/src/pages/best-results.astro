@@ -234,7 +234,7 @@ const description = 'The highest values measured on one RTX 3090 FE and on one N
   <section aria-labelledby="night-17-18-october">
     <h2 id="night-17-18-october">The night of 17 to 18 October, read together</h2>
     <p class="small muted">
-      Four results of one campaign (<a href={campaignHref('2026-10-18-night-3')}>night 3</a>), chosen for this page, with the settings and limits their records give.
+      Four results of one campaign (<a href={campaignHref('2026-10-18-night-3')}>night 3</a>), chosen for this page, with the settings and limits their records give; the agent loop on one card also names its two repeats of <a href={campaignHref('2026-10-19-night-4')}>the next night</a>, on the same launch line.
       The runs of each result are listed under it, with the ones added after the night's predeclared list or run in the day window after it marked as such.
     </p>
 
@@ -259,14 +259,18 @@ const description = 'The highest values measured on one RTX 3090 FE and on one N
         <p>
           Agent loop on one card, on another launch line (thinking on, no server reasoning budget, Cline window{' '}
           <Num value={arg(NIGHT.oneCardLoop, 'client_context_window')} run={NIGHT.oneCardLoop} />):{' '}
-          <Num value={metric(NIGHT.oneCardLoop, 'agent_tasks_passed')} run={NIGHT.oneCardLoop} />/<Num value={metric(NIGHT.oneCardLoop, 'agent_tasks_total')} run={NIGHT.oneCardLoop} />, one loop;{' '}
+          <Num value={metric(NIGHT.oneCardLoop, 'agent_tasks_passed')} run={NIGHT.oneCardLoop} />/<Num value={metric(NIGHT.oneCardLoop, 'agent_tasks_total')} run={NIGHT.oneCardLoop} />, one loop that night;{' '}
           <Num value={metric(NIGHT.oneCardLoop, 'agent_killed_or_timed_out')} run={NIGHT.oneCardLoop} /> tasks were stopped at the wall-clock cap.
+          {['2026-10-19-night-4/gpt-oss-120b-one-card-loop-r2', '2026-10-19-night-4/gpt-oss-120b-one-card-loop-r3'].filter((id) => nightRun(id)).length === 2 && (<>{' '}Repeated twice on the same launch line on the night of 18 to 19 October:{' '}
+            {['2026-10-19-night-4/gpt-oss-120b-one-card-loop-r2', '2026-10-19-night-4/gpt-oss-120b-one-card-loop-r3'].map((id, i) => <>{i > 0 && ' and '}<Num value={metric(id, 'agent_tasks_passed')} run={id} />/<Num value={metric(id, 'agent_tasks_total')} run={id} /></>)}{' '}
+            (three loops in all), with{' '}
+            {['2026-10-19-night-4/gpt-oss-120b-one-card-loop-r2', '2026-10-19-night-4/gpt-oss-120b-one-card-loop-r3'].map((id, i) => <>{i > 0 && ' and '}<Num value={metric(id, 'agent_killed_or_timed_out')} run={id} /></>)} tasks stopped at the cap.</>)}
           With the server reasoning budget at <Num value={arg(NIGHT.pairOneSlot, 'reasoning_budget')} run={NIGHT.pairOneSlot} />, on the pair:{' '}
           <Num value={metric(NIGHT.pairOneSlot, 'agent_tasks_passed')} run={NIGHT.pairOneSlot} />/<Num value={metric(NIGHT.pairOneSlot, 'agent_tasks_total')} run={NIGHT.pairOneSlot} /> and{' '}
           <Num value={metric(NIGHT.pairLoopLow, 'agent_tasks_passed')} run={NIGHT.pairLoopLow} />/<Num value={metric(NIGHT.pairLoopLow, 'agent_tasks_total')} run={NIGHT.pairLoopLow} /> (reasoning effort low added), one loop each.
         </p>
         <p class="small muted">Does not show: speed at long context, or with more than one slot on one card; the speed on another host, whose RAM and memory channels carry the experts (the <a href={href('rig/')}>rig page</a> describes this one). NVLink use on the pair is not recorded (layer split).</p>
-        <p class="small muted">Runs: {nightRuns([NIGHT.oneCard, NIGHT.oneCardLoop, NIGHT.pairOneSlot, NIGHT.pairFourSlots, NIGHT.pairLoopLow]).map((r, i) => <>{i > 0 && ' · '}<a class="mono" href={runHref(r.run_id)}>{r.run_id.split('/')[1]}</a>{addedTag(r) && <> ({addedTag(r)})</>}</>)}.</p>
+        <p class="small muted">Runs: {nightRuns([NIGHT.oneCard, NIGHT.oneCardLoop, '2026-10-19-night-4/gpt-oss-120b-one-card-loop-r2', '2026-10-19-night-4/gpt-oss-120b-one-card-loop-r3', NIGHT.pairOneSlot, NIGHT.pairFourSlots, NIGHT.pairLoopLow]).map((r, i) => <>{i > 0 && ' · '}<a class="mono" href={runHref(r.run_id)}>{r.run_id.split('/')[1]}</a>{addedTag(r) && <> ({addedTag(r)})</>}</>)}.</p>
       </article>
     )}
 

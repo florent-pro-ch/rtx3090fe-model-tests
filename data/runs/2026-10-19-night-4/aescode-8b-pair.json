@@ -1,0 +1,95 @@
+{
+  "build_id": "microsoft/aescode-8b@gguf-q4_k_m",
+  "campaign": "2026-10-19-night-4",
+  "duplicate_of": null,
+  "ended_at": "2026-10-18T23:26:58Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 2,
+    "passes": [
+      "fr"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11176",
+    "name": "llamacpp",
+    "pre_pin": false,
+    "version": "b11176"
+  },
+  "engine_args": {
+    "ctx_per_slot": 16384,
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_gpu_layers": 999,
+    "parallel_slots": 1,
+    "tensor_split": "16,20"
+  },
+  "evidence": [
+    "evidence/2026-10-19-night-4/aescode-8b-pair/three-pass.json"
+  ],
+  "hardware": "2x3090fe-nvlink",
+  "kind": "speed",
+  "metrics": {
+    "agg_completion_tokens": 4096.0,
+    "agg_concurrency": 8,
+    "agg_energy_j": 18431.7,
+    "agg_ok": 8,
+    "agg_power_mean_w": 590.6,
+    "agg_power_peak_w": 603.8,
+    "agg_rep1_tok_s": 131.4,
+    "agg_rep2_tok_s": 131.4,
+    "agg_rep3_tok_s": 131.1,
+    "agg_tok_per_j": 0.2222,
+    "agg_tok_s": 131.3,
+    "repetitions": 3,
+    "solo_completion_tokens": 512.0,
+    "solo_energy_j": 2311.2,
+    "solo_power_mean_w": 590.6,
+    "solo_power_peak_w": 602.2,
+    "solo_rep1_tok_s": 130.5,
+    "solo_rep2_tok_s": 131.3,
+    "solo_rep3_tok_s": 131.2,
+    "solo_tok_per_j": 0.2215,
+    "solo_tok_s": 131.0,
+    "solo_ttft_ms": 48,
+    "solo_ttft_ms_mean": 39.7
+  },
+  "model_id": "microsoft/aescode-8b",
+  "parse_notes": [
+    "Closed local observations on frozen synthetic benches. No generated answer, prompt, answer key, weight or machine log is published; no role is adopted.",
+    "Same weights, image and launch line as aescode-8b-one-card, on the NVLink pair with llama.cpp's layer split (-ts 16,20, from the predeclared pair fit search; no layer offloaded). Single stream 131.0 tok/s against 128.3 on one card, aggregate 131.3 against 128.5 (three passes each, one slot, the house protocol's short prompt): about 2.1 % faster single stream on the pair, in all three passes. The model fits on one card, so this test did not use the second card's memory.",
+    "Not in the night's predeclared run plan: a model picked during the night, when the owner left the choice of new models to test free until 07:00 Swiss time; its weights were downloaded at a fixed revision and checked by SHA-256, and its arms were written and its fit searched before they ran."
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-10-19-night-4/aescode-8b-pair",
+  "scrubbed_fields": [],
+  "source": {
+    "source_id": "src-df490083c065bb61"
+  },
+  "started_at": "2026-10-18T23:24:46Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": null,
+    "gpus": 2,
+    "nvlink_used": null,
+    "p2p": "unknown",
+    "pp": null,
+    "ram_spill": false,
+    "split": "layer",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      3707,
+      4251
+    ]
+  }
+}
