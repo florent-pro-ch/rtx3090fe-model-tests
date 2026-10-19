@@ -1,0 +1,51 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [],
+    "inventory_ids": []
+  },
+  "arch": "dense",
+  "builds": [
+    "microsoft/aescode-8b@gguf-q4_k_m"
+  ],
+  "category": "vlm",
+  "first_tested": "2026-10-18",
+  "last_tested": "2026-10-18",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "Hugging Face model card, read 2026-10-19"
+  },
+  "lineage": {
+    "base_model_id": "qwen/qwen3-vl-8b-instruct",
+    "kind": "finetune"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "microsoft/aescode-8b",
+  "name": "AesCode-8B",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 8.8,
+  "parse_notes": [
+    "Base model declared on the card: Qwen/Qwen3-VL-8B-Instruct (relation: fine-tune). Parameter count from the card's safetensors metadata (8,767,123,696)."
+  ],
+  "slug": "microsoft__aescode-8b",
+  "source": {
+    "source_id": "src-b169fd586a45d5ca"
+  },
+  "sources": [
+    {
+      "source_id": "src-b169fd586a45d5ca"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/microsoft/AesCode-8B",
+  "vendor": "Microsoft",
+  "verdict": {
+    "as_of": "2026-10-19",
+    "status": "rated-no-role",
+    "summary": "Microsoft's AesCode-8B (8.8B dense, vision encoder included), GGUF Q4_K_M (bartowski, third-party conversion), measured on one RTX 3090 FE on the night of 18 to 19 October: 128.3 tok/s single stream (three passes, one llama.cpp slot), 131.0 tok/s on the NVLink pair. Agent loop 0/6 at a 32,768-token context (one run). A vision-language model, served text-only. Tutoring and code answers not graded yet. No role is adopted."
+  }
+}
