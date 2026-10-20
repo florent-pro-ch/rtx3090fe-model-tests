@@ -1,6 +1,6 @@
 {
   "generated_by": "runs",
-  "n": 400,
+  "n": 406,
   "runs": [
     {
       "agg_concurrency": 8,
@@ -8630,6 +8630,144 @@
       "vram_mib_per_gpu": [
         23781,
         21635
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-20-repro-gptoss/gpt-oss-120b-reasoning-off-c8192-r2",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-20T06:44:33Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-20-repro-gptoss/gpt-oss-120b-reasoning-off-c8192-r3",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-20T07:23:08Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-20-repro-gptoss/gpt-oss-120b-reasoning-off-c8192-r4",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-20T08:00:19Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-20-repro-gptoss/gpt-oss-120b-reasoning-on4096-c8192-r2",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-20T07:03:01Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-20-repro-gptoss/gpt-oss-120b-reasoning-on4096-c8192-r3",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-20T07:40:27Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "openai/gpt-oss-120b@gguf-mxfp4",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "openai/gpt-oss-120b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-20-repro-gptoss/gpt-oss-120b-reasoning-on4096-c8192-r4",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-20T08:17:32Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23039,
+        20949
       ]
     }
   ]
