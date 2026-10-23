@@ -1,0 +1,101 @@
+{
+  "build_id": "ornith-ai/ornith-1.5-122b@gguf-ad-iq4_xs-iq3_s",
+  "campaign": "2026-10-21-night-5",
+  "duplicate_of": null,
+  "ended_at": "2026-10-21T08:18:26Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 1,
+    "passes": [
+      "fr"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11176",
+    "name": "llamacpp",
+    "pre_pin": false,
+    "version": "b11176"
+  },
+  "engine_args": {
+    "ctx_per_slot": 16384,
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_cpu_moe": 34,
+    "n_gpu_layers": 999,
+    "parallel_slots": 1,
+    "reasoning_budget": 0,
+    "reasoning_format": "deepseek",
+    "thinking": "off"
+  },
+  "evidence": [
+    "evidence/2026-10-21-night-5/ornith-1.5-122b-one-card/three-pass.json"
+  ],
+  "hardware": "1x3090fe",
+  "kind": "speed",
+  "metrics": {
+    "agg_completion_tokens": 4096.0,
+    "agg_concurrency": 8,
+    "agg_energy_j": 39595.0,
+    "agg_ok": 8,
+    "agg_power_mean_w": 150.5,
+    "agg_power_peak_w": 153.9,
+    "agg_rep1_tok_s": 15.5,
+    "agg_rep2_tok_s": 15.6,
+    "agg_rep3_tok_s": 15.6,
+    "agg_tok_per_j": 0.1034,
+    "agg_tok_s": 15.6,
+    "repetitions": 3,
+    "solo_completion_tokens": 512.0,
+    "solo_energy_j": 4960.4,
+    "solo_power_mean_w": 150.8,
+    "solo_power_peak_w": 153.8,
+    "solo_rep1_tok_s": 15.5,
+    "solo_rep2_tok_s": 15.6,
+    "solo_rep3_tok_s": 15.6,
+    "solo_tok_per_j": 0.1032,
+    "solo_tok_s": 15.6,
+    "solo_ttft_ms": 1535,
+    "solo_ttft_ms_mean": 717.0
+  },
+  "model_id": "ornith-ai/ornith-1.5-122b",
+  "parse_notes": [
+    "Closed local observations on frozen synthetic benches. No generated answer, prompt, answer key, weight or machine log is published; no role is adopted.",
+    "Ornith-1.5-122B (ornith-ai), GGUF AD-IQ4_XS-IQ3_S mixed (AtomicChat, third-party conversion), on ONE RTX 3090 FE: all 49 layers (and the output layer) on GPU, with the MoE experts of the first 34 layers kept in system RAM (--n-cpu-moe 34, 39.5 GiB of weights mapped on the CPU), 16,384-token context, one llama.cpp slot, so the eight requests of the house protocol are served one after another.",
+    "Same weights and image as ornith-1.5-122b-pair, the conditional arm on the other topology. Single stream 15.6 tok/s against 29.1 for ornith-1.5-122b-pair, aggregate 15.6 against 29.0 (three passes each, one slot): about 46.6 % slower single stream than the main record, in all three passes.",
+    "The predeclared fit search loaded at its first setting (12.0 s).",
+    "Picked from a public model watch, downloaded at a fixed revision and checked by SHA-256, with its arms written and its fit searched before they ran; the conditional arm on the other topology ran after this model's planned arms had finished.",
+    "Run on 21 October (06:08-08:18 UTC) in a day window opened after night 5 with the owner's go-ahead, under the night's campaign, image and launch lines; the night window had ended with no arm of this model run.",
+    "The other pair was idle during this arm, unlike during the pair arm."
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-10-21-night-5/ornith-1.5-122b-one-card",
+  "scrubbed_fields": [],
+  "source": {
+    "source_id": "src-bc974b6e6b3c84e5"
+  },
+  "started_at": "2026-10-21T08:01:29Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 42.4,
+    "expert_parallel": null,
+    "gpus": 1,
+    "nvlink_used": false,
+    "p2p": "n/a",
+    "pp": null,
+    "ram_spill": true,
+    "split": "none",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      21909
+    ]
+  }
+}

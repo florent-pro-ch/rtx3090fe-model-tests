@@ -1,0 +1,21 @@
+{
+  "build_id": "tencent/hy-memory-30b-a3b@gguf-q4_k_m",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "tencent/hy-memory-30b-a3b",
+  "parse_notes": [
+    "Licence Apache-2.0 read on the Hugging Face model card on 2026-10-23; numerical measurements only, no weights published.",
+    "Measured revision 38e10a37701e1caff4a6dc3831448aaf8c2e15d1 of tencent/Hy-Memory-30B-A3B-GGUF; Hy-Memory-30B-A3B-Q4_K_M.gguf, 18,236,702,464 bytes, SHA-256 e417fc86d0a2bb058ed253028f4617d144aa874b8af35711cca0c7009bd63446: the repository's LFS object, recomputed on the downloaded file (SHA-OK)."
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "gguf",
+    "label": "GGUF Q4_K_M (Tencent, official)"
+  },
+  "runs_count": 4,
+  "size_gb": 18.24,
+  "source": {
+    "source_id": "src-fbc7bf5476cc0661"
+  },
+  "source_repo": "tencent/Hy-Memory-30B-A3B-GGUF"
+}

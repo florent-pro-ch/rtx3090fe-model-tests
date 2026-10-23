@@ -1,0 +1,69 @@
+{
+  "fit_search": {
+    "attempts": [
+      {
+        "load_seconds": 12.1,
+        "n_cpu_moe": 13,
+        "status": "FIT",
+        "tensor_split": "30,19"
+      }
+    ],
+    "legend": {
+      "n_cpu_moe": "layers whose MoE experts stay in system RAM (null: no such flag)",
+      "order": "the predeclared settings, tried in this order until one loads and answers a canary request",
+      "status": "FIT: loaded and answered the canary; NO_FIT: did not load or did not answer"
+    },
+    "order": [
+      {
+        "n_cpu_moe": 13,
+        "tensor_split": "30,19"
+      },
+      {
+        "n_cpu_moe": 14,
+        "tensor_split": "30,19"
+      },
+      {
+        "n_cpu_moe": 15,
+        "tensor_split": "31,18"
+      },
+      {
+        "n_cpu_moe": 16,
+        "tensor_split": "31,18"
+      },
+      {
+        "n_cpu_moe": 18,
+        "tensor_split": "32,17"
+      }
+    ]
+  },
+  "passes": [
+    {
+      "aggregate_energy_j": 40268.275,
+      "aggregate_tok_s": 29.0,
+      "repetition": 1,
+      "solo_energy_j": 4925.076,
+      "solo_tok_s": 29.1,
+      "solo_ttft_ms": 906
+    },
+    {
+      "aggregate_energy_j": 41712.362,
+      "aggregate_tok_s": 28.8,
+      "repetition": 2,
+      "solo_energy_j": 5111.458,
+      "solo_tok_s": 29.2,
+      "solo_ttft_ms": 206
+    },
+    {
+      "aggregate_energy_j": 42215.373,
+      "aggregate_tok_s": 29.2,
+      "repetition": 3,
+      "solo_energy_j": 5212.964,
+      "solo_tok_s": 29.1,
+      "solo_ttft_ms": 195
+    }
+  ],
+  "protocol": "speed-house/v1",
+  "source": {
+    "source_id": "src-ae6c2db5caed51a7"
+  }
+}
