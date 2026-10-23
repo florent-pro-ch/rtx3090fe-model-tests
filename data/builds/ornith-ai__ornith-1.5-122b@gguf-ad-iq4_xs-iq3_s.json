@@ -1,0 +1,23 @@
+{
+  "build_id": "ornith-ai/ornith-1.5-122b@gguf-ad-iq4_xs-iq3_s",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "ornith-ai/ornith-1.5-122b",
+  "parse_notes": [
+    "Licence MIT read on the Hugging Face model card on 2026-10-23; numerical measurements only, no weights published.",
+    "Measured revision 1566a7eaa1ce49ce22d482da3f82a9967cd18be8 of AtomicChat/Ornith-1.5-122B-GGUF; Ornith-1.5-122B-AD-IQ4_XS-IQ3_S-00001-of-00002.gguf, 44,585,615,072 bytes, SHA-256 dd3d15acc21a6f50f21524ae4034b4d12926f9af1a72dec79fb847997f2a7f37; Ornith-1.5-122B-AD-IQ4_XS-IQ3_S-00002-of-00002.gguf, 17,566,343,712 bytes, SHA-256 25e8cb95e3264736eb3d4307f86aa2f10c3ea2f3d5dc53277f1a7cedbf84fd44: the repository's LFS objects, recomputed on the downloaded files (SHA-OK).",
+    "A third-party GGUF conversion (AtomicChat) of ornith-ai/Ornith-1.5-122B: the measurements are of this conversion.",
+    "When the weights were picked (2026-10-20) the publisher had no GGUF repository of this model; by 2026-10-23 it lists one of its own (ornith-ai/Ornith-1.5-122B-GGUF), not measured here."
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "gguf",
+    "label": "GGUF AD-IQ4_XS-IQ3_S mixed (AtomicChat, third-party conversion)"
+  },
+  "runs_count": 4,
+  "size_gb": 62.15,
+  "source": {
+    "source_id": "src-7ba4b1c62947249b"
+  },
+  "source_repo": "AtomicChat/Ornith-1.5-122B-GGUF"
+}

@@ -840,6 +840,17 @@
   },
   {
     "builds": [
+      "nvidia/nvidia-nemotron-3.5-super-vl-120b-a12b@gguf-q4_0"
+    ],
+    "category": "vlm",
+    "model_id": "nvidia/nvidia-nemotron-3.5-super-vl-120b-a12b",
+    "name": "NVIDIA Nemotron 3.5 Super VL 120B-A12B",
+    "slug": "nvidia__nvidia-nemotron-3.5-super-vl-120b-a12b",
+    "vendor": "NVIDIA",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "openai/gpt-oss-120b@gguf-mxfp4"
     ],
     "category": "moe-llm",
@@ -951,6 +962,17 @@
   },
   {
     "builds": [
+      "ornith-ai/ornith-1.5-122b@gguf-ad-iq4_xs-iq3_s"
+    ],
+    "category": "moe-llm",
+    "model_id": "ornith-ai/ornith-1.5-122b",
+    "name": "Ornith-1.5-122B",
+    "slug": "ornith-ai__ornith-1.5-122b",
+    "vendor": "ornith-ai",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "ornith-ai/ornith-1.5-35b-a3b@w4a16-sym-g32"
     ],
     "category": "moe-llm",
@@ -991,6 +1013,17 @@
     "name": "Limite 1B Violetto",
     "slug": "paradigma-inc__limite-1b-violetto",
     "vendor": "Paradigma",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
+      "perplexity-ai/pplx-decider-flash-v1.2@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "perplexity-ai/pplx-decider-flash-v1.2",
+    "name": "pplx-decider-flash-v1.2",
+    "slug": "perplexity-ai__pplx-decider-flash-v1.2",
+    "vendor": "Perplexity",
     "verdict_status": "rated-no-role"
   },
   {
@@ -1366,6 +1399,17 @@
     "slug": "tencent__hunyuanocr",
     "vendor": "Tencent",
     "verdict_status": "not-rated"
+  },
+  {
+    "builds": [
+      "tencent/hy-memory-30b-a3b@gguf-q4_k_m"
+    ],
+    "category": "moe-llm",
+    "model_id": "tencent/hy-memory-30b-a3b",
+    "name": "Hy-Memory-30B-A3B",
+    "slug": "tencent__hy-memory-30b-a3b",
+    "vendor": "Tencent",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [
