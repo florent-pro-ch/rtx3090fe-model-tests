@@ -68,6 +68,9 @@ const measuredOn = heads.filter((x) => x.run).map((x) => `${soloTokS(x.run!)} to
 // A run served on the CPU alone (hardware cpu-only) has no configuration page, so it is never a headline: its speed is
 // listed under "Every run" only. The newest such run with a single-stream figure, for the empty states below.
 const cpuSpeedRun = runs.find((r) => r.hardware === 'cpu-only' && soloTokS(r) !== null) ?? null;
+// One-slot runs serve the house protocol's eight requests one after another: never a headline, but they do carry a
+// single-stream speed, which the empty state must not deny.
+const oneSlotSpeedRuns = runs.filter((r) => r.engine_args?.parallel_slots === 1 && r.metrics?.agg_concurrency === 8 && soloTokS(r) !== null);
 // Listed in the lab's records with no run, no drafter run and no score: nothing was measured here.
 const withheld = scoresWithheld(m);
 const noRecord = runs.length === 0 && drafterRuns.length === 0 && allRankRows.length === 0 && runQuality.length === 0;
@@ -150,7 +153,11 @@ const ciText = (ci: unknown) => (Array.isArray(ci) && ci.length === 2 && isNum(c
     cpuSpeedRun ? (
       <p class="empty">No configuration page has a speed figure for this model: its single-stream speed was measured on the CPU alone, no card used, at <Num value={soloTokS(cpuSpeedRun)} unit="tok/s" run={cpuSpeedRun.run_id} /> for one request, listed under <a href="#runs">every run</a>.</p>
     ) : (
-      <p class="empty">No single-stream speed in the data for this model.</p>
+      oneSlotSpeedRuns.length > 0 ? (
+        <p class="empty">No headline speed for this model: its <Num value={oneSlotSpeedRuns.length} href="#runs" /> single-stream speed run{oneSlotSpeedRuns.length === 1 ? '' : 's'} used one server slot, which serves the house protocol's eight requests one after another, so the configuration pages leave {oneSlotSpeedRuns.length === 1 ? 'it' : 'them'} out; {oneSlotSpeedRuns.length === 1 ? 'it is' : 'they are'} listed under <a href="#runs">every run</a>.</p>
+      ) : (
+        <p class="empty">No single-stream speed in the data for this model.</p>
+      )
     )
   ) : (
     <BarChart
