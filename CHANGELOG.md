@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-25 — Run counts of the configuration pages, and one-slot speeds on model pages
+
+The one-card and NVLink-pair pages counted the distinct runs published before the reviewed overlays of 17 to 25 October, so their totals had fallen behind the README's: they now count the same run index (201 and 193 distinct runs). A model measured only with one-slot runs (the house protocol's eight requests served one after another, never a headline figure) no longer reads "no single-stream speed in the data" on its page: the page says why there is no headline and points to the runs. No measurement changes.
+
 ## 2026-10-25 — A night window of 25 October: NVIDIA Nemotron 3.5 Bolt E4B
 
 One model picked from a public model watch, downloaded at a fixed revision, checked by SHA-256 and measured with the campaign kit on llama.cpp b11176: speed in three passes on one card and on the pair, exact reasoning with thinking off and on, and one agent loop. NVIDIA Nemotron 3.5 Bolt E4B (NVIDIA, Q4_K_M): 141.1 tok/s on one card, 112.9 on the pair; exact reasoning 52/60 thinking off, 53/60 thinking on (1,024-token budget); agent loop 1/6. A dense 8B model (4B effective, per its card) post-trained by NVIDIA from Gemma 4 E4B, in the publisher's own GGUF; after load it holds 3,747 MiB of VRAM on one card, with a further 3.5 GiB of its weights in system RAM. Tutoring and code answers are not graded yet. No role is adopted.
