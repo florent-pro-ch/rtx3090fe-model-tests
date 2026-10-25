@@ -828,6 +828,17 @@
   },
   {
     "builds": [
+      "nvidia/nvidia-nemotron-3.5-bolt-e4b@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "nvidia/nvidia-nemotron-3.5-bolt-e4b",
+    "name": "NVIDIA Nemotron 3.5 Bolt E4B",
+    "slug": "nvidia__nvidia-nemotron-3.5-bolt-e4b",
+    "vendor": "NVIDIA",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b@gguf-q4_k_m-ollama",
       "nvidia/nvidia-nemotron-3.5-lightning-30b-a3b@w4a16"
     ],
