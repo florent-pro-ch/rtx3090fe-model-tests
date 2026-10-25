@@ -1,0 +1,102 @@
+{
+  "build_id": "perplexity-ai/pplx-decider-flash-v1.2@gguf-q8_0",
+  "campaign": "2026-10-25-day-run",
+  "duplicate_of": null,
+  "ended_at": "2026-10-25T13:51:03Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 2,
+    "passes": [
+      "fr"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11176",
+    "name": "llamacpp",
+    "pre_pin": false,
+    "version": "b11176"
+  },
+  "engine_args": {
+    "ctx_per_slot": 16384,
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_gpu_layers": 999,
+    "parallel_slots": 1,
+    "reasoning_budget": 0,
+    "reasoning_format": "deepseek",
+    "tensor_split": "15,17",
+    "thinking": "off"
+  },
+  "evidence": [
+    "evidence/2026-10-25-day-run/pplx-decider-flash-v1.2-official-pair/three-pass.json"
+  ],
+  "hardware": "2x3090fe-nvlink",
+  "kind": "speed",
+  "metrics": {
+    "agg_completion_tokens": 4096.0,
+    "agg_concurrency": 8,
+    "agg_energy_j": 16285.3,
+    "agg_ok": 8,
+    "agg_power_mean_w": 522.8,
+    "agg_power_peak_w": 537.4,
+    "agg_rep1_tok_s": 131.6,
+    "agg_rep2_tok_s": 131.6,
+    "agg_rep3_tok_s": 131.3,
+    "agg_tok_per_j": 0.2515,
+    "agg_tok_s": 131.5,
+    "repetitions": 3,
+    "solo_completion_tokens": 512.0,
+    "solo_energy_j": 2040.9,
+    "solo_power_mean_w": 521.6,
+    "solo_power_peak_w": 532.9,
+    "solo_rep1_tok_s": 130.2,
+    "solo_rep2_tok_s": 131.5,
+    "solo_rep3_tok_s": 131.4,
+    "solo_tok_per_j": 0.2509,
+    "solo_tok_s": 131.0,
+    "solo_ttft_ms": 103,
+    "solo_ttft_ms_mean": 77.3
+  },
+  "model_id": "perplexity-ai/pplx-decider-flash-v1.2",
+  "parse_notes": [
+    "Closed local observations on frozen synthetic benches. No generated answer, prompt, answer key, weight or machine log is published; no role is adopted.",
+    "pplx-decider-flash-v1.2 (Perplexity), GGUF q8_0 (Perplexity, official), on the NVLink pair with -ts 15,17: all 32 layers (and the output layer) on GPU, 16,384-token context, one llama.cpp slot, so the eight requests of the house protocol are served one after another.",
+    "Same weights and image as pplx-decider-flash-v1.2-official-one-card, the conditional arm on the other topology. Single stream 131.0 tok/s against 129.9 for pplx-decider-flash-v1.2-official-one-card, aggregate 131.5 against 130.5 (three passes each, one slot): no difference in single stream with one card beyond the spread of the three passes.",
+    "The predeclared fit search loaded at its first setting (6.3 s).",
+    "The publisher's own GGUF of a model first measured on night 5, downloaded at a fixed revision and checked by SHA-256, with its arms written and its fit searched before they ran; the conditional arm on the other topology ran after this model's planned arms had finished.",
+    "Run on 25 October in a day window opened with the owner's go-ahead.",
+    "The campaign's other model (Ornith-1.5-122B) ran on the other NVLink pair of the same host from 13:49 to 13:51 UTC, during its speed passes (13:49-13:51 UTC)."
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-10-25-day-run/pplx-decider-flash-v1.2-official-pair",
+  "scrubbed_fields": [],
+  "source": {
+    "source_id": "src-e19c479bce420d16"
+  },
+  "started_at": "2026-10-25T13:48:51Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": null,
+    "gpus": 2,
+    "nvlink_used": null,
+    "p2p": "unknown",
+    "pp": null,
+    "ram_spill": false,
+    "split": "layer",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      2548,
+      3192
+    ]
+  }
+}

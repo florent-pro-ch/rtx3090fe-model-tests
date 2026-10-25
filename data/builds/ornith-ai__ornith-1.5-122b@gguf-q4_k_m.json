@@ -1,0 +1,22 @@
+{
+  "build_id": "ornith-ai/ornith-1.5-122b@gguf-q4_k_m",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "ornith-ai/ornith-1.5-122b",
+  "parse_notes": [
+    "Licence MIT, read on the Hugging Face model card (ornith-ai/Ornith-1.5-122B, 2026-10-23) and in the GGUF repository's card metadata at the measured revision (2026-10-25); numerical measurements only, no weights published.",
+    "Measured revision 8d5893d767c449a4f18dd08f4bb6d0d6d4426175 of ornith-ai/Ornith-1.5-122B-GGUF; Ornith-1.5-122B-Q4_K_M.gguf, 75,843,911,648 bytes, SHA-256 729fe18c2491aaa446074a923e12f184f9f2239ffd5ce3dae47b0ce9cf8df40c: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "The publisher's own GGUF file (ornith-ai/Ornith-1.5-122B-GGUF)."
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "gguf",
+    "label": "GGUF Q4_K_M (ornith-ai, official)"
+  },
+  "runs_count": 4,
+  "size_gb": 75.84,
+  "source": {
+    "source_id": "src-55bc809808cb992f"
+  },
+  "source_repo": "ornith-ai/Ornith-1.5-122B-GGUF"
+}
