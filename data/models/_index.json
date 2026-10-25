@@ -973,7 +973,8 @@
   },
   {
     "builds": [
-      "ornith-ai/ornith-1.5-122b@gguf-ad-iq4_xs-iq3_s"
+      "ornith-ai/ornith-1.5-122b@gguf-ad-iq4_xs-iq3_s",
+      "ornith-ai/ornith-1.5-122b@gguf-q4_k_m"
     ],
     "category": "moe-llm",
     "model_id": "ornith-ai/ornith-1.5-122b",
@@ -1028,7 +1029,8 @@
   },
   {
     "builds": [
-      "perplexity-ai/pplx-decider-flash-v1.2@gguf-q4_k_m"
+      "perplexity-ai/pplx-decider-flash-v1.2@gguf-q4_k_m",
+      "perplexity-ai/pplx-decider-flash-v1.2@gguf-q8_0"
     ],
     "category": "llm",
     "model_id": "perplexity-ai/pplx-decider-flash-v1.2",

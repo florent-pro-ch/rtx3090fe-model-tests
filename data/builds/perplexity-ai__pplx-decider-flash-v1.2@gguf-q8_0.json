@@ -1,0 +1,22 @@
+{
+  "build_id": "perplexity-ai/pplx-decider-flash-v1.2@gguf-q8_0",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "perplexity-ai/pplx-decider-flash-v1.2",
+  "parse_notes": [
+    "Licence Apache-2.0, read on the Hugging Face model card (perplexity-ai/pplx-decider-flash-v1.2, 2026-10-23) and in the GGUF repository's card metadata at the measured revision (2026-10-25); numerical measurements only, no weights published.",
+    "Measured revision 2514d5f0b7fbbe1ee1bfec9ffb5801a60289b4cc of perplexity-ai/pplx-decider-flash-gguf-v1.2; decider-flash-v1.2-q8_0.gguf, 5,157,837,472 bytes, SHA-256 ffb27ade8976765b0e6943a0b7f5f3fd0f7042d45ad90256a76d608bcd3942c2: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "The publisher's own GGUF file (perplexity-ai/pplx-decider-flash-gguf-v1.2); at the measured revision its only GGUF weight file is q8_0 (listing of 2026-10-25, beside a vision projector)."
+  ],
+  "quant": {
+    "bits": 8,
+    "format": "gguf",
+    "label": "GGUF q8_0 (Perplexity, official)"
+  },
+  "runs_count": 4,
+  "size_gb": 5.16,
+  "source": {
+    "source_id": "src-590df45638fe1c66"
+  },
+  "source_repo": "perplexity-ai/pplx-decider-flash-gguf-v1.2"
+}
