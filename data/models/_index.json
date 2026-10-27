@@ -783,6 +783,17 @@
   },
   {
     "builds": [
+      "nanbeige/nanbeige4.3-33b@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "nanbeige/nanbeige4.3-33b",
+    "name": "Nanbeige4.3-33B",
+    "slug": "nanbeige__nanbeige4.3-33b",
+    "vendor": "Nanbeige",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "nex-agi/nex-n2.5-mini@gguf-q4_k_m",
       "nex-agi/nex-n2.5-mini@w4a16-autoround"
     ],

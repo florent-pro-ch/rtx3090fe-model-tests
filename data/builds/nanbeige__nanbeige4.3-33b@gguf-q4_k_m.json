@@ -1,0 +1,23 @@
+{
+  "build_id": "nanbeige/nanbeige4.3-33b@gguf-q4_k_m",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "nanbeige/nanbeige4.3-33b",
+  "parse_notes": [
+    "Licence Apache-2.0 read on the Hugging Face model cards of the original and GGUF repositories on 2026-10-27; numerical measurements only, no weights published.",
+    "Measured revision 9beb68421fdf7be095093a6888325fa2c83ddd38 of bartowski/Nanbeige_Nanbeige4.3-33B-GGUF; Nanbeige_Nanbeige4.3-33B-Q4_K_M.gguf, 20,788,825,216 bytes, SHA-256 2cef79855ca47ee6571e166db32a07089e34f3cf78e0397b262d124ddb814c37: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "A third-party GGUF conversion (bartowski) of Nanbeige/Nanbeige4.3-33B: the measurements are of this conversion.",
+    "The publisher listed no GGUF repository of this model on Hugging Face (listing of 2026-10-27)."
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "gguf",
+    "label": "GGUF Q4_K_M (bartowski, third-party conversion)"
+  },
+  "runs_count": 4,
+  "size_gb": 20.79,
+  "source": {
+    "source_id": "src-539047fcb2a65dec"
+  },
+  "source_repo": "bartowski/Nanbeige_Nanbeige4.3-33B-GGUF"
+}
