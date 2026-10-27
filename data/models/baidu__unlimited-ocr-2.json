@@ -1,0 +1,56 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [
+      "doc-unlimited-ocr-2"
+    ],
+    "inventory_ids": [
+      "unlimited-ocr-2-3b-bf16"
+    ]
+  },
+  "arch": "moe",
+  "builds": [
+    "baidu/unlimited-ocr-2@bf16"
+  ],
+  "category": "ocr",
+  "first_tested": "2026-10-27",
+  "last_tested": "2026-10-27",
+  "licence": {
+    "flags": [],
+    "name": "MIT",
+    "source": "Hugging Face model card of baidu/Unlimited-OCR-2 (revision 9cf077c4), license mit, read 2026-10-27"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "base"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "baidu/unlimited-ocr-2",
+  "name": "Unlimited-OCR 2",
+  "notes": null,
+  "params_b_active": null,
+  "params_b_total": 3.34,
+  "parse_notes": [
+    "Parameter count from the card's safetensors metadata (3,343,978,497).",
+    "The card declares no base model; recorded as a base model, as its first version is."
+  ],
+  "slug": "baidu__unlimited-ocr-2",
+  "source": {
+    "source_id": "src-3971737a0d66f9e7"
+  },
+  "sources": [
+    {
+      "source_id": "src-3971737a0d66f9e7"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+  "vendor": "Baidu",
+  "verdict": {
+    "as_of": "2026-10-27",
+    "status": "rated-no-role",
+    "summary": "OCR in the DeepSeek-OCR lineage, second version, with a block-sparse attention meant for long multi-page documents. On document/v1 (one page per item), through the card's Transformers route on one card, it ranks with the other specialists: it parses the page whatever the item asks, and its layout markup counts as text under the frozen reader. With that markup removed (off protocol, see the run record), it transcribes the pages nearly exactly, a little below its first version treated the same way, and lower on the degraded pages. 2.49 pages per minute through transformers. Its multi-page gain is not measured here. Rated, no role assigned."
+  }
+}

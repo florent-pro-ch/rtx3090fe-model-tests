@@ -79,6 +79,17 @@
   },
   {
     "builds": [
+      "baidu/unlimited-ocr-2@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "baidu/unlimited-ocr-2",
+    "name": "Unlimited-OCR 2",
+    "slug": "baidu__unlimited-ocr-2",
+    "vendor": "Baidu",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "black-forest-labs/flux.2-klein-4b@bf16"
     ],
     "category": "image-gen",

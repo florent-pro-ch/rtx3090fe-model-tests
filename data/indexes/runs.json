@@ -1,6 +1,6 @@
 {
   "generated_by": "runs",
-  "n": 438,
+  "n": 439,
   "runs": [
     {
       "agg_concurrency": 8,
@@ -9397,6 +9397,28 @@
       "status": "ok",
       "vram_mib_per_gpu": [
         3747
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "baidu/unlimited-ocr-2@bf16",
+      "duplicate_of": null,
+      "engine": "transformers",
+      "engine_version": "4.52.1",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "quality",
+      "model_id": "baidu/unlimited-ocr-2",
+      "pre_pin": false,
+      "protocol": "quality-house/v1",
+      "run_id": "2026-10-27-document-unlimited-ocr-2/doc-unlimited-ocr-2",
+      "solo_tok_s": null,
+      "split": "none",
+      "started_at": "2026-10-27T19:14:39Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        7438
       ]
     },
     {
