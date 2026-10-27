@@ -1,6 +1,6 @@
 {
   "generated_by": "runs",
-  "n": 434,
+  "n": 438,
   "runs": [
     {
       "agg_concurrency": 8,
@@ -9397,6 +9397,97 @@
       "status": "ok",
       "vram_mib_per_gpu": [
         3747
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "nanbeige/nanbeige4.3-33b@gguf-q4_k_m",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "nanbeige/nanbeige4.3-33b",
+      "pre_pin": false,
+      "protocol": "code-loop/v1",
+      "run_id": "2026-10-27-night-run/nanbeige4.3-33b-loop",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-27T00:35:17Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        11448,
+        12254
+      ]
+    },
+    {
+      "agg_concurrency": 8,
+      "agg_tok_s": 38.0,
+      "build_id": "nanbeige/nanbeige4.3-33b@gguf-q4_k_m",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "speed",
+      "model_id": "nanbeige/nanbeige4.3-33b",
+      "pre_pin": false,
+      "protocol": "speed-house/v1",
+      "run_id": "2026-10-27-night-run/nanbeige4.3-33b-one-card",
+      "solo_tok_s": 37.9,
+      "split": "none",
+      "started_at": "2026-10-27T01:46:08Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        23006
+      ]
+    },
+    {
+      "agg_concurrency": 8,
+      "agg_tok_s": 38.7,
+      "build_id": "nanbeige/nanbeige4.3-33b@gguf-q4_k_m",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "speed+quality",
+      "model_id": "nanbeige/nanbeige4.3-33b",
+      "pre_pin": false,
+      "protocol": "speed-house/v1",
+      "run_id": "2026-10-27-night-run/nanbeige4.3-33b-pair",
+      "solo_tok_s": 38.7,
+      "split": "layer",
+      "started_at": "2026-10-26T23:51:30Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        11448,
+        12254
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "nanbeige/nanbeige4.3-33b@gguf-q4_k_m",
+      "duplicate_of": null,
+      "engine": "llamacpp",
+      "engine_version": "b11176",
+      "gpus": 2,
+      "hardware": "2x3090fe-nvlink",
+      "kind": "quality",
+      "model_id": "nanbeige/nanbeige4.3-33b",
+      "pre_pin": false,
+      "protocol": "selected-night-observations/v1",
+      "run_id": "2026-10-27-night-run/nanbeige4.3-33b-reasoning-on1024-t0",
+      "solo_tok_s": null,
+      "split": "layer",
+      "started_at": "2026-10-27T01:20:02Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        11448,
+        12254
       ]
     }
   ]
