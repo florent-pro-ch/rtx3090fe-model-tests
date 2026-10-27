@@ -1,0 +1,24 @@
+{
+  "build_id": "baidu/unlimited-ocr-2@bf16",
+  "engine_family": "transformers",
+  "harness_ids": [
+    "doc-unlimited-ocr-2"
+  ],
+  "inventory_id": "unlimited-ocr-2-3b-bf16",
+  "model_id": "baidu/unlimited-ocr-2",
+  "parse_notes": [
+    "Licence MIT read on the Hugging Face model card on 2026-10-27; numerical measurements only, no weights published.",
+    "Measured revision 9cf077c4b206e0e2a31879df937b0b0bcba3661c of baidu/Unlimited-OCR-2, the publisher's own BF16 checkpoint; model-00001-of-00002.safetensors, 4,998,430,312 bytes, SHA-256 4c40b740f209fd7682040d4ebf19409208acde5c401ccd2dde426d0f41542f18; model-00002-of-00002.safetensors, 1,689,875,264 bytes, SHA-256 9490b82fa47f89e5110eb5577f8ab1b6694c12121905dbc086ddb10207a4ba0c: the repository's LFS objects, recomputed on the downloaded files (SHA-OK)."
+  ],
+  "quant": {
+    "bits": 16,
+    "format": "bf16",
+    "label": "BF16 as published"
+  },
+  "runs_count": 1,
+  "size_gb": 6.69,
+  "source": {
+    "source_id": "src-475192d9c3df0b98"
+  },
+  "source_repo": "baidu/Unlimited-OCR-2"
+}
