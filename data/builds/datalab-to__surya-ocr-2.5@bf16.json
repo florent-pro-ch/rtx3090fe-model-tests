@@ -1,0 +1,24 @@
+{
+  "build_id": "datalab-to/surya-ocr-2.5@bf16",
+  "engine_family": "vllm",
+  "harness_ids": [
+    "doc-surya-ocr-2-5"
+  ],
+  "inventory_id": "surya-ocr-2.5-0.69b-bf16",
+  "model_id": "datalab-to/surya-ocr-2.5",
+  "parse_notes": [
+    "Licence OpenRAIL-M (modified) read on the Hugging Face model card on 2026-11-02; numerical measurements only, no weights published.",
+    "Measured revision 00c843e9cae45611dca0a6dc2c9bbbf2dadaaed3 of datalab-to/surya-ocr-2.5, the publisher's own BF16 checkpoint; model.safetensors, 1,378,772,208 bytes, SHA-256 6940baca2d16a20b15b7302cac7253246c78c95469920fcdb064963f48b5cb17: the repository's LFS object, recomputed on the downloaded file (SHA-OK)."
+  ],
+  "quant": {
+    "bits": 16,
+    "format": "bf16",
+    "label": "BF16 as published"
+  },
+  "runs_count": 1,
+  "size_gb": 1.38,
+  "source": {
+    "source_id": "src-29967d64593c9a0f"
+  },
+  "source_repo": "datalab-to/surya-ocr-2.5"
+}

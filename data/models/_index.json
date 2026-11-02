@@ -212,6 +212,17 @@
   },
   {
     "builds": [
+      "datalab-to/surya-ocr-2.5@bf16"
+    ],
+    "category": "ocr",
+    "model_id": "datalab-to/surya-ocr-2.5",
+    "name": "Surya OCR 2.5",
+    "slug": "datalab-to__surya-ocr-2.5",
+    "vendor": "Datalab",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "davidau/qwen3.6-27b-fable-fusion-711@gptq-int4"
     ],
     "category": "vlm",
