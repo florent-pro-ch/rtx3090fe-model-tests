@@ -1,0 +1,22 @@
+{
+  "build_id": "internscience/sage-a1.5@gguf-q4_k_m",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "internscience/sage-a1.5",
+  "parse_notes": [
+    "Licence Apache-2.0 read on the Hugging Face model cards of the original and GGUF repositories on 2026-11-02; numerical measurements only, no weights published.",
+    "Measured revision 10b179b52f2c841030db327627e707d076b4c8cf of InternScience/Sage-A1.5-Q4_K_M-GGUF; Sage-A1.5-Q4_K_M.gguf, 21,713,463,520 bytes, SHA-256 a64fe0bbf936db3eb54f66f142c2b2eee569ade83673649f549a21daef8ca395: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "The publisher's own GGUF file (InternScience/Sage-A1.5-Q4_K_M-GGUF)."
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "gguf",
+    "label": "GGUF Q4_K_M (the publisher's own conversion)"
+  },
+  "runs_count": 4,
+  "size_gb": 21.71,
+  "source": {
+    "source_id": "src-8ee68a931d7575e5"
+  },
+  "source_repo": "InternScience/Sage-A1.5-Q4_K_M-GGUF"
+}

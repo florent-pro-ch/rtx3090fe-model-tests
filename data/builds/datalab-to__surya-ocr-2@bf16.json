@@ -2,7 +2,8 @@
   "build_id": "datalab-to/surya-ocr-2@bf16",
   "engine_family": "vllm",
   "harness_ids": [
-    "doc-surya-ocr-2"
+    "doc-surya-ocr-2",
+    "doc-surya-ocr-2-imgfirst"
   ],
   "inventory_id": "surya-ocr-2-0-65b-bf16",
   "model_id": "datalab-to/surya-ocr-2",
@@ -14,7 +15,7 @@
     "format": "bf16",
     "label": "BF16 as published"
   },
-  "runs_count": 1,
+  "runs_count": 2,
   "size_gb": 1.37,
   "source": {
     "source_id": "src-22c474888f1d7390"

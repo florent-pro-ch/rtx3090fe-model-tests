@@ -559,6 +559,17 @@
   },
   {
     "builds": [
+      "internscience/sage-a1.5@gguf-q4_k_m"
+    ],
+    "category": "vlm",
+    "model_id": "internscience/sage-a1.5",
+    "name": "Sage-A1.5",
+    "slug": "internscience__sage-a1.5",
+    "vendor": "InternScience",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "jaredpalmer/kev-4b@bf16-native-pointer"
     ],
     "category": "other",
