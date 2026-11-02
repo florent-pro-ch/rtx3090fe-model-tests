@@ -1,6 +1,6 @@
 {
   "generated_by": "runs",
-  "n": 439,
+  "n": 440,
   "runs": [
     {
       "agg_concurrency": 8,
@@ -9510,6 +9510,28 @@
       "vram_mib_per_gpu": [
         11448,
         12254
+      ]
+    },
+    {
+      "agg_concurrency": null,
+      "agg_tok_s": null,
+      "build_id": "datalab-to/surya-ocr-2.5@bf16",
+      "duplicate_of": null,
+      "engine": "vllm",
+      "engine_version": "0.29.0",
+      "gpus": 1,
+      "hardware": "1x3090fe",
+      "kind": "quality",
+      "model_id": "datalab-to/surya-ocr-2.5",
+      "pre_pin": false,
+      "protocol": "quality-house/v1",
+      "run_id": "2026-11-02-document-surya-ocr-2-5/doc-surya-ocr-2-5",
+      "solo_tok_s": null,
+      "split": "none",
+      "started_at": "2026-11-02T09:23:51Z",
+      "status": "ok",
+      "vram_mib_per_gpu": [
+        21494
       ]
     }
   ]
