@@ -1,0 +1,23 @@
+{
+  "build_id": "openmoss-team/moss-image-sft@int8-convrot-w4a8-comfy",
+  "engine_family": "comfyui",
+  "harness_ids": [],
+  "model_id": "openmoss-team/moss-image-sft",
+  "parse_notes": [
+    "Licence Apache-2.0 from the repackaging's card metadata (read 2026-11-02); numerical measurements only, no weights published.",
+    "Measured revision 530a4c94f92c35ef6818b1b035a983fe9dcf5f54 of Comfy-Org/MOSS-Image; vae/flux2-vae.safetensors, 336,211,292 bytes, SHA-256 868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3; diffusion_models/moss_image_sft_int8_convrot.safetensors, 5,413,698,958 bytes, SHA-256 b4d1475bc7eeffd7b809e82ea13a1fba1fb85c4e18365af3813722faa5c0fe4f; text_encoders/qwen3.5_9b_w4a8_gptq.safetensors, 7,343,591,088 bytes, SHA-256 4cc6a1543ad2061806da46f35f90cadb4801dcba246c44782cf42ec0feb6407c: the repository's LFS objects, checked on the downloaded files.",
+    "The three files the ComfyUI v0.43.0 MOSS-Image templates load by default.",
+    "Served by ComfyUI v0.43.0. A house image built from the house ComfyUI Dockerfile with ComfyUI moved to v0.43.0 (commit 426f5eea)."
+  ],
+  "quant": {
+    "bits": 8,
+    "format": "other",
+    "label": "int8 DiT (convrot), Qwen3.5-9B text encoder w4a8 GPTQ, FLUX.2 VAE"
+  },
+  "runs_count": 1,
+  "size_gb": 13.09,
+  "source": {
+    "source_id": "src-e2a7444e9ea4bc6d"
+  },
+  "source_repo": "Comfy-Org/MOSS-Image"
+}
