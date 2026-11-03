@@ -995,6 +995,17 @@
   },
   {
     "builds": [
+      "openmoss-team/moss-image-sft@int8-convrot-w4a8-comfy"
+    ],
+    "category": "image-gen",
+    "model_id": "openmoss-team/moss-image-sft",
+    "name": "MOSS-Image SFT",
+    "slug": "openmoss-team__moss-image-sft",
+    "vendor": "OpenMOSS",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "orcarouter/qwen3.8-27b-uncensored@w4a16-autoround"
     ],
     "category": "vlm",
@@ -1344,6 +1355,17 @@
     "slug": "sahilchachra__qwen3.6-35b-a3b-uncensored-heretic",
     "vendor": "sahilchachra",
     "verdict_status": "rejected"
+  },
+  {
+    "builds": [
+      "sensenova/sensenova-loop-9b-preview@bf16"
+    ],
+    "category": "vlm",
+    "model_id": "sensenova/sensenova-loop-9b-preview",
+    "name": "SenseNova-Loop-9B-Preview",
+    "slug": "sensenova__sensenova-loop-9b-preview",
+    "vendor": "SenseNova",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

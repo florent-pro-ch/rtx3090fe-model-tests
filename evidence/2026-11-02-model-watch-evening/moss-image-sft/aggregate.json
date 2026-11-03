@@ -1,0 +1,38 @@
+{
+  "limitations": [
+    "Closed image feasibility trial on one GPU, off any bench (the lab has no text-to-image bench): timing and memory only. No human review of the images, no technical-validity check of the image files, no cloud judge, role or ranking.",
+    "Five fixed English prompts at one fixed seed each (two ask for exact text in the image, one for a count of objects, one is photographic, one an illustration; one of the text prompts goes through the layout-box node): correlated requests, not independent capability cases. No generated image, input prompt, model weight, response or machine log is published.",
+    "ComfyUI v0.43.0 (commit 426f5eea), the graph of its official template image_moss_image_t2i in API form, without the template's prompt-enhancer branch and without SkipLayerGuidance: 25 steps, CFG 2.5, er_sde sampler, simple scheduler, 1024 x 1024; the layout item through CreateBoundingBoxes and MOSSImageLayoutPrompt (template image_moss_image_t2i_bboxes). Components: the int8 DiT (moss_image_sft_int8_convrot), the Qwen3.5-9B text encoder in w4a8 GPTQ and the FLUX.2 VAE, from Comfy-Org/MOSS-Image at 530a4c94, a repackaging of OpenMOSS-Team/MOSS-Image-SFT; SHA-256 equal to the Hub's LFS ids.",
+    "A house image built from the house ComfyUI Dockerfile with ComfyUI moved to v0.43.0 (commit 426f5eea).",
+    "Per-image time: wall clock from the request to completion, polled once a second, after one 512 x 512 warm-up request (not counted). Peak memory: the card's memory in use, read every 0.5 s with nvidia-smi (the whole card, not an allocator figure). The first request of the layout item was refused by ComfyUI's input validation (its box list read as a node link) and resubmitted with the boxes wrapped as a value; it is counted once.",
+    "The trial ran from about 18:35 to 18:47 UTC on 2 November (minute precision, from the lab's notes)."
+  ],
+  "metrics": {
+    "completed_outputs": 5,
+    "effective_runtime_corrections": 1,
+    "fixed_request_max_seconds": 17.1,
+    "fixed_request_min_seconds": 17.0,
+    "fixed_request_p50_seconds": 17.0,
+    "human_reviewed_outputs": 0,
+    "layout_conditioned_outputs": 1,
+    "output_height": 1024,
+    "output_width": 1024,
+    "planned_outputs": 5,
+    "request_errors": 0,
+    "runtime_preflight_failures": 1,
+    "sampled_peak_gpu_memory_mib": 11234,
+    "steps": 25,
+    "t2i_outputs": 5
+  },
+  "per_request_seconds": [
+    17.1,
+    17.0,
+    17.0,
+    17.0,
+    17.1
+  ],
+  "protocol": "synthetic-image-feasibility/v1",
+  "source": {
+    "source_id": "src-da33c443380be9f8"
+  }
+}

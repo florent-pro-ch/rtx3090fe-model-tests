@@ -1,0 +1,55 @@
+{
+  "access": "open",
+  "aliases": {
+    "harness_ids": [],
+    "inventory_ids": []
+  },
+  "arch": "other",
+  "builds": [
+    "openmoss-team/moss-image-sft@int8-convrot-w4a8-comfy"
+  ],
+  "category": "image-gen",
+  "first_tested": "2026-11-02",
+  "last_tested": "2026-11-02",
+  "licence": {
+    "flags": [],
+    "name": "Apache-2.0",
+    "source": "card metadata of Comfy-Org/MOSS-Image at revision 530a4c94 (the repackaging of OpenMOSS-Team/MOSS-Image-SFT), license apache-2.0, read 2026-11-02"
+  },
+  "lineage": {
+    "base_model_id": null,
+    "kind": "unknown"
+  },
+  "modalities": [
+    "text",
+    "image"
+  ],
+  "model_id": "openmoss-team/moss-image-sft",
+  "name": "MOSS-Image SFT",
+  "notes": "No quality rank or role. See the run for exact components, timing scope and limitations.",
+  "params_b_active": null,
+  "params_b_total": 5,
+  "parse_notes": [
+    "Parameter count as recorded by the lab: the 5B diffusion transformer, the 9B text encoder apart.",
+    "The measured files are the Comfy-Org repackaging at 530a4c94; the revision of OpenMOSS-Team/MOSS-Image-SFT it was made from is not recorded here."
+  ],
+  "slug": "openmoss-team__moss-image-sft",
+  "source": {
+    "source_id": "src-e1bfc8c51028d769"
+  },
+  "sources": [
+    {
+      "source_id": "src-e1bfc8c51028d769"
+    },
+    {
+      "source_id": "src-e2a7444e9ea4bc6d"
+    }
+  ],
+  "upstream_url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT",
+  "vendor": "OpenMOSS",
+  "verdict": {
+    "as_of": "2026-11-02",
+    "status": "rated-no-role",
+    "summary": "Closed one-GPU image feasibility trial off any bench, through ComfyUI v0.43.0 with the Comfy-Org repackaging (int8 DiT, w4a8 text encoder): timing and memory only, no human review of the images."
+  }
+}

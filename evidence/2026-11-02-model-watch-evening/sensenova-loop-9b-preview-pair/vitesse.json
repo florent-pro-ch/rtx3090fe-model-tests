@@ -1,0 +1,18 @@
+{
+  "agrege": {
+    "agg_tok_s": 316.8,
+    "conc": 8,
+    "ok": 8,
+    "p50_latency_s": 12.93,
+    "wall_s": 12.93
+  },
+  "candidat": "sensenova-loop-9b-preview-pair",
+  "debut": "2026-11-02T18:41:57Z",
+  "fin": "2026-11-02T18:42:34Z",
+  "solo": {
+    "completion_tokens": 512,
+    "tok_s": 44.0,
+    "ttft_ms": 198,
+    "wall_s": 11.636
+  }
+}

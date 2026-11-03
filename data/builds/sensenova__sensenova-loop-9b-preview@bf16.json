@@ -1,0 +1,22 @@
+{
+  "build_id": "sensenova/sensenova-loop-9b-preview@bf16",
+  "engine_family": "vllm",
+  "harness_ids": [],
+  "model_id": "sensenova/sensenova-loop-9b-preview",
+  "parse_notes": [
+    "Licence Apache-2.0, read on the Hugging Face model card on 2026-11-02; numerical measurements only, no weights published.",
+    "Measured revision 9937e91c7301b7dcbb5bf17e3e4e95c499a11e99 of sensenova/SenseNova-Loop-9B-Preview (eight weight shards and the multi-token-prediction file, not loaded); the SHA-256 of the files were not compared one by one with the Hub's. Size not given: the 36 GB on disk include the card's example media.",
+    "Served by a house vLLM image: vLLM 0.29.0 with vllm-project/vllm pull request #64832 at its head 86014ad4 (open, unmerged) and kernels/mhc/triton.py from the v0.30.0 image; see the run records."
+  ],
+  "quant": {
+    "bits": 16,
+    "format": "bf16",
+    "label": "BF16 safetensors (the publisher's own)"
+  },
+  "runs_count": 2,
+  "size_gb": null,
+  "source": {
+    "source_id": "src-025b217976a868d0"
+  },
+  "source_repo": "sensenova/SenseNova-Loop-9B-Preview"
+}
