@@ -2,14 +2,14 @@
   "about": "Written by tools/build_figures.mjs. source_sha256: the SVG drawn from data/ before rendering; sha256: the file written. Checked by node tools/build_figures.mjs --check.",
   "figures": {
     "banner-dark.svg": {
-      "source_sha256": "3253270b1f9650ce6a0cc3531681f275d1c56a9731311c727e74f3b1a04e5031",
-      "sha256": "092cc71b5827400fab17ced97735b0b73c53c8434b2c5f59c17001986abf8fe8",
-      "bytes": 163716
+      "source_sha256": "e05635ff669e842c2390c43a28c40467679558faa1779bb464741e60e187657c",
+      "sha256": "9117331740cc8d32c02a336b6a96fff93f9e92b26faaf538fbb2495ac0d1ae59",
+      "bytes": 163092
     },
     "banner-light.svg": {
-      "source_sha256": "3253270b1f9650ce6a0cc3531681f275d1c56a9731311c727e74f3b1a04e5031",
-      "sha256": "681d2cbd69b23335edfce8f63a23d6cc46eeccdb4ca91a627f3b39bb2b9ed33c",
-      "bytes": 163716
+      "source_sha256": "e05635ff669e842c2390c43a28c40467679558faa1779bb464741e60e187657c",
+      "sha256": "50a1bd864b9aaf874bab88f4a06feb5424bba24df82b66d391f78f45c1d82873",
+      "bytes": 163092
     },
     "social-preview.png": {
       "source_sha256": "2893e233e50356aa856f0cee9a15337c3048a4582d75d0b02b29ca03b15a607b",
