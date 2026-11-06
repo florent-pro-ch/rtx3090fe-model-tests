@@ -1241,6 +1241,17 @@
   },
   {
     "builds": [
+      "qwen/qwen3.5-0.8b@gguf-bf16"
+    ],
+    "category": "vlm",
+    "model_id": "qwen/qwen3.5-0.8b",
+    "name": "Qwen3.5-0.8B",
+    "slug": "qwen__qwen3.5-0.8b",
+    "vendor": "Qwen (Alibaba)",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "qwen/qwen3.5-9b@gguf-q4_k_m"
     ],
     "category": "llm",
@@ -1355,6 +1366,17 @@
     "slug": "resembleai__chatterbox",
     "vendor": "Resemble AI",
     "verdict_status": "reservations"
+  },
+  {
+    "builds": [
+      "rikiyat/qwen3.5-0.8b-weight-space-programming@gguf-bf16"
+    ],
+    "category": "vlm",
+    "model_id": "rikiyat/qwen3.5-0.8b-weight-space-programming",
+    "name": "Qwen3.5-0.8B weight-space programming",
+    "slug": "rikiyat__qwen3.5-0.8b-weight-space-programming",
+    "vendor": "RikiyaT",
+    "verdict_status": "rated-no-role"
   },
   {
     "builds": [

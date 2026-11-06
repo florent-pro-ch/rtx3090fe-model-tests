@@ -1,0 +1,22 @@
+{
+  "build_id": "rikiyat/qwen3.5-0.8b-weight-space-programming@gguf-bf16",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "rikiyat/qwen3.5-0.8b-weight-space-programming",
+  "parse_notes": [
+    "Licence Apache-2.0 read on the Hugging Face model card on 2026-11-06; numerical measurements only, no weights published.",
+    "Source revision d1671a178705bcab7644806d23c535517f35723b of RikiyaT/Qwen3.5-0.8B-weight-space-programming; model.safetensors-00001-of-00001.safetensors, SHA-256 fd1e42acdd118ac1b300d37500fd2885e75f5a09de3a33010d802bf7f737b553: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "GGUF converted by this lab with llama.cpp b11176's converter, from the repository's safetensors, BF16, text only: 1,557,662,208 bytes, SHA-256 072e61bfefd6e6376047d59a683f5e9b7d471379cad880d6d94658147fb105d8. Not a published file."
+  ],
+  "quant": {
+    "bits": 16,
+    "format": "gguf",
+    "label": "GGUF BF16 (converted by this lab)"
+  },
+  "runs_count": 3,
+  "size_gb": 1.56,
+  "source": {
+    "source_id": "src-40e521fb253f7563"
+  },
+  "source_repo": "RikiyaT/Qwen3.5-0.8B-weight-space-programming"
+}

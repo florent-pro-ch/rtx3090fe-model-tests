@@ -1,0 +1,22 @@
+{
+  "build_id": "qwen/qwen3.5-0.8b@gguf-bf16",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "qwen/qwen3.5-0.8b",
+  "parse_notes": [
+    "Licence Apache-2.0 read on the Hugging Face model card on 2026-11-06; numerical measurements only, no weights published.",
+    "Source revision 2fc06364715b967f1860aea9cf38778875588b17 of Qwen/Qwen3.5-0.8B; model.safetensors-00001-of-00001.safetensors, SHA-256 04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "GGUF converted by this lab with llama.cpp b11176's converter, from the repository's safetensors, BF16, text only: 1,557,662,208 bytes, SHA-256 c06dea1c9435861e8cc65ebf2c0a955a445ebbea4fcb0c52c3b29a31d5d3ca18. Not a published file."
+  ],
+  "quant": {
+    "bits": 16,
+    "format": "gguf",
+    "label": "GGUF BF16 (converted by this lab)"
+  },
+  "runs_count": 3,
+  "size_gb": 1.56,
+  "source": {
+    "source_id": "src-371a70913b4b330a"
+  },
+  "source_repo": "Qwen/Qwen3.5-0.8B"
+}

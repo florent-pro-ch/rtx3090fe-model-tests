@@ -1,0 +1,55 @@
+{
+  "fit_search": {
+    "attempts": [
+      {
+        "load_seconds": 6.6,
+        "n_cpu_moe": null,
+        "status": "FIT",
+        "tensor_split": null
+      }
+    ],
+    "legend": {
+      "load_seconds": "seconds the search waited for the model to load",
+      "n_cpu_moe": "layers whose MoE experts stay in system RAM (null: no such flag)",
+      "order": "the predeclared settings, tried in this order until one loads and answers a canary request",
+      "status": "FIT: loaded and answered the canary; NO_FIT: did not load or did not answer",
+      "tensor_split": "the -ts value: share of the layers per card (null: no such flag)"
+    },
+    "order": [
+      {
+        "n_cpu_moe": null,
+        "tensor_split": null
+      }
+    ]
+  },
+  "passes": [
+    {
+      "aggregate_energy_j": 4980.585,
+      "aggregate_tok_s": 276.6,
+      "repetition": 1,
+      "solo_energy_j": 633.275,
+      "solo_tok_s": 274.1,
+      "solo_ttft_ms": 78
+    },
+    {
+      "aggregate_energy_j": 4997.791,
+      "aggregate_tok_s": 275.8,
+      "repetition": 2,
+      "solo_energy_j": 606.94,
+      "solo_tok_s": 276.0,
+      "solo_ttft_ms": 36
+    },
+    {
+      "aggregate_energy_j": 4990.492,
+      "aggregate_tok_s": 274.9,
+      "repetition": 3,
+      "solo_energy_j": 603.951,
+      "solo_tok_s": 274.8,
+      "solo_ttft_ms": 35
+    }
+  ],
+  "protocol": "speed-house/v1",
+  "source": {
+    "source_id": "src-61bf88792e2e9103"
+  }
+}
