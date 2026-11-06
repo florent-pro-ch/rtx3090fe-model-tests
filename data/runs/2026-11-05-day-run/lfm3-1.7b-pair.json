@@ -1,0 +1,104 @@
+{
+  "build_id": "liquidai/lfm3-1.7b@gguf-q4_k_m",
+  "campaign": "2026-11-05-day-run",
+  "duplicate_of": null,
+  "ended_at": "2026-11-05T13:32:25Z",
+  "energy": {
+    "flags": [],
+    "gpus_counted": 2,
+    "passes": [
+      "fr"
+    ],
+    "period_s": 1.0,
+    "protocol": "nvml-energy/v1",
+    "scope": "gpu-board",
+    "source": "counter"
+  },
+  "engine": {
+    "image": "ghcr.io/ggml-org/llama.cpp:server-cuda-b11960",
+    "name": "llamacpp",
+    "pre_pin": false,
+    "version": "b11960"
+  },
+  "engine_args": {
+    "ctx_per_slot": 16384,
+    "ctx_size": 16384,
+    "flash_attn": "on",
+    "n_gpu_layers": 999,
+    "parallel_slots": 1,
+    "reasoning_budget": 0,
+    "reasoning_format": "deepseek",
+    "tensor_split": "6,18",
+    "thinking": "off"
+  },
+  "evidence": [
+    "evidence/2026-11-05-day-run/lfm3-1.7b-pair/three-pass.json"
+  ],
+  "hardware": "2x3090fe-nvlink",
+  "kind": "speed",
+  "metrics": {
+    "agg_completion_tokens": 4096.0,
+    "agg_concurrency": 8,
+    "agg_energy_j": 5953.4,
+    "agg_ok": 8,
+    "agg_power_mean_w": 405.9,
+    "agg_power_peak_w": 414.9,
+    "agg_rep1_tok_s": 279.3,
+    "agg_rep2_tok_s": 279.7,
+    "agg_rep3_tok_s": 278.9,
+    "agg_tok_per_j": 0.688,
+    "agg_tok_s": 279.3,
+    "repetitions": 3,
+    "solo_completion_tokens": 512.0,
+    "solo_energy_j": 739.7,
+    "solo_power_mean_w": 402.1,
+    "solo_power_peak_w": 414.0,
+    "solo_rep1_tok_s": 278.4,
+    "solo_rep2_tok_s": 279.8,
+    "solo_rep3_tok_s": 278.7,
+    "solo_tok_per_j": 0.6922,
+    "solo_tok_s": 279.0,
+    "solo_ttft_ms": 38,
+    "solo_ttft_ms_mean": 36.7
+  },
+  "model_id": "liquidai/lfm3-1.7b",
+  "parse_notes": [
+    "Closed local observations on frozen synthetic benches. No generated answer, prompt, answer key, weight or machine log is published; no role is adopted.",
+    "LFM3-1.7B (Liquid AI), GGUF Q4_K_M (the publisher's own conversion), on the NVLink pair with -ts 6,18: all 24 layers (and the output layer) on GPU, 16,384-token context, one llama.cpp slot, so the eight requests of the house protocol are served one after another. llama.cpp's log also shows a CPU-mapped buffer of 205 MiB, against a file of 1,049 MiB; these records set ram_spill from 1,024 MiB, so it stays false here.",
+    "Same weights and image as lfm3-1.7b-one-card, the conditional arm on the other topology. Single stream 279.0 tok/s against 284.0 for lfm3-1.7b-one-card, aggregate 279.3 against 283.9 (three passes each, one slot): about 1.8 % slower single stream than one card, in all three passes.",
+    "One fixed order, one sequence: the pair ran last, with card 0 at 59-62 C and 1695 MHz at the start of its single-stream passes, against 41-50 C and 1935-1965 MHz on one card; the difference is an observation of this sequence, not an isolated topology effect.",
+    "The predeclared fit search had one setting, which loaded (6.3 s) and answered the canary.",
+    "Engine llama.cpp b11960. The published runs of other models used earlier or unversioned llama.cpp builds, or other engines, so their figures are not strictly comparable with these.",
+    "Single-stream energy rests on short windows: 722, 726, 771 J over the three passes (0.709, 0.705, 0.664 tok/J); in pass 3 the counter's mean power (418.6 W) exceeds the one-second peak (414.0 W).",
+    "Picked from a public model watch, downloaded at a fixed revision and checked by SHA-256, with its arms written and its fit searched before they ran; the conditional arm on the other topology ran after this model's planned arms had finished.",
+    "Run from 12:06 UTC to 13:32 UTC on 5 November, in a day window opened with the owner's go-ahead after the model watch, on the host's first pair. At each arm's start no process ran on the other pair."
+  ],
+  "prompt_lang": "fr",
+  "protocol": "speed-house/v1",
+  "quality": [],
+  "run_id": "2026-11-05-day-run/lfm3-1.7b-pair",
+  "scrubbed_fields": [],
+  "source": {
+    "source_id": "src-1cd23b36e8ab70da"
+  },
+  "started_at": "2026-11-05T13:31:15Z",
+  "status": "ok",
+  "topology": {
+    "cpu_offload_gb": 0,
+    "expert_parallel": null,
+    "gpus": 2,
+    "nvlink_used": null,
+    "p2p": "unknown",
+    "pp": null,
+    "ram_spill": false,
+    "split": "layer",
+    "tp": null
+  },
+  "vram": {
+    "kind": "after-load",
+    "mib_per_gpu": [
+      786,
+      1374
+    ]
+  }
+}

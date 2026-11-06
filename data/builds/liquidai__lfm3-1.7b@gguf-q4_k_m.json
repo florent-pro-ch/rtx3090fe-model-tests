@@ -1,0 +1,22 @@
+{
+  "build_id": "liquidai/lfm3-1.7b@gguf-q4_k_m",
+  "engine_family": "llamacpp",
+  "harness_ids": [],
+  "model_id": "liquidai/lfm3-1.7b",
+  "parse_notes": [
+    "Licence LFM Open License v1.0 read on the Hugging Face model cards of the original and GGUF repositories on 2026-11-06; numerical measurements only, no weights published.",
+    "Measured revision cd0c74c575b5c416f3011b5b4c298077f26ca8c2 of LiquidAI/LFM3-1.7B-GGUF; LFM3-1.7B-Q4_K_M.gguf, 1,099,627,808 bytes, SHA-256 3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4: the repository's LFS object, recomputed on the downloaded file (SHA-OK).",
+    "The publisher's own GGUF file (LiquidAI/LFM3-1.7B-GGUF)."
+  ],
+  "quant": {
+    "bits": 4,
+    "format": "gguf",
+    "label": "GGUF Q4_K_M (the publisher's own conversion)"
+  },
+  "runs_count": 4,
+  "size_gb": 1.1,
+  "source": {
+    "source_id": "src-abe3409bf3f54d23"
+  },
+  "source_repo": "LiquidAI/LFM3-1.7B-GGUF"
+}
