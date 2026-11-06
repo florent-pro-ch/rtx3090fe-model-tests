@@ -669,6 +669,17 @@
   },
   {
     "builds": [
+      "liquidai/lfm3-1.7b@gguf-q4_k_m"
+    ],
+    "category": "llm",
+    "model_id": "liquidai/lfm3-1.7b",
+    "name": "LFM3-1.7B",
+    "slug": "liquidai__lfm3-1.7b",
+    "vendor": "LiquidAI",
+    "verdict_status": "rated-no-role"
+  },
+  {
+    "builds": [
       "m-a-p/yue2-3b@as-published"
     ],
     "category": "music",
